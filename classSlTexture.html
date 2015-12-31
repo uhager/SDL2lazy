@@ -134,8 +134,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ada29a1d9470557cc56c43afb973aa040"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1fcae66fc912703aa42b6170b19ef02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#ac1fcae66fc912703aa42b6170b19ef02">recoverOriginalSize</a> ()</td></tr>
 <tr class="separator:ac1fcae66fc912703aa42b6170b19ef02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad35d4a2a700cf4d61483989277eac39e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#ad35d4a2a700cf4d61483989277eac39e">render</a> (SDL_Renderer *renderer, uint32_t renderOptions)</td></tr>
-<tr class="separator:ad35d4a2a700cf4d61483989277eac39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac9736a608c11ee52de9e57939db80e7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#aac9736a608c11ee52de9e57939db80e7">render</a> (SDL_Renderer *renderer)</td></tr>
+<tr class="separator:aac9736a608c11ee52de9e57939db80e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8cbe08f537e5801f87bf7d5e55bac7d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#ad8cbe08f537e5801f87bf7d5e55bac7d">renderWithOptions</a> (SDL_Renderer *renderer, uint32_t renderOptions)</td></tr>
+<tr class="separator:ad8cbe08f537e5801f87bf7d5e55bac7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ff303973f295670016a995b09a7f236"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a4ff303973f295670016a995b09a7f236">renderTextureOnTexture</a> (SDL_Renderer *renderer, <a class="el" href="classSlTexture.html">SlTexture</a> *toAdd)</td></tr>
+<tr class="separator:a4ff303973f295670016a995b09a7f236"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a647f9845a914dce54d68fc8446d0f3b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a647f9845a914dce54d68fc8446d0f3b0">renderTextureOnTexture</a> (SDL_Renderer *renderer, <a class="el" href="classSlTexture.html">SlTexture</a> *toAdd, uint32_t renderOptions)</td></tr>
 <tr class="separator:a647f9845a914dce54d68fc8446d0f3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af454913583e879c722dc83e695b33066"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#af454913583e879c722dc83e695b33066">setColor</a> (uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)</td></tr>
@@ -146,6 +150,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac734b57da49659cc4e1f02ed77896390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a285da30b12e0f2bd55d987038270f351"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a285da30b12e0f2bd55d987038270f351">setDestinationDimension</a> (int width, int height)</td></tr>
 <tr class="separator:a285da30b12e0f2bd55d987038270f351"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a082a69498c14916287ccdb2aaa8971bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a082a69498c14916287ccdb2aaa8971bb">setRenderOptions</a> (uint32_t renderOptions)</td></tr>
+<tr class="separator:a082a69498c14916287ccdb2aaa8971bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a054601d0ce368215c2149e6a3c1e265f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a054601d0ce368215c2149e6a3c1e265f">tileTexture</a> (SDL_Renderer *renderer, int width, int height)</td></tr>
 <tr class="separator:a054601d0ce368215c2149e6a3c1e265f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -154,6 +160,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8d5a90e89cef23d3fa50d4738bf80fc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d5a90e89cef23d3fa50d4738bf80fc5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> ()</td></tr>
 <tr class="separator:a8d5a90e89cef23d3fa50d4738bf80fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeafcdf0fae54b65c1fbc7d68670e0ab0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#aeafcdf0fae54b65c1fbc7d68670e0ab0">renderThis</a> (SDL_Renderer *renderer, <a class="el" href="structSlTextureInfo.html">SlTextureInfo</a> &amp;textureInfo)</td></tr>
+<tr class="separator:aeafcdf0fae54b65c1fbc7d68670e0ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -445,12 +453,45 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad35d4a2a700cf4d61483989277eac39e"></a>
+<a class="anchor" id="aac9736a608c11ee52de9e57939db80e7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlTexture::render </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Renders texture_ using SDL_RenderCopy</p>
+<p>Uses textureInfo_.renderOptions to specify where and what to plot. Currently implemented:<br />
+sourceRect to clip part of the texture<br />
+destinationRect to specify where and how big to render<br />
+colour mod (SDL_SetTextureColorMod)<br />
+alpha mod (SDL_SetTextureAlphaMod)<br />
+</p>
+
+<p>Reimplemented in <a class="el" href="classSlSpritesheet.html#a10c64300e699b5949e9b1d382bf3b64c">SlSpritesheet</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4ff303973f295670016a995b09a7f236"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool SlTexture::render </td>
+          <td class="memname">bool SlTexture::renderTextureOnTexture </td>
           <td>(</td>
           <td class="paramtype">SDL_Renderer *&#160;</td>
           <td class="paramname"><em>renderer</em>, </td>
@@ -458,8 +499,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>renderOptions</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td>
+          <td class="paramname"><em>toAdd</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -468,13 +509,8 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Renders texture_ using SDL_RenderCopy</p>
-<p>renderOptions use enum RenderOptions to specify where and what to plot. Currently implemented:<br />
-sourceRect to clip part of the texture<br />
-destinationRect to specify where and how big to render<br />
-colour mod (SDL_SetTextureColorMod)<br />
-alpha mod (SDL_SetTextureAlphaMod)<br />
-</p>
+<p>Renders <a class="el" href="classSlTexture.html">SlTexture</a> toAdd on top of texture_ , using toAdd-&gt;textureInfo_.renderOptions</p>
+<p>Used to combine textures. renderOptions modify toAdd when rendered on top of texture_. </p>
 
 </div>
 </div>
@@ -509,6 +545,75 @@ alpha mod (SDL_SetTextureAlphaMod)<br />
 </div><div class="memdoc">
 <p>Renders <a class="el" href="classSlTexture.html">SlTexture</a> toAdd on top of texture_ , renderOptions apply to toAdd</p>
 <p>Used to combine textures. renderOptions modify toAdd when rendered on top of texture_. </p>
+
+</div>
+</div>
+<a class="anchor" id="aeafcdf0fae54b65c1fbc7d68670e0ab0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlTexture::renderThis </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structSlTextureInfo.html">SlTextureInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>textureInfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Renders texture using settings in textureInfo.</p>
+<p>This is where the actual rendering happens. textureInfo is passed as a reference to allow toogling of alphaModIsSet and colorModIsSet. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad8cbe08f537e5801f87bf7d5e55bac7d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlTexture::renderWithOptions </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>renderOptions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Renders texture_.</p>
+<p>Replaces textureInfo_.renderOptions with renderOptions. renderOptions use enum RenderOptions to specify where and what to plot. Currently implemented:<br />
+sourceRect to clip part of the texture<br />
+destinationRect to specify where and how big to render<br />
+colour mod (SDL_SetTextureColorMod)<br />
+alpha mod (SDL_SetTextureAlphaMod)<br />
+</p>
 
 </div>
 </div>
@@ -622,6 +727,23 @@ alpha mod (SDL_SetTextureAlphaMod)<br />
 </div><div class="memdoc">
 <p>Changes destinationRect</p>
 <p>Sets where the texture will be rendered. </p>
+
+</div>
+</div>
+<a class="anchor" id="a082a69498c14916287ccdb2aaa8971bb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlTexture::setRenderOptions </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>renderOptions</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets SlRenderOptions in textureInfo_ </p>
 
 </div>
 </div>

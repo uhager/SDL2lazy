@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['texture_5f',['texture_',['../classSlTexture.html#abeed33bb9d24730e5ea428b0e04a62ef',1,'SlTexture']]],
-  ['textureinfo_5f',['textureInfo_',['../classSlTexture.html#a5e406525db5e5b85cb33d2b8813e3441',1,'SlTexture']]]
+  ['sourcerect',['sourceRect',['../structSlTextureInfo.html#a071e5aaae83a56b42c38f9d4bcaba8b7',1,'SlTextureInfo']]],
+  ['sprites',['sprites',['../classSlSpritesheet.html#af6ad223c4d13b4b585421b17c2795345',1,'SlSpritesheet']]]
 ];

@@ -97,16 +97,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a1f20fdf8eccb0981ba79573a798c22d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f20fdf8eccb0981ba79573a798c22d1"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
 <tr class="separator:a1f20fdf8eccb0981ba79573a798c22d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a071e5aaae83a56b42c38f9d4bcaba8b7"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#a071e5aaae83a56b42c38f9d4bcaba8b7">sourceRect</a></td></tr>
+<tr class="memitem:a071e5aaae83a56b42c38f9d4bcaba8b7"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#a071e5aaae83a56b42c38f9d4bcaba8b7">sourceRect</a> = {0,0,0,0}</td></tr>
 <tr class="separator:a071e5aaae83a56b42c38f9d4bcaba8b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf5210d3c97582d95895fbe6f8e54954"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#adf5210d3c97582d95895fbe6f8e54954">destinationRect</a></td></tr>
+<tr class="memitem:adf5210d3c97582d95895fbe6f8e54954"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#adf5210d3c97582d95895fbe6f8e54954">destinationRect</a> = {0,0,0,0}</td></tr>
 <tr class="separator:adf5210d3c97582d95895fbe6f8e54954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af92ef19223a3f4ffa7efe1c2176ccf57"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#af92ef19223a3f4ffa7efe1c2176ccf57">color</a> [4]</td></tr>
+<tr class="memitem:af92ef19223a3f4ffa7efe1c2176ccf57"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#af92ef19223a3f4ffa7efe1c2176ccf57">color</a> [4] = {0x00, 0x00, 0x00, 0xFF}</td></tr>
 <tr class="separator:af92ef19223a3f4ffa7efe1c2176ccf57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7756f1ce9a85181d80b6be3966a52de3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#a7756f1ce9a85181d80b6be3966a52de3">alphaModIsSet</a> = false</td></tr>
 <tr class="separator:a7756f1ce9a85181d80b6be3966a52de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3df304774451415a00f143ba867f88ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#a3df304774451415a00f143ba867f88ae">colorModIsSet</a> = false</td></tr>
 <tr class="separator:a3df304774451415a00f143ba867f88ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14bd97b05f5e7a4f2d91910d0ab5c089"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSlTextureInfo.html#a14bd97b05f5e7a4f2d91910d0ab5c089">renderOptions</a> = SL_RENDER_DEFAULT</td></tr>
+<tr class="separator:a14bd97b05f5e7a4f2d91910d0ab5c089"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains source and destination rectangles. In <a class="el" href="classSlSpritesheet.html">SlSpritesheet</a>, the location of each sprite on the spritesheet is defined by the corresponding <a class="el" href="structSlTextureInfo.html">SlTextureInfo</a>. </p>
@@ -129,12 +131,12 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td><
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t SlTextureInfo::color[4]</td>
+          <td class="memname">uint8_t SlTextureInfo::color[4] = {0x00, 0x00, 0x00, 0xFF}</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>red, green, blue, alpha</p>
-<p>Used for SL_RENDER_COLORMOD (SDL_SetTextureColorMod) and SL_RENDER_ALPHAMOD (SDL_SetTextureAlphaMod). Also used as fill colour when creating texture from rectangle. </p>
+<p>Used for SL_RENDER_COLORMOD (SDL_SetTextureColorMod) and SL_RENDER_ALPHAMOD (SDL_SetTextureAlphaMod). Also used as fill colour when creating texture from rectangle. Initialized to black and max alpha. </p>
 
 </div>
 </div>
@@ -156,11 +158,24 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td><
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">SDL_Rect SlTextureInfo::destinationRect</td>
+          <td class="memname">SDL_Rect SlTextureInfo::destinationRect = {0,0,0,0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>destinationRect specifies where and how large to render the texture. Upon loading an image it is set to the same values as sourceRect. </p>
+
+</div>
+</div>
+<a class="anchor" id="a14bd97b05f5e7a4f2d91910d0ab5c089"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t SlTextureInfo::renderOptions = SL_RENDER_DEFAULT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>SlRenderOptions for the texture. Used when rendered with render(SDL_Renderer *renderer), overwritten when rendered with bool render(SDL_Renderer *renderer, uint32_t renderOptions); </p>
 
 </div>
 </div>
@@ -169,7 +184,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td><
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">SDL_Rect SlTextureInfo::sourceRect</td>
+          <td class="memname">SDL_Rect SlTextureInfo::sourceRect = {0,0,0,0}</td>
         </tr>
       </table>
 </div><div class="memdoc">
