@@ -112,6 +112,12 @@ Collaboration diagram for SlTexture:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5751f8edd56a5eb26450b83c03ee7005"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a5751f8edd56a5eb26450b83c03ee7005">SlTexture</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>)</td></tr>
 <tr class="separator:a5751f8edd56a5eb26450b83c03ee7005"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceb8c5b741d0fbbbb088b0db2e19ae57"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#aceb8c5b741d0fbbbb088b0db2e19ae57">~SlTexture</a> ()</td></tr>
+<tr class="separator:aceb8c5b741d0fbbbb088b0db2e19ae57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fe0d1161bab8217d76c276e1b1cffcb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a1fe0d1161bab8217d76c276e1b1cffcb">SlTexture</a> (const <a class="el" href="classSlTexture.html">SlTexture</a> &amp;)=delete</td></tr>
+<tr class="separator:a1fe0d1161bab8217d76c276e1b1cffcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0906e2dd8a0b0d514302ee6dce049601"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a0906e2dd8a0b0d514302ee6dce049601">operator=</a> (const <a class="el" href="classSlTexture.html">SlTexture</a> &amp;)=delete</td></tr>
+<tr class="separator:a0906e2dd8a0b0d514302ee6dce049601"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb08c3329e1ca070241e006f879662b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#acb08c3329e1ca070241e006f879662b9">createFromRectangle</a> (SDL_Renderer *renderer)</td></tr>
 <tr class="separator:acb08c3329e1ca070241e006f879662b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0811634ae31fe871c1420f5edbdf2230"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a0811634ae31fe871c1420f5edbdf2230">createFromRectangle</a> (SDL_Renderer *renderer, SDL_Rect rectangle)</td></tr>
@@ -188,6 +194,55 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Constructor with texture name.</p>
 <p>All textures have a name. This is currently only really implemented for spritesheets, where individual sprites are identified by their name. </p>
+
+</div>
+</div>
+<a class="anchor" id="aceb8c5b741d0fbbbb088b0db2e19ae57"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SlTexture::~SlTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>deletes texture_ </p>
+
+</div>
+</div>
+<a class="anchor" id="a1fe0d1161bab8217d76c276e1b1cffcb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SlTexture::SlTexture </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSlTexture.html">SlTexture</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Delete copy constructor. There's no reason to copy the texture, if the goal is to render different parts of it or with different options use <a class="el" href="classSlSpritesheet.html">SlSpritesheet</a>. </p>
 
 </div>
 </div>
@@ -433,6 +488,31 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Returns the name of the <a class="el" href="classSlTexture.html">SlTexture</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="a0906e2dd8a0b0d514302ee6dce049601"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSlTexture.html">SlTexture</a>&amp; SlTexture::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSlTexture.html">SlTexture</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Deleted, same reason as copy constructor. </p>
 
 </div>
 </div>
