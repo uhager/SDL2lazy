@@ -73,7 +73,7 @@ int main()
   SlSpritesheet* arrowSheet = new SlSpritesheet("arrowsheet");
   arrowSheet->loadFromFile(gRenderer,"resources/arrowsheet_transp.png");
   arrowSheet->readCoordSheet("resources/arrowsheet.layout");
-  arrowSheet->findSprite("up");
+  arrowSheet->setCurrentSprite("up");
   
   SlTexture* miniMapBgTexture = new SlTexture("miniMapBg");
   miniMapBgTexture->setColor(0x00,0x00,0xC0,0x40);
@@ -112,19 +112,19 @@ int main()
 	  switch(event.key.keysym.sym)
 	    {
 	    case SDLK_UP:
-	      arrowSheet->findSprite("up");
+	      arrowSheet->setCurrentSprite("up");
 	      tuxRenderOptions = SL_RENDER_DEFAULT;
 	      break;
 	    case SDLK_DOWN:
-	      arrowSheet->findSprite("down");
+	      arrowSheet->setCurrentSprite("down");
 	      tuxRenderOptions = SL_RENDER_COLORMOD;
 	      break;
 	    case SDLK_LEFT:
-	      arrowSheet->findSprite("left");
+	      arrowSheet->setCurrentSprite("left");
 	      minimapRenderOptions |= SL_RENDER_ALPHAMOD;
 	      break;
 	    case SDLK_RIGHT:
-	      arrowSheet->findSprite("right");
+	      arrowSheet->setCurrentSprite("right");
 	      minimapRenderOptions &= ~SL_RENDER_ALPHAMOD;
 	      break;
 	    case SDLK_ESCAPE:

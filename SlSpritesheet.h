@@ -60,6 +60,7 @@ class SlSpritesheet : public SlTexture
     The center the sprite's destinationRect will be placed at the specified coordinates.
     This does not change the destinationRect width or height, only the xy origin will be adjusted.
     If the width or height are changed after calling this function, the sprite will no longer be centered.
+    Calls setCurrentSprite() setting the #currentSprite iterator to this sprite.
   */
   bool centerSpriteAt(std::string name, int x, int y);
   /*! Center sprite in the specified rectangle.
@@ -68,14 +69,17 @@ class SlSpritesheet : public SlTexture
     x, y, x+w, y+h.\n
     This does not change the destinationRect width or height, only the xy origin will be adjusted.
     If the width or height are changed after calling this function, the sprite will no longer be centered.\n
-    Calls findSprite(std::string name) and thus also sets the #currentSprite .
+    Calls setCurrentSprite() setting the #currentSprite iterator to this sprite.
   */
   bool centerSpriteIn(std::string name, int x, int y, int w, int h);
-  /*! Finds sprite by its name.
-    This also sets currentSprite to this sprite. 
-    After calling findSprite you can call renderSprite(SDL_Renderer* renderer, uint32_t renderOptions) directly rather than
+  /* Sets the #currentSprite iterator to point at the specified sprite
+    After calling currentSprite you can call renderSprite(SDL_Renderer* renderer, uint32_t renderOptions) directly rather than
     renderSprite(std::string name, SDL_Renderer* renderer, uint32_t renderOptions).
-    Calls findSprite(std::string name) and thus also sets the #currentSprite .
+   */
+  void setCurrentSprite(std::string name);
+  /*! Finds sprite by its name and returns its position in #sprites.
+
+    Does not affect #currentSprite.
    */
   int findSprite(std::string name);
   /*! Reads a configuration file with names and coordinates that specify the sprites
@@ -89,7 +93,7 @@ class SlSpritesheet : public SlTexture
   bool readCoordSheet(std::string fileName);
   /*! Renders the specified sprite. 
 
-    Calls findSprite(std::string name) and thus also sets the #currentSprite.
+    Calls setCurrentSprite(std::string name) and thus also sets the #currentSprite.
     Then calls renderSprite(SDL_Renderer* renderer, uint32_t renderOptions).
     Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, 
     SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect.
@@ -105,26 +109,26 @@ class SlSpritesheet : public SlTexture
    */
   bool renderSprite(SDL_Renderer* renderer, uint32_t renderOptions);
   /*! Sets the coordinates for plotting the specified sprite.
-
-    Calls findSprite(std::string name) and thus also sets the #currentSprite .
    */
   bool setDestinationOrigin(std::string spriteName, int x, int y);
   /*! Sets the target dimensions for plotting the specified sprite.
-
-    Calls findSprite(std::string name) and thus also sets the #currentSprite .
-   */
+  */
   bool setDestinationDimension(std::string spriteName, int w, int h);
   /*! Sets the destination rectangle for plotting the specified sprite.
-
-    Calls findSprite(std::string name) and thus also sets the #currentSprite .
    */
   bool setDestination(std::string spriteName, SDL_Rect destRect);
 
 
  private:
   SlSpritesheet();
-  int currentSprite;
+  /*! Holds a TlTextureInfo for each sprite
+   */
   std::vector<SlTextureInfo> sprites;
+  /*! Points to the sprite set by currentSprite().
+   */
+  std::vector<SlTextureInfo>::iterator currentSprite = sprites.begin();
+  /*! Reads coordinates from line and adds the new sprite to #sprites.
+   */
   bool readSourceRect(std::string line);
 };
 

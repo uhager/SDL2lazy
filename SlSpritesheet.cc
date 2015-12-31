@@ -16,13 +16,11 @@
 SlSpritesheet::SlSpritesheet()
   : SlTexture()
 {
-  currentSprite = -1;
 }
 
 SlSpritesheet::SlSpritesheet(std::string name)
   : SlTexture(name)
 {
-  currentSprite = -1;
   textureInfo_.name = name;  
 }
 
@@ -70,13 +68,13 @@ bool
 SlSpritesheet::centerSpriteIn(std::string name, int x, int y, int w, int h)
 {
   bool result = true;
-  int sprite = findSprite(name);
-  if (sprite == -1){
+  setCurrentSprite(name);
+  if (currentSprite == sprites.end()){
     std::cout << "[SlSpritesheet::centerSpriteIn] unknown sprite " << std::endl;
     return false;
   }
-  sprites.at(sprite).destinationRect.x = x + (w - sprites.at(sprite).destinationRect.w) / 2 ;
-  sprites.at(sprite).destinationRect.y = y + (h - sprites.at(sprite).destinationRect.h) / 2 ;
+  currentSprite->destinationRect.x = x + (w - currentSprite->destinationRect.w) / 2 ;
+  currentSprite->destinationRect.y = y + (h - currentSprite->destinationRect.h) / 2 ;
   return result;
 }
 
@@ -85,29 +83,38 @@ bool
 SlSpritesheet::centerSpriteAt(std::string name, int x, int y)
 {
   bool result = true;
-  int sprite = findSprite(name);
-  if (sprite == -1){
+  setCurrentSprite(name);
+  if (currentSprite == sprites.end()){
     std::cout << "[SlSpritesheet::centerSpriteAt] unknown sprite " << std::endl;
     return false;
   }
-  sprites.at(sprite).destinationRect.x = x +  sprites.at(sprite).destinationRect.w / 2 ;
-  sprites.at(sprite).destinationRect.y = y +  sprites.at(sprite).destinationRect.h / 2 ;
+  currentSprite->destinationRect.x = x +  currentSprite->destinationRect.w / 2 ;
+  currentSprite->destinationRect.y = y +  currentSprite->destinationRect.h / 2 ;
   return result;
 }
 
+void
+SlSpritesheet::setCurrentSprite(std::string name)
+{
+  for (auto sprite = sprites.begin() ; sprite != sprites.end() ; ++sprite) {
+    if (name == sprite->name ) {
+      currentSprite = sprite;
+      return;
+    }
+  }
+}
 
-
+  
 int
 SlSpritesheet::findSprite(std::string name)
 {
-  int result = -1;
+  int result = 0;
   for (unsigned int i = 0; i<sprites.size(); i++) {
     if (name.compare( sprites.at(i).name ) == 0) {
       result = i;
       break;
     }
   }
-  currentSprite = result;
   return result;
 }
 
@@ -165,26 +172,26 @@ bool
 SlSpritesheet::renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)
 {
   bool result = true;
-  if (currentSprite == -1) return result;  //< -1 (constructor default value) will cause no sprite to be rendered
+  if (currentSprite == sprites.end()) return result;  //< no sprite to be rendered
   if ((renderOptions & SL_RENDER_USE_SOURCE) == 0){                 
     /*! sprites always use their source rectangle, 
       but explicitly setting SL_RENDER_USE_SOURCE allows setting 
       an arbitrary source of the sprite sheet 
       (could just use normal render though...)
     */
-    textureInfo_.sourceRect = sprites.at(currentSprite).sourceRect;
+    textureInfo_.sourceRect = currentSprite->sourceRect;
     renderOptions |= SL_RENDER_USE_SOURCE ;
   }
   if ( (renderOptions & SL_RENDER_USE_DESTINATION) == 0) {
-    textureInfo_.destinationRect = sprites.at(currentSprite).destinationRect;
+    textureInfo_.destinationRect = currentSprite->destinationRect;
     renderOptions |= SL_RENDER_USE_DESTINATION ;
   }
   
-  textureInfo_.colorModIsSet = sprites.at(currentSprite).colorModIsSet;
-  textureInfo_.alphaModIsSet = sprites.at(currentSprite).alphaModIsSet;
+  textureInfo_.colorModIsSet = currentSprite->colorModIsSet;
+  textureInfo_.alphaModIsSet = currentSprite->alphaModIsSet;
   result = render(renderer, renderOptions);
-  sprites.at(currentSprite).colorModIsSet = textureInfo_.colorModIsSet;
-  sprites.at(currentSprite).alphaModIsSet = textureInfo_.alphaModIsSet;
+  currentSprite->colorModIsSet = textureInfo_.colorModIsSet;
+  currentSprite->alphaModIsSet = textureInfo_.alphaModIsSet;
   return result;
 }
 
@@ -192,8 +199,8 @@ bool
 SlSpritesheet::renderSprite(std::string name, SDL_Renderer* renderer, uint32_t renderOptions)
 {
   bool result = true;
-  int sprite = findSprite(name);
-  if (sprite == -1){
+  setCurrentSprite(name);
+  if (currentSprite == sprites.end()){
     std::cerr << "[SlSpritesheet::renderSprite] unknown sprite " << std::endl;
     return false;
   }
@@ -203,18 +210,17 @@ SlSpritesheet::renderSprite(std::string name, SDL_Renderer* renderer, uint32_t r
 
 
 
-
 bool
 SlSpritesheet::setDestinationOrigin(std::string spriteName, int x, int y)
 {
   bool result = true;
-  int iSprite = findSprite(spriteName);
-  if (iSprite == -1){
+  int i = findSprite(spriteName);
+  if (i == -1){
     std::cerr << "[SlSpritesheet::setDestinationOrigin] unknown sprite " << std::endl;
     return false;
   }
-  sprites.at(iSprite).destinationRect.x = x;
-  sprites.at(iSprite).destinationRect.y = y;
+  sprites.at(i).destinationRect.x = x;
+  sprites.at(i).destinationRect.y = y;
   return result;
 }
 
@@ -223,13 +229,13 @@ bool
 SlSpritesheet::setDestinationDimension(std::string spriteName, int w, int h)
 {
   bool result = true;
-  int iSprite = findSprite(spriteName);
-  if (iSprite == -1){
+  int i = findSprite(spriteName);
+  if (i == -1){
     std::cerr << "[SlSpritesheet::setDestinationDimension] unknown sprite " << std::endl;
     return false;
   }
-  sprites.at(iSprite).destinationRect.w = w;
-  sprites.at(iSprite).destinationRect.h = h;
+  sprites.at(i).destinationRect.w = w;
+  sprites.at(i).destinationRect.h = h;
   return result;
 }
 
@@ -237,12 +243,12 @@ bool
 SlSpritesheet::setDestination(std::string spriteName, SDL_Rect destRect)
 {
   bool result = true;
-  int iSprite = findSprite(spriteName);
-  if (iSprite == -1){
+  int i = findSprite(spriteName);
+  if (i == -1){
     std::cerr << "[SlSpritesheet::setDestination] unknown sprite " << std::endl;
     return false;
   }
-  sprites.at(iSprite).destinationRect = destRect;
+  sprites.at(i).destinationRect = destRect;
   return result;
 }
   
