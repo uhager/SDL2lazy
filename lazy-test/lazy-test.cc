@@ -134,6 +134,18 @@ int main()
 	      arrowSheet->setCurrentSprite("right");
 	      miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION );
 	      break;
+	    case SDLK_1:
+	      corners->toggleSprite("upperleft");
+	      break;
+	    case SDLK_2:
+	      corners->toggleSprite("upperright");
+	      break;
+	    case SDLK_3:
+	      corners->toggleSprite("lowerright");
+	      break;
+	    case SDLK_4:
+	      corners->toggleSprite("lowerleft");
+	      break;
 	    case SDLK_ESCAPE:
 	      quit = true;
 	      break;
@@ -143,9 +155,9 @@ int main()
 
     SDL_RenderClear(gRenderer);
     backgroundTexture->render(gRenderer);
-    corners->renderAll(gRenderer);
+    corners->render(gRenderer);
     miniMapBgTexture->render(gRenderer);
-    arrowSheet->render(gRenderer);
+    arrowSheet->renderCurrentSprite(gRenderer);
     SDL_RenderPresent( gRenderer );
   }
   

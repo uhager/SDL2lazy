@@ -24,10 +24,42 @@ SlSpritesheet::SlSpritesheet(std::string name)
   textureInfo_.name = name;
 }
 
-// SlSpritesheet::~SlSpritesheet()
-// {
-// }
 
+
+void
+SlSpritesheet::addAllToRender()
+{
+  for (auto sprite: sprites){
+    toRender.insert(&sprite);
+  }
+}
+
+
+
+void
+SlSpritesheet::addToRender(std::string name)
+{
+  for (auto& sprite: sprites){
+    if (sprite.name == name){
+      toRender.insert(&sprite);
+      return;
+    }
+  }
+  std::cerr << "[SlSpritesheet::addToRender] couldn't find sprite " << name << std::endl;
+
+  // std::cout << "[SlSpritesheet::addToRender] added " << name << std::endl;
+  // std::cout << "all toRender names: " << std::endl;
+  // for (auto sprite: toRender){
+  //   std::cout << sprite->name << std::endl;
+  // }
+}
+
+
+void
+SlSpritesheet::clearToRender()
+{
+  toRender.clear();
+}
 
 
 bool
@@ -91,17 +123,6 @@ SlSpritesheet::centerSpriteAt(std::string name, int x, int y)
   currentSprite->destinationRect.x = x +  currentSprite->destinationRect.w / 2 ;
   currentSprite->destinationRect.y = y +  currentSprite->destinationRect.h / 2 ;
   return result;
-}
-
-void
-SlSpritesheet::setCurrentSprite(std::string name)
-{
-  for (auto sprite = sprites.begin() ; sprite != sprites.end() ; ++sprite) {
-    if (name == sprite->name ) {
-      currentSprite = sprite;
-      return;
-    }
-  }
 }
 
   
@@ -170,23 +191,42 @@ SlSpritesheet::readSourceRect(std::string line)
   return result;
 }
 
+
+
+void
+SlSpritesheet::removeFromRender(std::string name)
+{
+  for (auto sprite: toRender) {
+    if (sprite->name == name){ 
+      toRender.erase(sprite);
+      return;
+    }
+  }
+}
+
+
+
 bool
 SlSpritesheet::render(SDL_Renderer *renderer)
 {
   bool isRendered = true;
-  if (currentSprite == sprites.end()) return false;  //< no sprite to be rendered
-  if ((currentSprite->renderOptions & SL_RENDER_USE_SOURCE) == 0){                 
+  std::set<SlTextureInfo*>::iterator sprite = toRender.begin();
+  
+  for (sprite = toRender.begin() ; sprite != toRender.end() ; ++sprite){
     /*! sprites always use their source rectangle, 
       but explicitly setting SL_RENDER_USE_SOURCE allows setting 
       an arbitrary source of the sprite sheet 
       (could just use normal render though...)
     */
-    currentSprite->renderOptions |= SL_RENDER_USE_SOURCE ;
+    (*sprite)->renderOptions |= SL_RENDER_USE_SOURCE ;
+    (*sprite)->renderOptions |= SL_RENDER_USE_DESTINATION ;
+
+    isRendered = renderThis(renderer, **sprite);
+    if (isRendered == false) {
+      std::cerr << "[SlSpritesheet::render] couldn't render sprite " << (*sprite)->name << std::endl;
+      return isRendered;
+    }
   }
-  if ( (currentSprite->renderOptions & SL_RENDER_USE_DESTINATION) == 0) {
-    currentSprite->renderOptions |= SL_RENDER_USE_DESTINATION ;
-  }
-  isRendered = renderThis(renderer, *currentSprite);
   return isRendered;
 }
 
@@ -203,15 +243,28 @@ SlSpritesheet::renderAll(SDL_Renderer *renderer)
 }
 
 
+
 bool
-SlSpritesheet::renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)
+SlSpritesheet::renderCurrentSprite(SDL_Renderer* renderer)
+{
+  bool result = true;
+  if (currentSprite == sprites.end()) return false;  //< no sprite to be rendered
+  result = renderThis(renderer,*currentSprite);
+  return result;
+}
+
+
+
+bool
+SlSpritesheet::renderCurrentSprite(SDL_Renderer* renderer, uint32_t renderOptions)
 {
   bool result = true;
   if (currentSprite == sprites.end()) return false;  //< no sprite to be rendered
   currentSprite->renderOptions = renderOptions;
-  result = render(renderer);
+  result = renderThis(renderer,*currentSprite);
   return result;
 }
+
 
 
 bool
@@ -223,12 +276,25 @@ SlSpritesheet::renderSprite(std::string name, SDL_Renderer* renderer, uint32_t r
     std::cerr << "[SlSpritesheet::renderSprite] unknown sprite " << std::endl;
     return false;
   }
-  result = renderSprite(renderer, renderOptions);
+  result = renderCurrentSprite(renderer, renderOptions);
   return result;
 }
 
 
 
+void
+SlSpritesheet::setCurrentSprite(std::string name)
+{
+  for (auto sprite = sprites.begin() ; sprite != sprites.end() ; ++sprite) {
+    if (name == sprite->name ) {
+      currentSprite = sprite;
+      return;
+    }
+  }
+}
+
+
+ 
 bool
 SlSpritesheet::setDestinationOrigin(std::string spriteName, int x, int y)
 {
@@ -300,4 +366,18 @@ SlSpritesheet::setSpriteRenderOption(unsigned int i, uint32_t renderOptions)
   }
   renderOptions |= SL_RENDER_USE_SOURCE;
   sprites.at(i).renderOptions = renderOptions;
+}
+
+
+
+void
+SlSpritesheet::toggleSprite(std::string name)
+{
+  for (auto sprite: toRender) {
+    if (sprite->name == name){ 
+      toRender.erase(sprite);
+      return;
+    }
+  }
+  addToRender(name);
 }

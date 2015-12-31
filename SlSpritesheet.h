@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <vector>
 #include <string>
+#include <set>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -31,8 +32,17 @@ class SlSpritesheet : public SlTexture
     Like SlTextures, SlSpritesheets all have names.
    */
   SlSpritesheet(std::string name);
-  //  ~SlSpritesheet();
 
+  /*! Adds all sprites to #toRender. All sprites in #toRender will be rendered at the next render(SDL_Renderer *renderer) call.
+   */
+  void addAllToRender();
+  /*! Adds the named sprite to #toRender. All sprites in #toRender will be rendered at the next render(SDL_Renderer *renderer) call.
+   */
+  void addToRender(std::string name);
+  /*! Clears #toRender.
+    No sprites will be rendered during the next call to render(SDL_Renderer *renderer).
+   */
+  void clearToRender();
   /*! Centers all sprites at some coordinate using their sourceRect.
 
     The given coordinates will be at the x- and y- midpoints of each sprite's destinationRect.
@@ -91,7 +101,10 @@ class SlSpritesheet : public SlTexture
     (nb: these are all coordinates, not width and height, the 2 sprites in the example have the same dimensions.)
    */
   bool readCoordSheet(std::string fileName);
-  /* Render the current sprite with its SlTextureInfo settings
+  /*! Removes the sprite from toRender, i.e. during the next render call, this sprite will no longer be rendered.
+   */
+  void removeFromRender(std::string name);
+  /*! Render the sprites in #toRender with their respective SlTextureInfo settings
 
      Calls SlTexture::render(SDL_Renderer *renderer, SlTextureInfo textureInfo).
    */
@@ -99,20 +112,23 @@ class SlSpritesheet : public SlTexture
   /*! Renders all sprites as specified in their SlTextureInfo properties.
    */
   bool renderAll(SDL_Renderer *renderer);
+  /*! Renders the #currentSprite using its settings
+   */
+  bool renderCurrentSprite(SDL_Renderer* renderer);
+  /*! Renders the #currentSprite and sets its SlTextureInfo::renderOptions.
+
+    Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, 
+    SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect.
+   */
+  bool renderCurrentSprite(SDL_Renderer* renderer, uint32_t renderOptions);
   /*! Renders the specified sprite. 
 
     Calls setCurrentSprite(std::string name) and thus also sets the #currentSprite.
-    Then calls renderSprite(SDL_Renderer* renderer, uint32_t renderOptions).
+    Then calls renderCurrentSprite(SDL_Renderer* renderer, uint32_t renderOptions).
     Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, 
     SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect.
    */
   bool renderSprite(std::string name, SDL_Renderer* renderer, uint32_t renderOptions);
-  /*! Renders the #currentSprite.
-
-    Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, 
-    SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect.
-   */
-  bool renderSprite(SDL_Renderer* renderer, uint32_t renderOptions);
   /*! Sets the coordinates for plotting the specified sprite.
    */
   bool setDestinationOrigin(std::string spriteName, int x, int y);
@@ -132,8 +148,14 @@ class SlSpritesheet : public SlTexture
     SL_RENDER_USE_SOURCE will remain set.
    */
   void setSpriteRenderOption(uint32_t renderOptions);
-    
+  /*! Toggles whether the named sprite is rendered or not.
 
+    If the sprite is already in #toRender it will be removed. If it is not, it will be added.
+   */
+  void toggleSprite(std::string name);  
+
+
+  
  private:
   SlSpritesheet();
   /*! Holds a SlTextureInfo for each sprite
@@ -142,6 +164,9 @@ class SlSpritesheet : public SlTexture
   /*! Points to the sprite set by setCurrentSprite().
    */
   std::vector<SlTextureInfo>::iterator currentSprite = sprites.begin();
+  /*! Contains pointers to the sprites that will be rendered next time render(SDL_Renderer *renderer) is called.
+   */
+  std::set<SlTextureInfo*> toRender;
   /*! Reads coordinates from line and adds the new sprite to #sprites.
    */
   bool readSourceRect(std::string line);
