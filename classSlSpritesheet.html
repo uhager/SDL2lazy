@@ -120,6 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad6f9f6618e35bb3b05d53d40eb2a8a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a430aff81d97a0cd8ec36d6e6624835e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a430aff81d97a0cd8ec36d6e6624835e8">centerSpriteIn</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>, int x, int y, int w, int h)</td></tr>
 <tr class="separator:a430aff81d97a0cd8ec36d6e6624835e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a137e0e7bc5e16ac36f481a3e94cfe371"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a137e0e7bc5e16ac36f481a3e94cfe371">setCurrentSprite</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>)</td></tr>
+<tr class="separator:a137e0e7bc5e16ac36f481a3e94cfe371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cc1c63a30efe2600bec3b66456afae4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4">findSprite</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>)</td></tr>
 <tr class="separator:a8cc1c63a30efe2600bec3b66456afae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ba905e598d79ae4e1b1b61c874060b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#af8ba905e598d79ae4e1b1b61c874060b">readCoordSheet</a> (std::string fileName)</td></tr>
@@ -324,7 +326,7 @@ This does not change the destinationRect width or height, only the xy origin wil
       </table>
 </div><div class="memdoc">
 <p>Center sprite at the specified coordinates.</p>
-<p>The center the sprite's destinationRect will be placed at the specified coordinates. This does not change the destinationRect width or height, only the xy origin will be adjusted. If the width or height are changed after calling this function, the sprite will no longer be centered. </p>
+<p>The center the sprite's destinationRect will be placed at the specified coordinates. This does not change the destinationRect width or height, only the xy origin will be adjusted. If the width or height are changed after calling this function, the sprite will no longer be centered. Calls <a class="el" href="classSlSpritesheet.html#a137e0e7bc5e16ac36f481a3e94cfe371">setCurrentSprite()</a> setting the #currentSprite iterator to this sprite. </p>
 
 </div>
 </div>
@@ -372,7 +374,7 @@ This does not change the destinationRect width or height, only the xy origin wil
 <p>Center sprite in the specified rectangle.</p>
 <p>The center the sprite's destinationRect will be at the center of the rectangle given by x, y, x+w, y+h.<br />
 This does not change the destinationRect width or height, only the xy origin will be adjusted. If the width or height are changed after calling this function, the sprite will no longer be centered.<br />
-Calls <a class="el" href="classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4">findSprite(std::string name)</a> and thus also sets the #currentSprite . </p>
+Calls <a class="el" href="classSlSpritesheet.html#a137e0e7bc5e16ac36f481a3e94cfe371">setCurrentSprite()</a> setting the #currentSprite iterator to this sprite. </p>
 
 </div>
 </div>
@@ -389,7 +391,8 @@ Calls <a class="el" href="classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456af
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Finds sprite by its name. This also sets currentSprite to this sprite. After calling findSprite you can call <a class="el" href="classSlSpritesheet.html#a4c47a3ec3c7b936c308e53e326e13af9">renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)</a> directly rather than <a class="el" href="classSlSpritesheet.html#a6be6bd6b3faef349e8f80b3490b3aa7a">renderSprite(std::string name, SDL_Renderer* renderer, uint32_t renderOptions)</a>. Calls <a class="el" href="classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4">findSprite(std::string name)</a> and thus also sets the #currentSprite . </p>
+<p>Finds sprite by its name and returns its position in #sprites.</p>
+<p>Does not affect currentSprite. </p>
 
 </div>
 </div>
@@ -444,7 +447,7 @@ where "left" and "right" are the names of 2 sprites with their coordinates given
       </table>
 </div><div class="memdoc">
 <p>Renders the specified sprite.</p>
-<p>Calls <a class="el" href="classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4">findSprite(std::string name)</a> and thus also sets the #currentSprite. Then calls <a class="el" href="classSlSpritesheet.html#a4c47a3ec3c7b936c308e53e326e13af9">renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)</a>. Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect. If SL_RENDER_USE_DESTINATION is not set, the sprite's destination rectangle is used, otherwise the <a class="el" href="classSlTexture.html#a5e406525db5e5b85cb33d2b8813e3441">SlTexture::textureInfo_</a>'s destinationRect is used. </p>
+<p>Calls <a class="el" href="classSlSpritesheet.html#a137e0e7bc5e16ac36f481a3e94cfe371">setCurrentSprite(std::string name)</a> and thus also sets the #currentSprite. Then calls <a class="el" href="classSlSpritesheet.html#a4c47a3ec3c7b936c308e53e326e13af9">renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)</a>. Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect. If SL_RENDER_USE_DESTINATION is not set, the sprite's destination rectangle is used, otherwise the <a class="el" href="classSlTexture.html#a5e406525db5e5b85cb33d2b8813e3441">SlTexture::textureInfo_</a>'s destinationRect is used. </p>
 
 </div>
 </div>
@@ -477,6 +480,23 @@ where "left" and "right" are the names of 2 sprites with their coordinates given
 
 </div>
 </div>
+<a class="anchor" id="a137e0e7bc5e16ac36f481a3e94cfe371"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlSpritesheet::setCurrentSprite </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the currentSprite iterator to point at the specified sprite After calling setCurrentSprite you can call <a class="el" href="classSlSpritesheet.html#a4c47a3ec3c7b936c308e53e326e13af9">renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)</a> directly rather than <a class="el" href="classSlSpritesheet.html#a6be6bd6b3faef349e8f80b3490b3aa7a">renderSprite(std::string name, SDL_Renderer* renderer, uint32_t renderOptions)</a>. </p>
+
+</div>
+</div>
 <a class="anchor" id="aa1f92a733875563d3ee82b5023fd1c2c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -500,8 +520,7 @@ where "left" and "right" are the names of 2 sprites with their coordinates given
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the destination rectangle for plotting the specified sprite.</p>
-<p>Calls <a class="el" href="classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4">findSprite(std::string name)</a> and thus also sets the #currentSprite . </p>
+<p>Sets the destination rectangle for plotting the specified sprite. </p>
 
 </div>
 </div>
@@ -534,8 +553,7 @@ where "left" and "right" are the names of 2 sprites with their coordinates given
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the target dimensions for plotting the specified sprite.</p>
-<p>Calls <a class="el" href="classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4">findSprite(std::string name)</a> and thus also sets the #currentSprite . </p>
+<p>Sets the target dimensions for plotting the specified sprite. </p>
 
 </div>
 </div>
@@ -568,8 +586,7 @@ where "left" and "right" are the names of 2 sprites with their coordinates given
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the coordinates for plotting the specified sprite.</p>
-<p>Calls <a class="el" href="classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4">findSprite(std::string name)</a> and thus also sets the #currentSprite . </p>
+<p>Sets the coordinates for plotting the specified sprite. </p>
 
 </div>
 </div>
