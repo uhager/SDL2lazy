@@ -97,12 +97,12 @@ int main()
   
   SDL_Rect miniMapRect = {10,10,220,220};
   miniMapBgTexture->setDestination(miniMapRect);
+  miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION );
+
   arrowSheet->centerAllSpritesIn(miniMapRect);
   
   bool quit = false;
   SDL_Event event;
-  uint32_t tuxRenderOptions = SL_RENDER_DEFAULT;
-  uint32_t minimapRenderOptions = SL_RENDER_USE_DESTINATION;
     
   while (!quit) {
     while (SDL_PollEvent(&event)) {
@@ -113,19 +113,19 @@ int main()
 	    {
 	    case SDLK_UP:
 	      arrowSheet->setCurrentSprite("up");
-	      tuxRenderOptions = SL_RENDER_DEFAULT;
+	      backgroundTexture->setRenderOptions( SL_RENDER_DEFAULT );
 	      break;
 	    case SDLK_DOWN:
 	      arrowSheet->setCurrentSprite("down");
-	      tuxRenderOptions = SL_RENDER_COLORMOD;
+	      backgroundTexture->setRenderOptions( SL_RENDER_COLORMOD );
 	      break;
 	    case SDLK_LEFT:
 	      arrowSheet->setCurrentSprite("left");
-	      minimapRenderOptions |= SL_RENDER_ALPHAMOD;
+	      miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION | SL_RENDER_ALPHAMOD );
 	      break;
 	    case SDLK_RIGHT:
 	      arrowSheet->setCurrentSprite("right");
-	      minimapRenderOptions &= ~SL_RENDER_ALPHAMOD;
+	      miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION );
 	      break;
 	    case SDLK_ESCAPE:
 	      quit = true;
@@ -134,11 +134,10 @@ int main()
 	}
     }
 
-
     SDL_RenderClear(gRenderer);
-    backgroundTexture->render(gRenderer, tuxRenderOptions);
-    miniMapBgTexture->render(gRenderer, minimapRenderOptions);
-    arrowSheet->renderSprite(gRenderer, SL_RENDER_DEFAULT);
+    backgroundTexture->render(gRenderer);
+    miniMapBgTexture->render(gRenderer);
+    arrowSheet->render(gRenderer);
     SDL_RenderPresent( gRenderer );
   }
   

@@ -21,12 +21,12 @@ SlSpritesheet::SlSpritesheet()
 SlSpritesheet::SlSpritesheet(std::string name)
   : SlTexture(name)
 {
-  textureInfo_.name = name;  
+  textureInfo_.name = name;
 }
 
-SlSpritesheet::~SlSpritesheet()
-{
-}
+// SlSpritesheet::~SlSpritesheet()
+// {
+// }
 
 
 
@@ -142,7 +142,9 @@ SlSpritesheet::readSourceRect(std::string line)
   SlTextureInfo toAdd;
   std::istringstream stream(line.c_str());
   stream >> toAdd.name;
+  if (toAdd.name.size() == 0) return false;
   //  cout << name << endl;
+
   int coord[4];
   for (int i = 0; i<4 ; i++)
     {
@@ -162,9 +164,29 @@ SlSpritesheet::readSourceRect(std::string line)
   toAdd.destinationRect.y = 0;
   toAdd.destinationRect.w = toAdd.sourceRect.w;
   toAdd.destinationRect.h = toAdd.sourceRect.h;
-  if (toAdd.name.size() == 0) return false;
+  toAdd.renderOptions = SL_RENDER_USE_SOURCE | SL_RENDER_USE_DESTINATION;
   sprites.push_back(toAdd);
   return result;
+}
+
+bool
+SlSpritesheet::render(SDL_Renderer *renderer)
+{
+  bool isRendered = true;
+  if (currentSprite == sprites.end()) return false;  //< no sprite to be rendered
+  if ((currentSprite->renderOptions & SL_RENDER_USE_SOURCE) == 0){                 
+    /*! sprites always use their source rectangle, 
+      but explicitly setting SL_RENDER_USE_SOURCE allows setting 
+      an arbitrary source of the sprite sheet 
+      (could just use normal render though...)
+    */
+    currentSprite->renderOptions |= SL_RENDER_USE_SOURCE ;
+  }
+  if ( (currentSprite->renderOptions & SL_RENDER_USE_DESTINATION) == 0) {
+    currentSprite->renderOptions |= SL_RENDER_USE_DESTINATION ;
+  }
+  isRendered = renderThis(renderer, *currentSprite);
+  return isRendered;
 }
 
 
@@ -172,28 +194,12 @@ bool
 SlSpritesheet::renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)
 {
   bool result = true;
-  if (currentSprite == sprites.end()) return result;  //< no sprite to be rendered
-  if ((renderOptions & SL_RENDER_USE_SOURCE) == 0){                 
-    /*! sprites always use their source rectangle, 
-      but explicitly setting SL_RENDER_USE_SOURCE allows setting 
-      an arbitrary source of the sprite sheet 
-      (could just use normal render though...)
-    */
-    textureInfo_.sourceRect = currentSprite->sourceRect;
-    renderOptions |= SL_RENDER_USE_SOURCE ;
-  }
-  if ( (renderOptions & SL_RENDER_USE_DESTINATION) == 0) {
-    textureInfo_.destinationRect = currentSprite->destinationRect;
-    renderOptions |= SL_RENDER_USE_DESTINATION ;
-  }
-  
-  textureInfo_.colorModIsSet = currentSprite->colorModIsSet;
-  textureInfo_.alphaModIsSet = currentSprite->alphaModIsSet;
-  result = render(renderer, renderOptions);
-  currentSprite->colorModIsSet = textureInfo_.colorModIsSet;
-  currentSprite->alphaModIsSet = textureInfo_.alphaModIsSet;
+  if (currentSprite == sprites.end()) return false;  //< no sprite to be rendered
+  currentSprite->renderOptions = renderOptions;
+  result = render(renderer);
   return result;
 }
+
 
 bool
 SlSpritesheet::renderSprite(std::string name, SDL_Renderer* renderer, uint32_t renderOptions)
@@ -252,3 +258,33 @@ SlSpritesheet::setDestination(std::string spriteName, SDL_Rect destRect)
   return result;
 }
   
+
+void
+SlSpritesheet::setSpriteRenderOption(std::string name, uint32_t renderOptions)
+{
+  int i = findSprite(name);
+  if (i == -1){
+    std::cerr << "[SlSpritesheet::setDestination] unknown sprite " << std::endl;
+    return;
+  }
+  setSpriteRenderOption(i, renderOptions);
+}
+
+
+void
+SlSpritesheet::setSpriteRenderOption(uint32_t renderOptions)
+{
+  currentSprite->renderOptions = renderOptions;
+}
+
+
+void
+SlSpritesheet::setSpriteRenderOption(unsigned int i, uint32_t renderOptions)
+{
+  if ( i >= sprites.size() ){
+    std::cerr << "[SlSpritesheet::setDestination] unknown sprite " << std::endl;
+    return;
+  }
+  renderOptions |= SL_RENDER_USE_SOURCE;
+  sprites.at(i).renderOptions = renderOptions;
+}

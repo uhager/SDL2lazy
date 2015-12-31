@@ -24,6 +24,7 @@ SlTexture::SlTexture(std::string name)
 
 SlTexture::~SlTexture()
 {
+  std::cout << "Deleting " << textureInfo_.name << std::endl;
   SDL_DestroyTexture(texture_);
   texture_ = nullptr;
 }
@@ -117,14 +118,6 @@ void
 SlTexture::initialize()
 {
   texture_ = nullptr;
-  textureInfo_.sourceRect.x = 0;
-  textureInfo_.sourceRect.y = 0;
-  textureInfo_.destinationRect.x = 0;
-  textureInfo_.destinationRect.y = 0;
-  textureInfo_.color[0] = 0x00;
-  textureInfo_.color[1] = 0x00;
-  textureInfo_.color[2] = 0x00;
-  textureInfo_.color[3] = 0xFF;
 }
 
 
@@ -189,39 +182,48 @@ SlTexture::recoverOriginalSize()
 
 
 bool
-SlTexture::render(SDL_Renderer *renderer, uint32_t renderOptions)
+SlTexture::render(SDL_Renderer *renderer)
+{
+  bool isRendered = true;
+  renderThis(renderer, textureInfo_);  
+  return isRendered;
+}
+
+
+bool
+SlTexture::renderThis(SDL_Renderer *renderer, SlTextureInfo& textureInfo)
 {
   bool isRendered = true;
   
   SDL_Rect *dstRect = nullptr;
   SDL_Rect *srcRect = nullptr;
-  if (renderOptions & SL_RENDER_USE_DESTINATION) dstRect = &(textureInfo_.destinationRect);
-  if (renderOptions & SL_RENDER_USE_SOURCE) srcRect = &(textureInfo_.sourceRect);
+  if (textureInfo.renderOptions & SL_RENDER_USE_DESTINATION) dstRect = &(textureInfo.destinationRect);
+  if (textureInfo.renderOptions & SL_RENDER_USE_SOURCE) srcRect = &(textureInfo.sourceRect);
   
-  int modColor = (renderOptions & SL_RENDER_COLORMOD);
-  if ((modColor == SL_RENDER_COLORMOD) && !textureInfo_.colorModIsSet) {
+  int modColor = (textureInfo.renderOptions & SL_RENDER_COLORMOD);
+  if ((modColor == SL_RENDER_COLORMOD) && !textureInfo.colorModIsSet) {
     //std::cout <<"[SlTexture::render] colormod on " << std::endl;
-    SDL_SetTextureColorMod(texture_, textureInfo_.color[0], textureInfo_.color[1], textureInfo_.color[2] );
-    textureInfo_.colorModIsSet = true;
+    SDL_SetTextureColorMod(texture_, textureInfo.color[0], textureInfo.color[1], textureInfo.color[2] );
+    textureInfo.colorModIsSet = true;
   }
-  if (textureInfo_.colorModIsSet && (modColor == 0)) {
+  if (textureInfo.colorModIsSet && (modColor == 0)) {
     //std::cout <<"[SlTexture::render] colormod off " << std::endl;
     SDL_SetTextureColorMod(texture_, 0xFF, 0xFF, 0xFF);
-    textureInfo_.colorModIsSet = false;
+    textureInfo.colorModIsSet = false;
   }
   
-  int modAlpha = (renderOptions & SL_RENDER_ALPHAMOD);
-  if ((modAlpha == SL_RENDER_ALPHAMOD) && !textureInfo_.alphaModIsSet) {
+  int modAlpha = (textureInfo.renderOptions & SL_RENDER_ALPHAMOD);
+  if ((modAlpha == SL_RENDER_ALPHAMOD) && !textureInfo.alphaModIsSet) {
     //std::cout <<"[SlTexture::render] alphamod on " << std::endl;
     SDL_SetTextureBlendMode( texture_, SDL_BLENDMODE_BLEND );
-    SDL_SetTextureAlphaMod(texture_, textureInfo_.color[3] );
-    textureInfo_.alphaModIsSet = true;
+    SDL_SetTextureAlphaMod(texture_, textureInfo.color[3] );
+    textureInfo.alphaModIsSet = true;
   }
-  if (textureInfo_.alphaModIsSet && (modAlpha == 0)){
+  if (textureInfo.alphaModIsSet && (modAlpha == 0)){
     //    std::cout <<"[SlTexture::render] alphamod off " << std::endl;
     SDL_SetTextureBlendMode( texture_, SDL_BLENDMODE_NONE );
     //SDL_SetTextureAlphaMod(texture_, 0xFF );
-    textureInfo_.alphaModIsSet = false;
+    textureInfo.alphaModIsSet = false;
   }
 
   int check = SDL_RenderCopy(renderer, texture_, srcRect, dstRect);
@@ -231,11 +233,31 @@ SlTexture::render(SDL_Renderer *renderer, uint32_t renderOptions)
 
 
 bool
+SlTexture::renderWithOptions(SDL_Renderer *renderer, uint32_t renderOptions)
+{
+  bool isRendered = true;
+  textureInfo_.renderOptions = renderOptions;
+  isRendered = render(renderer);
+  return isRendered;
+}
+
+
+bool
+SlTexture::renderTextureOnTexture(SDL_Renderer *renderer, SlTexture *toAdd)
+{
+  bool isRendered = true;
+  isRendered = renderTextureOnTexture(renderer, toAdd, toAdd->textureInfo_.renderOptions);
+  return isRendered;
+}
+
+
+
+bool
 SlTexture::renderTextureOnTexture(SDL_Renderer *renderer, SlTexture *toAdd, uint32_t renderOptions)
 {
   bool isRendered = true;
   SDL_SetRenderTarget(renderer, texture_);
-  isRendered = toAdd->render(renderer, renderOptions);
+  isRendered = toAdd->renderWithOptions(renderer, renderOptions);
   SDL_SetRenderTarget(renderer, nullptr);
   return isRendered;
 }
@@ -284,6 +306,14 @@ SlTexture::setDestinationOrigin(int x, int y)
 }
 
 
+void
+SlTexture::setRenderOptions(uint32_t renderOptions)
+{
+  textureInfo_.renderOptions = renderOptions;
+}
+
+
+
 bool
 SlTexture::tileTexture(SDL_Renderer *renderer, int width, int height)
 {
@@ -296,9 +326,10 @@ SlTexture::tileTexture(SDL_Renderer *renderer, int width, int height)
   textureInfo_.destinationRect.y = 0; 
   textureInfo_.destinationRect.w = textureInfo_.sourceRect.w;
   textureInfo_.destinationRect.h = textureInfo_.sourceRect.h;
+  textureInfo_.renderOptions = SL_RENDER_USE_SOURCE | SL_RENDER_USE_DESTINATION;
   
   while ( textureInfo_.destinationRect.y < height) {
-    isRendered = render(renderer, SL_RENDER_USE_SOURCE | SL_RENDER_USE_DESTINATION);
+    isRendered = renderThis(renderer, textureInfo_);
     if (isRendered == false) return isRendered;
     if ( textureInfo_.destinationRect.x + textureInfo_.sourceRect.w < width) {
       textureInfo_.destinationRect.x += textureInfo_.sourceRect.w;

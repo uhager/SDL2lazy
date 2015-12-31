@@ -21,7 +21,7 @@
   Specifies whether to use the SlTexture's source or destination SDL_Rect. 
   Also specifies use of colour mod and alpha mod.
 */
-enum RenderOptions {
+enum SlRenderOptions {
   SL_RENDER_DEFAULT         = (1u << 0),
   SL_RENDER_USE_DESTINATION = (1u << 1),
   SL_RENDER_USE_SOURCE      = (1u << 2),
@@ -42,17 +42,18 @@ struct SlTextureInfo
   /*! When a texture is loaded from an image file, sourceRect is set to the width and height of the texture.
     It can be adjusted to clip certain sections of the texture.
   */
-  SDL_Rect sourceRect;
+  SDL_Rect sourceRect = {0,0,0,0};
   /*! destinationRect specifies where and how large to render the texture. 
     Upon loading an image it is set to the same values as sourceRect.
   */
-  SDL_Rect destinationRect;
+  SDL_Rect destinationRect = {0,0,0,0};
   /*! red, green, blue, alpha
 
     Used for SL_RENDER_COLORMOD (SDL_SetTextureColorMod) and SL_RENDER_ALPHAMOD (SDL_SetTextureAlphaMod).
     Also used as fill colour when creating texture from rectangle.
+    Initialized to black and max alpha.
   */
-  uint8_t color[4];
+  uint8_t color[4] = {0x00, 0x00, 0x00, 0xFF};
   /*! alphaModIsSet stores whether SDL_SetTextureAlphaMod has been applied. 
     If true but the RenderOptions for the next render call don't request the mod
     anymore, the texture is reset to default.
@@ -63,6 +64,11 @@ struct SlTextureInfo
     anymore, the texture is reset to default.
    */
   bool colorModIsSet = false;
+  /*! SlRenderOptions for the texture.
+    Used when  rendered with render(SDL_Renderer *renderer), 
+    overwritten when rendered with bool render(SDL_Renderer *renderer, uint32_t renderOptions);
+  */
+  uint32_t renderOptions = SL_RENDER_DEFAULT;
 };
 
 
@@ -79,7 +85,7 @@ class SlTexture
     sprites are identified by their name.
   */
   SlTexture(std::string name);
-  ~SlTexture();
+  virtual ~SlTexture();
 
   /*! createFromRectangle uses SDL_FillRect to create a texture based on the given geometry and the color defined in SlTextureInfo.
     When no geometry is specified in the function call, SlTextureInfo::sourceRect is used.
@@ -118,8 +124,21 @@ class SlTexture
     If textureInfo_.sourceRect was changed, this function calls SDL_QueryTexture to restore it to the size of the texture. 
    */
   bool recoverOriginalSize();
+
   /*! Renders texture_ using SDL_RenderCopy
    
+    Uses textureInfo_.renderOptions to specify where and what to plot.
+    Currently implemented:\n
+    sourceRect to clip part of the texture\n
+    destinationRect to specify where and how big to render\n
+    colour mod (SDL_SetTextureColorMod)\n
+    alpha mod (SDL_SetTextureAlphaMod)\n
+  */
+  virtual bool render(SDL_Renderer *renderer);
+
+  /*! Renders texture_.
+   
+    Replaces textureInfo_.renderOptions with renderOptions.
     renderOptions use enum RenderOptions to specify where and what to plot.
     Currently implemented:\n
     sourceRect to clip part of the texture\n
@@ -127,13 +146,22 @@ class SlTexture
     colour mod (SDL_SetTextureColorMod)\n
     alpha mod (SDL_SetTextureAlphaMod)\n
   */
-  bool render(SDL_Renderer *renderer, uint32_t renderOptions);
+  bool renderWithOptions(SDL_Renderer *renderer, uint32_t renderOptions);
+
+  /*! Renders SlTexture toAdd on top of texture_ , using toAdd->textureInfo_.renderOptions
+
+    Used to combine textures.
+    renderOptions modify toAdd when rendered on top of texture_.
+  */
+  bool renderTextureOnTexture(SDL_Renderer *renderer, SlTexture *toAdd);
+
   /*! Renders SlTexture toAdd on top of texture_ , renderOptions apply to toAdd
 
     Used to combine textures.
     renderOptions modify toAdd when rendered on top of texture_.
   */
   bool renderTextureOnTexture(SDL_Renderer *renderer, SlTexture *toAdd, uint32_t renderOptions);
+
   /*! color is use when using color mod to render, and when creating a texture from a rectangle.
    */
   bool setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
@@ -152,6 +180,9 @@ class SlTexture
     Sets how large the texture will be rendered.
   */
   bool setDestinationDimension(int width, int height);
+  /*! Sets SlRenderOptions in textureInfo_
+   */
+  void setRenderOptions(uint32_t renderOptions);
   /*!Creates a new texture with dimensions w x h and fills it with tiles of the current texture. 
     The current texture is not stretched, but rendered as often as needed to fill the new texture.
     The current texture's sourceRect is used to determine what part is used for the tiles 
@@ -170,6 +201,13 @@ class SlTexture
    */
   SlTextureInfo textureInfo_;
   void initialize();
+
+  /*! Renders texture using settings in textureInfo. 
+
+    This is where the actual rendering happens.
+    textureInfo is passed as a reference to allow toogling of alphaModIsSet and colorModIsSet.
+  */
+  bool renderThis(SDL_Renderer *renderer, SlTextureInfo& textureInfo);
 
 };
 
