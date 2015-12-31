@@ -131,7 +131,8 @@ SlSpritesheet::readCoordSheet(std::string fileName)
       if (result == false) break;
       if ( input) getline(input,line);
     }
-  return result;
+   currentSprite = sprites.end();
+   return result;
 }
 
 
@@ -186,6 +187,18 @@ SlSpritesheet::render(SDL_Renderer *renderer)
     currentSprite->renderOptions |= SL_RENDER_USE_DESTINATION ;
   }
   isRendered = renderThis(renderer, *currentSprite);
+  return isRendered;
+}
+
+
+bool
+SlSpritesheet::renderAll(SDL_Renderer *renderer)
+{
+  bool isRendered = true;
+  for (auto sprite: sprites){
+    isRendered = renderThis(renderer, sprite);
+    if (isRendered == false) return isRendered;
+  }
   return isRendered;
 }
 

@@ -94,7 +94,14 @@ int main()
     return -1;
   }
   delete temp;
-  
+
+  SlSpritesheet* corners = new SlSpritesheet("corners");
+  corners->loadFromFile(gRenderer, "resources/corners.png");
+  corners->readCoordSheet("resources/cornersheet.layout");
+  corners->setDestinationOrigin("upperright", SCREEN_WIDTH - 120,                 0  ); 
+  corners->setDestinationOrigin("lowerright", SCREEN_WIDTH - 120, SCREEN_HEIGHT - 120); 
+  corners->setDestinationOrigin("lowerleft" ,                0  , SCREEN_HEIGHT - 120); 
+    
   SDL_Rect miniMapRect = {10,10,220,220};
   miniMapBgTexture->setDestination(miniMapRect);
   miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION );
@@ -136,6 +143,7 @@ int main()
 
     SDL_RenderClear(gRenderer);
     backgroundTexture->render(gRenderer);
+    corners->renderAll(gRenderer);
     miniMapBgTexture->render(gRenderer);
     arrowSheet->render(gRenderer);
     SDL_RenderPresent( gRenderer );
@@ -145,6 +153,7 @@ int main()
   delete backgroundTexture;
   delete arrowSheet;
   delete miniMapBgTexture;
+  delete corners;
   close();
   
   return 0;

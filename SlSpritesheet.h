@@ -96,6 +96,9 @@ class SlSpritesheet : public SlTexture
      Calls SlTexture::render(SDL_Renderer *renderer, SlTextureInfo textureInfo).
    */
   bool render(SDL_Renderer *renderer);
+  /*! Renders all sprites as specified in their SlTextureInfo properties.
+   */
+  bool renderAll(SDL_Renderer *renderer);
   /*! Renders the specified sprite. 
 
     Calls setCurrentSprite(std::string name) and thus also sets the #currentSprite.
