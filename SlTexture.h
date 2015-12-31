@@ -85,8 +85,17 @@ class SlTexture
     sprites are identified by their name.
   */
   SlTexture(std::string name);
+  /*! deletes texture_
+   */
   virtual ~SlTexture();
+  /*! Delete copy constructor. There's no reason to copy the texture, if the goal is to render different parts of it or with different options use SlSpritesheet.
+   */
+  SlTexture(const SlTexture&) = delete;
+  /*! Deleted, same reason as copy constructor.
+   */
+  SlTexture &operator=(const SlTexture&) = delete;
 
+  
   /*! createFromRectangle uses SDL_FillRect to create a texture based on the given geometry and the color defined in SlTextureInfo.
     When no geometry is specified in the function call, SlTextureInfo::sourceRect is used.
     Colour has to be set before calling this, or the texture will be the default colour (currently black).

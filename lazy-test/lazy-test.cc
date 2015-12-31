@@ -100,7 +100,7 @@ int main()
   miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION );
 
   arrowSheet->centerAllSpritesIn(miniMapRect);
-  
+
   bool quit = false;
   SDL_Event event;
     
