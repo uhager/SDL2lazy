@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['initializefromconfigfile',['initializeFromConfigFile',['../classSlTexture.html#aa398460a91813b65fc06d6d655055fae',1,'SlTexture']]]
+  ['findsprite',['findSprite',['../classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4',1,'SlSpritesheet']]]
 ];

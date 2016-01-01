@@ -3,7 +3,7 @@ var indexSectionsWithContent =
   0: "acdfilnorst~",
   1: "s",
   2: "s",
-  3: "cdfilnorst~",
+  3: "acdfilnorst~",
   4: "acdrst"
 };
 

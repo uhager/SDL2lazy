@@ -112,6 +112,12 @@ Collaboration diagram for SlSpritesheet:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a86c8ca9b244a052f99e270d3302cf8bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a86c8ca9b244a052f99e270d3302cf8bc">SlSpritesheet</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>)</td></tr>
 <tr class="separator:a86c8ca9b244a052f99e270d3302cf8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d08963c8c25abc977a526f09e26389e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a1d08963c8c25abc977a526f09e26389e">addAllToRender</a> ()</td></tr>
+<tr class="separator:a1d08963c8c25abc977a526f09e26389e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6746c079728c060466420a281d92851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#ab6746c079728c060466420a281d92851">addToRender</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>)</td></tr>
+<tr class="separator:ab6746c079728c060466420a281d92851"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2a0ac63a523ce863293e7ef5e1f4947"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#ab2a0ac63a523ce863293e7ef5e1f4947">clearToRender</a> ()</td></tr>
+<tr class="separator:ab2a0ac63a523ce863293e7ef5e1f4947"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee76f8cb814f5a2d24937f1bfd5e9229"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#aee76f8cb814f5a2d24937f1bfd5e9229">centerAllSpritesAt</a> (int x, int y)</td></tr>
 <tr class="separator:aee76f8cb814f5a2d24937f1bfd5e9229"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0cd36a07e2a826b240ce8c2b99a66cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#ad0cd36a07e2a826b240ce8c2b99a66cf">centerAllSpritesIn</a> (int x, int y, int w, int h)</td></tr>
@@ -128,12 +134,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8cc1c63a30efe2600bec3b66456afae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ba905e598d79ae4e1b1b61c874060b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#af8ba905e598d79ae4e1b1b61c874060b">readCoordSheet</a> (std::string fileName)</td></tr>
 <tr class="separator:af8ba905e598d79ae4e1b1b61c874060b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0174465358b2c7e5700cd72524820c8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a0174465358b2c7e5700cd72524820c8a">removeFromRender</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>)</td></tr>
+<tr class="separator:a0174465358b2c7e5700cd72524820c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10c64300e699b5949e9b1d382bf3b64c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a10c64300e699b5949e9b1d382bf3b64c">render</a> (SDL_Renderer *renderer)</td></tr>
 <tr class="separator:a10c64300e699b5949e9b1d382bf3b64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2befd2cc0243759a68f0be23efed32d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#af2befd2cc0243759a68f0be23efed32d">renderAll</a> (SDL_Renderer *renderer)</td></tr>
+<tr class="separator:af2befd2cc0243759a68f0be23efed32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0555564801ebe3b5126802cb733690"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a2b0555564801ebe3b5126802cb733690">renderCurrentSprite</a> (SDL_Renderer *renderer)</td></tr>
+<tr class="separator:a2b0555564801ebe3b5126802cb733690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f2bdfcde4abf03fde057fab487629c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#aa6f2bdfcde4abf03fde057fab487629c">renderCurrentSprite</a> (SDL_Renderer *renderer, uint32_t renderOptions)</td></tr>
+<tr class="separator:aa6f2bdfcde4abf03fde057fab487629c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6be6bd6b3faef349e8f80b3490b3aa7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a6be6bd6b3faef349e8f80b3490b3aa7a">renderSprite</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>, SDL_Renderer *renderer, uint32_t renderOptions)</td></tr>
 <tr class="separator:a6be6bd6b3faef349e8f80b3490b3aa7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c47a3ec3c7b936c308e53e326e13af9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a4c47a3ec3c7b936c308e53e326e13af9">renderSprite</a> (SDL_Renderer *renderer, uint32_t renderOptions)</td></tr>
-<tr class="separator:a4c47a3ec3c7b936c308e53e326e13af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e6e20eaf6ce0e0e461cb52aac5fdded"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a5e6e20eaf6ce0e0e461cb52aac5fdded">setDestinationOrigin</a> (std::string spriteName, int x, int y)</td></tr>
 <tr class="separator:a5e6e20eaf6ce0e0e461cb52aac5fdded"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a234b1c3fe12f4eba8b89bc3514d9cb8f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a234b1c3fe12f4eba8b89bc3514d9cb8f">setDestinationDimension</a> (std::string spriteName, int w, int h)</td></tr>
@@ -144,6 +156,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afdd3a115ae1bfbb56ab7c3bb08a1d461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d20098c973fa2cfe4a3a803ce8c7710"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a8d20098c973fa2cfe4a3a803ce8c7710">setSpriteRenderOption</a> (uint32_t renderOptions)</td></tr>
 <tr class="separator:a8d20098c973fa2cfe4a3a803ce8c7710"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e7e729d4a5e750e1c2be06646cd3b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a43e7e729d4a5e750e1c2be06646cd3b7">toggleSprite</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>)</td></tr>
+<tr class="separator:a43e7e729d4a5e750e1c2be06646cd3b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classSlTexture"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classSlTexture')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classSlTexture.html">SlTexture</a></td></tr>
 <tr class="memitem:a5751f8edd56a5eb26450b83c03ee7005 inherit pub_methods_classSlTexture"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTexture.html#a5751f8edd56a5eb26450b83c03ee7005">SlTexture</a> (std::string <a class="el" href="classSlTexture.html#ada29a1d9470557cc56c43afb973aa040">name</a>)</td></tr>
 <tr class="separator:a5751f8edd56a5eb26450b83c03ee7005 inherit pub_methods_classSlTexture"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,6 +221,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:af6ad223c4d13b4b585421b17c2795345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb6a0a8e79cdf76d9161f1d56dae840c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structSlTextureInfo.html">SlTextureInfo</a> &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#adb6a0a8e79cdf76d9161f1d56dae840c">currentSprite</a> = sprites.begin()</td></tr>
 <tr class="separator:adb6a0a8e79cdf76d9161f1d56dae840c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a392932dccb7f847d8cec713dbc4a88d0"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="structSlTextureInfo.html">SlTextureInfo</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSpritesheet.html#a392932dccb7f847d8cec713dbc4a88d0">toRender</a></td></tr>
+<tr class="separator:a392932dccb7f847d8cec713dbc4a88d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -243,6 +259,39 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> ()</td
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a1d08963c8c25abc977a526f09e26389e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlSpritesheet::addAllToRender </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds all sprites to <a class="el" href="classSlSpritesheet.html#a392932dccb7f847d8cec713dbc4a88d0">toRender</a>. All sprites in <a class="el" href="classSlSpritesheet.html#a392932dccb7f847d8cec713dbc4a88d0">toRender</a> will be rendered at the next <a class="el" href="classSlSpritesheet.html#a10c64300e699b5949e9b1d382bf3b64c">render(SDL_Renderer *renderer)</a> call. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab6746c079728c060466420a281d92851"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlSpritesheet::addToRender </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds the named sprite to <a class="el" href="classSlSpritesheet.html#a392932dccb7f847d8cec713dbc4a88d0">toRender</a>. All sprites in <a class="el" href="classSlSpritesheet.html#a392932dccb7f847d8cec713dbc4a88d0">toRender</a> will be rendered at the next <a class="el" href="classSlSpritesheet.html#a10c64300e699b5949e9b1d382bf3b64c">render(SDL_Renderer *renderer)</a> call. </p>
+
+</div>
+</div>
 <a class="anchor" id="aee76f8cb814f5a2d24937f1bfd5e9229"></a>
 <div class="memitem">
 <div class="memproto">
@@ -412,6 +461,22 @@ Calls <a class="el" href="classSlSpritesheet.html#a137e0e7bc5e16ac36f481a3e94cfe
 
 </div>
 </div>
+<a class="anchor" id="ab2a0ac63a523ce863293e7ef5e1f4947"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlSpritesheet::clearToRender </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Clears <a class="el" href="classSlSpritesheet.html#a392932dccb7f847d8cec713dbc4a88d0">toRender</a>. No sprites will be rendered during the next call to <a class="el" href="classSlSpritesheet.html#a10c64300e699b5949e9b1d382bf3b64c">render(SDL_Renderer *renderer)</a>. </p>
+
+</div>
+</div>
 <a class="anchor" id="a8cc1c63a30efe2600bec3b66456afae4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -476,6 +541,23 @@ where "left" and "right" are the names of 2 sprites with their coordinates given
 
 </div>
 </div>
+<a class="anchor" id="a0174465358b2c7e5700cd72524820c8a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlSpritesheet::removeFromRender </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Removes the sprite from toRender, i.e. during the next render call, this sprite will no longer be rendered. </p>
+
+</div>
+</div>
 <a class="anchor" id="a10c64300e699b5949e9b1d382bf3b64c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -497,16 +579,73 @@ where "left" and "right" are the names of 2 sprites with their coordinates given
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Renders texture_ using SDL_RenderCopy</p>
-<p>Uses textureInfo_.renderOptions to specify where and what to plot. Currently implemented:<br />
-sourceRect to clip part of the texture<br />
-destinationRect to specify where and how big to render<br />
-colour mod (SDL_SetTextureColorMod)<br />
-alpha mod (SDL_SetTextureAlphaMod)<br />
-</p>
+<p>Render the sprites in <a class="el" href="classSlSpritesheet.html#a392932dccb7f847d8cec713dbc4a88d0">toRender</a> with their respective <a class="el" href="structSlTextureInfo.html">SlTextureInfo</a> settings</p>
+<p>Calls SlTexture::render(SDL_Renderer *renderer, SlTextureInfo textureInfo). </p>
 <p>sprites always use their source rectangle, but explicitly setting SL_RENDER_USE_SOURCE allows setting an arbitrary source of the sprite sheet (could just use normal render though...)</p>
 
 <p>Reimplemented from <a class="el" href="classSlTexture.html#aac9736a608c11ee52de9e57939db80e7">SlTexture</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af2befd2cc0243759a68f0be23efed32d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlSpritesheet::renderAll </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Renders all sprites as specified in their <a class="el" href="structSlTextureInfo.html">SlTextureInfo</a> properties. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2b0555564801ebe3b5126802cb733690"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlSpritesheet::renderCurrentSprite </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Renders the <a class="el" href="classSlSpritesheet.html#adb6a0a8e79cdf76d9161f1d56dae840c">currentSprite</a> using its settings </p>
+
+</div>
+</div>
+<a class="anchor" id="aa6f2bdfcde4abf03fde057fab487629c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlSpritesheet::renderCurrentSprite </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>renderOptions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Renders the <a class="el" href="classSlSpritesheet.html#adb6a0a8e79cdf76d9161f1d56dae840c">currentSprite</a> and sets its <a class="el" href="structSlTextureInfo.html#a14bd97b05f5e7a4f2d91910d0ab5c089">SlTextureInfo::renderOptions</a>.</p>
+<p>Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect. </p>
 
 </div>
 </div>
@@ -540,35 +679,7 @@ alpha mod (SDL_SetTextureAlphaMod)<br />
       </table>
 </div><div class="memdoc">
 <p>Renders the specified sprite.</p>
-<p>Calls <a class="el" href="classSlSpritesheet.html#a137e0e7bc5e16ac36f481a3e94cfe371">setCurrentSprite(std::string name)</a> and thus also sets the <a class="el" href="classSlSpritesheet.html#adb6a0a8e79cdf76d9161f1d56dae840c">currentSprite</a>. Then calls <a class="el" href="classSlSpritesheet.html#a4c47a3ec3c7b936c308e53e326e13af9">renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)</a>. Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect. </p>
-
-</div>
-</div>
-<a class="anchor" id="a4c47a3ec3c7b936c308e53e326e13af9"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool SlSpritesheet::renderSprite </td>
-          <td>(</td>
-          <td class="paramtype">SDL_Renderer *&#160;</td>
-          <td class="paramname"><em>renderer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>renderOptions</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Renders the <a class="el" href="classSlSpritesheet.html#adb6a0a8e79cdf76d9161f1d56dae840c">currentSprite</a>.</p>
-<p>Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect. </p>
+<p>Calls <a class="el" href="classSlSpritesheet.html#a137e0e7bc5e16ac36f481a3e94cfe371">setCurrentSprite(std::string name)</a> and thus also sets the <a class="el" href="classSlSpritesheet.html#adb6a0a8e79cdf76d9161f1d56dae840c">currentSprite</a>. Then calls <a class="el" href="classSlSpritesheet.html#aa6f2bdfcde4abf03fde057fab487629c">renderCurrentSprite(SDL_Renderer* renderer, uint32_t renderOptions)</a>. Note about renderOptions: since it doesn't make sense to render a sprite with a different sourceRect, SL_RENDER_USE_SOURCE is always used with the sprite's sourceRect. </p>
 
 </div>
 </div>
@@ -585,7 +696,7 @@ alpha mod (SDL_SetTextureAlphaMod)<br />
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the currentSprite iterator to point at the specified sprite After calling setCurrentSprite you can call <a class="el" href="classSlSpritesheet.html#a4c47a3ec3c7b936c308e53e326e13af9">renderSprite(SDL_Renderer* renderer, uint32_t renderOptions)</a> directly rather than <a class="el" href="classSlSpritesheet.html#a6be6bd6b3faef349e8f80b3490b3aa7a">renderSprite(std::string name, SDL_Renderer* renderer, uint32_t renderOptions)</a>. </p>
+<p>Sets the currentSprite iterator to point at the specified sprite After calling setCurrentSprite you can call renderSprite(SDL_Renderer* renderer, uint32_t renderOptions) directly rather than <a class="el" href="classSlSpritesheet.html#a6be6bd6b3faef349e8f80b3490b3aa7a">renderSprite(std::string name, SDL_Renderer* renderer, uint32_t renderOptions)</a>. </p>
 
 </div>
 </div>
@@ -764,6 +875,24 @@ alpha mod (SDL_SetTextureAlphaMod)<br />
 
 </div>
 </div>
+<a class="anchor" id="a43e7e729d4a5e750e1c2be06646cd3b7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlSpritesheet::toggleSprite </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Toggles whether the named sprite is rendered or not.</p>
+<p>If the sprite is already in <a class="el" href="classSlSpritesheet.html#a392932dccb7f847d8cec713dbc4a88d0">toRender</a> it will be removed. If it is not, it will be added. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="adb6a0a8e79cdf76d9161f1d56dae840c"></a>
 <div class="memitem">
@@ -804,6 +933,27 @@ alpha mod (SDL_SetTextureAlphaMod)<br />
 </table>
 </div><div class="memdoc">
 <p>Holds a <a class="el" href="structSlTextureInfo.html">SlTextureInfo</a> for each sprite </p>
+
+</div>
+</div>
+<a class="anchor" id="a392932dccb7f847d8cec713dbc4a88d0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::set&lt;<a class="el" href="structSlTextureInfo.html">SlTextureInfo</a>*&gt; SlSpritesheet::toRender</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Contains pointers to the sprites that will be rendered next time <a class="el" href="classSlSpritesheet.html#a10c64300e699b5949e9b1d382bf3b64c">render(SDL_Renderer *renderer)</a> is called. </p>
 
 </div>
 </div>
