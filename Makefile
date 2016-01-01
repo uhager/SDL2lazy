@@ -9,24 +9,29 @@ EXAMPLE = ./example
 SDL_INCLUDES = $(shell sdl2-config --cflags)
 SDL_LIBS = $(shell sdl2-config --libs) -lSDL2_image
 
-CC = gcc
 CXX = g++
-CXXFLAGS += -g -O2 -Wall -fPIC -std=c++11 -I$(INC)
+CXXFLAGS += -O2 -Wall -fPIC -std=c++11 -I$(INC)
 
-OBJS = $(SRC)/SlTexture.o $(SRC)/SlSpritesheet.o
+DEBUG_FLAGS = -g -DDEBUG 
+
+OBJS = $(SRC)/SlTexture.o $(SRC)/SlSprite.o
 EXAMPLE_OBJS = $(EXAMPLE)/lazy-test.o
 ALL += lib/libSDL2lazy.so example/lazy-test
 
 example: example/lazy-test
 lib: lib/libSDL2lazy.so
-all: $(ALL) 
+all: $(ALL)
+debug: CXXFLAGS += $(DEBUG_FLAGS)
+debug: clean all
+
+.PHONY: clean
 
 %.o: %.cc
-	$(CC) $(CXXFLAGS) $(SDL_INCLUDES) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) $(SDL_INCLUDES) -o $@ -c $<
 
 lib/libSDL2lazy.so: $(OBJS)
 	mkdir -p lib/
-	$(CC) -shared -o  $@ $(OBJS) $(SDL_LIBS)
+	$(CXX) -shared -o  $@ $(OBJS) $(SDL_LIBS)
 
 example/lazy-test: lib/libSDL2lazy.so $(EXAMPLE_OBJS)
 	$(CXX) $(CXXFLAGS) $(EXAMPLE_OBJS) $(SDL_LIBS) -L$(LIB) -lSDL2lazy -o $@

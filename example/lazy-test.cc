@@ -6,7 +6,7 @@
 #include <SDL2/SDL.h>
 
 #include "SlTexture.h"
-#include "SlSpritesheet.h"
+#include "SlSprite.h"
 
 
 const int SCREEN_WIDTH = 1000;
@@ -65,49 +65,31 @@ int main()
     return -1;
   }
 
-  SlTexture* backgroundTexture = new SlTexture("background");
-  backgroundTexture->loadFromFile(gRenderer,"resources/tacky_background.png");
-  backgroundTexture->setColor(0xBB, 0x40, 0x80, 0x50);
-  backgroundTexture->tileTexture(gRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+  SlTexture* backgroundTile = new SlTexture("tile");
+  backgroundTile->loadFromFile(gRenderer,"resources/tacky_background.png");
+  SlSprite* tile = new SlSprite("tile",backgroundTile);
+  SlTexture* bgTexture = new SlTexture("background");
+  bgTexture->createFromTiles(gRenderer, tile, SCREEN_WIDTH, SCREEN_HEIGHT);
+  SlSprite* background = new SlSprite("background", bgTexture);
+  delete backgroundTile;
+  delete tile;
   
-  SlSpritesheet* arrowSheet = new SlSpritesheet("arrowsheet");
-  arrowSheet->loadFromFile(gRenderer,"resources/arrowsheet_transp.png");
-  arrowSheet->readCoordSheet("resources/arrowsheet.layout");
-  arrowSheet->setCurrentSprite("up");
+  SlTexture* mmTexture1 = new SlTexture("tex1");
+  mmTexture1->createFromRectangle(gRenderer, 210, 210, 0x00, 0x00, 0xC0, 0xFF);
+  SlTexture* tempTex = new SlTexture("temp");
+  tempTex->createFromRectangle(gRenderer, 186, 186, 0x50, 0x00, 0xE0, 0xFF);
+  SlSprite* tempSprite = new SlSprite("temp",tempTex);
+  tempSprite->setDestinationOrigin(12, 12);
+
+  SlTexture* miniMapTexture = new SlTexture("minimap");
+  miniMapTexture->createFromSpriteOnTexture(gRenderer, mmTexture1, tempSprite);
+  delete tempSprite;
+  delete tempTex;
+  delete mmTexture1;
   
-  SlTexture* miniMapBgTexture = new SlTexture("miniMapBg");
-  miniMapBgTexture->setColor(0x00,0x00,0xC0,0x40);
-  miniMapBgTexture->createFromRectangle(gRenderer,210,210);
-
-  SlTexture* temp = new SlTexture("temp");
-  temp->setColor(0x50,0x00,0xE0,0xFF);
-  temp->createFromRectangle(gRenderer,186,186);
-  temp->setDestinationOrigin(12, 12);
-  bool check = miniMapBgTexture->renderTextureOnTexture(gRenderer, temp, SL_RENDER_USE_DESTINATION);
-  if (!check){
-    std::cout << "renderTextureOnTexture failed " << SDL_GetError() << std::endl;
-    delete backgroundTexture;
-    delete arrowSheet;
-    delete miniMapBgTexture;
-    delete temp;
-    close();
-    return -1;
-  }
-  delete temp;
-
-  SlSpritesheet* corners = new SlSpritesheet("corners");
-  corners->loadFromFile(gRenderer, "resources/corners.png");
-  corners->readCoordSheet("resources/cornersheet.layout");
-  corners->setDestinationOrigin("upperright", SCREEN_WIDTH - 120,                 0  ); 
-  corners->setDestinationOrigin("lowerright", SCREEN_WIDTH - 120, SCREEN_HEIGHT - 120); 
-  corners->setDestinationOrigin("lowerleft" ,                0  , SCREEN_HEIGHT - 120); 
-    
-  SDL_Rect miniMapRect = {10,10,220,220};
-  miniMapBgTexture->setDestination(miniMapRect);
-  miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION );
-
-  arrowSheet->centerAllSpritesIn(miniMapRect);
-
+  SlSprite* miniMapBg = new SlSprite("miniMapBg", miniMapTexture);
+  miniMapBg->setDestinationOrigin( 20, 20 );
+  
   bool quit = false;
   SDL_Event event;
     
@@ -119,32 +101,20 @@ int main()
 	  switch(event.key.keysym.sym)
 	    {
 	    case SDLK_UP:
-	      arrowSheet->setCurrentSprite("up");
-	      backgroundTexture->setRenderOptions( SL_RENDER_DEFAULT );
 	      break;
 	    case SDLK_DOWN:
-	      arrowSheet->setCurrentSprite("down");
-	      backgroundTexture->setRenderOptions( SL_RENDER_COLORMOD );
 	      break;
 	    case SDLK_LEFT:
-	      arrowSheet->setCurrentSprite("left");
-	      miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION | SL_RENDER_ALPHAMOD );
 	      break;
 	    case SDLK_RIGHT:
-	      arrowSheet->setCurrentSprite("right");
-	      miniMapBgTexture->setRenderOptions( SL_RENDER_USE_DESTINATION );
 	      break;
 	    case SDLK_1:
-	      corners->toggleSprite("upperleft");
 	      break;
 	    case SDLK_2:
-	      corners->toggleSprite("upperright");
 	      break;
 	    case SDLK_3:
-	      corners->toggleSprite("lowerright");
 	      break;
 	    case SDLK_4:
-	      corners->toggleSprite("lowerleft");
 	      break;
 	    case SDLK_ESCAPE:
 	      quit = true;
@@ -154,18 +124,16 @@ int main()
     }
 
     SDL_RenderClear(gRenderer);
-    backgroundTexture->render(gRenderer);
-    corners->render(gRenderer);
-    miniMapBgTexture->render(gRenderer);
-    arrowSheet->renderCurrentSprite(gRenderer);
+    background->render(gRenderer);
+    miniMapBg->render(gRenderer);
     SDL_RenderPresent( gRenderer );
   }
   
 
-  delete backgroundTexture;
-  delete arrowSheet;
-  delete miniMapBgTexture;
-  delete corners;
+  delete bgTexture;
+  delete background;
+  delete miniMapTexture;
+  delete miniMapBg;
   close();
   
   return 0;
