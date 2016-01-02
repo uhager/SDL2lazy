@@ -55,7 +55,13 @@ SlTexture::createFromRectangle(SDL_Renderer* renderer, int width, int height, ui
   int result = 0;
   
   texture_ = SDL_CreateTexture(renderer, 0, SDL_TEXTUREACCESS_TARGET, width, height);
-
+  if (texture_ == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlTexture::createFromRectangle] Failed to create texture " << SDL_GetError() << std::endl;
+#endif
+    return 1;
+  }
+  
   SDL_RenderClear(renderer);
   SDL_SetRenderTarget(renderer, texture_);
   SDL_SetRenderDrawColor( renderer, red, green, blue, alpha );
@@ -79,10 +85,16 @@ SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgrou
   int width, height;
   SDL_QueryTexture(backgroundTexture->texture_, nullptr, nullptr, &width, &height);
   texture_ = SDL_CreateTexture(renderer, 0, SDL_TEXTUREACCESS_TARGET, width, height);
-
+  if (texture_ == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlTexture::createFromSpriteOnTexture] Failed to create texture " << SDL_GetError() << std::endl;
+#endif
+    return 1;
+  }
+  
   SDL_RenderClear(renderer);
   SDL_SetRenderTarget(renderer, texture_);
-  SDL_RenderCopy(renderer, backgroundTexture->texture_, nullptr, nullptr);
+  result = SDL_RenderCopy(renderer, backgroundTexture->texture_, nullptr, nullptr);
   foregroundSprite->render(renderer);
 
   SDL_SetRenderTarget(renderer, nullptr);
@@ -99,6 +111,13 @@ SlTexture::createFromTile(SDL_Renderer *renderer, SlSprite* tile, int width, int
 {
   int result = 0;
   texture_ = SDL_CreateTexture(renderer, 0, SDL_TEXTUREACCESS_TARGET, width, height);
+  if (texture_ == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlTexture::createFromTile] Failed to create texture " << SDL_GetError() << std::endl;
+#endif
+    return 1;
+  }
+
   SDL_SetRenderTarget(renderer, texture_);
   SDL_RenderClear(renderer);
 

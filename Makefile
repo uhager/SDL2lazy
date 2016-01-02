@@ -18,9 +18,10 @@ OBJS = $(SRC)/SlTexture.o $(SRC)/SlSprite.o $(SRC)/SlRenderItem.o $(SRC)/SlManag
 EXAMPLE_OBJS = $(EXAMPLE)/lazy-test.o
 ALL += lib/libSDL2lazy.so example/lazy-test
 
+all: $(ALL)
+
 example: example/lazy-test
 lib: lib/libSDL2lazy.so
-all: $(ALL)
 debug: CXXFLAGS += $(DEBUG_FLAGS)
 debug: clean all
 

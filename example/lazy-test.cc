@@ -17,13 +17,19 @@ int main()
 {
   SlManager* gMngr = new SlManager("lazy-test", SCREEN_WIDTH, SCREEN_HEIGHT) ;  
 
+  SlTexture* wrongFileTest = gMngr->createTextureFromFile("tile","resources/tacky_backgroun.png");
+  if (wrongFileTest == nullptr) {
+    std::cout << "wrong file! " << std::endl;
+  }
+  
   SlTexture* backgroundTile = gMngr->createTextureFromFile("tile","resources/tacky_background.png");
   SlSprite* tile = new SlSprite("tile",backgroundTile);
   SlTexture* bgTexture = gMngr->createTextureFromTile("background", tile, SCREEN_WIDTH, SCREEN_HEIGHT);
   SlSprite* background = new SlSprite("background", bgTexture);
-  gMngr->deleteTexture("tile");
-  delete tile;
-
+    gMngr->deleteTexture("tile");
+    delete tile;
+  
+  
   SlTexture* mmTexture1 = gMngr->createTextureFromRectangle("tex1", 210, 210, 0x00, 0x00, 0xC0, 0xFF);
   SlTexture* tempTex = gMngr->createTextureFromRectangle("temp", 186, 186, 0x50, 0x00, 0xE0, 0xFF);
   SlSprite* tempSprite = new SlSprite("temp",tempTex);

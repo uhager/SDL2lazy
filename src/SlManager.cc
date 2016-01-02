@@ -82,18 +82,37 @@ SlTexture*
 SlManager::createTextureFromFile(std::string name, std::string fileName)
 {
   SlTexture* toAdd = new SlTexture(name);
-  toAdd->loadFromFile(renderer_, fileName);
-  textures_.push_back(toAdd);
+  bool check = toAdd->loadFromFile(renderer_, fileName);
+  if (check == false) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromFile] Couldn't load texture."  << std::endl;
+#endif
+    delete toAdd;
+    toAdd = nullptr;
+  }
+  else {
+    textures_.push_back(toAdd);
+  }
   return toAdd;
 }
+
 
 
 SlTexture*
 SlManager::createTextureFromRectangle(std::string name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
   SlTexture* toAdd = new SlTexture(name);
-  toAdd->createFromRectangle(renderer_, width, height, red, green, blue, alpha);
-  textures_.push_back(toAdd);
+  int check = toAdd->createFromRectangle(renderer_, width, height, red, green, blue, alpha);
+  if (check != 0) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromRectangle] Couldn't create texture."  << std::endl;
+#endif
+    delete toAdd;
+    toAdd = nullptr;
+  }
+  else {
+    textures_.push_back(toAdd);
+  }
   return toAdd;
 }
 
@@ -103,8 +122,17 @@ SlTexture*
 SlManager::createTextureFromSpriteOnTexture(std::string name, SlTexture* backgroundTexture, SlSprite *foregroundSprite)
 {
   SlTexture* toAdd = new SlTexture(name);
-  toAdd->createFromSpriteOnTexture(renderer_, backgroundTexture, foregroundSprite);
-  textures_.push_back(toAdd);
+  int check = toAdd->createFromSpriteOnTexture(renderer_, backgroundTexture, foregroundSprite);
+  if (check != 0) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromSpriteOnTexture] Couldn't create texture."  << std::endl;
+#endif
+    delete toAdd;
+    toAdd = nullptr;
+  }
+  else {
+    textures_.push_back(toAdd);
+  }
   return toAdd;
 }
 
@@ -114,8 +142,17 @@ SlTexture*
 SlManager::createTextureFromTile(std::string name, SlSprite* sprite, int width, int height)
 {
   SlTexture* toAdd = new SlTexture(name);
-  toAdd->createFromTile(renderer_, sprite, width, height);
-  textures_.push_back(toAdd);
+  int check = toAdd->createFromTile(renderer_, sprite, width, height);
+  if (check != 0) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromTile] Couldn't create texture."  << std::endl;
+#endif
+    delete toAdd;
+    toAdd = nullptr;
+  }
+  else {
+    textures_.push_back(toAdd);
+  }
   return toAdd;
 }
 
