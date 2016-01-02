@@ -27,6 +27,7 @@ class SlTexture
   /*! SlSprite is friend so SlSprites can set the alpha mod and color mod of the texture.
    */
   friend class SlSprite;
+  friend class SlManager;
  public:
   /*! Constructor with texture name.
 
@@ -57,7 +58,7 @@ class SlTexture
     The SlRenderSettings::destinationRect at position 0 in the SlSprite's #destinations_ is used to determine the width of the tile. 
     If the sprite's #destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
   */
-  int createFromTiles(SDL_Renderer *renderer, SlSprite* tile, int width, int height);
+  int createFromTile(SDL_Renderer *renderer, SlSprite* tile, int width, int height);
   /*! Returns the dimensions of the SDL_Texture.
    */
   bool dimensions(int& width, int& height);

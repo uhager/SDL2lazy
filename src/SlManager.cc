@@ -52,6 +52,7 @@ SlManager::~SlManager(void)
 {
   this->clear();
   SDL_DestroyRenderer(renderer_);
+  renderer_ = nullptr;
   SDL_DestroyWindow( window_ );
   window_ = nullptr;
   SDL_Quit();
@@ -62,8 +63,75 @@ SlManager::~SlManager(void)
 void
 SlManager::clear()
 {
+  std::vector<SlTexture*>::iterator iter;
+  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
+    delete (*iter);
+  }
+  textures_.clear();      
 
+  std::vector<SlSprite*>::iterator sprite;
+  for ( sprite = sprites_.begin(); sprite != sprites_.end(); ++sprite) {
+    delete (*sprite);
+  }
+  sprites_.clear();      
 }
+
+
+
+SlTexture*
+SlManager::createTextureFromFile(std::string name, std::string fileName)
+{
+  SlTexture* toAdd = new SlTexture(name);
+  toAdd->loadFromFile(renderer_, fileName);
+  textures_.push_back(toAdd);
+  return toAdd;
+}
+
+
+SlTexture*
+SlManager::createTextureFromRectangle(std::string name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
+{
+  SlTexture* toAdd = new SlTexture(name);
+  toAdd->createFromRectangle(renderer_, width, height, red, green, blue, alpha);
+  textures_.push_back(toAdd);
+  return toAdd;
+}
+
+
+
+SlTexture*
+SlManager::createTextureFromSpriteOnTexture(std::string name, SlTexture* backgroundTexture, SlSprite *foregroundSprite)
+{
+  SlTexture* toAdd = new SlTexture(name);
+  toAdd->createFromSpriteOnTexture(renderer_, backgroundTexture, foregroundSprite);
+  textures_.push_back(toAdd);
+  return toAdd;
+}
+
+
+
+SlTexture*
+SlManager::createTextureFromTile(std::string name, SlSprite* sprite, int width, int height)
+{
+  SlTexture* toAdd = new SlTexture(name);
+  toAdd->createFromTile(renderer_, sprite, width, height);
+  textures_.push_back(toAdd);
+  return toAdd;
+}
+
+
+
+void
+SlManager::deleteTexture(std::string name)
+{
+  std::vector<SlTexture*>::iterator iter;
+  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
+    if ( (*iter)->name_ == name){
+      textures_.erase(iter);
+    }
+  }
+}
+
 
 
 void

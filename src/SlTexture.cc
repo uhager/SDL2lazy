@@ -95,7 +95,7 @@ SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgrou
 
 
 int
-SlTexture::createFromTiles(SDL_Renderer *renderer, SlSprite* tile, int width, int height)
+SlTexture::createFromTile(SDL_Renderer *renderer, SlSprite* tile, int width, int height)
 {
   int result = 0;
   texture_ = SDL_CreateTexture(renderer, 0, SDL_TEXTUREACCESS_TARGET, width, height);
