@@ -89,6 +89,13 @@ int main()
   
   SlSprite* miniMapBg = new SlSprite("miniMapBg", miniMapTexture);
   miniMapBg->setDestinationOrigin( 20, 20 );
+  miniMapBg->setColor(0x40, 0xAA, 0xBB, 0x50);
+  miniMapBg->setRenderOptions(SL_RENDER_ALPHAMOD | SL_RENDER_COLORMOD);
+
+  SlTexture* arrowTexture = new SlTexture("arrowTexture");
+  arrowTexture->loadFromFile(gRenderer,"resources/arrowsheet_transp.png");
+  SlSprite* upArrow = new SlSprite("up", arrowTexture, 0, 160, 80, 140);
+  upArrow->setDestinationOrigin(25,25);
   
   bool quit = false;
   SDL_Event event;
@@ -126,6 +133,7 @@ int main()
     SDL_RenderClear(gRenderer);
     background->render(gRenderer);
     miniMapBg->render(gRenderer);
+    upArrow->render(gRenderer);
     SDL_RenderPresent( gRenderer );
   }
   

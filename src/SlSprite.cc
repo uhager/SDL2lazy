@@ -13,14 +13,22 @@
 #include "SlSprite.h"
 
 
-SlSprite::SlSprite(std::string name, SlTexture* texture)
+SlSprite::SlSprite(std::string name, SlTexture* texture, int x, int y, int width, int height)
   : name_(name)
   , texture_(texture)
 {
-  SDL_QueryTexture(texture_->texture_, nullptr, nullptr, &sourceRect_.w, &sourceRect_.h);
+  if (width == 0 || height == 0) {   //! assumes whole texture to be used
+    SDL_QueryTexture(texture_->texture_, nullptr, nullptr, &sourceRect_.w, &sourceRect_.h);
+  }
+  else {
+    sourceRect_.x = x;
+    sourceRect_.y = y;
+    sourceRect_.w = width;
+    sourceRect_.h = height;
+  }
   addDefaultDestination();
 #ifdef DEBUG
-  std::cout << "[SlSprite::SlSprite] new sprite " << name_ << " from texture " << texture_->name_ << " w = " << sourceRect_.w  << " h = " << sourceRect_.h << std::endl;
+  std::cout << "[SlSprite::SlSprite] Creating " << name_ << " from texture " << texture_->name_ << " w = " << sourceRect_.w  << " h = " << sourceRect_.h << std::endl;
 #endif
 }
 
@@ -89,6 +97,14 @@ SDL_Rect
 SlSprite::destination(unsigned int i)
 {
   SDL_Rect rect;
+  if (i >= destinations_.size() ){
+#ifdef DEBUG
+    std::cout << "[SlSprite::destination] attempting to access destination " << i << " out of " << destinations_.size() << std::endl;
+#endif
+  }
+  else {
+    rect = destinations_.at(i).destinationRect;
+  }
   return rect;
 }
 
@@ -217,6 +233,19 @@ bool
 SlSprite::setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int i)
 {
   bool hasDestination = true;
+  if (i >= destinations_.size() ){
+#ifdef DEBUG
+    std::cout << "[SlSprite::setColor] attempting to access destination " << i << " out of " << destinations_.size() << std::endl;
+#endif
+    hasDestination = false;
+  }
+  else {
+    auto p = destinations_.at(i).color;
+    *p = red; ++p;
+    *p = green; ++p;
+    *p = blue; ++p;
+    *p = alpha; 
+  }
   return hasDestination;  
 }
 
@@ -226,6 +255,15 @@ bool
 SlSprite::setDestination(SDL_Rect dstRect, unsigned int i)
 {
   bool hasDestination = true;
+  if (i >= destinations_.size()) {
+#ifdef DEBUG
+      std::cout << "[SlSprite::setDestination] requested element: " << i << " destinations_.size(): " << destinations_.size() << std::endl; 
+#endif
+      hasDestination = false;
+    }
+    else {
+      destinations_.at(i).destinationRect = dstRect;
+    }
   return hasDestination;  
 }
 
@@ -235,6 +273,16 @@ bool
 SlSprite::setDestinationDimension(int width, int height, unsigned int i)
 {
   bool hasDestination = true;
+  if (i >= destinations_.size()) {
+#ifdef DEBUG
+      std::cout << "[SlSprite::setDestinationDimension] requested element: " << i << " destinations_.size(): " << destinations_.size() << std::endl; 
+#endif
+      hasDestination = false;
+    }
+    else {
+      destinations_.at(i).destinationRect.w = width;
+      destinations_.at(i).destinationRect.h = height;
+    }
   return hasDestination;  
 }
 
@@ -264,6 +312,15 @@ bool
 SlSprite::setRenderOptions(uint32_t renderOptions, unsigned int i)
 {
   bool hasDestination = true;
+  if (i >= destinations_.size()) {
+#ifdef DEBUG
+      std::cout << "[SlSprite::setRenderOptions] requested element: " << i << " destinations_.size(): " << destinations_.size() << std::endl; 
+#endif
+      hasDestination = false;
+    }
+    else {
+      destinations_.at(i).renderOptions = renderOptions;
+    }
   return hasDestination;  
 }
 

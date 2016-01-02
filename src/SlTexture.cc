@@ -104,9 +104,6 @@ SlTexture::createFromTiles(SDL_Renderer *renderer, SlSprite* tile, int width, in
   if (!tile->hasDestination()) tile->addDefaultDestination();
   
   tile->destinationDimension(stepWidth, stepHeight);
-#ifdef DEBUG
-  std::cout << "[SlTexture::createFromTiles] stepWidth " << stepWidth << " stepHeight " << stepHeight << std::endl; 
-#endif
   if ( stepWidth <= 0 || stepHeight <= 0 ) {
 #ifdef DEBUG
     std::cout << "[SlTexture::createFromTiles] wrong step size." << std::endl; 

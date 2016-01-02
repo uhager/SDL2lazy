@@ -71,11 +71,14 @@ The SlSprite has a source rectangle which defines which part of the texture is r
 class SlSprite
 {
  public:
-  /*! This is the constructor that should be used when the sprite is the whole texture. All SlSprites must have a name and a texture.
+  /*! This is the constructor that should be used for creating SlSprites. 
 
-    Calls addDefaultDestination(), so if you don't want to use the whole texture, either delete or adjust that destination.
+    All SlSprites must have a name and a texture. \n
+    If either width or height are 0, the texture's width and height will be used.\n
+    The default values will use the whole texture as a sprite.
+    Calls addDefaultDestination(), so if you don't want to that, either delete or adjust that destination.
    */
-  SlSprite(std::string name, SlTexture* texture);
+  SlSprite(std::string name, SlTexture* texture, int x = 0, int y = 0, int width = 0, int height = 0);
   
   ~SlSprite();
   /*! Delete copy constructor. There's no reason to copy the sprite, if the goal is to render different parts of it or with different options create another sprite.
@@ -122,7 +125,8 @@ class SlSprite
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
    */
-  bool setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int i = 0);
+  bool setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF
+		, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_.
 
     Sets where and how large the texture will be rendered.
