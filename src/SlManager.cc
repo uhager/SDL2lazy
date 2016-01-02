@@ -127,6 +127,7 @@ SlManager::deleteTexture(std::string name)
   std::vector<SlTexture*>::iterator iter;
   for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
     if ( (*iter)->name_ == name){
+      delete (*iter);
       textures_.erase(iter);
     }
   }
