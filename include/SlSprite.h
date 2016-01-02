@@ -70,13 +70,14 @@ The SlSprite has a source rectangle which defines which part of the texture is r
  */
 class SlSprite
 {
+  friend class SlManager;
  public:
   /*! This is the constructor that should be used for creating SlSprites. 
 
     All SlSprites must have a name and a texture. \n
     If either width or height are 0, the texture's width and height will be used.\n
     The default values will use the whole texture as a sprite.
-    Calls addDefaultDestination(), so if you don't want to that, either delete or adjust that destination.
+    Calls addDefaultDestination(), so if you don't want to use that, either delete or adjust that destination.
    */
   SlSprite(std::string name, SlTexture* texture, int x = 0, int y = 0, int width = 0, int height = 0);
   

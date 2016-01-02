@@ -78,6 +78,25 @@ SlManager::clear()
 
 
 
+SlSprite*
+SlManager::createSprite(std::string name, std::string textureName, int x, int y, int width, int height)
+{
+  SlSprite* toAdd = nullptr;
+  SlTexture* tex = findTexture(textureName);
+  if ( tex == nullptr ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createSprite] Couldn't find texture " << textureName << " required for sprite " << name  << std::endl;
+#endif
+  }
+  else {
+    toAdd = new SlSprite(name, tex, x, y, width, height);
+    sprites_.push_back(toAdd);
+  }
+  return toAdd;
+}
+
+
+
 SlTexture*
 SlManager::createTextureFromFile(std::string name, std::string fileName)
 {
@@ -119,10 +138,25 @@ SlManager::createTextureFromRectangle(std::string name, int width, int height, u
 
 
 SlTexture*
-SlManager::createTextureFromSpriteOnTexture(std::string name, SlTexture* backgroundTexture, SlSprite *foregroundSprite)
+SlManager::createTextureFromSpriteOnTexture(std::string name, std::string backgroundTexture, std::string foregroundSprite)
 {
-  SlTexture* toAdd = new SlTexture(name);
-  int check = toAdd->createFromSpriteOnTexture(renderer_, backgroundTexture, foregroundSprite);
+  SlTexture* toAdd = nullptr;   
+  SlTexture* background = findTexture(backgroundTexture);
+  if (background == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromSpriteOnTexture] Failed to create " << name << ": Couldn't find background texture " << backgroundTexture  << std::endl;
+#endif
+    return toAdd;
+  }
+  SlSprite* foreground = findSprite(foregroundSprite);
+  if (foreground == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromSpriteOnTexture] Failed to create " << name << ": Couldn't find foreground sprite " << foregroundSprite << std::endl;
+#endif
+    return toAdd;
+  }
+  toAdd = new SlTexture(name);
+  int check = toAdd->createFromSpriteOnTexture(renderer_, background, foreground);
   if (check != 0) {
 #ifdef DEBUG
     std::cout << "[SlManager::createTextureFromSpriteOnTexture] Couldn't create texture."  << std::endl;
@@ -139,10 +173,20 @@ SlManager::createTextureFromSpriteOnTexture(std::string name, SlTexture* backgro
 
 
 SlTexture*
-SlManager::createTextureFromTile(std::string name, SlSprite* sprite, int width, int height)
+SlManager::createTextureFromTile(std::string name, std::string sprite, int width, int height)
 {
-  SlTexture* toAdd = new SlTexture(name);
-  int check = toAdd->createFromTile(renderer_, sprite, width, height);
+  SlTexture* toAdd = nullptr;
+
+  SlSprite* tile = findSprite(sprite);
+  if (tile == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromTile] Failed to create " << name << ": Couldn't find sprite " << sprite << std::endl;
+#endif
+    return toAdd;
+  }
+
+  toAdd = new SlTexture(name);
+  int check = toAdd->createFromTile(renderer_, tile, width, height);
   if (check != 0) {
 #ifdef DEBUG
     std::cout << "[SlManager::createTextureFromTile] Couldn't create texture."  << std::endl;
@@ -159,6 +203,21 @@ SlManager::createTextureFromTile(std::string name, SlSprite* sprite, int width, 
 
 
 void
+SlManager::deleteSprite(std::string name)
+{
+  std::vector<SlSprite*>::iterator iter;
+  for ( iter=sprites_.begin(); iter != sprites_.end(); ++iter){
+    if ( (*iter)->name_ == name){
+      delete (*iter);
+      sprites_.erase(iter);
+      break;
+    }
+  }
+}
+
+
+
+void
 SlManager::deleteTexture(std::string name)
 {
   std::vector<SlTexture*>::iterator iter;
@@ -166,10 +225,42 @@ SlManager::deleteTexture(std::string name)
     if ( (*iter)->name_ == name){
       delete (*iter);
       textures_.erase(iter);
+      break;
     }
   }
 }
 
+
+
+SlSprite*
+SlManager::findSprite(std::string name)
+{
+  SlSprite* result = nullptr;
+  std::vector<SlSprite*>::iterator iter;
+  for ( iter=sprites_.begin(); iter != sprites_.end(); ++iter){
+    if ( (*iter)->name_ == name){
+      result = *iter;
+      break;
+    }
+  }
+  return result;
+}
+
+
+
+SlTexture*
+SlManager::findTexture(std::string name)
+{
+  SlTexture* result = nullptr;
+  std::vector<SlTexture*>::iterator iter;
+  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
+    if ( (*iter)->name_ == name){
+      result = *iter;
+      break;
+    }
+  }
+  return result;
+}
 
 
 void

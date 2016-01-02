@@ -22,31 +22,31 @@ int main()
     std::cout << "wrong file! " << std::endl;
   }
   
-  SlTexture* backgroundTile = gMngr->createTextureFromFile("tile","resources/tacky_background.png");
-  SlSprite* tile = new SlSprite("tile",backgroundTile);
-  SlTexture* bgTexture = gMngr->createTextureFromTile("background", tile, SCREEN_WIDTH, SCREEN_HEIGHT);
-  SlSprite* background = new SlSprite("background", bgTexture);
-    gMngr->deleteTexture("tile");
-    delete tile;
+  gMngr->createTextureFromFile("tile","resources/tacky_background.png");
+  gMngr->createSprite("tile","tile");
+  gMngr->createTextureFromTile("background", "tile", SCREEN_WIDTH, SCREEN_HEIGHT);
+  SlSprite* background = gMngr->createSprite("background", "background");
+  gMngr->deleteTexture("tile");
+  gMngr->deleteSprite("tile");
+    
   
-  
-  SlTexture* mmTexture1 = gMngr->createTextureFromRectangle("tex1", 210, 210, 0x00, 0x00, 0xC0, 0xFF);
-  SlTexture* tempTex = gMngr->createTextureFromRectangle("temp", 186, 186, 0x50, 0x00, 0xE0, 0xFF);
-  SlSprite* tempSprite = new SlSprite("temp",tempTex);
+  gMngr->createTextureFromRectangle("tex1", 210, 210, 0x00, 0x00, 0xC0, 0xFF);
+  gMngr->createTextureFromRectangle("temp", 186, 186, 0x50, 0x00, 0xE0, 0xFF);
+  SlSprite* tempSprite = gMngr->createSprite("temp","tex1");
   tempSprite->setDestinationOrigin(12, 12);
 
-  SlTexture* miniMapTexture = gMngr->createTextureFromSpriteOnTexture("minimap", mmTexture1, tempSprite);
+  gMngr->createTextureFromSpriteOnTexture("minimap", "tex1", "temp");
+  gMngr->deleteSprite("temp");
   gMngr->deleteTexture("tex1");
   gMngr->deleteTexture("temp");
-  delete tempSprite;
   
-  SlSprite* miniMapBg = new SlSprite("miniMapBg", miniMapTexture);
+  SlSprite* miniMapBg = gMngr->createSprite("miniMapBg", "minimap");
   miniMapBg->setDestinationOrigin( 20, 20 );
   miniMapBg->setColor(0x40, 0xAA, 0xBB, 0x50);
   miniMapBg->setRenderOptions(SL_RENDER_ALPHAMOD | SL_RENDER_COLORMOD);
 
-  SlTexture* arrowTexture = gMngr->createTextureFromFile("arrowTexture","resources/arrowsheet_transp.png");
-  SlSprite* upArrow = new SlSprite("up", arrowTexture, 0, 160, 80, 140);
+  gMngr->createTextureFromFile("arrowTexture","resources/arrowsheet_transp.png");
+  SlSprite* upArrow = gMngr->createSprite("up", "arrowTexture", 0, 160, 80, 140);
   upArrow->setDestinationOrigin(25,25);
   
   bool quit = false;
@@ -89,10 +89,6 @@ int main()
     SDL_RenderPresent( gMngr->renderer() );
   }
   
-
-  delete background;
-  delete miniMapBg;
-  delete upArrow;
 
   delete gMngr;
   
