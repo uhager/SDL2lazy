@@ -16,6 +16,7 @@ SlTexture::SlTexture()
 }
 
 
+
 SlTexture::SlTexture(std::string name)
 {
   texture_ = nullptr;
@@ -24,6 +25,8 @@ SlTexture::SlTexture(std::string name)
   std::cout << "[SlTexture::SlTexture] Creating " << name_ << std::endl;
 #endif // DEBUG
 }
+
+
 
 SlTexture::~SlTexture()
 {

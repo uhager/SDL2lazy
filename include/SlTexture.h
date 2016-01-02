@@ -16,6 +16,7 @@
 
 #include "SlSprite.h"
 
+class SlSprite;
 
 /*! \class SlTexture
 
@@ -29,8 +30,7 @@ class SlTexture
  public:
   /*! Constructor with texture name.
 
-    All textures have a name. This is currently only really implemented for spritesheets, where individual
-    sprites are identified by their name.
+    All textures have a name. Remember to create the actual texture!
   */
   SlTexture(std::string name);
   /*! deletes texture_
