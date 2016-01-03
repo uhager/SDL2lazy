@@ -28,7 +28,7 @@ SlSprite::SlSprite(std::string name, SlTexture* texture, int x, int y, int width
   }
   addDefaultDestination();
 #ifdef DEBUG
-  std::cout << "[SlSprite::SlSprite] Creating " << name_ << " from texture " << texture_->name_ << " w = " << sourceRect_.w  << " h = " << sourceRect_.h << std::endl;
+  std::cout << "[SlSprite::SlSprite] Created " << name_ << " from texture " << texture_->name_ << " w = " << sourceRect_.w  << " h = " << sourceRect_.h << std::endl;
 #endif
 }
 
@@ -55,10 +55,10 @@ SlSprite::SlSprite(SlTexture* texture)
 
 SlSprite::~SlSprite()
 {
+  texture_ = nullptr;
 #ifdef DEBUG
   std::cout << "[SlSprite::~SlSprite] deleting sprite " << name_  << std::endl;
 #endif
-
 }
 
 

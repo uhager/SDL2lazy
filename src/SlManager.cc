@@ -10,10 +10,12 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <stdexcept>
 
 #include "SlTexture.h"
 #include "SlSprite.h"
 #include "SlManager.h"
+
 
 
 
@@ -67,9 +69,9 @@ SlManager::~SlManager(void)
 void
 SlManager::addTexture(SlTexture* toAdd)
 {
+  if ( toAdd == nullptr ) return;
   textures_.push_back(toAdd);
-  SlSprite* sprite = createSprite(toAdd->name_, toAdd->name_);
-  sprites_.push_back(sprite);
+  createSprite(toAdd->name_, toAdd->name_);
 }
 
 
@@ -82,7 +84,7 @@ SlManager::appendToRenderQueue(std::string name, unsigned int destination)
   SlRenderItem* toAdd = nullptr;
   toAdd = createRenderItem(name, destination);
   if ( toAdd ) {
-  renderQueue_.push_back(toAdd);
+    renderQueue_.push_back(toAdd);
   }
   else {
 #ifdef DEBUG
@@ -97,23 +99,25 @@ SlManager::appendToRenderQueue(std::string name, unsigned int destination)
 void
 SlManager::clear()
 {
-  std::vector<SlTexture*>::iterator iter;
-  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
-    delete (*iter);
-  }
-  textures_.clear();      
-
-  std::vector<SlSprite*>::iterator sprite;
-  for ( sprite = sprites_.begin(); sprite != sprites_.end(); ++sprite) {
-    delete (*sprite);
-  }
-  sprites_.clear();  
-
   std::vector<SlRenderItem*>::iterator item;
   for ( item = renderQueue_.begin(); item != renderQueue_.end() ; ++item) {
     delete (*item);
   }
   renderQueue_.clear();
+
+  std::vector<SlSprite*>::iterator sprite;
+  for ( sprite = sprites_.begin(); sprite != sprites_.end(); ++sprite) {
+    std::cout << "[SlManager::clear] next "<< std::endl;
+    delete (*sprite);
+    (*sprite) = nullptr ;
+  }
+  sprites_.clear();  
+
+  std::vector<SlTexture*>::iterator iter;
+  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
+    delete (*iter);
+  }
+  textures_.clear();      
 }
 
 
@@ -121,7 +125,7 @@ SlRenderItem*
 SlManager::createRenderItem(std::string name, unsigned int destination)
 {
 #ifdef DEBUG
-    std::cout << "[SlManager::createRenderItem] Creating item for " << name  << std::endl;
+  std::cout << "[SlManager::createRenderItem] Creating item for " << name  << std::endl;
 #endif
   SlRenderItem* item = nullptr;
   SlSprite* sprite = findSprite(name);
@@ -299,6 +303,72 @@ SlManager::deleteTexture(std::string name)
 
 
 
+bool
+SlManager::determineDimensions(std::vector<std::string> dimensions, int& width, int& height)
+{
+  bool validDimensions = false;
+  
+  if ( dimensions.size() != 2 ) {
+#ifdef DEBUG
+    std::cerr << "[SlManager::determineDimensions] Need 2 dimensions, found " << dimensions.size() << std::endl;
+#endif
+    return validDimensions;
+  }
+  
+  if ( dimensions.at(0) == "SCREEN_WIDTH" )
+    width = screen_width_;
+  else {
+    try {
+      width = std::stoi( dimensions.at(0) );
+    }
+    catch (std::invalid_argument) {
+      return validDimensions;
+    }
+  }
+  
+  if ( dimensions.at(1) == "SCREEN_HEIGHT" )
+    height = screen_height_;
+  else {
+    try {
+      height = std::stoi( dimensions.at(1) );
+    }
+    catch (std::invalid_argument) {
+      return validDimensions;
+    }
+  }
+  validDimensions = true;
+  return validDimensions;
+}
+
+
+
+bool
+SlManager::determineColors(std::vector<std::string> colors, uint8_t (&colArray)[4] ) 
+{
+  bool validColors = false;
+  
+  if ( colors.size() != 4 ) {
+#ifdef DEBUG
+    std::cerr << "[SlManager::determineColors] Need 4 colors, found " << colors.size() << std::endl;
+#endif
+    return validColors;
+  }
+
+  for ( unsigned int i = 0 ; i != colors.size() ; ++i ){
+    try {
+      colArray[i] = std::stoi( colors.at(i) );
+    }
+    catch (std::invalid_argument) {
+      return validColors;
+    }
+  }
+
+  validColors = true;
+  return validColors;
+}
+
+
+
 SlSprite*
 SlManager::findSprite(std::string name)
 {
@@ -349,6 +419,8 @@ SlManager::initialize()
 void
 SlManager::initializeWindow(std::string name, int width, int height)
 {
+  screen_width_ = width;
+  screen_height_ = height;
   window_ = SDL_CreateWindow( name.c_str() , SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN );
   if( window_ == nullptr ){
     std::cerr << "Window could not be created! SDL_Error: " <<  SDL_GetError()  << std::endl;
@@ -380,36 +452,160 @@ SlManager::parseConfigurationFile(std::string filename)
     {
       std::istringstream stream(line.c_str());
       stream >> token;
-      if ( token[0] == '#' || token.empty() ) {
+      if ( token[0] == '#' || token.empty() || token[0] == '\n' ) {
 	/* empty line or comment */
       }
-      else if ( token == "textures" ) {
-	parseTextures( input );
+      else if ( token == "texture" ) {
+	parseTexture( input );
       }
-      else if ( token == "sprites" ) {
-	parseSprites(input);
+      else if ( token == "sprite" ) {
+	parseSprite(input);
+      }
+      else {
+#ifdef DEBUG
+	std::cerr << "[SlManager::parseConfigurationFile] Unknown token " << token << std::endl;
+#endif
       }
 	
+      token.clear();
       if ( input) getline(input,line);
     }
 
-   return result;
+  return result;
 }
 
 
 
 void
-SlManager::parseSprites(std::ifstream& input)
+SlManager::parseSprite(std::ifstream& input)
 {
   std::cout << "[SlManager::parseSprites]" << std::endl;
+  std::string line, token;
+  std::string name;
+  bool endOfConfig = false;
+  
+  getline(input,line);
+  while ( !endOfConfig && input ) {
+    std::istringstream stream(line.c_str());
+    stream >> token;
+    if ( token[0] == '#' || token.empty() ) {
+      /* empty line or comment */
+    }
+    else if ( token == "end" ) {
+      endOfConfig = true;
+    }
+    else if ( token == "name" ) {
+      stream >> name ;
+    }
+    else {
+#ifdef DEBUG
+      std::cerr << "[SlManager::parseSprites] Unknown token " << token << std::endl;
+#endif
+    }
+    
+    token.clear();
+    if ( !endOfConfig ) getline(input,line);
+  }
 }
 
 
 
+
 void
-SlManager::parseTextures(std::ifstream& input)
+SlManager::parseTexture(std::ifstream& input)
 {
-  std::cout << "[SlManager::parseTextures]" << std::endl;
+  std::string line, token;
+  bool endOfConfig = false;
+  std::string name, type, file, sprite;
+  std::vector<std::string> dimensions;
+  std::vector<std::string> colors;
+  
+  getline(input,line);
+  while ( !endOfConfig && input ) {
+    std::istringstream stream(line.c_str());
+    stream >> token;
+    if ( token[0] == '#' || token.empty() || token[0] == '\n' ) {
+      /* empty line or comment */
+    }
+    else if ( token == "end" ) {
+      endOfConfig = true;
+    }
+    else if ( token == "type" ) {
+      stream >> type;
+    }
+    else if ( token == "sprite" ) {
+      stream >> sprite;
+    }
+    else if ( token == "name" ) {
+      stream >> name ;
+    }
+    else if ( token == "file" ) {
+      stream >> file ;
+    }
+    else if ( token == "dimensions" ) {
+      while ( !stream.eof() ){
+	dimensions.push_back("");
+	stream >> dimensions.back();
+      }
+    }
+    else if ( token == "color" ) {
+      while ( !stream.eof() ){
+	colors.push_back("");
+	stream >> colors.back();
+      }
+    }
+    else {
+#ifdef DEBUG
+      std::cerr << "[SlManager::parseTexture] Unknown token " << token << std::endl;
+#endif
+    }
+    token.clear();
+    if (  !endOfConfig ) getline(input,line);
+  }
+
+  
+  if ( name.empty() ) {
+#ifdef DEBUG
+    std::cerr << "[SlManager::parseTexture] No name found" << std::endl;
+#endif
+    return;
+  }
+  
+  if ( type == "file" ) {
+    createTextureFromFile( name, file );
+  }
+  
+  else if ( type == "tile" || type == "rectangle" ) {
+    int width, height;
+    bool check = determineDimensions( dimensions, width, height );
+    if ( !check ) {
+#ifdef DEBUG
+      std::cerr << "[SlManager::parseTexture] invalid dimensions for type " << type << std::endl;
+#endif
+      return;
+    }
+
+    if ( type == "tile") {
+      createTextureFromTile( name, sprite, width, height );
+    }
+
+    else if ( type == "rectangle" ) {
+      uint8_t colArray[4] = {0,0,0,0};
+      bool check = determineColors( colors, colArray );
+      if ( !check ) {
+#ifdef DEBUG
+	std::cerr << "[SlManager::parseTexture] invalid color for " << name  << std::endl;
+#endif
+	return;
+      }
+      createTextureFromRectangle( name, width, height, colArray[0], colArray[1], colArray[2], colArray[3] );
+    }
+  }
+  else {
+#ifdef DEBUG
+    std::cerr << "[SlManager::parseTexture] Unknown type "  << type << " for texture " << name << std::endl;
+#endif
+  }
 }
 
 

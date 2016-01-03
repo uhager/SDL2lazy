@@ -24,10 +24,10 @@ SlRenderItem::SlRenderItem(std::string name, SlSprite* pSprite, int dest)
 
 SlRenderItem::~SlRenderItem()
 {
+  sprite_ = nullptr;
 #ifdef DEBUG
     std::cout << "[SlRenderItem::~SlRenderItem] Deleting item for sprite " << name_  << std::endl;
 #endif
-  sprite_ = nullptr;
 }
 
 

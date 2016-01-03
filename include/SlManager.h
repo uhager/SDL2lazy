@@ -126,6 +126,12 @@ class SlManager
   /*! Deletes all textures and sprites, empties render queue.
    */
   void clear();
+  /*! Extract color values from strings read from file
+   */
+  bool determineColors(std::vector<std::string> colors, uint8_t (&colArray)[4]);
+ /*! Determines width and height from strings that were read from a file.
+   */
+  bool determineDimensions(std::vector<std::string> dimensions, int& width, int& height);
   /*! Initializes SDL
    */
   void initialize();
@@ -134,11 +140,31 @@ class SlManager
   void initializeWindow(std::string name, int width, int height);
   /*! Read sprite configurations from file
    */
-  void parseSprites(std::ifstream& input);
+  void parseSprite(std::ifstream& input);
   /*! Read texture configurations from file
-   */
-  void parseTextures(std::ifstream& input);
+    ##### Example: \n
+> texture
+> 	type	file
+> 	name	tile
+> 	file	resources/tacky_background.png
+> end
+> texture
+> 	type	 tile
+>   	name	background
+> 	dimensions	SCREEN_WIDTH	SCREEN_HEIGHT
+> # can use sprite 'tile' here since it's automatically created when texture 'tile' is created 
+>       	sprite		tile
+> end
+> texture
+> 	type	rectangle
+> 	name	tex1
+> 	dimensions	210	210
+> 	color		0x00	0x00	0xC0	0xFF
+> end
+  */
+  void parseTexture(std::ifstream& input);
 
+  
  private:
   /*! The running instance of SlManager. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer.
    */
@@ -151,7 +177,13 @@ class SlManager
     Sprites will be deleted when the SlManager instance is deleted.
    */
   std::vector<SlSprite*> sprites_;
-  std::vector<SlRenderItem*> renderQueue_;  
+  std::vector<SlRenderItem*> renderQueue_;
+  /*! Window width.
+   */
+  int screen_width_ ;
+  /*! Window height
+   */
+  int screen_height_ ;
 
 };
 
