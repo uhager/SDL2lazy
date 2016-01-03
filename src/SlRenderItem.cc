@@ -5,25 +5,28 @@
   \brief Implementation of SlRenderItem class for SlRenderItem's renderQueue entries.
 */
 
+#include <iostream>
 #include <string>
 
 #include "SlRenderItem.h"
 
 SlRenderItem::SlRenderItem()
 {
+  initialize( "", nullptr, -1 );
 }
 
 
 SlRenderItem::SlRenderItem(std::string name, SlSprite* pSprite, int dest)
-  : name_(name)
-  , destination_(dest)
 {
-  sprite_ = pSprite;
+  initialize(name, pSprite, dest);
 }
 
 
 SlRenderItem::~SlRenderItem()
 {
+#ifdef DEBUG
+    std::cout << "[SlRenderItem::~SlRenderItem] Deleting item for sprite " << name_  << std::endl;
+#endif
   sprite_ = nullptr;
 }
 
@@ -34,6 +37,16 @@ SlRenderItem::SlRenderItem(const SlRenderItem& toCopy)
   name_ = toCopy.name_;
   destination_ = toCopy.destination_;
   sprite_ = toCopy.sprite_;
+}
+
+
+
+void
+SlRenderItem::initialize(std::string name, SlSprite* pSprite, int dest)
+{
+  name_ = name;
+  destination_ = dest;
+  sprite_ = pSprite;
 }
 
 

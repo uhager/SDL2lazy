@@ -20,6 +20,7 @@
 
 
 
+
 class SlManager
 {
  public:
@@ -35,12 +36,15 @@ class SlManager
   /*! Deleted, same reason as copy constructor.
    */
   SlManager& operator=(const SlManager&) = delete;
-  /*! The running instance of SlManager. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer.
-   */
-  static SlManager& Instance(void);
-  /*! Temporary solution until all rendering related stuff happens in SlManager methods.
-   */
-  SDL_Renderer* renderer(){return renderer_;}
+
+  /*! Adds the sprite 'name' to the end of the #renderQueue_ .
+    \retval false if sprite not found or destination out of bounds.
+   */ 
+  bool appendToRenderQueue(std::string name, unsigned int destination = 0);
+  /*! Creates new SlRenderItem for the specified sprite. \n
+    \retval false if sprite not found or destination out of bounds.
+   */ 
+  SlRenderItem* createRenderItem(std::string name, unsigned int destination);
   /*! Creates sprite based on the texture textureName.
 
     If either width or height are 0, the texture's width and height will be used.\n
@@ -75,7 +79,21 @@ class SlManager
   /*! Returns pointer to the texture, nullptr if not found.
    */
   SlTexture* findTexture(std::string name);
+  /*! The running instance of SlManager. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer.
+   */
+  static SlManager* Instance(void) {return instance_;}
+  /*! Render all items in the #renderQueue_ .
+    \retval 0 if all renders well.
+   */ 
+  int render();
+  /*! Temporary solution until all rendering related stuff happens in SlManager methods.
+   */
+  SDL_Renderer* renderer(){return renderer_;}
+  /*! Changes destinationRect for SlSprite name at position destination of #destinations_.
 
+    Sets where the sprite will be rendered.
+  */
+  bool setSpriteDestinationOrigin(std::string name,  int x, int y, int destination = 0);
   
 					      
  protected:
@@ -95,6 +113,9 @@ class SlManager
   void initializeWindow(std::string name, int width, int height);
 
  private:
+  /*! The running instance of SlManager. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer.
+   */
+  static SlManager* instance_;
   /*! Holds all SlTextures that were created using SlManager methods.
     Texture will be deleted when the SlManager instance is deleted.
    */
@@ -103,9 +124,11 @@ class SlManager
     Sprites will be deleted when the SlManager instance is deleted.
    */
   std::vector<SlSprite*> sprites_;
-  std::vector<SlRenderItem> renderQueue_;  
+  std::vector<SlRenderItem*> renderQueue_;  
 
 };
+
+
 
 
 #endif // SLMANAGER_H

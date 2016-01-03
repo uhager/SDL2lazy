@@ -13,18 +13,20 @@
 #include "SlSprite.h"
 #include "SlManager.h"
 
+
+
 /*! The running instance. 
  */
-static SlManager* gInstance = nullptr;
+SlManager* SlManager::instance_ = nullptr;
 
 SlManager::SlManager()
 {
-  if ( gInstance == nullptr) {
-    gInstance = this;
+  if ( instance_ == nullptr) {
+    instance_ = this;
   }
   else
     {
-      std::cout << "[SlManager::SlManager]  Manager is a singleton class and can only be constructed once." << std::endl;
+      std::cout << "[SlManager::SlManager]  One manager per application." << std::endl;
       exit(1);
     }
   this->initialize();
@@ -34,8 +36,8 @@ SlManager::SlManager()
 
 SlManager::SlManager(std::string name, int width, int height)
 {
-  if ( gInstance == nullptr) {
-    gInstance = this;
+  if ( instance_ == nullptr) {
+    instance_ = this;
   }
   else
     {
@@ -60,6 +62,25 @@ SlManager::~SlManager(void)
 
 
 
+bool
+SlManager::appendToRenderQueue(std::string name, unsigned int destination)
+{
+  bool result = true;
+  SlRenderItem* toAdd = nullptr;
+  toAdd = createRenderItem(name, destination);
+  if ( toAdd ) {
+  renderQueue_.push_back(toAdd);
+  }
+  else {
+#ifdef DEBUG
+    std::cout << "[SlManager::appendToRenderQueue] Couldn't add sprite " << name  << " at " << destination << " to queue."  << std::endl;
+#endif
+  }
+  return result;
+}
+
+
+
 void
 SlManager::clear()
 {
@@ -73,7 +94,38 @@ SlManager::clear()
   for ( sprite = sprites_.begin(); sprite != sprites_.end(); ++sprite) {
     delete (*sprite);
   }
-  sprites_.clear();      
+  sprites_.clear();  
+
+  std::vector<SlRenderItem*>::iterator item;
+  for ( item = renderQueue_.begin(); item != renderQueue_.end() ; ++item) {
+    delete (*item);
+  }
+  renderQueue_.clear();
+}
+
+
+SlRenderItem* 
+SlManager::createRenderItem(std::string name, unsigned int destination)
+{
+#ifdef DEBUG
+    std::cout << "[SlManager::createRenderItem] Creating item for " << name  << std::endl;
+#endif
+  SlRenderItem* item = nullptr;
+  SlSprite* sprite = findSprite(name);
+  if (sprite == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createRenderItem] Couldn't find sprite " << name  << std::endl;
+#endif
+    return item;
+  }
+  if (sprite->destinations_.size() <= destination){
+#ifdef DEBUG
+    std::cout << "[SlManager::createRenderItem] Failed to add sprite " << name << ": destination " << destination << " out of bounds (" << sprite->destinations_.size() << ")" <<  std::endl;
+#endif
+    return item;
+  }
+  item = new SlRenderItem(name, sprite, destination);
+  return item;
 }
 
 
@@ -186,7 +238,8 @@ SlManager::createTextureFromTile(std::string name, std::string sprite, int width
   }
 
   toAdd = new SlTexture(name);
-  int check = toAdd->createFromTile(renderer_, tile, width, height);
+  int check = toAdd->createFromTile(renderer_, tile
+				    , width, height);
   if (check != 0) {
 #ifdef DEBUG
     std::cout << "[SlManager::createTextureFromTile] Couldn't create texture."  << std::endl;
@@ -295,3 +348,39 @@ SlManager::initializeWindow(std::string name, int width, int height)
 }
 
 
+
+int
+SlManager::render()
+{
+  int result;
+  
+  SDL_RenderClear( renderer_ );
+ 
+  for (auto& item: renderQueue_){
+    result = (item->sprite_)->render( renderer_, (item->destination_) );
+    if (result != 0) {
+#ifdef DEBUG
+      std::cout << "[SlManager::render] Couldn't render sprite " << item->name_ << std::endl;
+#endif
+      return result;
+    }
+  }
+
+  SDL_RenderPresent( renderer_ );
+  return result;
+}
+
+
+bool
+SlManager::setSpriteDestinationOrigin(std::string name,  int x, int y, int destination)
+{
+  SlSprite* sprite = findSprite(name);
+  if (sprite == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlManager::setSpriteDestinationOrigin] Couldn't find sprite " << name  << std::endl;
+#endif
+    return false;
+  }
+  sprite->setDestinationOrigin(x, y, destination);
+  return true;
+}

@@ -140,7 +140,7 @@ class SlSprite
   bool setDestinationDimension(int width, int height, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_.
 
-    Sets where the texture will be rendered.
+    Sets where the sprite will be rendered.
   */
   bool setDestinationOrigin(int x, int y, unsigned int i = 0);
   /*! Sets SlRenderOptions for position i of #destinations_.

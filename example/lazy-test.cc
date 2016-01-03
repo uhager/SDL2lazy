@@ -15,39 +15,42 @@ const int SCREEN_HEIGHT = 800;
 
 int main()
 {
-  SlManager* gMngr = new SlManager("lazy-test", SCREEN_WIDTH, SCREEN_HEIGHT) ;  
+  SlManager *mngr = SlManager::Instance();
+  mngr = new SlManager("lazy-test", SCREEN_WIDTH, SCREEN_HEIGHT) ;  
 
-  SlTexture* wrongFileTest = gMngr->createTextureFromFile("tile","resources/tacky_backgroun.png");
+  SlTexture* wrongFileTest = mngr->createTextureFromFile("tile","resources/tacky_backgroun.png");
   if (wrongFileTest == nullptr) {
     std::cout << "wrong file! " << std::endl;
   }
   
-  gMngr->createTextureFromFile("tile","resources/tacky_background.png");
-  gMngr->createSprite("tile","tile");
-  gMngr->createTextureFromTile("background", "tile", SCREEN_WIDTH, SCREEN_HEIGHT);
-  SlSprite* background = gMngr->createSprite("background", "background");
-  gMngr->deleteTexture("tile");
-  gMngr->deleteSprite("tile");
-    
+  mngr->createTextureFromFile("tile","resources/tacky_background.png");
+  mngr->createSprite("tile","tile");
+  mngr->createTextureFromTile("background", "tile", SCREEN_WIDTH, SCREEN_HEIGHT);
+  mngr->createSprite("background", "background");
+  mngr->deleteTexture("tile");
+  mngr->deleteSprite("tile");
+  mngr->appendToRenderQueue("background",0);    
   
-  gMngr->createTextureFromRectangle("tex1", 210, 210, 0x00, 0x00, 0xC0, 0xFF);
-  gMngr->createTextureFromRectangle("temp", 186, 186, 0x50, 0x00, 0xE0, 0xFF);
-  SlSprite* tempSprite = gMngr->createSprite("temp","tex1");
+  mngr->createTextureFromRectangle("tex1", 210, 210, 0x00, 0x00, 0xC0, 0xFF);
+  mngr->createTextureFromRectangle("temp", 186, 186, 0x50, 0x00, 0xE0, 0xFF);
+  SlSprite* tempSprite = mngr->createSprite("temp","tex1");
   tempSprite->setDestinationOrigin(12, 12);
 
-  gMngr->createTextureFromSpriteOnTexture("minimap", "tex1", "temp");
-  gMngr->deleteSprite("temp");
-  gMngr->deleteTexture("tex1");
-  gMngr->deleteTexture("temp");
+  mngr->createTextureFromSpriteOnTexture("minimap", "tex1", "temp");
+  mngr->deleteSprite("temp");
+  mngr->deleteTexture("tex1");
+  mngr->deleteTexture("temp");
   
-  SlSprite* miniMapBg = gMngr->createSprite("miniMapBg", "minimap");
-  miniMapBg->setDestinationOrigin( 20, 20 );
+  SlSprite* miniMapBg = mngr->createSprite("miniMapBg", "minimap");
+  mngr->setSpriteDestinationOrigin("miniMapBg", 20, 20 );
   miniMapBg->setColor(0x40, 0xAA, 0xBB, 0x50);
   miniMapBg->setRenderOptions(SL_RENDER_ALPHAMOD | SL_RENDER_COLORMOD);
-
-  gMngr->createTextureFromFile("arrowTexture","resources/arrowsheet_transp.png");
-  SlSprite* upArrow = gMngr->createSprite("up", "arrowTexture", 0, 160, 80, 140);
-  upArrow->setDestinationOrigin(25,25);
+  mngr->appendToRenderQueue("miniMapBg",0);
+  
+  mngr->createTextureFromFile("arrowTexture","resources/arrowsheet_transp.png");
+  mngr->createSprite("upArrow", "arrowTexture", 0, 160, 80, 140);
+  mngr->setSpriteDestinationOrigin("upArrow", 25, 25);
+  mngr->appendToRenderQueue("upArrow");
   
   bool quit = false;
   SDL_Event event;
@@ -82,15 +85,11 @@ int main()
 	}
     }
 
-    SDL_RenderClear(gMngr->renderer());
-    background->render(gMngr->renderer());
-    miniMapBg->render(gMngr->renderer());
-    upArrow->render(gMngr->renderer());
-    SDL_RenderPresent( gMngr->renderer() );
+     mngr->render();
+ 
   }
   
-
-  delete gMngr;
+  delete mngr;
   
   return 0;
 }

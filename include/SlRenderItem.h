@@ -17,7 +17,6 @@ Entries for SlRenderItem::renderQueue.
 Objects are identified by their name and destination which correspond to the SlSprite::name_ and SlSprite::destinations_ position.\n
 The pointer to the sprite is added to avoid having ro repeatedly find the sprite by name.
 */
-
 class SlRenderItem
 {
  public:
@@ -36,11 +35,15 @@ class SlRenderItem
    */
   SlRenderItem& operator=(const SlRenderItem& rhs);
 
-  std::string name_ = "";
-  SlSprite* sprite_ = nullptr;
+  /*! Sets values for all data members.
+   */
+  void initialize(std::string name, SlSprite* pSprite, int dest);
+  
+  std::string name_;
+  SlSprite* sprite_;
   /*! The position in SlSprite::destinations_ .
    */
-  int destination_ = -1;
+  int destination_ ;
 };
 
 
