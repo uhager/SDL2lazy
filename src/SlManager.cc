@@ -304,67 +304,36 @@ SlManager::deleteTexture(std::string name)
 
 
 bool
-SlManager::determineDimensions(std::vector<std::string> dimensions, int& width, int& height)
+SlManager::determineValues(std::vector<std::string> stringValues, int *values, unsigned int valueSize ) 
 {
-  bool validDimensions = false;
+  bool validValues = false;
   
-  if ( dimensions.size() != 2 ) {
+  if ( stringValues.size() != valueSize ) {
 #ifdef DEBUG
-    std::cerr << "[SlManager::determineDimensions] Need 2 dimensions, found " << dimensions.size() << std::endl;
+    std::cerr << "[SlManager::determineColors] Need 4 colors, found " << stringValues.size() << std::endl;
 #endif
-    return validDimensions;
-  }
-  
-  if ( dimensions.at(0) == "SCREEN_WIDTH" )
-    width = screen_width_;
-  else {
-    try {
-      width = std::stoi( dimensions.at(0) );
-    }
-    catch (std::invalid_argument) {
-      return validDimensions;
-    }
-  }
-  
-  if ( dimensions.at(1) == "SCREEN_HEIGHT" )
-    height = screen_height_;
-  else {
-    try {
-      height = std::stoi( dimensions.at(1) );
-    }
-    catch (std::invalid_argument) {
-      return validDimensions;
-    }
-  }
-  validDimensions = true;
-  return validDimensions;
-}
-
-
-
-bool
-SlManager::determineColors(std::vector<std::string> colors, uint8_t (&colArray)[4] ) 
-{
-  bool validColors = false;
-  
-  if ( colors.size() != 4 ) {
-#ifdef DEBUG
-    std::cerr << "[SlManager::determineColors] Need 4 colors, found " << colors.size() << std::endl;
-#endif
-    return validColors;
+    return validValues;
   }
 
-  for ( unsigned int i = 0 ; i != colors.size() ; ++i ){
-    try {
-      colArray[i] = std::stoi( colors.at(i) );
+  for ( unsigned int i = 0 ; i != stringValues.size() ; ++i , ++values){
+    if ( stringValues.at(i) == "SCREEN_WIDTH" ) {
+      (*values) = screen_width_;
     }
-    catch (std::invalid_argument) {
-      return validColors;
+    else if ( stringValues.at(i) == "SCREEN_HEIGHT" ) {
+      (*values) = screen_height_;
+    }
+    else {
+      try {
+	(*values) = std::stoi( stringValues.at(i) );
+      }
+      catch (std::invalid_argument) {
+	return validValues;
+      }
     }
   }
 
-  validColors = true;
-  return validColors;
+  validValues = true;
+  return validValues;
 }
 
 
@@ -481,7 +450,8 @@ SlManager::parseSprite(std::ifstream& input)
 {
   std::cout << "[SlManager::parseSprites]" << std::endl;
   std::string line, token;
-  std::string name;
+  std::string name, texture;
+  std::vector<std::string> location;
   bool endOfConfig = false;
   
   getline(input,line);
@@ -497,6 +467,16 @@ SlManager::parseSprite(std::ifstream& input)
     else if ( token == "name" ) {
       stream >> name ;
     }
+    else if ( token == "texture" ) {
+      stream >> texture ;
+    }
+    else if ( token == "location" ) {
+      while ( !stream.eof() ){
+	location.push_back("");
+	stream >> location.back();
+      }
+    }
+    
     else {
 #ifdef DEBUG
       std::cerr << "[SlManager::parseSprites] Unknown token " << token << std::endl;
@@ -506,6 +486,23 @@ SlManager::parseSprite(std::ifstream& input)
     token.clear();
     if ( !endOfConfig ) getline(input,line);
   }
+
+  if ( name.empty() || texture.empty() ) {
+#ifdef DEBUG
+    std::cerr << "[SlManager::parseTexture] Name or texture missing" << std::endl;
+#endif
+    return;
+  }
+  int loc[4];
+  bool check = determineValues(location, loc, 4);
+  if ( !check ) {
+#ifdef DEBUG
+    std::cerr << "[SlManager::parseTexture] Invalid location for " << name << std::endl;
+#endif
+    return;
+  }
+  createSprite( name, texture, loc[0], loc[1], loc[2], loc[3] );
+  
 }
 
 
@@ -576,8 +573,8 @@ SlManager::parseTexture(std::ifstream& input)
   }
   
   else if ( type == "tile" || type == "rectangle" ) {
-    int width, height;
-    bool check = determineDimensions( dimensions, width, height );
+    int dim[2];
+    bool check = determineValues( dimensions, dim, 2 );
     if ( !check ) {
 #ifdef DEBUG
       std::cerr << "[SlManager::parseTexture] invalid dimensions for type " << type << std::endl;
@@ -586,19 +583,19 @@ SlManager::parseTexture(std::ifstream& input)
     }
 
     if ( type == "tile") {
-      createTextureFromTile( name, sprite, width, height );
+      createTextureFromTile( name, sprite, dim[0], dim[1] );
     }
 
     else if ( type == "rectangle" ) {
-      uint8_t colArray[4] = {0,0,0,0};
-      bool check = determineColors( colors, colArray );
+      int colArray[] = {0,0,0,0};
+      bool check = determineValues( colors, colArray, 4 );
       if ( !check ) {
 #ifdef DEBUG
 	std::cerr << "[SlManager::parseTexture] invalid color for " << name  << std::endl;
 #endif
 	return;
       }
-      createTextureFromRectangle( name, width, height, colArray[0], colArray[1], colArray[2], colArray[3] );
+      createTextureFromRectangle( name, dim[0], dim[1], colArray[0], colArray[1], colArray[2], colArray[3] );
     }
   }
   else {

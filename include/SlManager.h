@@ -126,12 +126,9 @@ class SlManager
   /*! Deletes all textures and sprites, empties render queue.
    */
   void clear();
-  /*! Extract color values from strings read from file
+  /*! Extract integer values from strings read from file.
    */
-  bool determineColors(std::vector<std::string> colors, uint8_t (&colArray)[4]);
- /*! Determines width and height from strings that were read from a file.
-   */
-  bool determineDimensions(std::vector<std::string> dimensions, int& width, int& height);
+  bool determineValues(std::vector<std::string> stringValues, int *values, unsigned int valueSize ); 
   /*! Initializes SDL
    */
   void initialize();

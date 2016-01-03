@@ -34,13 +34,10 @@ int main()
   mngr->deleteTexture("tex1");
   mngr->deleteTexture("tex2");
 
-  mngr->createTextureFromFile("arrowTexture","resources/arrowsheet_transp.png");
-  mngr->createSprite("upArrow", "arrowTexture", 0, 160, 80, 140);
-  mngr->setSpriteDestinationOrigin("upArrow", 25, 25);
-
+  mngr->setSpriteDestinationOrigin("up", 25, 25);
   mngr->appendToRenderQueue("background",0);    
   mngr->appendToRenderQueue("minimap",0);
-  mngr->appendToRenderQueue("upArrow");
+  mngr->appendToRenderQueue("up");
 
   bool quit = false;
   SDL_Event event;
