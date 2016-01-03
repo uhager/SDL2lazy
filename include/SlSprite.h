@@ -126,8 +126,7 @@ class SlSprite
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
    */
-  bool setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF
-		, unsigned int i = 0);
+  bool setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_.
 
     Sets where and how large the texture will be rendered.

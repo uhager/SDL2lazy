@@ -7,6 +7,8 @@
 */
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
 
 #include "SlTexture.h"
@@ -59,6 +61,17 @@ SlManager::~SlManager(void)
   window_ = nullptr;
   SDL_Quit();
 }
+
+
+
+void
+SlManager::addTexture(SlTexture* toAdd)
+{
+  textures_.push_back(toAdd);
+  SlSprite* sprite = createSprite(toAdd->name_, toAdd->name_);
+  sprites_.push_back(sprite);
+}
+
 
 
 
@@ -150,10 +163,10 @@ SlManager::createSprite(std::string name, std::string textureName, int x, int y,
 
 
 SlTexture*
-SlManager::createTextureFromFile(std::string name, std::string fileName)
+SlManager::createTextureFromFile(std::string name, std::string filename)
 {
   SlTexture* toAdd = new SlTexture(name);
-  bool check = toAdd->loadFromFile(renderer_, fileName);
+  bool check = toAdd->loadFromFile(renderer_, filename);
   if (check == false) {
 #ifdef DEBUG
     std::cout << "[SlManager::createTextureFromFile] Couldn't load texture."  << std::endl;
@@ -162,7 +175,7 @@ SlManager::createTextureFromFile(std::string name, std::string fileName)
     toAdd = nullptr;
   }
   else {
-    textures_.push_back(toAdd);
+    addTexture(toAdd);
   }
   return toAdd;
 }
@@ -182,7 +195,7 @@ SlManager::createTextureFromRectangle(std::string name, int width, int height, u
     toAdd = nullptr;
   }
   else {
-    textures_.push_back(toAdd);
+    addTexture(toAdd);
   }
   return toAdd;
 }
@@ -217,7 +230,7 @@ SlManager::createTextureFromSpriteOnTexture(std::string name, std::string backgr
     toAdd = nullptr;
   }
   else {
-    textures_.push_back(toAdd);
+    addTexture(toAdd);
   }
   return toAdd;
 }
@@ -248,7 +261,7 @@ SlManager::createTextureFromTile(std::string name, std::string sprite, int width
     toAdd = nullptr;
   }
   else {
-    textures_.push_back(toAdd);
+    addTexture(toAdd);
   }
   return toAdd;
 }
@@ -273,6 +286,7 @@ SlManager::deleteSprite(std::string name)
 void
 SlManager::deleteTexture(std::string name)
 {
+  deleteSprite(name);
   std::vector<SlTexture*>::iterator iter;
   for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
     if ( (*iter)->name_ == name){
@@ -349,6 +363,57 @@ SlManager::initializeWindow(std::string name, int width, int height)
 
 
 
+bool
+SlManager::parseConfigurationFile(std::string filename)
+{
+  bool result = true;
+  std::ifstream input(filename,std::ifstream::in);
+  if ( !input.is_open() ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::parseConfigurationFile] Couldn't open file " << filename << std::endl;
+#endif
+    return false;
+  }
+  std::string line, token;
+  getline(input,line);
+  while ( input )
+    {
+      std::istringstream stream(line.c_str());
+      stream >> token;
+      if ( token[0] == '#' || token.empty() ) {
+	/* empty line or comment */
+      }
+      else if ( token == "textures" ) {
+	parseTextures( input );
+      }
+      else if ( token == "sprites" ) {
+	parseSprites(input);
+      }
+	
+      if ( input) getline(input,line);
+    }
+
+   return result;
+}
+
+
+
+void
+SlManager::parseSprites(std::ifstream& input)
+{
+  std::cout << "[SlManager::parseSprites]" << std::endl;
+}
+
+
+
+void
+SlManager::parseTextures(std::ifstream& input)
+{
+  std::cout << "[SlManager::parseTextures]" << std::endl;
+}
+
+
+
 int
 SlManager::render()
 {
@@ -371,16 +436,53 @@ SlManager::render()
 }
 
 
+
 bool
-SlManager::setSpriteDestinationOrigin(std::string name,  int x, int y, int destination)
+SlManager::setSpriteColor(std::string name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int destination)
 {
+  bool isSet = false;
+  SlSprite* sprite = findSprite(name);
+  if (sprite == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlManager::setSpriteColor] Couldn't find sprite " << name  << std::endl;
+#endif
+    return isSet;
+  }
+  isSet = sprite->setColor(red, green, blue, alpha, destination);
+  return isSet;
+}
+
+
+
+
+bool
+SlManager::setSpriteDestinationOrigin(std::string name,  int x, int y, unsigned int destination)
+{
+  bool isSet = false;
   SlSprite* sprite = findSprite(name);
   if (sprite == nullptr) {
 #ifdef DEBUG
     std::cout << "[SlManager::setSpriteDestinationOrigin] Couldn't find sprite " << name  << std::endl;
 #endif
-    return false;
+    return isSet;
   }
-  sprite->setDestinationOrigin(x, y, destination);
-  return true;
+  isSet = sprite->setDestinationOrigin(x, y, destination);
+  return isSet;
+}
+
+
+
+bool
+SlManager::setSpriteRenderOptions(std::string name, uint32_t renderOptions, unsigned int destination)
+{
+  bool isSet = false;
+  SlSprite* sprite = findSprite(name);
+  if (sprite == nullptr) {
+#ifdef DEBUG
+    std::cout << "[SlManager::setSpriteRenderOptions] Couldn't find sprite " << name  << std::endl;
+#endif
+    return isSet;
+  }
+  isSet = sprite->setRenderOptions(renderOptions, destination);
+  return isSet;
 }

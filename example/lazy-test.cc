@@ -24,28 +24,22 @@ int main()
   }
   
   mngr->createTextureFromFile("tile","resources/tacky_background.png");
-  mngr->createSprite("tile","tile");
   mngr->createTextureFromTile("background", "tile", SCREEN_WIDTH, SCREEN_HEIGHT);
-  mngr->createSprite("background", "background");
   mngr->deleteTexture("tile");
-  mngr->deleteSprite("tile");
   mngr->appendToRenderQueue("background",0);    
   
   mngr->createTextureFromRectangle("tex1", 210, 210, 0x00, 0x00, 0xC0, 0xFF);
-  mngr->createTextureFromRectangle("temp", 186, 186, 0x50, 0x00, 0xE0, 0xFF);
-  SlSprite* tempSprite = mngr->createSprite("temp","tex1");
-  tempSprite->setDestinationOrigin(12, 12);
+  mngr->createTextureFromRectangle("tex2", 186, 186, 0x50, 0x00, 0xE0, 0xFF);
+  mngr->setSpriteDestinationOrigin("tex2", 12, 12);
 
-  mngr->createTextureFromSpriteOnTexture("minimap", "tex1", "temp");
-  mngr->deleteSprite("temp");
+  mngr->createTextureFromSpriteOnTexture("minimap", "tex1", "tex2");
   mngr->deleteTexture("tex1");
-  mngr->deleteTexture("temp");
+  mngr->deleteTexture("tex2");
   
-  SlSprite* miniMapBg = mngr->createSprite("miniMapBg", "minimap");
-  mngr->setSpriteDestinationOrigin("miniMapBg", 20, 20 );
-  miniMapBg->setColor(0x40, 0xAA, 0xBB, 0x50);
-  miniMapBg->setRenderOptions(SL_RENDER_ALPHAMOD | SL_RENDER_COLORMOD);
-  mngr->appendToRenderQueue("miniMapBg",0);
+  mngr->setSpriteDestinationOrigin("minimap", 20, 20 );
+  mngr->setSpriteColor("minimap", 0x40, 0xAA, 0xBB, 0xA0);
+  mngr->setSpriteRenderOptions("minimap", SL_RENDER_ALPHAMOD | SL_RENDER_COLORMOD);
+  mngr->appendToRenderQueue("minimap",0);
   
   mngr->createTextureFromFile("arrowTexture","resources/arrowsheet_transp.png");
   mngr->createSprite("upArrow", "arrowTexture", 0, 160, 80, 140);
