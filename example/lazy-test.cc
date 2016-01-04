@@ -23,13 +23,15 @@ int main()
   //   std::cout << "wrong file! " << std::endl;
   // }
 
-   mngr->parseConfigurationFile();
+  mngr->parseConfigurationFile();
+  mngr->setSpriteColor("background", 0x40, 0xAA, 0xBB, 0xFF);
+
    
   mngr->setSpriteDestinationOrigin("tex2", 12, 12);
   mngr->createTextureFromSpriteOnTexture("minimap", "tex1", "tex2");
   mngr->setSpriteDestinationOrigin("minimap", 20, 20 );
   mngr->setSpriteColor("minimap", 0x40, 0xAA, 0xBB, 0xA0);
-  mngr->setSpriteRenderOptions("minimap", SL_RENDER_ALPHAMOD | SL_RENDER_COLORMOD);
+  //  mngr->setSpriteRenderOptions("minimap");
 
   mngr->deleteTexture("tex1");
   mngr->deleteTexture("tex2");
@@ -43,7 +45,7 @@ int main()
   mngr->appendToRenderQueue("minimap", 0);
   mngr->appendToRenderQueue("up");
 
-  mngr->swapInRenderQueue( "down", "up", 0, 0 );
+  //  mngr->swapInRenderQueue( "down", "up", 0, 0 );
 
   bool quit = false;
   SDL_Event event;
@@ -57,15 +59,19 @@ int main()
 	    {
 	    case SDLK_UP:
 	      mngr->swapInRenderQueueLastPosition( "up", 0 );
+	      mngr->setSpriteRenderOptions( "background", SL_RENDER_DEFAULT );
 	      break;
 	    case SDLK_DOWN:
 	      mngr->swapInRenderQueueLastPosition( "down", 0 );
+	      mngr->setSpriteRenderOptions( "background", SL_RENDER_COLORMOD );
 	      break;
 	    case SDLK_LEFT:
 	      mngr->swapInRenderQueueLastPosition( "left" );
+	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_DEFAULT );
 	      break;
 	    case SDLK_RIGHT:
 	      mngr->swapInRenderQueueLastPosition( "right", 0 );
+	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_ALPHAMOD );
 	      break;
 	    case SDLK_1:
 	      break;

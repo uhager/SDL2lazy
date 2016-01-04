@@ -36,9 +36,8 @@ class SlTexture;
 */
 enum SlRenderOptions {
   SL_RENDER_DEFAULT         = (1u << 0),
-  SL_RENDER_COLORMOD        = (1u << 3),
-  SL_RENDER_FADE            = (1u << 4),
-  SL_RENDER_ALPHAMOD        = (1u << 5),
+  SL_RENDER_COLORMOD        = (1u << 1),
+  SL_RENDER_ALPHAMOD        = (1u << 2),
 };
 
 
