@@ -9,6 +9,8 @@
 #include <iostream>
 #include <string>
 
+#include <SDL2/SDL.h>
+
 #include "SlTexture.h"
 #include "SlSprite.h"
 
@@ -81,6 +83,24 @@ SlSprite::addDestination(int x, int y, uint32_t renderOptions)
   toAdd.destinationRect.x = x;
   toAdd.destinationRect.y = y;
   destinations_.push_back(toAdd);
+}
+
+
+
+void
+SlSprite::centerInSprite(SlSprite * otherSprite, unsigned int destinationThis, unsigned int destinationOther)
+{
+  if ( destinationThis >= destinations_.size() || destinationOther >= otherSprite->destinations_.size() ) {
+#ifdef DEBUG
+    std::cout << "[SlSprite::centerInSprite] Couldn't center " << name_ << " in " << otherSprite->name_ << " destination out of bounds." << std::endl;
+#endif
+    return;
+  }
+    
+  SDL_Rect target = otherSprite->destinations_.at(destinationOther).destinationRect;
+  SDL_Rect& dest = destinations_.at(destinationThis).destinationRect ;
+  dest.x = target.x + ( target.w - dest.w ) / 2 ;
+  dest.y = target.y + ( target.h - dest.h ) / 2 ;
 }
 
 

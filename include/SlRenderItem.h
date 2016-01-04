@@ -34,6 +34,19 @@ class SlRenderItem
   /*! Assignment, #sprite will point to same SlSprite object 
    */
   SlRenderItem& operator=(const SlRenderItem& rhs);
+  /*! SlRenderItems are equal when they have the same name and destination, i.e. the same sprite will be plotted in the same position.
+   */
+  bool operator==( const SlRenderItem& rhs)
+  {
+    return ( (name_        == rhs.name_       ) &&
+	     (destination_ == rhs.destination_) );
+  }
+  /*! SlRenderItems are equal when they have the same name and destination, i.e. the same sprite will be plotted in the same position.
+   */
+  bool operator!=( const SlRenderItem& rhs)
+  {
+    return !(*this == rhs);
+  }
 
   /*! Sets values for all data members.
    */

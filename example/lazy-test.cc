@@ -34,11 +34,12 @@ int main()
   mngr->deleteTexture("tex1");
   mngr->deleteTexture("tex2");
 
-  mngr->setSpriteDestinationOrigin("up", 25, 25);
-  mngr->appendToRenderQueue("background",0);    
-  mngr->appendToRenderQueue("minimap",0);
+  mngr->centerSpriteInSprite("up", "minimap");
+  mngr->centerSpriteInSprite("down", "minimap");
+  mngr->appendToRenderQueue("background", 0);    
+  mngr->appendToRenderQueue("minimap", 0);
   mngr->appendToRenderQueue("up");
-
+  mngr->swapInRenderQueue( "down", "up", 0, 0 );
   bool quit = false;
   SDL_Event event;
     

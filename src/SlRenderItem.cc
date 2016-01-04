@@ -60,20 +60,3 @@ SlRenderItem::operator=(const SlRenderItem& rhs)
   return *this;
 }
 
-
-
-/*! SlRenderItems are equal when they have the same name and destination, i.e. the same sprite will be plotted in the same position.
- */
-bool operator==(const SlRenderItem& lhs, const SlRenderItem& rhs)
-{
-  return ( (lhs.name_        == rhs.name_       ) &&
-	   (lhs.destination_ == rhs.destination_) );
-}
-
-
-/*! SlRenderItems are equal when they have the same name and destination, i.e. the same sprite will be plotted in the same position.
- */
-bool operator!=(const SlRenderItem& lhs, const SlRenderItem& rhs)
-{
-  return !(lhs == rhs);
-}

@@ -41,6 +41,10 @@ class SlManager
     \retval false if sprite not found or destination out of bounds.
    */ 
   bool appendToRenderQueue(std::string name, unsigned int destination = 0);
+  /*! Centers the destination of the sprite in the destinationRect of the target sprite.\n
+    Note that if the destination dimensions are changed afterwards, the sprite will no longer be centered.
+   */
+  void centerSpriteInSprite(std::string toCenter, std::string target, unsigned int destinationThis = 0, unsigned int destinationOther = 0);
   /*! Creates new SlRenderItem for the specified sprite. \n
     \retval false if sprite not found or destination out of bounds.
    */ 
@@ -111,6 +115,10 @@ class SlManager
     \retval false if i > #destinations_.size()
    */
   bool setSpriteRenderOptions(std::string name, uint32_t renderOptions, unsigned int destination = 0);
+  /*! Replaces the sprite 'toRemove' in the #renderQueue_ with sprite 'toAdd' .
+    \retval false if sprite not found or destination out of bounds.
+   */ 
+  bool swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned int destToAdd = 0, unsigned int destToRemove = 0);
   
 					      
  protected:

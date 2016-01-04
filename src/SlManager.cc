@@ -97,6 +97,29 @@ SlManager::appendToRenderQueue(std::string name, unsigned int destination)
 
 
 void
+SlManager::centerSpriteInSprite(std::string toCenter, std::string target, unsigned int destinationThis, unsigned int destinationOther)
+{
+  SlSprite* sprite = findSprite(toCenter);
+  if ( sprite == nullptr ) {
+#ifdef DEBUG
+    std::cerr << "[SlManager::centerSpriteInSprite] Couldn't find sprite " << toCenter << std::endl;
+#endif
+    return;
+  }
+
+  SlSprite* other = findSprite(target);
+  if ( other == nullptr ) {
+#ifdef DEBUG
+    std::cerr << "[SlManager::centerSpriteInSprite] Couldn't find sprite " << other << std::endl;
+#endif
+    return;
+  }
+
+  sprite->centerInSprite( other, destinationThis, destinationOther );
+}
+  
+
+void
 SlManager::clear()
 {
   std::vector<SlRenderItem*>::iterator item;
@@ -107,7 +130,6 @@ SlManager::clear()
 
   std::vector<SlSprite*>::iterator sprite;
   for ( sprite = sprites_.begin(); sprite != sprites_.end(); ++sprite) {
-    std::cout << "[SlManager::clear] next "<< std::endl;
     delete (*sprite);
     (*sprite) = nullptr ;
   }
@@ -117,7 +139,7 @@ SlManager::clear()
   for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
     delete (*iter);
   }
-  textures_.clear();      
+  textures_.clear();
 }
 
 
@@ -678,4 +700,46 @@ SlManager::setSpriteRenderOptions(std::string name, uint32_t renderOptions, unsi
   }
   isSet = sprite->setRenderOptions(renderOptions, destination);
   return isSet;
+}
+
+
+
+bool
+SlManager::swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned int destToAdd, unsigned int destToRemove)
+{
+  bool isSwapped = false;
+  SlRenderItem* item = createRenderItem( toAdd, destToAdd );
+  if ( item == nullptr ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toAdd  << std::endl;
+#endif
+    return isSwapped;
+  }
+
+  SlRenderItem* old = createRenderItem( toRemove, destToRemove );
+  if ( old == nullptr ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toRemove  << std::endl;
+#endif
+    return isSwapped;
+  }
+
+  std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+    if ( (**iter) ==  *old ) {
+      delete (*iter);
+      renderQueue_.erase( iter );
+      renderQueue_.insert( iter, item );
+      isSwapped = true;
+      delete old;
+      break;
+    }
+  }
+
+  if ( !isSwapped ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::swapInRenderQueue] Couldn't find RenderItem " << toRemove << " to swap for"  << std::endl;
+#endif
+  }
+  return isSwapped;
 }

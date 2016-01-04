@@ -96,6 +96,9 @@ class SlSprite
   /*! Adds an entry to #destinations_. The destination dimensions are set to the source dimensions, color is default.
    */
   void addDestination(int x, int y, uint32_t renderOptions = SL_RENDER_DEFAULT);
+  /*! Centers the destination of this sprite in the destinationRect of the other sprite.
+   */
+  void centerInSprite(SlSprite * otherSprite, unsigned int destionationThis = 0, unsigned int destinationOther = 0);
   /*! Removes all entries from #destinations_. Sprite will not be rendered.
    */
   void clearDestinations();
