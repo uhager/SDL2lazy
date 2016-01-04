@@ -12,11 +12,11 @@
 
 SlRenderItem::SlRenderItem()
 {
-  initialize( "", nullptr, -1 );
+  initialize( "", nullptr, 0 );
 }
 
 
-SlRenderItem::SlRenderItem(std::string name, SlSprite* pSprite, int dest)
+SlRenderItem::SlRenderItem(std::string name, SlSprite* pSprite, unsigned int dest)
 {
   initialize(name, pSprite, dest);
 }
@@ -42,7 +42,7 @@ SlRenderItem::SlRenderItem(const SlRenderItem& toCopy)
 
 
 void
-SlRenderItem::initialize(std::string name, SlSprite* pSprite, int dest)
+SlRenderItem::initialize(std::string name, SlSprite* pSprite, unsigned int dest)
 {
   name_ = name;
   destination_ = dest;

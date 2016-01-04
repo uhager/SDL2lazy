@@ -119,6 +119,12 @@ class SlManager
     \retval false if sprite not found or destination out of bounds.
    */ 
   bool swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned int destToAdd = 0, unsigned int destToRemove = 0);
+  /*! Replaces the SlRenderItem at 'position' in the #renderQueue_ with sprite 'toAdd'.
+   */
+  bool swapInRenderQueueAtPosition(std::string toAdd, unsigned int destToAdd, unsigned int position );
+  /*! Replaces the last item in the #renderQueue_ with sprite toAdd.
+   */
+  bool swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToAdd = 0 );
   
 					      
  protected:
@@ -182,6 +188,8 @@ class SlManager
     Sprites will be deleted when the SlManager instance is deleted.
    */
   std::vector<SlSprite*> sprites_;
+  /*! Holds the items to be rendered. The front of the queue is rendered first (background) the last element is rendered last (foreground).
+   */
   std::vector<SlRenderItem*> renderQueue_;
   /*! Window width.
    */

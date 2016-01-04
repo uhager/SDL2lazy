@@ -36,10 +36,15 @@ int main()
 
   mngr->centerSpriteInSprite("up", "minimap");
   mngr->centerSpriteInSprite("down", "minimap");
+  mngr->centerSpriteInSprite("left", "minimap");
+  mngr->centerSpriteInSprite("right", "minimap");
+  
   mngr->appendToRenderQueue("background", 0);    
   mngr->appendToRenderQueue("minimap", 0);
   mngr->appendToRenderQueue("up");
+
   mngr->swapInRenderQueue( "down", "up", 0, 0 );
+
   bool quit = false;
   SDL_Event event;
     
@@ -51,12 +56,16 @@ int main()
 	  switch(event.key.keysym.sym)
 	    {
 	    case SDLK_UP:
+	      mngr->swapInRenderQueueLastPosition( "up", 0 );
 	      break;
 	    case SDLK_DOWN:
+	      mngr->swapInRenderQueueLastPosition( "down", 0 );
 	      break;
 	    case SDLK_LEFT:
+	      mngr->swapInRenderQueueLastPosition( "left" );
 	      break;
 	    case SDLK_RIGHT:
+	      mngr->swapInRenderQueueLastPosition( "right", 0 );
 	      break;
 	    case SDLK_1:
 	      break;

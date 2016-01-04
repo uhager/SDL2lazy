@@ -25,7 +25,7 @@ class SlRenderItem
   SlRenderItem();
   /*! Constructor sets name and destiantion and points sprite to pSprite.
    */
-  SlRenderItem(std::string name, SlSprite* pSprite, int dest);
+  SlRenderItem(std::string name, SlSprite* pSprite, unsigned int dest);
 
   ~SlRenderItem();
   /*! Copy constructor, #sprite will point to same SlSprite object 
@@ -50,13 +50,13 @@ class SlRenderItem
 
   /*! Sets values for all data members.
    */
-  void initialize(std::string name, SlSprite* pSprite, int dest);
+  void initialize(std::string name, SlSprite* pSprite, unsigned int dest);
   
   std::string name_;
   SlSprite* sprite_;
   /*! The position in SlSprite::destinations_ .
    */
-  int destination_ ;
+  unsigned int destination_ ;
 };
 
 

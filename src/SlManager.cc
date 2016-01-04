@@ -716,22 +716,13 @@ SlManager::swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned i
     return isSwapped;
   }
 
-  SlRenderItem* old = createRenderItem( toRemove, destToRemove );
-  if ( old == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toRemove  << std::endl;
-#endif
-    return isSwapped;
-  }
-
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
-    if ( (**iter) ==  *old ) {
+    if ( ( (*iter)->name_ ==  toRemove ) && ( (*iter)->destination_ == destToRemove ) ) {
       delete (*iter);
       renderQueue_.erase( iter );
       renderQueue_.insert( iter, item );
       isSwapped = true;
-      delete old;
       break;
     }
   }
@@ -741,5 +732,43 @@ SlManager::swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned i
     std::cout << "[SlManager::swapInRenderQueue] Couldn't find RenderItem " << toRemove << " to swap for"  << std::endl;
 #endif
   }
+  return isSwapped;
+}
+
+
+
+bool
+SlManager::swapInRenderQueueAtPosition(std::string toAdd, unsigned int destToAdd, unsigned int position )
+{
+  bool isSwapped = false;
+  SlRenderItem* item = createRenderItem( toAdd, destToAdd );
+  if ( item == nullptr ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toAdd  << std::endl;
+#endif
+    return isSwapped;
+  }
+
+  std::vector<SlRenderItem*>::iterator iter = renderQueue_.begin() + position;
+  delete (*iter);
+  renderQueue_.erase( iter );
+  renderQueue_.insert( iter, item );
+  isSwapped = true;
+
+  if ( !isSwapped ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::swapInRenderQueueAtPosition] Couldn't swap in sprite " << toAdd << " at position " << position << "."  << std::endl;
+#endif
+  }
+  return isSwapped;
+}
+
+
+bool
+SlManager::swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToAdd )
+{
+  bool isSwapped = false;
+  unsigned int position = renderQueue_.size() - 1 ;
+  isSwapped = swapInRenderQueueAtPosition( toAdd, destToAdd, position );
   return isSwapped;
 }
