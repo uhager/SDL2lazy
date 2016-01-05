@@ -87,6 +87,13 @@ class SlManager
   /*! Returns pointer to the texture, nullptr if not found.
    */
   SlTexture* findTexture(std::string name);
+  /*! Inserts the sprite into the #renderQueue_ after the specified sprite.
+   */
+  bool insertInRenderQueueAfter(std::string toAdd, std::string afterThis, unsigned int destToAdd = 0, unsigned int destAfterThis = 0);
+  /*! Inserts the sprite into the #renderQueue_ before the specified sprite.
+   */
+  bool insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, unsigned int destToAdd = 0, unsigned int destBeforeThis = 0);
+
   /*! The running instance of SlManager. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer.
    */
   static SlManager* Instance(void) {return instance_;}
@@ -119,13 +126,16 @@ class SlManager
     \retval false if sprite not found or destination out of bounds.
    */ 
   bool swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned int destToAdd = 0, unsigned int destToRemove = 0);
-  /*! Replaces the SlRenderItem at 'position' in the #renderQueue_ with sprite 'toAdd'.
+  /*! Replaces the SlRenderItem at 'position' in the #renderQueue_ with sprite 'toAdd'. \n
+    Note that the first item is in position 0.
    */
   bool swapInRenderQueueAtPosition(std::string toAdd, unsigned int destToAdd, unsigned int position );
   /*! Replaces the last item in the #renderQueue_ with sprite toAdd.
    */
   bool swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToAdd = 0 );
-  
+  /*! Toggles rendering of an item in the #renderQueue_ on and off. 
+   */
+  bool toggleRender(std::string toToggle, unsigned int destination = 0);
 					      
  protected:
   SDL_Window* window_ = nullptr;

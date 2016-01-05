@@ -40,10 +40,19 @@ int main()
   mngr->centerSpriteInSprite("down", "minimap");
   mngr->centerSpriteInSprite("left", "minimap");
   mngr->centerSpriteInSprite("right", "minimap");
+
+  mngr->setSpriteDestinationOrigin("upperright", SCREEN_WIDTH - 120,                 0  );
+  mngr->setSpriteDestinationOrigin("lowerright", SCREEN_WIDTH - 120, SCREEN_HEIGHT - 120);
+  mngr->setSpriteDestinationOrigin("lowerleft" ,                0  , SCREEN_HEIGHT - 120); 
   
   mngr->appendToRenderQueue("background", 0);    
+  mngr->appendToRenderQueue("upperright");
+  mngr->appendToRenderQueue("lowerright");
   mngr->appendToRenderQueue("minimap", 0);
   mngr->appendToRenderQueue("up");
+
+  mngr->insertInRenderQueueAfter("upperleft", "background");
+  mngr->insertInRenderQueueBefore("lowerleft", "minimap");
 
   //  mngr->swapInRenderQueue( "down", "up", 0, 0 );
 
@@ -70,16 +79,20 @@ int main()
 	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_DEFAULT );
 	      break;
 	    case SDLK_RIGHT:
-	      mngr->swapInRenderQueueLastPosition( "right", 0 );
+	      mngr->swapInRenderQueueAtPosition( "right", 0, 6 );
 	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_ALPHAMOD );
 	      break;
 	    case SDLK_1:
+	      mngr->toggleRender("upperleft");
 	      break;
 	    case SDLK_2:
+	      mngr->toggleRender("upperright");
 	      break;
 	    case SDLK_3:
+	      mngr->toggleRender("lowerright");
 	      break;
 	    case SDLK_4:
+	      mngr->toggleRender("lowerleft");
 	      break;
 	    case SDLK_ESCAPE:
 	      quit = true;

@@ -427,6 +427,68 @@ SlManager::initializeWindow(std::string name, int width, int height)
 
 
 bool
+SlManager::insertInRenderQueueAfter(std::string toAdd, std::string afterThis, unsigned int destToAdd, unsigned int destAfterThis)
+{
+  bool isInserted = false;
+  SlRenderItem* toInsert = createRenderItem( toAdd, destToAdd );
+  if ( toInsert == nullptr ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toAdd  << std::endl;
+#endif
+    return isInserted;
+  }
+
+  std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+    if ( ( (*iter)->name_ ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
+      renderQueue_.insert( (++iter), toInsert );
+      isInserted = true;
+      break;
+    }
+  }
+
+  if ( !isInserted ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::insertInRenderQueueAfter] Couldn't find RenderItem " << afterThis << " to insert after."  << std::endl;
+#endif
+  }
+  return isInserted;
+}
+
+
+
+bool
+SlManager::insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, unsigned int destToAdd, unsigned int destBeforeThis)
+{
+  bool isInserted = false;
+  SlRenderItem* toInsert = createRenderItem( toAdd, destToAdd );
+  if ( toInsert == nullptr ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toAdd  << std::endl;
+#endif
+    return isInserted;
+  }
+
+  std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+    if ( ( (*iter)->name_ ==  beforeThis ) && ( (*iter)->destination_ == destBeforeThis ) ) {
+      renderQueue_.insert( (++iter), toInsert );
+      isInserted = true;
+      break;
+    }
+  }
+
+  if ( !isInserted ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::insertInRenderQueueBefore] Couldn't find RenderItem " << beforeThis << " to insert before."  << std::endl;
+#endif
+  }
+  return isInserted;
+}
+
+
+
+bool
 SlManager::parseConfigurationFile(std::string filename)
 {
   bool result = true;
@@ -637,12 +699,14 @@ SlManager::render()
   SDL_RenderClear( renderer_ );
  
   for (auto& item: renderQueue_){
-    result = (item->sprite_)->render( renderer_, (item->destination_) );
-    if (result != 0) {
+    if ( item->renderMe_ ) {
+      result = (item->sprite_)->render( renderer_, (item->destination_) );
+      if (result != 0) {
 #ifdef DEBUG
-      std::cout << "[SlManager::render] Couldn't render sprite " << item->name_ << std::endl;
+	std::cout << "[SlManager::render] Couldn't render sprite " << item->name_ << std::endl;
 #endif
-      return result;
+	return result;
+      }
     }
   }
 
@@ -764,6 +828,7 @@ SlManager::swapInRenderQueueAtPosition(std::string toAdd, unsigned int destToAdd
 }
 
 
+
 bool
 SlManager::swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToAdd )
 {
@@ -771,4 +836,28 @@ SlManager::swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToA
   unsigned int position = renderQueue_.size() - 1 ;
   isSwapped = swapInRenderQueueAtPosition( toAdd, destToAdd, position );
   return isSwapped;
+}
+
+
+
+bool
+SlManager::toggleRender(std::string toToggle, unsigned int destination )
+{
+  bool isToggled = false;
+  
+  std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+    if ( ( (*iter)->name_ ==  toToggle ) && ( (*iter)->destination_ == destination ) ) {
+      (*iter)->renderMe_ = !((*iter)->renderMe_) ;
+      isToggled = true;
+      break;
+    }
+  }
+
+  if ( !isToggled ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::toggleRender] Couldn't toggle sprite " << toToggle << " - sprite not in render queue."  << std::endl;
+#endif
+  }
+  return isToggled;
 }

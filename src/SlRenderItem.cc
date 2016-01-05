@@ -47,6 +47,7 @@ SlRenderItem::initialize(std::string name, SlSprite* pSprite, unsigned int dest)
   name_ = name;
   destination_ = dest;
   sprite_ = pSprite;
+  renderMe_ = true;
 }
 
 

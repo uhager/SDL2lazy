@@ -57,6 +57,9 @@ class SlRenderItem
   /*! The position in SlSprite::destinations_ .
    */
   unsigned int destination_ ;
+  /*! Determines whether the item will be rendered. This avoids having to delete an item and create a new one each in the same position if a sprite is toggled on and off often.
+   */
+  bool renderMe_;
 };
 
 
