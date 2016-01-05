@@ -15,8 +15,7 @@ const int SCREEN_HEIGHT = 800;
 
 int main()
 {
-  SlManager *mngr = SlManager::Instance();
-  mngr = new SlManager("lazy-test", SCREEN_WIDTH, SCREEN_HEIGHT) ;  
+  SlManager *mngr = new SlManager("lazy-test", SCREEN_WIDTH, SCREEN_HEIGHT) ;  
 
   // SlTexture* wrongFileTest = mngr->createTextureFromFile("tile","resources/tacky_backgroun.png");
   // if (wrongFileTest == nullptr) {

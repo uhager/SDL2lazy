@@ -93,10 +93,6 @@ class SlManager
   /*! Inserts the sprite into the #renderQueue_ before the specified sprite.
    */
   bool insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, unsigned int destToAdd = 0, unsigned int destBeforeThis = 0);
-
-  /*! The running instance of SlManager. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer.
-   */
-  static SlManager* Instance(void) {return instance_;}
   /*! Read texture and sprite definitions from configuration file.\n
     Default file name: "SlTextures.ini".
    */
@@ -191,9 +187,6 @@ class SlManager
 
   
  private:
-  /*! The running instance of SlManager. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer.
-   */
-  static SlManager* instance_;
   /*! Holds all SlTextures that were created using SlManager methods.
     Texture will be deleted when the SlManager instance is deleted.
    */

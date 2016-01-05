@@ -19,20 +19,9 @@
 
 
 
-/*! The running instance. 
- */
-SlManager* SlManager::instance_ = nullptr;
 
 SlManager::SlManager()
 {
-  if ( instance_ == nullptr) {
-    instance_ = this;
-  }
-  else
-    {
-      std::cout << "[SlManager::SlManager]  One manager per application." << std::endl;
-      exit(1);
-    }
   this->initialize();
 }
 
@@ -40,14 +29,6 @@ SlManager::SlManager()
 
 SlManager::SlManager(std::string name, int width, int height)
 {
-  if ( instance_ == nullptr) {
-    instance_ = this;
-  }
-  else
-    {
-      std::cout << "[SlManager::SlManager]  Manager is a singleton class and can only be constructed once." << std::endl;
-      exit(1);
-    }
   this->initialize();
   this->initializeWindow(name, width, height);
 }
