@@ -28,10 +28,10 @@ class SlRenderItem
   SlRenderItem(std::string name, SlSprite* pSprite, unsigned int dest);
 
   ~SlRenderItem();
-  /*! Copy constructor, #sprite will point to same SlSprite object 
+  /*! Copy constructor, #sprite_ will point to same SlSprite object 
    */
   SlRenderItem(const SlRenderItem& toCopy);
-  /*! Assignment, #sprite will point to same SlSprite object 
+  /*! Assignment, #sprite_ will point to same SlSprite object 
    */
   SlRenderItem& operator=(const SlRenderItem& rhs);
   /*! SlRenderItems are equal when they have the same name and destination, i.e. the same sprite will be plotted in the same position.
@@ -51,8 +51,11 @@ class SlRenderItem
   /*! Sets values for all data members.
    */
   void initialize(std::string name, SlSprite* pSprite, unsigned int dest);
-  
+  /*! The name of the item is the name of the sprite it is using.
+   */
   std::string name_;
+  /*! The sprite that will be rendered.
+   */
   SlSprite* sprite_;
   /*! The position in SlSprite::destinations_ .
    */

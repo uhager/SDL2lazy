@@ -70,8 +70,8 @@ class SlManager
   /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile.  \n
     Creates SlSprite of same name that holds the whole texture.
 
-    The SlRenderSettings::destinationRect at position 0 in the SlSprite's #destinations_ is used to determine the width of the tile. 
-    If the sprite's #destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
+    The SlRenderSettings::destinationRect at position 0 in the SlSprite::destinations_ is used to determine the width of the tile. 
+    If the SlSprite::destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
   */
   SlTexture* createTextureFromTile(std::string name, std::string sprite, int width, int height);
   /*! Delete the specified sprite and remove from #sprites_ .
@@ -108,18 +108,18 @@ class SlManager
   /*! Temporary solution until all rendering related stuff happens in SlManager methods.
    */
   SDL_Renderer* renderer(){return renderer_;}
-  /*! Sets color for SlSprite name at position i of #destinations_.
+  /*! Sets color for SlSprite name at position i of SlSprite::destinations_.
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
    */
   bool setSpriteColor(std::string name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int destination = 0);
-  /*! Changes destinationRect for SlSprite name at position destination of #destinations_.
+  /*! Changes destinationRect for SlSprite name at position destination of SlSprite::destinations_.
 
     Sets where the sprite will be rendered.
   */
   bool setSpriteDestinationOrigin(std::string name,  int x, int y, unsigned int destination = 0);
-  /*! Sets SlRenderOptions for SlSprite name at position i of #destinations_.
-    \retval false if i > #destinations_.size()
+  /*! Sets SlRenderOptions for SlSprite name at position i of SlSprite::destinations_.
+    \retval false if i > SlSprite::destinations_ size.
    */
   bool setSpriteRenderOptions(std::string name, uint32_t renderOptions, unsigned int destination = 0);
   /*! Replaces the sprite 'toRemove' in the #renderQueue_ with sprite 'toAdd' .
@@ -138,7 +138,11 @@ class SlManager
   bool toggleRender(std::string toToggle, unsigned int destination = 0);
 					      
  protected:
+  /*! The main (and only) window.
+   */
   SDL_Window* window_ = nullptr;
+  /*! The renderer tied to the main window.
+   */
   SDL_Renderer* renderer_ = nullptr;
   /*!Default constructor.
    */
@@ -163,24 +167,24 @@ class SlManager
    */
   void parseSprite(std::ifstream& input);
   /*! Read texture configurations from file
-    ##### Example: \n
-> texture
-> 	type	file
-> 	name	tile
-> 	file	resources/tacky_background.png
-> end
-> texture
-> 	type	 tile
->   	name	background
-> 	dimensions	SCREEN_WIDTH	SCREEN_HEIGHT
-> # can use sprite 'tile' here since it's automatically created when texture 'tile' is created 
->       	sprite		tile
-> end
-> texture
-> 	type	rectangle
-> 	name	tex1
-> 	dimensions	210	210
-> 	color		0x00	0x00	0xC0	0xFF
+    ##### Example: 
+> texture\n
+> 	type	file\n
+> 	name	tile\n
+> 	file	resources/tacky_background.png\n
+> end\n
+> texture\n
+> 	type	 tile\n
+>   	name	background\n
+> 	dimensions	SCREEN_WIDTH	SCREEN_HEIGHT\n
+> (can use sprite 'tile' here since it's automatically created when texture 'tile' is created )\n
+>       	sprite		tile\n
+> end\n
+> texture\n
+> 	type	rectangle\n
+> 	name	tex1\n
+> 	dimensions	210	210\n
+> 	color		0x00	0x00	0xC0	0xFF\n
 > end
   */
   void parseTexture(std::ifstream& input);

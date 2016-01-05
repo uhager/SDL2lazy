@@ -55,8 +55,8 @@ class SlTexture
   int createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgroundTexture, SlSprite *foregroundSprite);
   /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile. 
 
-    The SlRenderSettings::destinationRect at position 0 in the SlSprite's #destinations_ is used to determine the width of the tile. 
-    If the sprite's #destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
+    The SlRenderSettings::destinationRect at position 0 in the sprite's lSprite::destinations_ is used to determine the width of the tile. 
+    If the sprite's SlSprite::destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
   */
   int createFromTile(SDL_Renderer *renderer, SlSprite* tile, int width, int height);
   /*! Returns the dimensions of the SDL_Texture.

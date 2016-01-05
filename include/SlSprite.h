@@ -47,6 +47,8 @@ enum SlRenderOptions {
 */
 struct SlRenderSettings
 {
+  /*! Holds the location where the sprite will be rendered in the window.
+   */
   SDL_Rect destinationRect = {0,0,0,0};
   /*! red, green, blue, alpha
 
@@ -139,13 +141,13 @@ class SlSprite
     Sets how large the texture will be rendered.
   */
   bool setDestinationDimension(int width, int height, unsigned int i = 0);
-  /*! Changes destinationRect for position i of #destinations_.
+  /*! Changes destinationRect for position i of #destinations_ .
 
     Sets where the sprite will be rendered.
   */
   bool setDestinationOrigin(int x, int y, unsigned int i = 0);
   /*! Sets SlRenderOptions for position i of #destinations_.
-    \retval false if i > #destinations_.size()
+    \retval false if i > #destinations_ size.
    */
   bool setRenderOptions(uint32_t renderOptions, unsigned int i = 0);
 
