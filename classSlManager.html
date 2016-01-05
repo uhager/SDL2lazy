@@ -1026,8 +1026,24 @@ Default file name: "SlTextures.ini". </p>
 </div><div class="memdoc">
 <p>Read texture configurations from file </p><h5>Example:</h5>
 <blockquote class="doxtable">
-<p>texture type file name tile file resources/tacky_background.png end texture type tile name background dimensions SCREEN_WIDTH SCREEN_HEIGHT </p><h1>can use sprite 'tile' here since it's automatically created when texture 'tile' is created</h1>
-<p>sprite tile end texture type rectangle name tex1 dimensions 210 210 color 0x00 0x00 0xC0 0xFF end</p>
+<p>texture<br />
+ type file<br />
+ name tile<br />
+ file resources/tacky_background.png<br />
+end<br />
+texture<br />
+ type tile<br />
+ name background<br />
+ dimensions SCREEN_WIDTH SCREEN_HEIGHT<br />
+(can use sprite 'tile' here since it's automatically created when texture 'tile' is created )<br />
+ sprite tile<br />
+end<br />
+texture<br />
+ type rectangle<br />
+ name tex1<br />
+ dimensions 210 210<br />
+ color 0x00 0x00 0xC0 0xFF<br />
+end</p>
 </blockquote>
 
 </div>
