@@ -1,0 +1,9 @@
+<map id="include/SlSprite.h" name="include/SlSprite.h">
+<area shape="rect" id="node2" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="106,229,230,256"/>
+<area shape="rect" id="node3" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="22,155,130,181"/>
+<area shape="rect" id="node4" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="119,80,254,107"/>
+<area shape="rect" id="node6" href="$SlManager_8h.html" title="SlManager class, has a Window with SDL_Renderer, manages textures and sprites. SlRenderItem struct fo..." alt="" coords="348,155,488,181"/>
+<area shape="rect" id="node7" href="$SlRenderItem_8h.html" title="SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="339,80,498,107"/>
+<area shape="rect" id="node5" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="206,155,324,181"/>
+<area shape="rect" id="node8" href="$SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="512,155,655,181"/>
+</map>

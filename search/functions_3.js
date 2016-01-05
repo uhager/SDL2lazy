@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['findsprite',['findSprite',['../classSlSpritesheet.html#a8cc1c63a30efe2600bec3b66456afae4',1,'SlSpritesheet']]]
+  ['findsprite',['findSprite',['../classSlManager.html#a3665fb1d820ca290cc3a7aedc516c4df',1,'SlManager']]],
+  ['findtexture',['findTexture',['../classSlManager.html#a6128a2559c31a727486492059d4b80c6',1,'SlManager']]]
 ];

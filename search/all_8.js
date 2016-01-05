@@ -1,15 +1,6 @@
 var searchData=
 [
-  ['readcoordsheet',['readCoordSheet',['../classSlSpritesheet.html#af8ba905e598d79ae4e1b1b61c874060b',1,'SlSpritesheet']]],
-  ['readsourcerect',['readSourceRect',['../classSlSpritesheet.html#a33eac1969e8a19853f016bacf8dce0bd',1,'SlSpritesheet']]],
-  ['recoveroriginalsize',['recoverOriginalSize',['../classSlTexture.html#ac1fcae66fc912703aa42b6170b19ef02',1,'SlTexture']]],
-  ['removefromrender',['removeFromRender',['../classSlSpritesheet.html#a0174465358b2c7e5700cd72524820c8a',1,'SlSpritesheet']]],
-  ['render',['render',['../classSlSpritesheet.html#a10c64300e699b5949e9b1d382bf3b64c',1,'SlSpritesheet::render()'],['../classSlTexture.html#aac9736a608c11ee52de9e57939db80e7',1,'SlTexture::render()']]],
-  ['renderall',['renderAll',['../classSlSpritesheet.html#af2befd2cc0243759a68f0be23efed32d',1,'SlSpritesheet']]],
-  ['rendercurrentsprite',['renderCurrentSprite',['../classSlSpritesheet.html#a2b0555564801ebe3b5126802cb733690',1,'SlSpritesheet::renderCurrentSprite(SDL_Renderer *renderer)'],['../classSlSpritesheet.html#aa6f2bdfcde4abf03fde057fab487629c',1,'SlSpritesheet::renderCurrentSprite(SDL_Renderer *renderer, uint32_t renderOptions)']]],
-  ['renderoptions',['renderOptions',['../structSlTextureInfo.html#a14bd97b05f5e7a4f2d91910d0ab5c089',1,'SlTextureInfo']]],
-  ['rendersprite',['renderSprite',['../classSlSpritesheet.html#a6be6bd6b3faef349e8f80b3490b3aa7a',1,'SlSpritesheet']]],
-  ['rendertextureontexture',['renderTextureOnTexture',['../classSlTexture.html#a4ff303973f295670016a995b09a7f236',1,'SlTexture::renderTextureOnTexture(SDL_Renderer *renderer, SlTexture *toAdd)'],['../classSlTexture.html#a647f9845a914dce54d68fc8446d0f3b0',1,'SlTexture::renderTextureOnTexture(SDL_Renderer *renderer, SlTexture *toAdd, uint32_t renderOptions)']]],
-  ['renderthis',['renderThis',['../classSlTexture.html#aeafcdf0fae54b65c1fbc7d68670e0ab0',1,'SlTexture']]],
-  ['renderwithoptions',['renderWithOptions',['../classSlTexture.html#ad8cbe08f537e5801f87bf7d5e55bac7d',1,'SlTexture']]]
+  ['operator_21_3d',['operator!=',['../classSlRenderItem.html#af6c508eb7108a11d2847939ef516a302',1,'SlRenderItem']]],
+  ['operator_3d',['operator=',['../classSlManager.html#a0994550a822ff9ccf8f5dbcf13e7eeb8',1,'SlManager::operator=()'],['../classSlRenderItem.html#aa5ce28ce823ca22e30b150381093ca32',1,'SlRenderItem::operator=()'],['../classSlSprite.html#a0f505a5fd6e704bd5c39eadc31de859d',1,'SlSprite::operator=()'],['../classSlTexture.html#a0906e2dd8a0b0d514302ee6dce049601',1,'SlTexture::operator=()']]],
+  ['operator_3d_3d',['operator==',['../classSlRenderItem.html#adc49109b6f96dcbec0e81247c495a2ec',1,'SlRenderItem']]]
 ];

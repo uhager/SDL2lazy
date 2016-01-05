@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['renderoptions',['RenderOptions',['../SlTexture_8h.html#adbc2ec6c4ad10e95cb1060bd89907ae0',1,'SlTexture.h']]]
+  ['slrenderoptions',['SlRenderOptions',['../SlSprite_8h.html#af222e38a6d85bfac79864e4ad5a76622',1,'SlSprite.h']]]
 ];

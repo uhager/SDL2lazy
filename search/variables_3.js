@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['renderoptions',['renderOptions',['../structSlTextureInfo.html#a14bd97b05f5e7a4f2d91910d0ab5c089',1,'SlTextureInfo']]]
+  ['instance_5f',['instance_',['../classSlManager.html#a66b971d2d358eeb7f81d13eb8a37aa47',1,'SlManager']]]
 ];

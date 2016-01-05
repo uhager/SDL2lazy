@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tiletexture',['tileTexture',['../classSlTexture.html#a054601d0ce368215c2149e6a3c1e265f',1,'SlTexture']]],
-  ['togglesprite',['toggleSprite',['../classSlSpritesheet.html#a43e7e729d4a5e750e1c2be06646cd3b7',1,'SlSpritesheet']]]
+  ['render',['render',['../classSlManager.html#adc7c29a607df8cd0eb6e56617c2148f0',1,'SlManager::render()'],['../classSlSprite.html#a8b7ecec25227918f7832dbc2ee06213c',1,'SlSprite::render(SDL_Renderer *renderer)'],['../classSlSprite.html#aaefcc3e7a4ee8ee93643ba4bb8413034',1,'SlSprite::render(SDL_Renderer *renderer, unsigned int i)']]],
+  ['renderer',['renderer',['../classSlManager.html#a99b4448836d16c9a84b4afe39fb2d3db',1,'SlManager']]]
 ];

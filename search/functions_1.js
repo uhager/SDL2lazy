@@ -1,10 +1,17 @@
 var searchData=
 [
-  ['centerallspritesat',['centerAllSpritesAt',['../classSlSpritesheet.html#aee76f8cb814f5a2d24937f1bfd5e9229',1,'SlSpritesheet']]],
-  ['centerallspritesin',['centerAllSpritesIn',['../classSlSpritesheet.html#ad0cd36a07e2a826b240ce8c2b99a66cf',1,'SlSpritesheet::centerAllSpritesIn(int x, int y, int w, int h)'],['../classSlSpritesheet.html#a009f670e6d56596aa03f4745c71951a0',1,'SlSpritesheet::centerAllSpritesIn(SDL_Rect rect)']]],
-  ['centerspriteat',['centerSpriteAt',['../classSlSpritesheet.html#ad6f9f6618e35bb3b05d53d40eb2a8a5f',1,'SlSpritesheet']]],
-  ['centerspritein',['centerSpriteIn',['../classSlSpritesheet.html#a430aff81d97a0cd8ec36d6e6624835e8',1,'SlSpritesheet']]],
-  ['cleartorender',['clearToRender',['../classSlSpritesheet.html#ab2a0ac63a523ce863293e7ef5e1f4947',1,'SlSpritesheet']]],
-  ['createfromrectangle',['createFromRectangle',['../classSlTexture.html#acb08c3329e1ca070241e006f879662b9',1,'SlTexture::createFromRectangle(SDL_Renderer *renderer)'],['../classSlTexture.html#a0811634ae31fe871c1420f5edbdf2230',1,'SlTexture::createFromRectangle(SDL_Renderer *renderer, SDL_Rect rectangle)'],['../classSlTexture.html#a86efd33dcc11a2184feb2a64ee0422b8',1,'SlTexture::createFromRectangle(SDL_Renderer *renderer, int w, int h)']]],
-  ['currentlocation',['currentLocation',['../classSlTexture.html#a7c0775409ebf3b4afae7d6e62d1ff577',1,'SlTexture']]]
+  ['centerinsprite',['centerInSprite',['../classSlSprite.html#a1a83569b4d3738e26c2d9b2a56a2a659',1,'SlSprite']]],
+  ['centerspriteinsprite',['centerSpriteInSprite',['../classSlManager.html#aa13a0cbe2c58bd34dd0015c856d5355f',1,'SlManager']]],
+  ['clear',['clear',['../classSlManager.html#a6d2025542e2b1b948f6fd8a34b01b223',1,'SlManager']]],
+  ['cleardestinations',['clearDestinations',['../classSlSprite.html#aa35430177caab5f667abc6407f033773',1,'SlSprite']]],
+  ['createfromconfigfile',['createFromConfigFile',['../classSlTexture.html#ace3a524c72a46719e433c6cbf8ba3d09',1,'SlTexture']]],
+  ['createfromrectangle',['createFromRectangle',['../classSlTexture.html#a38ea19711f84cb318a6d32d8357ad500',1,'SlTexture']]],
+  ['createfromspriteontexture',['createFromSpriteOnTexture',['../classSlTexture.html#a22fc8da49a96c20acc208fc4fc9126aa',1,'SlTexture']]],
+  ['createfromtile',['createFromTile',['../classSlTexture.html#adae0e5718a67a5a6fd2f742047cab94c',1,'SlTexture']]],
+  ['createrenderitem',['createRenderItem',['../classSlManager.html#a8708a2c032375e685584246fcaba340f',1,'SlManager']]],
+  ['createsprite',['createSprite',['../classSlManager.html#aa206a4e70d983744bfe9d11a19eabb0b',1,'SlManager']]],
+  ['createtexturefromfile',['createTextureFromFile',['../classSlManager.html#acc1fa9614f9a87b9f5db77f668795a36',1,'SlManager']]],
+  ['createtexturefromrectangle',['createTextureFromRectangle',['../classSlManager.html#af82f84c675c255f80592010f4f5c4d23',1,'SlManager']]],
+  ['createtexturefromspriteontexture',['createTextureFromSpriteOnTexture',['../classSlManager.html#aee023e686beafb077cef38cfab67978e',1,'SlManager']]],
+  ['createtexturefromtile',['createTextureFromTile',['../classSlManager.html#af70918a067951e1e1f5e77498a3b5d03',1,'SlManager']]]
 ];

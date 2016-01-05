@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['sourcerect',['sourceRect',['../structSlTextureInfo.html#a071e5aaae83a56b42c38f9d4bcaba8b7',1,'SlTextureInfo']]],
-  ['sprites',['sprites',['../classSlSpritesheet.html#af6ad223c4d13b4b585421b17c2795345',1,'SlSpritesheet']]]
+  ['name_5f',['name_',['../classSlRenderItem.html#ab74374f31d9202b22c3adc52628098dc',1,'SlRenderItem::name_()'],['../classSlSprite.html#a390f5e40313754666ca0749f63ff38db',1,'SlSprite::name_()'],['../classSlTexture.html#a0c17a906576f0aa5c74a6d42840f7520',1,'SlTexture::name_()']]]
 ];

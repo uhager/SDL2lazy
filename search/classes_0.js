@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['slspritesheet',['SlSpritesheet',['../classSlSpritesheet.html',1,'']]],
-  ['sltexture',['SlTexture',['../classSlTexture.html',1,'']]],
-  ['sltextureinfo',['SlTextureInfo',['../structSlTextureInfo.html',1,'']]]
+  ['slmanager',['SlManager',['../classSlManager.html',1,'']]],
+  ['slrenderitem',['SlRenderItem',['../classSlRenderItem.html',1,'']]],
+  ['slrendersettings',['SlRenderSettings',['../structSlRenderSettings.html',1,'']]],
+  ['slsprite',['SlSprite',['../classSlSprite.html',1,'']]],
+  ['sltexture',['SlTexture',['../classSlTexture.html',1,'']]]
 ];
