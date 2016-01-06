@@ -32,6 +32,7 @@ int main()
   mngr->setSpriteColor("minimap", 0x40, 0xAA, 0xBB, 0xA0);
   //  mngr->setSpriteRenderOptions("minimap");
 
+  mngr->appendToRenderQueue("tex2"); // appending just to check deleting.
   mngr->deleteTexture("tex1");
   mngr->deleteTexture("tex2");
 

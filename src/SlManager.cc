@@ -18,8 +18,6 @@
 
 
 
-
-
 SlManager::SlManager()
 {
   this->initialize();
@@ -54,7 +52,6 @@ SlManager::addTexture(SlTexture* toAdd)
   textures_.push_back(toAdd);
   createSprite(toAdd->name_, toAdd->name_);
 }
-
 
 
 
@@ -291,8 +288,7 @@ SlManager::createTextureFromTile(std::string name, std::string sprite, int width
   }
 
   toAdd = new SlTexture(name);
-  int check = toAdd->createFromTile(renderer_, tile
-				    , width, height);
+  int check = toAdd->createFromTile(renderer_, tile, width, height);
   if (check != 0) {
 #ifdef DEBUG
     std::cout << "[SlManager::createTextureFromTile] Couldn't create texture."  << std::endl;
@@ -311,6 +307,15 @@ SlManager::createTextureFromTile(std::string name, std::string sprite, int width
 void
 SlManager::deleteSprite(std::string name)
 {
+  std::vector<SlRenderItem*>::iterator item = renderQueue_.end() ;
+  while ( item != renderQueue_.begin() ) {
+    --item;
+    if ( (*item)->sprite_->name_ == name ) {
+      delete (*item);
+      renderQueue_.erase(item);
+    }
+  }
+  
   std::vector<SlSprite*>::iterator iter;
   for ( iter=sprites_.begin(); iter != sprites_.end(); ++iter){
     if ( (*iter)->name_ == name){
