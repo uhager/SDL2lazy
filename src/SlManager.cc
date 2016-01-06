@@ -854,16 +854,30 @@ SlManager::swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToA
 
 
 bool
-SlManager::toggleRender(std::string toToggle, unsigned int destination )
+SlManager::toggleRender(std::string toToggle, unsigned int destination, int onOrOff )
 {
   bool isToggled = false;
-  
+  if ( (onOrOff < -1) || (onOrOff > 1) ){
+#ifdef DEBUG
+    std::cout << "[SlManager::toggleRender] Unknown onOrOff selection " << onOrOff << std::endl;
+#endif
+    return isToggled;
+  }    
   std::vector<SlRenderItem*>::iterator iter;
-  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+  for ( iter = renderQueue_.begin(); ( ( iter != renderQueue_.end() ) && ( !isToggled ) ) ; ++iter) {
     if ( ( (*iter)->name_ ==  toToggle ) && ( (*iter)->destination_ == destination ) ) {
-      (*iter)->renderMe_ = !((*iter)->renderMe_) ;
+      switch (onOrOff){
+      case -1:
+	(*iter)->renderMe_ = !((*iter)->renderMe_) ;
+	break;
+      case 0:	
+	(*iter)->renderMe_ = false ;
+	break;
+      case 1:
+	(*iter)->renderMe_ = true ;
+	break;
+      }
       isToggled = true;
-      break;
     }
   }
 
@@ -873,4 +887,21 @@ SlManager::toggleRender(std::string toToggle, unsigned int destination )
 #endif
   }
   return isToggled;
+}
+
+
+
+bool
+SlManager::toggleRenderOff(std::string toToggle, unsigned int destination )
+{
+
+  return toggleRender(toToggle, destination, 0);
+}
+
+
+
+bool
+SlManager::toggleRenderOn(std::string toToggle, unsigned int destination )
+{
+  return toggleRender(toToggle, destination, 1);
 }

@@ -93,6 +93,12 @@ int main()
 	    case SDLK_4:
 	      mngr->toggleRender("lowerleft");
 	      break;
+	    case SDLK_m:
+	      mngr->toggleRenderOn("minimap");
+	      break;
+	    case SDLK_n:
+	      mngr->toggleRenderOff("minimap");
+	      break;
 	    case SDLK_ESCAPE:
 	      quit = true;
 	      break;

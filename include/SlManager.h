@@ -130,8 +130,15 @@ class SlManager
    */
   bool swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToAdd = 0 );
   /*! Toggles rendering of an item in the #renderQueue_ on and off. 
+    onOrOff is -1 to toggle, 0 to turn off, 1 to turn on.
    */
-  bool toggleRender(std::string toToggle, unsigned int destination = 0);
+  bool toggleRender(std::string toToggle, unsigned int destination = 0, int onOrOff = -1);
+  /*! Turns off rendering for the specified SlRenderItem in the #renderQueue_ .
+   */
+  bool toggleRenderOff(std::string toToggle, unsigned int destination = 0);
+  /*! Turns on rendering for the specified SlRenderItem in the #renderQueue_ .
+   */
+  bool toggleRenderOn(std::string toToggle, unsigned int destination = 0);
 					      
  protected:
   /*! The main (and only) window.
