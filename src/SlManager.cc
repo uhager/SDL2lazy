@@ -153,7 +153,13 @@ SlManager::createRenderItem(std::string name, unsigned int destination)
 SlSprite*
 SlManager::createSprite(std::string name, std::string textureName, int x, int y, int width, int height)
 {
-  SlSprite* toAdd = nullptr;
+  SlSprite* toAdd = findSprite(name);
+  if ( toAdd ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createSprite] Error: Sprite of name " << name << " already exists."  << std::endl;
+#endif
+    return nullptr;
+  }
   SlTexture* tex = findTexture(textureName);
   if ( tex == nullptr ) {
 #ifdef DEBUG
@@ -172,7 +178,14 @@ SlManager::createSprite(std::string name, std::string textureName, int x, int y,
 SlTexture*
 SlManager::createTextureFromFile(std::string name, std::string filename)
 {
-  SlTexture* toAdd = new SlTexture(name);
+  SlTexture* toAdd = findTexture(name);
+  if ( toAdd ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromFile] Error: texture of name " << name << " already exists."  << std::endl;
+#endif
+    return nullptr;
+  }
+  toAdd = new SlTexture(name);
   bool check = toAdd->loadFromFile(renderer_, filename);
   if (check == false) {
 #ifdef DEBUG
@@ -192,7 +205,14 @@ SlManager::createTextureFromFile(std::string name, std::string filename)
 SlTexture*
 SlManager::createTextureFromRectangle(std::string name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
-  SlTexture* toAdd = new SlTexture(name);
+  SlTexture* toAdd = findTexture(name);
+  if ( toAdd ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromRectangle] Error: texture of name " << name << " already exists."  << std::endl;
+#endif
+    return nullptr;
+  }
+  toAdd = new SlTexture(name);
   int check = toAdd->createFromRectangle(renderer_, width, height, red, green, blue, alpha);
   if (check != 0) {
 #ifdef DEBUG
@@ -212,7 +232,14 @@ SlManager::createTextureFromRectangle(std::string name, int width, int height, u
 SlTexture*
 SlManager::createTextureFromSpriteOnTexture(std::string name, std::string backgroundTexture, std::string foregroundSprite)
 {
-  SlTexture* toAdd = nullptr;   
+  SlTexture* toAdd = findTexture(name);
+  if ( toAdd ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromSpriteOnTexture] Error: texture of name " << name << " already exists."  << std::endl;
+#endif
+    return nullptr;
+  }
+
   SlTexture* background = findTexture(backgroundTexture);
   if (background == nullptr) {
 #ifdef DEBUG
@@ -247,7 +274,13 @@ SlManager::createTextureFromSpriteOnTexture(std::string name, std::string backgr
 SlTexture*
 SlManager::createTextureFromTile(std::string name, std::string sprite, int width, int height)
 {
-  SlTexture* toAdd = nullptr;
+  SlTexture* toAdd = findTexture(name);
+  if ( toAdd ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::createTextureFromTile] Error: texture of name " << name << " already exists."  << std::endl;
+#endif
+    return nullptr;
+  }
 
   SlSprite* tile = findSprite(sprite);
   if (tile == nullptr) {
@@ -513,7 +546,6 @@ SlManager::parseConfigurationFile(std::string filename)
 void
 SlManager::parseSprite(std::ifstream& input)
 {
-  std::cout << "[SlManager::parseSprites]" << std::endl;
   std::string line, token;
   std::string name, texture;
   std::vector<std::string> location;
