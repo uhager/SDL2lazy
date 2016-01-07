@@ -8,6 +8,7 @@
 #ifndef SLMANAGER_H
 #define SLMANAGER_H
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -19,7 +20,7 @@
 #include "SlRenderItem.h"
 
 
-
+using std::shared_ptr;
 
 class SlManager
 {
@@ -55,7 +56,7 @@ class SlManager
     The default values will use the whole texture as a sprite.
     Calls SlSprite::addDefaultDestination(), so if you don't want to use that, either delete or adjust that destination.
    */
-  SlSprite* createSprite(std::string name, std::string textureName, int x = 0, int y = 0, int width = 0, int height = 0);
+  shared_ptr<SlSprite> createSprite(std::string name, std::string textureName, int x = 0, int y = 0, int width = 0, int height = 0);
   /*! Load texture from image filename
    */
   SlTexture* createTextureFromFile(std::string name, std::string filename);
@@ -83,7 +84,7 @@ class SlManager
   void deleteTexture(std::string name);
   /*! Returns pointer to the sprite, nullptr if not found.
    */
-  SlSprite* findSprite(std::string name);
+  shared_ptr<SlSprite> findSprite(std::string name);
   /*! Returns pointer to the texture, nullptr if not found.
    */
   SlTexture* findTexture(std::string name);
@@ -201,7 +202,7 @@ class SlManager
   /*! Holds all SlSprites that were created using SlManager methods.
     Sprites will be deleted when the SlManager instance is deleted.
    */
-  std::vector<SlSprite*> sprites_;
+  std::vector<shared_ptr<SlSprite>> sprites_;
   /*! Holds the items to be rendered. The front of the queue is rendered first (background) the last element is rendered last (foreground).
    */
   std::vector<SlRenderItem*> renderQueue_;

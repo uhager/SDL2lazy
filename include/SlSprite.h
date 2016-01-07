@@ -11,7 +11,9 @@ The SlSprite has a source rectangle which defines which part of the texture is r
 #ifndef SLSPRITE_H
 #define SLSPRITE_H
 
+
 #include <cstdint>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -100,7 +102,7 @@ class SlSprite
   void addDestination(int x, int y, uint32_t renderOptions = SL_RENDER_DEFAULT);
   /*! Centers the destination of this sprite in the destinationRect of the other sprite.
    */
-  void centerInSprite(SlSprite * otherSprite, unsigned int destionationThis = 0, unsigned int destinationOther = 0);
+  void centerInSprite(std::shared_ptr<SlSprite> otherSprite, unsigned int destionationThis = 0, unsigned int destinationOther = 0);
   /*! Removes all entries from #destinations_. Sprite will not be rendered.
    */
   void clearDestinations();

@@ -88,7 +88,7 @@ SlSprite::addDestination(int x, int y, uint32_t renderOptions)
 
 
 void
-SlSprite::centerInSprite(SlSprite * otherSprite, unsigned int destinationThis, unsigned int destinationOther)
+SlSprite::centerInSprite(std::shared_ptr<SlSprite> otherSprite, unsigned int destinationThis, unsigned int destinationOther)
 {
   if ( destinationThis >= destinations_.size() || destinationOther >= otherSprite->destinations_.size() ) {
 #ifdef DEBUG

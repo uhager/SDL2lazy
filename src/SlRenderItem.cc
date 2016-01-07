@@ -16,7 +16,7 @@ SlRenderItem::SlRenderItem()
 }
 
 
-SlRenderItem::SlRenderItem(SlSprite* pSprite, unsigned int dest)
+SlRenderItem::SlRenderItem(std::shared_ptr<SlSprite> pSprite, unsigned int dest)
 {
   initialize(pSprite, dest);
 }
@@ -42,7 +42,7 @@ SlRenderItem::SlRenderItem(const SlRenderItem& toCopy)
 
 
 void
-SlRenderItem::initialize(SlSprite* pSprite, unsigned int dest)
+SlRenderItem::initialize(std::shared_ptr<SlSprite> pSprite, unsigned int dest)
 {
   destination_ = dest;
   sprite_ = pSprite;

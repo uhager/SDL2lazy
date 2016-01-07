@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include <stdexcept>
+#include <memory>
 
 #include "SlTexture.h"
 #include "SlSprite.h"
@@ -77,7 +78,7 @@ SlManager::appendToRenderQueue(std::string name, unsigned int destination)
 void
 SlManager::centerSpriteInSprite(std::string toCenter, std::string target, unsigned int destinationThis, unsigned int destinationOther)
 {
-  SlSprite* sprite = findSprite(toCenter);
+  shared_ptr<SlSprite> sprite = findSprite(toCenter);
   if ( sprite == nullptr ) {
 #ifdef DEBUG
     std::cerr << "[SlManager::centerSpriteInSprite] Couldn't find sprite " << toCenter << std::endl;
@@ -85,7 +86,7 @@ SlManager::centerSpriteInSprite(std::string toCenter, std::string target, unsign
     return;
   }
 
-  SlSprite* other = findSprite(target);
+  shared_ptr<SlSprite> other = findSprite(target);
   if ( other == nullptr ) {
 #ifdef DEBUG
     std::cerr << "[SlManager::centerSpriteInSprite] Couldn't find sprite " << other << std::endl;
@@ -106,11 +107,11 @@ SlManager::clear()
   }
   renderQueue_.clear();
 
-  std::vector<SlSprite*>::iterator sprite;
-  for ( sprite = sprites_.begin(); sprite != sprites_.end(); ++sprite) {
-    delete (*sprite);
-    (*sprite) = nullptr ;
-  }
+  // std::vector<shared_ptr<SlSprite>>::iterator sprite;
+  // for ( sprite = sprites_.begin(); sprite != sprites_.end(); ++sprite) {
+  //   delete (*sprite);
+  //   (*sprite) = nullptr ;
+  // }
   sprites_.clear();  
 
   std::vector<SlTexture*>::iterator iter;
@@ -128,7 +129,7 @@ SlManager::createRenderItem(std::string name, unsigned int destination)
   std::cout << "[SlManager::createRenderItem] Creating item for " << name  << std::endl;
 #endif
   SlRenderItem* item = nullptr;
-  SlSprite* sprite = findSprite(name);
+  shared_ptr<SlSprite> sprite = findSprite(name);
   if (sprite == nullptr) {
 #ifdef DEBUG
     std::cout << "[SlManager::createRenderItem] Couldn't find sprite " << name  << std::endl;
@@ -147,10 +148,10 @@ SlManager::createRenderItem(std::string name, unsigned int destination)
 
 
 
-SlSprite*
+shared_ptr<SlSprite>
 SlManager::createSprite(std::string name, std::string textureName, int x, int y, int width, int height)
 {
-  SlSprite* toAdd = findSprite(name);
+  shared_ptr<SlSprite> toAdd = findSprite(name);
   if ( toAdd ) {
 #ifdef DEBUG
     std::cout << "[SlManager::createSprite] Error: Sprite of name " << name << " already exists."  << std::endl;
@@ -164,7 +165,7 @@ SlManager::createSprite(std::string name, std::string textureName, int x, int y,
 #endif
   }
   else {
-    toAdd = new SlSprite(name, tex, x, y, width, height);
+    toAdd = std::make_shared<SlSprite>(name, tex, x, y, width, height);
     sprites_.push_back(toAdd);
   }
   return toAdd;
@@ -244,7 +245,7 @@ SlManager::createTextureFromSpriteOnTexture(std::string name, std::string backgr
 #endif
     return toAdd;
   }
-  SlSprite* foreground = findSprite(foregroundSprite);
+  shared_ptr<SlSprite> foreground = findSprite(foregroundSprite);
   if (foreground == nullptr) {
 #ifdef DEBUG
     std::cout << "[SlManager::createTextureFromSpriteOnTexture] Failed to create " << name << ": Couldn't find foreground sprite " << foregroundSprite << std::endl;
@@ -279,7 +280,7 @@ SlManager::createTextureFromTile(std::string name, std::string sprite, int width
     return nullptr;
   }
 
-  SlSprite* tile = findSprite(sprite);
+  shared_ptr<SlSprite> tile = findSprite(sprite);
   if (tile == nullptr) {
 #ifdef DEBUG
     std::cout << "[SlManager::createTextureFromTile] Failed to create " << name << ": Couldn't find sprite " << sprite << std::endl;
@@ -316,10 +317,10 @@ SlManager::deleteSprite(std::string name)
     }
   }
   
-  std::vector<SlSprite*>::iterator iter;
+  std::vector<shared_ptr<SlSprite>>::iterator iter;
   for ( iter=sprites_.begin(); iter != sprites_.end(); ++iter){
     if ( (*iter)->name_ == name){
-      delete (*iter);
+      //      delete (*iter);
       sprites_.erase(iter);
       break;
     }
@@ -379,11 +380,11 @@ SlManager::determineValues(std::vector<std::string> stringValues, int *values, u
 
 
 
-SlSprite*
+shared_ptr<SlSprite>
 SlManager::findSprite(std::string name)
 {
-  SlSprite* result = nullptr;
-  std::vector<SlSprite*>::iterator iter;
+  shared_ptr<SlSprite> result = nullptr;
+  std::vector<shared_ptr<SlSprite>>::iterator iter;
   for ( iter=sprites_.begin(); iter != sprites_.end(); ++iter){
     if ( (*iter)->name_ == name){
       result = *iter;
@@ -738,7 +739,7 @@ bool
 SlManager::setSpriteColor(std::string name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int destination)
 {
   bool isSet = false;
-  SlSprite* sprite = findSprite(name);
+  shared_ptr<SlSprite> sprite = findSprite(name);
   if (sprite == nullptr) {
 #ifdef DEBUG
     std::cout << "[SlManager::setSpriteColor] Couldn't find sprite " << name  << std::endl;
@@ -756,7 +757,7 @@ bool
 SlManager::setSpriteDestinationOrigin(std::string name,  int x, int y, unsigned int destination)
 {
   bool isSet = false;
-  SlSprite* sprite = findSprite(name);
+  shared_ptr<SlSprite> sprite = findSprite(name);
   if (sprite == nullptr) {
 #ifdef DEBUG
     std::cout << "[SlManager::setSpriteDestinationOrigin] Couldn't find sprite " << name  << std::endl;
@@ -773,7 +774,7 @@ bool
 SlManager::setSpriteRenderOptions(std::string name, uint32_t renderOptions, unsigned int destination)
 {
   bool isSet = false;
-  SlSprite* sprite = findSprite(name);
+  shared_ptr<SlSprite> sprite = findSprite(name);
   if (sprite == nullptr) {
 #ifdef DEBUG
     std::cout << "[SlManager::setSpriteRenderOptions] Couldn't find sprite " << name  << std::endl;

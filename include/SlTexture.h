@@ -9,6 +9,7 @@
 #define SLTEXTURE_H
 
 #include <cstdint>
+#include <memory>
 #include <string>
 
 #include <SDL2/SDL.h>
@@ -52,13 +53,13 @@ class SlTexture
   int createFromRectangle(SDL_Renderer* renderer, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha );
   /*! Create a new texture by rendering a sprite on this texture.
    */
-  int createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgroundTexture, SlSprite *foregroundSprite);
+  int createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgroundTexture, std::shared_ptr<SlSprite> foregroundSprite);
   /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile. 
 
     The SlRenderSettings::destinationRect at position 0 in the sprite's lSprite::destinations_ is used to determine the width of the tile. 
     If the sprite's SlSprite::destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
   */
-  int createFromTile(SDL_Renderer *renderer, SlSprite* tile, int width, int height);
+  int createFromTile(SDL_Renderer *renderer, std::shared_ptr<SlSprite> tile, int width, int height);
   /*! Returns the dimensions of the SDL_Texture.
    */
   bool dimensions(int& width, int& height);

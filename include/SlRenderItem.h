@@ -8,6 +8,7 @@
 #ifndef SLRENDERITEM_H
 #define SLRENDERITEM_H
 
+#include <memory>
 #include <string>
 
 #include "SlSprite.h"
@@ -25,7 +26,7 @@ class SlRenderItem
   SlRenderItem();
   /*! Constructor sets name and destiantion and points sprite to pSprite.
    */
-  SlRenderItem(SlSprite* pSprite, unsigned int dest);
+  SlRenderItem(std::shared_ptr<SlSprite> pSprite, unsigned int dest);
 
   ~SlRenderItem();
   /*! Copy constructor, #sprite_ will point to same SlSprite object 
@@ -50,10 +51,10 @@ class SlRenderItem
 
   /*! Sets values for all data members.
    */
-  void initialize(SlSprite* pSprite, unsigned int dest);
+  void initialize(std::shared_ptr<SlSprite> pSprite, unsigned int dest);
   /*! The sprite that will be rendered.
    */
-  SlSprite* sprite_;
+  std::shared_ptr<SlSprite> sprite_;
   /*! The position in SlSprite::destinations_ .
    */
   unsigned int destination_ ;
