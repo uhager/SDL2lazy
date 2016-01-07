@@ -141,7 +141,7 @@ SlManager::createRenderItem(std::string name, unsigned int destination)
 #endif
     return item;
   }
-  item = new SlRenderItem(name, sprite, destination);
+  item = new SlRenderItem(sprite, destination);
   return item;
 }
 
@@ -459,7 +459,7 @@ SlManager::insertInRenderQueueAfter(std::string toAdd, std::string afterThis, un
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
-    if ( ( (*iter)->name_ ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
+    if ( ( (*iter)->sprite_->name_ ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
       renderQueue_.insert( (++iter), toInsert );
       isInserted = true;
       break;
@@ -490,7 +490,7 @@ SlManager::insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, 
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
-    if ( ( (*iter)->name_ ==  beforeThis ) && ( (*iter)->destination_ == destBeforeThis ) ) {
+    if ( ( (*iter)->sprite_->name_ ==  beforeThis ) && ( (*iter)->destination_ == destBeforeThis ) ) {
       renderQueue_.insert( (++iter), toInsert );
       isInserted = true;
       break;
@@ -721,7 +721,7 @@ SlManager::render()
       result = (item->sprite_)->render( renderer_, (item->destination_) );
       if (result != 0) {
 #ifdef DEBUG
-	std::cout << "[SlManager::render] Couldn't render sprite " << item->name_ << std::endl;
+	std::cout << "[SlManager::render] Couldn't render sprite " << item->sprite_->name_ << std::endl;
 #endif
 	return result;
       }
@@ -800,7 +800,7 @@ SlManager::swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned i
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
-    if ( ( (*iter)->name_ ==  toRemove ) && ( (*iter)->destination_ == destToRemove ) ) {
+    if ( ( (*iter)->sprite_->name_ ==  toRemove ) && ( (*iter)->destination_ == destToRemove ) ) {
       delete (*iter);
       renderQueue_.erase( iter );
       renderQueue_.insert( iter, item );
@@ -823,6 +823,13 @@ bool
 SlManager::swapInRenderQueueAtPosition(std::string toAdd, unsigned int destToAdd, unsigned int position )
 {
   bool isSwapped = false;
+  if ( position >= renderQueue_.size() ) {
+#ifdef DEBUG
+    std::cout << "[SlManager::swapInRenderQueue] Error: Position " << position << " is out of bounds. Render queue size is " << renderQueue_.size()  << std::endl;
+#endif
+    return isSwapped;
+  }
+  
   SlRenderItem* item = createRenderItem( toAdd, destToAdd );
   if ( item == nullptr ) {
 #ifdef DEBUG
@@ -870,7 +877,7 @@ SlManager::toggleRender(std::string toToggle, unsigned int destination, int onOr
   }    
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); ( ( iter != renderQueue_.end() ) && ( !isToggled ) ) ; ++iter) {
-    if ( ( (*iter)->name_ ==  toToggle ) && ( (*iter)->destination_ == destination ) ) {
+    if ( ( (*iter)->sprite_->name_ ==  toToggle ) && ( (*iter)->destination_ == destination ) ) {
       switch (onOrOff){
       case -1:
 	(*iter)->renderMe_ = !((*iter)->renderMe_) ;
@@ -899,7 +906,6 @@ SlManager::toggleRender(std::string toToggle, unsigned int destination, int onOr
 bool
 SlManager::toggleRenderOff(std::string toToggle, unsigned int destination )
 {
-
   return toggleRender(toToggle, destination, 0);
 }
 

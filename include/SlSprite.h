@@ -72,6 +72,7 @@ The SlSprite has a source rectangle which defines which part of the texture is r
 class SlSprite
 {
   friend class SlManager;
+  friend class SlRenderItem;
  public:
   /*! This is the constructor that should be used for creating SlSprites. 
 

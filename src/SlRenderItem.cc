@@ -12,39 +12,38 @@
 
 SlRenderItem::SlRenderItem()
 {
-  initialize( "", nullptr, 0 );
+  initialize(nullptr, 0 );
 }
 
 
-SlRenderItem::SlRenderItem(std::string name, SlSprite* pSprite, unsigned int dest)
+SlRenderItem::SlRenderItem(SlSprite* pSprite, unsigned int dest)
 {
-  initialize(name, pSprite, dest);
+  initialize(pSprite, dest);
 }
 
 
 SlRenderItem::~SlRenderItem()
 {
-  sprite_ = nullptr;
 #ifdef DEBUG
-    std::cout << "[SlRenderItem::~SlRenderItem] Deleting item for sprite " << name_  << std::endl;
+    std::cout << "[SlRenderItem::~SlRenderItem] Deleting item for sprite " << sprite_->name_  << std::endl;
 #endif
+  sprite_ = nullptr;
 }
 
 
 
 SlRenderItem::SlRenderItem(const SlRenderItem& toCopy)
 {
-  name_ = toCopy.name_;
   destination_ = toCopy.destination_;
   sprite_ = toCopy.sprite_;
+  renderMe_ = false ;
 }
 
 
 
 void
-SlRenderItem::initialize(std::string name, SlSprite* pSprite, unsigned int dest)
+SlRenderItem::initialize(SlSprite* pSprite, unsigned int dest)
 {
-  name_ = name;
   destination_ = dest;
   sprite_ = pSprite;
   renderMe_ = true;
@@ -57,7 +56,7 @@ SlRenderItem::operator=(const SlRenderItem& rhs)
 {
   sprite_ = rhs.sprite_;
   destination_ = rhs.destination_;
-  name_ = rhs.name_;
+  renderMe_ = false ;
   return *this;
 }
 
