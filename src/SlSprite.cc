@@ -290,6 +290,25 @@ SlSprite::setDestination(SDL_Rect dstRect, unsigned int i)
 
 
 bool
+SlSprite::setDestination(int x, int y, int w, int h, unsigned int i)
+{
+  bool hasDestination = true;
+  if (i >= destinations_.size()) {
+#ifdef DEBUG
+      std::cout << "[SlSprite::setDestination] requested element: " << i << " destinations_.size(): " << destinations_.size() << std::endl; 
+#endif
+      hasDestination = false;
+    }
+    else {
+      SDL_Rect dstRect = {x, y, w, h};
+      hasDestination = setDestination(dstRect, i);
+    }
+  return hasDestination;  
+}
+
+
+
+bool
 SlSprite::setDestinationDimension(int width, int height, unsigned int i)
 {
   bool hasDestination = true;

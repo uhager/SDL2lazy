@@ -141,6 +141,11 @@ class SlSprite
   bool setDestination(SDL_Rect dstRect, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_.
 
+    Sets where and how large the texture will be rendered.
+  */
+  bool setDestination(int x, int y, int w, int h, unsigned int i = 0);
+ /*! Changes destinationRect for position i of #destinations_.
+
     Sets how large the texture will be rendered.
   */
   bool setDestinationDimension(int width, int height, unsigned int i = 0);
