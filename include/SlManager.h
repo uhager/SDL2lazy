@@ -93,6 +93,12 @@ class SlManager
   bool insertInRenderQueueAfter(std::string toAdd, std::string afterThis, unsigned int destToAdd = 0, unsigned int destAfterThis = 0);
   /*! Inserts the sprite into the #renderQueue_ before the specified sprite.
    */
+  bool moveInRenderQueueBefore(std::string toAdd, std::string beforeThis, unsigned int destToAdd = 0, unsigned int destBeforeThis = 0);
+  /*! Inserts the sprite into the #renderQueue_ after the specified sprite.
+   */
+  bool moveInRenderQueueAfter(std::string toAdd, std::string afterThis, unsigned int destToAdd = 0, unsigned int destAfterThis = 0);
+  /*! Inserts the sprite into the #renderQueue_ before the specified sprite.
+   */
   bool insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, unsigned int destToAdd = 0, unsigned int destBeforeThis = 0);
   /*! Read texture and sprite definitions from configuration file.\n
     Default file name: "SlTextures.ini".

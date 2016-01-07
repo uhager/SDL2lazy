@@ -100,6 +100,12 @@ int main()
 	    case SDLK_n:
 	      mngr->toggleRenderOff("minimap");
 	      break;
+	    case SDLK_b:
+	      mngr->moveInRenderQueueBefore("upperleft", "minimap");
+	      break;
+	    case SDLK_f:
+	      mngr->moveInRenderQueueAfter("upperleft", "minimap", 0, 0);
+	      break;
 	    case SDLK_ESCAPE:
 	      quit = true;
 	      break;

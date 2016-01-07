@@ -492,7 +492,7 @@ SlManager::insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
     if ( ( (*iter)->sprite_->name_ ==  beforeThis ) && ( (*iter)->destination_ == destBeforeThis ) ) {
-      renderQueue_.insert( (++iter), toInsert );
+      renderQueue_.insert( (iter), toInsert );
       isInserted = true;
       break;
     }
@@ -504,6 +504,84 @@ SlManager::insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, 
 #endif
   }
   return isInserted;
+}
+
+
+
+bool
+SlManager::moveInRenderQueueAfter(std::string toMoveName, std::string afterThis, unsigned int destToMove, unsigned int destAfterThis)
+{
+  bool isMoved = false;
+
+  SlRenderItem* toMove = nullptr;
+  std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name_ ==  toMoveName ) && ( (*iter)->destination_ == destToMove ) ) {
+      toMove = (*iter);
+      renderQueue_.erase(iter);
+      break;
+    }
+  }
+  if ( !toMove) {
+#ifdef DEBUG
+    std::cout << "[SlManager::moveInRenderQueueAfter] Couldn't find item to move " << toMoveName   << std::endl;
+#endif
+    return isMoved;
+  }
+
+  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name_ ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
+      renderQueue_.insert( (++iter), toMove );
+      isMoved = true;
+      break;
+    }
+  }
+
+  if ( !isMoved) {
+#ifdef DEBUG
+    std::cout << "[SlManager::moveInRenderQueueAfter] Couldn't find RenderItem to insert after: " << afterThis << std::endl;
+#endif
+  }
+  return isMoved;
+}
+
+
+
+bool
+SlManager::moveInRenderQueueBefore(std::string toMoveName, std::string afterThis, unsigned int destToMove, unsigned int destAfterThis)
+{
+  bool isMoved = false;
+
+  SlRenderItem* toMove = nullptr;
+  std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name_ ==  toMoveName ) && ( (*iter)->destination_ == destToMove ) ) {
+      toMove = (*iter);
+      renderQueue_.erase(iter);
+      break;
+    }
+  }
+  if ( !toMove) {
+#ifdef DEBUG
+    std::cout << "[SlManager::moveInRenderQueueBefore] Couldn't find item to move " << toMoveName   << std::endl;
+#endif
+    return isMoved;
+  }
+
+  for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name_ ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
+      renderQueue_.insert( (iter), toMove );
+      isMoved = true;
+      break;
+    }
+  }
+
+  if ( !isMoved) {
+#ifdef DEBUG
+    std::cout << "[SlManager::moveInRenderQueueBefore] Couldn't find RenderItem to insert before: " << afterThis << std::endl;
+#endif
+  }
+  return isMoved;
 }
 
 
