@@ -20,8 +20,6 @@ The SlSprite has a source rectangle which defines which part of the texture is r
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "SlTexture.h"
-
 
 class SlTexture;
 

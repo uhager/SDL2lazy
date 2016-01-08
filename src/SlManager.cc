@@ -15,6 +15,7 @@
 
 #include "SlTexture.h"
 #include "SlSprite.h"
+#include "SlRenderItem.h"
 #include "SlManager.h"
 
 

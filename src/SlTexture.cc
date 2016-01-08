@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 
+#include "SlSprite.h"
 #include "SlTexture.h"
 
 SlTexture::SlTexture()

@@ -15,9 +15,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "SlTexture.h"
-#include "SlSprite.h"
-#include "SlRenderItem.h"
+
+
+class SlTexture;
+class SlSprite;
+class SlRenderItem;
 
 
 class SlManager
@@ -109,6 +111,12 @@ class SlManager
   /*! Temporary solution until all rendering related stuff happens in SlManager methods.
    */
   SDL_Renderer* renderer(){return renderer_;}
+  /*! Returns the #screen_width_ of the window.
+   */
+  int screenWidth(){ return screen_width_; }
+  /*! Returns the #screen_height_ of the window.
+   */
+  int screenHeight(){ return screen_height_; }
   /*! Sets color for SlSprite name at position i of SlSprite::destinations_.
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
