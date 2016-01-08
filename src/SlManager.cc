@@ -16,6 +16,7 @@
 #include "SlTexture.h"
 #include "SlSprite.h"
 #include "SlRenderItem.h"
+#include "SlTextureManager.h"
 #include "SlManager.h"
 
 
@@ -43,16 +44,6 @@ SlManager::~SlManager(void)
   SDL_DestroyWindow( window_ );
   window_ = nullptr;
   SDL_Quit();
-}
-
-
-
-void
-SlManager::addTexture(SlTexture* toAdd)
-{
-  if ( toAdd == nullptr ) return;
-  textures_.push_back(toAdd);
-  createSprite(toAdd->name_, toAdd->name_);
 }
 
 
@@ -114,12 +105,6 @@ SlManager::clear()
   //   (*sprite) = nullptr ;
   // }
   sprites_.clear();  
-
-  std::vector<SlTexture*>::iterator iter;
-  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
-    delete (*iter);
-  }
-  textures_.clear();
 }
 
 
@@ -159,7 +144,7 @@ SlManager::createSprite(std::string name, std::string textureName, int x, int y,
 #endif
     return nullptr;
   }
-  SlTexture* tex = findTexture(textureName);
+  SlTexture* tex = tmngr_->findTexture(textureName);
   if ( tex == nullptr ) {
 #ifdef DEBUG
     std::cout << "[SlManager::createSprite] Couldn't find texture " << textureName << " required for sprite " << name  << std::endl;
@@ -168,138 +153,6 @@ SlManager::createSprite(std::string name, std::string textureName, int x, int y,
   else {
     toAdd = std::make_shared<SlSprite>(name, tex, x, y, width, height);
     sprites_.push_back(toAdd);
-  }
-  return toAdd;
-}
-
-
-
-SlTexture*
-SlManager::createTextureFromFile(std::string name, std::string filename)
-{
-  SlTexture* toAdd = findTexture(name);
-  if ( toAdd ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromFile] Error: texture of name " << name << " already exists."  << std::endl;
-#endif
-    return nullptr;
-  }
-  toAdd = new SlTexture(name);
-  bool check = toAdd->loadFromFile(renderer_, filename);
-  if (check == false) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromFile] Couldn't load texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
-  }
-  return toAdd;
-}
-
-
-
-SlTexture*
-SlManager::createTextureFromRectangle(std::string name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
-{
-  SlTexture* toAdd = findTexture(name);
-  if ( toAdd ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromRectangle] Error: texture of name " << name << " already exists."  << std::endl;
-#endif
-    return nullptr;
-  }
-  toAdd = new SlTexture(name);
-  int check = toAdd->createFromRectangle(renderer_, width, height, red, green, blue, alpha);
-  if (check != 0) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromRectangle] Couldn't create texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
-  }
-  return toAdd;
-}
-
-
-
-SlTexture*
-SlManager::createTextureFromSpriteOnTexture(std::string name, std::string backgroundTexture, std::string foregroundSprite)
-{
-  SlTexture* toAdd = findTexture(name);
-  if ( toAdd ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromSpriteOnTexture] Error: texture of name " << name << " already exists."  << std::endl;
-#endif
-    return nullptr;
-  }
-
-  SlTexture* background = findTexture(backgroundTexture);
-  if (background == nullptr) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromSpriteOnTexture] Failed to create " << name << ": Couldn't find background texture " << backgroundTexture  << std::endl;
-#endif
-    return toAdd;
-  }
-  std::shared_ptr<SlSprite> foreground = findSprite(foregroundSprite);
-  if (foreground == nullptr) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromSpriteOnTexture] Failed to create " << name << ": Couldn't find foreground sprite " << foregroundSprite << std::endl;
-#endif
-    return toAdd;
-  }
-  toAdd = new SlTexture(name);
-  int check = toAdd->createFromSpriteOnTexture(renderer_, background, foreground);
-  if (check != 0) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromSpriteOnTexture] Couldn't create texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
-  }
-  return toAdd;
-}
-
-
-
-SlTexture*
-SlManager::createTextureFromTile(std::string name, std::string sprite, int width, int height)
-{
-  SlTexture* toAdd = findTexture(name);
-  if ( toAdd ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromTile] Error: texture of name " << name << " already exists."  << std::endl;
-#endif
-    return nullptr;
-  }
-
-  std::shared_ptr<SlSprite> tile = findSprite(sprite);
-  if (tile == nullptr) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromTile] Failed to create " << name << ": Couldn't find sprite " << sprite << std::endl;
-#endif
-    return toAdd;
-  }
-
-  toAdd = new SlTexture(name);
-  int check = toAdd->createFromTile(renderer_, tile, width, height);
-  if (check != 0) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createTextureFromTile] Couldn't create texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
   }
   return toAdd;
 }
@@ -333,15 +186,7 @@ SlManager::deleteSprite(std::string name)
 void
 SlManager::deleteTexture(std::string name)
 {
-  deleteSprite(name);
-  std::vector<SlTexture*>::iterator iter;
-  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
-    if ( (*iter)->name_ == name){
-      delete (*iter);
-      textures_.erase(iter);
-      break;
-    }
-  }
+  tmngr_->deleteTexture(name);
 }
 
 
@@ -397,21 +242,6 @@ SlManager::findSprite(std::string name)
 
 
 
-SlTexture*
-SlManager::findTexture(std::string name)
-{
-  SlTexture* result = nullptr;
-  std::vector<SlTexture*>::iterator iter;
-  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
-    if ( (*iter)->name_ == name){
-      result = *iter;
-      break;
-    }
-  }
-  return result;
-}
-
-
 void
 SlManager::initialize()
 {
@@ -424,6 +254,7 @@ SlManager::initialize()
     SDL_Quit();
     exit(1);
   }
+  tmngr_ = new SlTextureManager( this );
 }
 
 
@@ -587,6 +418,33 @@ SlManager::moveInRenderQueueBefore(std::string toMoveName, std::string afterThis
 
 
 
+void
+SlManager::moveSprite(std::string name, unsigned int destination, std::string whatToDo, std::vector<std::string> coordinates)
+{
+  std::shared_ptr<SlSprite> toMove = findSprite(name);
+
+  if ( toMove == nullptr ){
+#ifdef DEBUG
+    std::cout << "[SlManager::moveSprite] Couldn't find sprite to move " << name << std::endl;
+#endif
+    return;
+  }
+  if ( destination >= toMove->destinations_.size() ){
+#ifdef DEBUG
+    std::cout << "[SlManager::moveSprite] Invalid destination for sprite " << name << std::endl;
+#endif
+    return;
+  }
+
+  if ( whatToDo == "setOrigin" ) {
+    int origin[2] ;
+    bool check = determineValues( coordinates, origin, 2 );
+    if ( check ) toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
+  }
+}
+
+
+
 bool
 SlManager::parseConfigurationFile(std::string filename)
 {
@@ -608,10 +466,13 @@ SlManager::parseConfigurationFile(std::string filename)
 	/* empty line or comment */
       }
       else if ( token == "texture" ) {
-	parseTexture( input );
+	tmngr_->parseTexture( input );
       }
       else if ( token == "sprite" ) {
 	parseSprite(input);
+      }
+      else if ( token == "move_sprite" ) {
+	parseSpriteMovement(input);
       }
       else {
 #ifdef DEBUG
@@ -661,7 +522,7 @@ SlManager::parseSprite(std::ifstream& input)
     
     else {
 #ifdef DEBUG
-      std::cerr << "[SlManager::parseSprites] Unknown token " << token << std::endl;
+      std::cerr << "[SlManager::parseSprite] Unknown token " << token << std::endl;
 #endif
     }
     
@@ -671,7 +532,7 @@ SlManager::parseSprite(std::ifstream& input)
 
   if ( name.empty() || texture.empty() ) {
 #ifdef DEBUG
-    std::cerr << "[SlManager::parseTexture] Name or texture missing" << std::endl;
+    std::cerr << "[SlManager::parseSprite] Name or texture missing" << std::endl;
 #endif
     return;
   }
@@ -679,7 +540,7 @@ SlManager::parseSprite(std::ifstream& input)
   bool check = determineValues(location, loc, 4);
   if ( !check ) {
 #ifdef DEBUG
-    std::cerr << "[SlManager::parseTexture] Invalid location for " << name << std::endl;
+    std::cerr << "[SlManager::parseSprite] Invalid location for " << name << std::endl;
 #endif
     return;
   }
@@ -688,102 +549,45 @@ SlManager::parseSprite(std::ifstream& input)
 }
 
 
-
-
 void
-SlManager::parseTexture(std::ifstream& input)
+SlManager::parseSpriteMovement(std::ifstream& input)
 {
   std::string line, token;
+  std::string name, whatToDo;
+  unsigned int destination;
+  std::vector<std::string> coordinates;
   bool endOfConfig = false;
-  std::string name, type, file, sprite;
-  std::vector<std::string> dimensions;
-  std::vector<std::string> colors;
   
   getline(input,line);
   while ( !endOfConfig && input ) {
     std::istringstream stream(line.c_str());
     stream >> token;
-    if ( token[0] == '#' || token.empty() || token[0] == '\n' ) {
+    if ( token[0] == '#' || token.empty() ) {
       /* empty line or comment */
     }
     else if ( token == "end" ) {
       endOfConfig = true;
     }
-    else if ( token == "type" ) {
-      stream >> type;
-    }
-    else if ( token == "sprite" ) {
-      stream >> sprite;
-    }
-    else if ( token == "name" ) {
-      stream >> name ;
-    }
-    else if ( token == "file" ) {
-      stream >> file ;
-    }
-    else if ( token == "dimensions" ) {
-      while ( !stream.eof() ){
-	dimensions.push_back("");
-	stream >> dimensions.back();
-      }
-    }
-    else if ( token == "color" ) {
-      while ( !stream.eof() ){
-	colors.push_back("");
-	stream >> colors.back();
-      }
-    }
     else {
+      try {
+	name = token ;
+	stream >> destination ;
+	stream >> whatToDo ;
+	while ( !stream.eof() ){
+	  coordinates.push_back("");
+	  stream >> coordinates.back();
+	}
+	moveSprite( name, destination, whatToDo, coordinates );
+      }
+      catch (std::exception) {
 #ifdef DEBUG
-      std::cerr << "[SlManager::parseTexture] Unknown token " << token << std::endl;
+	std::cerr << "[SlManager::parseSpriteMovement] Error at line: " << line << std::endl;
 #endif
+	;
+      }
     }
     token.clear();
-    if (  !endOfConfig ) getline(input,line);
-  }
-
-  
-  if ( name.empty() ) {
-#ifdef DEBUG
-    std::cerr << "[SlManager::parseTexture] No name found" << std::endl;
-#endif
-    return;
-  }
-  
-  if ( type == "file" ) {
-    createTextureFromFile( name, file );
-  }
-  
-  else if ( type == "tile" || type == "rectangle" ) {
-    int dim[2];
-    bool check = determineValues( dimensions, dim, 2 );
-    if ( !check ) {
-#ifdef DEBUG
-      std::cerr << "[SlManager::parseTexture] invalid dimensions for type " << type << std::endl;
-#endif
-      return;
-    }
-
-    if ( type == "tile") {
-      createTextureFromTile( name, sprite, dim[0], dim[1] );
-    }
-
-    else if ( type == "rectangle" ) {
-      int colArray[] = {0,0,0,0};
-      bool check = determineValues( colors, colArray, 4 );
-      if ( !check ) {
-#ifdef DEBUG
-	std::cerr << "[SlManager::parseTexture] invalid color for " << name  << std::endl;
-#endif
-	return;
-      }
-      createTextureFromRectangle( name, dim[0], dim[1], colArray[0], colArray[1], colArray[2], colArray[3] );
-    }
-  }
-  else {
-#ifdef DEBUG
-    std::cerr << "[SlManager::parseTexture] Unknown type "  << type << " for texture " << name << std::endl;
-#endif
+    if ( !endOfConfig ) getline(input,line);
   }
 }
 

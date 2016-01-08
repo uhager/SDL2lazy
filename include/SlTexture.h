@@ -29,6 +29,8 @@ class SlTexture
    */
   friend class SlSprite;
   friend class SlManager;
+  friend class SlTextureManager;
+
  public:
   /*! Constructor with texture name.
 

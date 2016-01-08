@@ -26,21 +26,22 @@ int main()
   mngr->setSpriteColor("background", 0x40, 0xAA, 0xBB, 0xFF);
 
    
-  mngr->setSpriteDestinationOrigin("tex2", 12, 12);
-  mngr->createTextureFromSpriteOnTexture("minimap", "tex1", "tex2");
-  mngr->setSpriteDestinationOrigin("minimap", 20, 20 );
-  mngr->setSpriteColor("minimap", 0x40, 0xAA, 0xBB, 0xA0);
+  //  mngr->setSpriteDestinationOrigin("tex2", 12, 12);
+  //mngr->createTextureFromSpriteOnTexture("minimap", "tex1", "tex2");
+  //  mngr->setSpriteDestinationOrigin("minimap", 20, 20 );
   //  mngr->setSpriteRenderOptions("minimap");
 
   mngr->appendToRenderQueue("tex2"); // appending just to check deleting.
   mngr->deleteTexture("tex1");
   mngr->deleteTexture("tex2");
 
+  mngr->setSpriteColor("minimap", 0x40, 0xAA, 0xBB, 0xA0);
+
   mngr->centerSpriteInSprite("up", "minimap");
   mngr->centerSpriteInSprite("down", "minimap");
   mngr->centerSpriteInSprite("left", "minimap");
   mngr->centerSpriteInSprite("right", "minimap");
-
+  
   mngr->setSpriteDestinationOrigin("upperright", SCREEN_WIDTH - 120,                 0  );
   mngr->setSpriteDestinationOrigin("lowerright", SCREEN_WIDTH - 120, SCREEN_HEIGHT - 120);
   mngr->setSpriteDestinationOrigin("lowerleft" ,                0  , SCREEN_HEIGHT - 120); 

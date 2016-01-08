@@ -20,7 +20,7 @@
 class SlTexture;
 class SlSprite;
 class SlRenderItem;
-
+class SlTextureManager;
 
 class SlManager
 {
@@ -57,31 +57,16 @@ class SlManager
     Calls SlSprite::addDefaultDestination(), so if you don't want to use that, either delete or adjust that destination.
    */
   std::shared_ptr<SlSprite> createSprite(std::string name, std::string textureName, int x = 0, int y = 0, int width = 0, int height = 0);
-  /*! Load texture from image filename
-   */
-  SlTexture* createTextureFromFile(std::string name, std::string filename);
-  /*! Creates SlTexture using a rectangle of dimension width x height filled with the specified colour. \n
-    Creates SlSprite of same name that holds the whole texture.
-   */
-  SlTexture* createTextureFromRectangle(std::string name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF);
-  /*! Create a new texture by rendering a sprite on this texture.  \n
-    Creates SlSprite of same name that holds the whole texture.
-   */
-  SlTexture* createTextureFromSpriteOnTexture(std::string name, std::string backgroundTexture, std::string foregroundSprite);
-  /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile.  \n
-    Creates SlSprite of same name that holds the whole texture.
-
-    The SlRenderSettings::destinationRect at position 0 in the SlSprite::destinations_ is used to determine the width of the tile. 
-    If the SlSprite::destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
-  */
-  SlTexture* createTextureFromTile(std::string name, std::string sprite, int width, int height);
   /*! Delete the specified sprite and remove from #sprites_ .
    */
   void deleteSprite(std::string name);
-  /*! Delete the specified texture and remove from #textures_ . \n 
+   /*! Tells #tmngr_ to delete the specified texture and remove from SlTextureManager::textures_ . \n 
     Also deletes the SlSprite of same name that was created automatically with the texture.
    */
   void deleteTexture(std::string name);
+  /*! Extract integer values from strings read from file.
+   */
+  bool determineValues(std::vector<std::string> stringValues, int *values, unsigned int valueSize ); 
   /*! Returns pointer to the sprite, nullptr if not found.
    */
   std::shared_ptr<SlSprite> findSprite(std::string name);
@@ -163,54 +148,28 @@ class SlManager
   /*!Default constructor.
    */
   SlManager(void);
-
-  /*! Adds toAdd to #textures_ and creates SlSprite of same name. 
-   */
-  void addTexture(SlTexture* toAdd);
   /*! Deletes all textures and sprites, empties render queue.
    */
   void clear();
-  /*! Extract integer values from strings read from file.
-   */
-  bool determineValues(std::vector<std::string> stringValues, int *values, unsigned int valueSize ); 
   /*! Initializes SDL
    */
   void initialize();
   /*!  Initializes window
    */
   void initializeWindow(std::string name, int width, int height);
+  /*! Move the sprite based on configuration file.\
+    Currently implemented whatToDo:\n
+    setOrigin
+   */
+  void moveSprite(std::string name, unsigned int destination, std::string whatToDo, std::vector<std::string> coordinates);
   /*! Read sprite configurations from file
    */
   void parseSprite(std::ifstream& input);
-  /*! Read texture configurations from file
-    ##### Example: 
-> texture\n
-> 	type	file\n
-> 	name	tile\n
-> 	file	resources/tacky_background.png\n
-> end\n
-> texture\n
-> 	type	 tile\n
->   	name	background\n
-> 	dimensions	SCREEN_WIDTH	SCREEN_HEIGHT\n
-> (can use sprite 'tile' here since it's automatically created when texture 'tile' is created )\n
->       	sprite		tile\n
-> end\n
-> texture\n
-> 	type	rectangle\n
-> 	name	tex1\n
-> 	dimensions	210	210\n
-> 	color		0x00	0x00	0xC0	0xFF\n
-> end
-  */
-  void parseTexture(std::ifstream& input);
-
+  /*! Read sprite placement from file.
+   */
+  void parseSpriteMovement(std::ifstream& input);
   
  private:
-  /*! Holds all SlTextures that were created using SlManager methods.
-    Texture will be deleted when the SlManager instance is deleted.
-   */
-  std::vector<SlTexture*> textures_;
   /*! Holds all SlSprites that were created using SlManager methods.
     Sprites will be deleted when the SlManager instance is deleted.
    */
@@ -218,6 +177,9 @@ class SlManager
   /*! Holds the items to be rendered. The front of the queue is rendered first (background) the last element is rendered last (foreground).
    */
   std::vector<SlRenderItem*> renderQueue_;
+  /*! Texture manager, creates, stores, deletes textures
+   */
+  SlTextureManager* tmngr_ = nullptr;
   /*! Window width.
    */
   int screen_width_ ;
