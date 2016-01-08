@@ -83,11 +83,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
-<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classSlManager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">SlManager Class Reference</div>  </div>
@@ -97,6 +95,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Collaboration diagram for SlManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSlManager__coll__graph.png" border="0" usemap="#SlManager_coll__map" alt="Collaboration graph"/></div>
+<map name="SlManager_coll__map" id="SlManager_coll__map">
+<area shape="rect" id="node2" href="classSlTextureManager.html" title="SlTextureManager" alt="" coords="5,95,133,121"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -113,26 +113,24 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa13a0cbe2c58bd34dd0015c856d5355f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8708a2c032375e685584246fcaba340f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlRenderItem.html">SlRenderItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a8708a2c032375e685584246fcaba340f">createRenderItem</a> (std::string name, unsigned int destination)</td></tr>
 <tr class="separator:a8708a2c032375e685584246fcaba340f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa206a4e70d983744bfe9d11a19eabb0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlSprite.html">SlSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aa206a4e70d983744bfe9d11a19eabb0b">createSprite</a> (std::string name, std::string textureName, int x=0, int y=0, int width=0, int height=0)</td></tr>
-<tr class="separator:aa206a4e70d983744bfe9d11a19eabb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc1fa9614f9a87b9f5db77f668795a36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#acc1fa9614f9a87b9f5db77f668795a36">createTextureFromFile</a> (std::string name, std::string filename)</td></tr>
-<tr class="separator:acc1fa9614f9a87b9f5db77f668795a36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af82f84c675c255f80592010f4f5c4d23"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#af82f84c675c255f80592010f4f5c4d23">createTextureFromRectangle</a> (std::string name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha=0xFF)</td></tr>
-<tr class="separator:af82f84c675c255f80592010f4f5c4d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee023e686beafb077cef38cfab67978e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aee023e686beafb077cef38cfab67978e">createTextureFromSpriteOnTexture</a> (std::string name, std::string backgroundTexture, std::string foregroundSprite)</td></tr>
-<tr class="separator:aee023e686beafb077cef38cfab67978e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af70918a067951e1e1f5e77498a3b5d03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#af70918a067951e1e1f5e77498a3b5d03">createTextureFromTile</a> (std::string name, std::string sprite, int width, int height)</td></tr>
-<tr class="separator:af70918a067951e1e1f5e77498a3b5d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6fab3522d816dacf095a760d15821a1"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aa6fab3522d816dacf095a760d15821a1">createSprite</a> (std::string name, std::string textureName, int x=0, int y=0, int width=0, int height=0)</td></tr>
+<tr class="separator:aa6fab3522d816dacf095a760d15821a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85c554c6fb8aa410fc936ae4a498dad3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a85c554c6fb8aa410fc936ae4a498dad3">deleteSprite</a> (std::string name)</td></tr>
 <tr class="separator:a85c554c6fb8aa410fc936ae4a498dad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3221e07b2068188857665b8e8d50108d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a3221e07b2068188857665b8e8d50108d">deleteTexture</a> (std::string name)</td></tr>
 <tr class="separator:a3221e07b2068188857665b8e8d50108d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3665fb1d820ca290cc3a7aedc516c4df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlSprite.html">SlSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a3665fb1d820ca290cc3a7aedc516c4df">findSprite</a> (std::string name)</td></tr>
-<tr class="separator:a3665fb1d820ca290cc3a7aedc516c4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6128a2559c31a727486492059d4b80c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a6128a2559c31a727486492059d4b80c6">findTexture</a> (std::string name)</td></tr>
-<tr class="separator:a6128a2559c31a727486492059d4b80c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae64b5e13fb140fb9839c32ccfda6cc46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ae64b5e13fb140fb9839c32ccfda6cc46">determineValues</a> (std::vector&lt; std::string &gt; stringValues, int *values, unsigned int valueSize)</td></tr>
+<tr class="separator:ae64b5e13fb140fb9839c32ccfda6cc46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab417681911dd70eeacc483b28d5c8357"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ab417681911dd70eeacc483b28d5c8357">findSprite</a> (std::string name)</td></tr>
+<tr class="separator:ab417681911dd70eeacc483b28d5c8357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3cbaac1f64345e81258047c6eb38445"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ae3cbaac1f64345e81258047c6eb38445">findTexture</a> (std::string name)</td></tr>
+<tr class="separator:ae3cbaac1f64345e81258047c6eb38445"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a029d19bb862fb4abc93054f845bf982b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a029d19bb862fb4abc93054f845bf982b">insertInRenderQueueAfter</a> (std::string toAdd, std::string afterThis, unsigned int destToAdd=0, unsigned int destAfterThis=0)</td></tr>
 <tr class="separator:a029d19bb862fb4abc93054f845bf982b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0acdc9f36c84436ab9854510d4fc25a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aa0acdc9f36c84436ab9854510d4fc25a">moveInRenderQueueBefore</a> (std::string toAdd, std::string beforeThis, unsigned int destToAdd=0, unsigned int destBeforeThis=0)</td></tr>
+<tr class="separator:aa0acdc9f36c84436ab9854510d4fc25a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a7112225785c28ffcc91dc8a9337747"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a9a7112225785c28ffcc91dc8a9337747">moveInRenderQueueAfter</a> (std::string toAdd, std::string afterThis, unsigned int destToAdd=0, unsigned int destAfterThis=0)</td></tr>
+<tr class="separator:a9a7112225785c28ffcc91dc8a9337747"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a256ed950b737a4400f8382a581e2f55f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a256ed950b737a4400f8382a581e2f55f">insertInRenderQueueBefore</a> (std::string toAdd, std::string beforeThis, unsigned int destToAdd=0, unsigned int destBeforeThis=0)</td></tr>
 <tr class="separator:a256ed950b737a4400f8382a581e2f55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94d597105f446ddb9b872c04fc246c71"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a94d597105f446ddb9b872c04fc246c71">parseConfigurationFile</a> (std::string filename=&quot;SlTextureConfig.ini&quot;)</td></tr>
@@ -141,6 +139,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adc7c29a607df8cd0eb6e56617c2148f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99b4448836d16c9a84b4afe39fb2d3db"><td class="memItemLeft" align="right" valign="top">SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a99b4448836d16c9a84b4afe39fb2d3db">renderer</a> ()</td></tr>
 <tr class="separator:a99b4448836d16c9a84b4afe39fb2d3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b88c2e3b603eca77ce0f04806a3a9f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a2b88c2e3b603eca77ce0f04806a3a9f8">screenWidth</a> ()</td></tr>
+<tr class="separator:a2b88c2e3b603eca77ce0f04806a3a9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee282398e2131ab14f7a51c46fccd5ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aee282398e2131ab14f7a51c46fccd5ca">screenHeight</a> ()</td></tr>
+<tr class="separator:aee282398e2131ab14f7a51c46fccd5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a876d96b3872ab13e76fb9f541700177d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a876d96b3872ab13e76fb9f541700177d">setSpriteColor</a> (std::string name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha=0xFF, unsigned int destination=0)</td></tr>
 <tr class="separator:a876d96b3872ab13e76fb9f541700177d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a874cb72ca150234c9477600bd68f07c0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a874cb72ca150234c9477600bd68f07c0">setSpriteDestinationOrigin</a> (std::string name, int x, int y, unsigned int destination=0)</td></tr>
@@ -153,32 +155,29 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0d71be79849771eede79cf9c4579812b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfec48b0fcd93d37cc484b3bbcb43104"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#abfec48b0fcd93d37cc484b3bbcb43104">swapInRenderQueueLastPosition</a> (std::string toAdd, unsigned int destToAdd=0)</td></tr>
 <tr class="separator:abfec48b0fcd93d37cc484b3bbcb43104"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae3f3cb664f587e9305e9be3a2bb2f7b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aae3f3cb664f587e9305e9be3a2bb2f7b">toggleRender</a> (std::string toToggle, unsigned int destination=0)</td></tr>
-<tr class="separator:aae3f3cb664f587e9305e9be3a2bb2f7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a8dea3398927be78730f2e691a9874b79"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classSlManager.html">SlManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a8dea3398927be78730f2e691a9874b79">Instance</a> (void)</td></tr>
-<tr class="separator:a8dea3398927be78730f2e691a9874b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fa7670d56f31c8c27926863c3651b62"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a3fa7670d56f31c8c27926863c3651b62">toggleRender</a> (std::string toToggle, unsigned int destination=0, int onOrOff=-1)</td></tr>
+<tr class="separator:a3fa7670d56f31c8c27926863c3651b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac46833316edafd5917b61c1d3831e6aa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ac46833316edafd5917b61c1d3831e6aa">toggleRenderOff</a> (std::string toToggle, unsigned int destination=0)</td></tr>
+<tr class="separator:ac46833316edafd5917b61c1d3831e6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a454c7f165a04bd612b4af6ef569fab71"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a454c7f165a04bd612b4af6ef569fab71">toggleRenderOn</a> (std::string toToggle, unsigned int destination=0)</td></tr>
+<tr class="separator:a454c7f165a04bd612b4af6ef569fab71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3000b6a40074cf14ba689145d649015f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a3000b6a40074cf14ba689145d649015f">SlManager</a> (void)</td></tr>
 <tr class="separator:a3000b6a40074cf14ba689145d649015f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec3423ae08780f25d8254bb448e83054"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aec3423ae08780f25d8254bb448e83054">addTexture</a> (<a class="el" href="classSlTexture.html">SlTexture</a> *toAdd)</td></tr>
-<tr class="separator:aec3423ae08780f25d8254bb448e83054"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d2025542e2b1b948f6fd8a34b01b223"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a6d2025542e2b1b948f6fd8a34b01b223">clear</a> ()</td></tr>
 <tr class="separator:a6d2025542e2b1b948f6fd8a34b01b223"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae64b5e13fb140fb9839c32ccfda6cc46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ae64b5e13fb140fb9839c32ccfda6cc46">determineValues</a> (std::vector&lt; std::string &gt; stringValues, int *values, unsigned int valueSize)</td></tr>
-<tr class="separator:ae64b5e13fb140fb9839c32ccfda6cc46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d1e2aa30a4e8c75367b323e478cf3ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a7d1e2aa30a4e8c75367b323e478cf3ef">initialize</a> ()</td></tr>
 <tr class="separator:a7d1e2aa30a4e8c75367b323e478cf3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5df0ae53d2c0612cf38e33b3665d3241"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a5df0ae53d2c0612cf38e33b3665d3241">initializeWindow</a> (std::string name, int width, int height)</td></tr>
 <tr class="separator:a5df0ae53d2c0612cf38e33b3665d3241"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f9e699b4d7d23a5a99a520835e5ea82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a5f9e699b4d7d23a5a99a520835e5ea82">moveSprite</a> (std::string name, unsigned int destination, std::string whatToDo, std::vector&lt; std::string &gt; coordinates)</td></tr>
+<tr class="separator:a5f9e699b4d7d23a5a99a520835e5ea82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a611fc43d58376224873a2f79f8aa851f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a611fc43d58376224873a2f79f8aa851f">parseSprite</a> (std::ifstream &amp;input)</td></tr>
 <tr class="separator:a611fc43d58376224873a2f79f8aa851f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac647170eb45098a435bd2de2ba80a3b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ac647170eb45098a435bd2de2ba80a3b8">parseTexture</a> (std::ifstream &amp;input)</td></tr>
-<tr class="separator:ac647170eb45098a435bd2de2ba80a3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abab1340345d917c4d13f4d197bd9ba43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#abab1340345d917c4d13f4d197bd9ba43">parseSpriteMovement</a> (std::ifstream &amp;input)</td></tr>
+<tr class="separator:abab1340345d917c4d13f4d197bd9ba43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -189,21 +188,16 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:aa97ace1d5c7403d116e46e92e5ca1737"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSlTexture.html">SlTexture</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aa97ace1d5c7403d116e46e92e5ca1737">textures_</a></td></tr>
-<tr class="separator:aa97ace1d5c7403d116e46e92e5ca1737"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeeb8d9de3a9f1a16969fc33a1f5624e6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSlSprite.html">SlSprite</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aeeb8d9de3a9f1a16969fc33a1f5624e6">sprites_</a></td></tr>
-<tr class="separator:aeeb8d9de3a9f1a16969fc33a1f5624e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af95c26f250b40e1c9ac15fcc0d3506f0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#af95c26f250b40e1c9ac15fcc0d3506f0">sprites_</a></td></tr>
+<tr class="separator:af95c26f250b40e1c9ac15fcc0d3506f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6bb06d56cfff1f6a0a3432f42563f82"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSlRenderItem.html">SlRenderItem</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a></td></tr>
 <tr class="separator:ae6bb06d56cfff1f6a0a3432f42563f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae777b943394db1bd976f218362ec7931"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTextureManager.html">SlTextureManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ae777b943394db1bd976f218362ec7931">tmngr_</a> = nullptr</td></tr>
+<tr class="separator:ae777b943394db1bd976f218362ec7931"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0580832c910ef5155f76a58ed899804"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#ac0580832c910ef5155f76a58ed899804">screen_width_</a></td></tr>
 <tr class="separator:ac0580832c910ef5155f76a58ed899804"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8229ee04a73c1465bf727a2d33dada2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aa8229ee04a73c1465bf727a2d33dada2">screen_height_</a></td></tr>
 <tr class="separator:aa8229ee04a73c1465bf727a2d33dada2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
-Static Private Attributes</h2></td></tr>
-<tr class="memitem:a66b971d2d358eeb7f81d13eb8a37aa47"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classSlManager.html">SlManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a66b971d2d358eeb7f81d13eb8a37aa47">instance_</a> = nullptr</td></tr>
-<tr class="separator:a66b971d2d358eeb7f81d13eb8a37aa47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac7058fa22e20f83fc7f67a33911ac28b"></a>
@@ -290,31 +284,6 @@ Static Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="aec3423ae08780f25d8254bb448e83054"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void SlManager::addTexture </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td>
-          <td class="paramname"><em>toAdd</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Adds toAdd to <a class="el" href="classSlManager.html#aa97ace1d5c7403d116e46e92e5ca1737">textures_</a> and creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name. </p>
-
-</div>
-</div>
 <a class="anchor" id="a08be684cdcccb4b86bf7827bf5b18777"></a>
 <div class="memitem">
 <div class="memproto">
@@ -444,12 +413,12 @@ Note that if the destination dimensions are changed afterwards, the sprite will 
 
 </div>
 </div>
-<a class="anchor" id="aa206a4e70d983744bfe9d11a19eabb0b"></a>
+<a class="anchor" id="aa6fab3522d816dacf095a760d15821a1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSlSprite.html">SlSprite</a> * SlManager::createSprite </td>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt; SlManager::createSprite </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -497,166 +466,6 @@ The default values will use the whole texture as a sprite. Calls <a class="el" h
 
 </div>
 </div>
-<a class="anchor" id="acc1fa9614f9a87b9f5db77f668795a36"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classSlTexture.html">SlTexture</a> * SlManager::createTextureFromFile </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>filename</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Load texture from image filename </p>
-
-</div>
-</div>
-<a class="anchor" id="af82f84c675c255f80592010f4f5c4d23"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classSlTexture.html">SlTexture</a> * SlManager::createTextureFromRectangle </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>red</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>green</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>blue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>alpha</em> = <code>0xFF</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Creates <a class="el" href="classSlTexture.html">SlTexture</a> using a rectangle of dimension width x height filled with the specified colour. <br />
-Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that holds the whole texture. </p>
-
-</div>
-</div>
-<a class="anchor" id="aee023e686beafb077cef38cfab67978e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classSlTexture.html">SlTexture</a> * SlManager::createTextureFromSpriteOnTexture </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>backgroundTexture</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>foregroundSprite</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Create a new texture by rendering a sprite on this texture. <br />
-Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that holds the whole texture. </p>
-
-</div>
-</div>
-<a class="anchor" id="af70918a067951e1e1f5e77498a3b5d03"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classSlTexture.html">SlTexture</a> * SlManager::createTextureFromTile </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>sprite</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Creates a new texture with dimensions w x h and fills it with tiles of <a class="el" href="classSlSprite.html">SlSprite</a> tile. <br />
-Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that holds the whole texture.</p>
-<p>The <a class="el" href="structSlRenderSettings.html#ad983a345cf036f4124f0af1bb93aa312">SlRenderSettings::destinationRect</a> at position 0 in the <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">SlSprite::destinations_</a> is used to determine the width of the tile. If the <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">SlSprite::destinations_</a> is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect. </p>
-
-</div>
-</div>
 <a class="anchor" id="a85c554c6fb8aa410fc936ae4a498dad3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -670,7 +479,7 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Delete the specified sprite and remove from <a class="el" href="classSlManager.html#aeeb8d9de3a9f1a16969fc33a1f5624e6">sprites_</a> . </p>
+<p>Delete the specified sprite and remove from <a class="el" href="classSlManager.html#af95c26f250b40e1c9ac15fcc0d3506f0">sprites_</a> . </p>
 
 </div>
 </div>
@@ -687,7 +496,7 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Delete the specified texture and remove from <a class="el" href="classSlManager.html#aa97ace1d5c7403d116e46e92e5ca1737">textures_</a> . <br />
+<p>Tells <a class="el" href="classSlManager.html#ae777b943394db1bd976f218362ec7931">tmngr_</a> to delete the specified texture and remove from <a class="el" href="classSlTextureManager.html#a29b251d227346d2730179db2f1e71ef6">SlTextureManager::textures_</a> . <br />
  Also deletes the <a class="el" href="classSlSprite.html">SlSprite</a> of same name that was created automatically with the texture. </p>
 
 </div>
@@ -695,9 +504,6 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
 <a class="anchor" id="ae64b5e13fb140fb9839c32ccfda6cc46"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool SlManager::determineValues </td>
@@ -723,22 +529,17 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <p>Extract integer values from strings read from file. </p>
 
 </div>
 </div>
-<a class="anchor" id="a3665fb1d820ca290cc3a7aedc516c4df"></a>
+<a class="anchor" id="ab417681911dd70eeacc483b28d5c8357"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSlSprite.html">SlSprite</a> * SlManager::findSprite </td>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt; SlManager::findSprite </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -750,12 +551,12 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
 
 </div>
 </div>
-<a class="anchor" id="a6128a2559c31a727486492059d4b80c6"></a>
+<a class="anchor" id="ae3cbaac1f64345e81258047c6eb38445"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classSlTexture.html">SlTexture</a> * SlManager::findTexture </td>
+          <td class="memname"><a class="el" href="classSlTexture.html">SlTexture</a>* SlManager::findTexture </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -910,7 +711,85 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
 
 </div>
 </div>
-<a class="anchor" id="a8dea3398927be78730f2e691a9874b79"></a>
+<a class="anchor" id="a9a7112225785c28ffcc91dc8a9337747"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlManager::moveInRenderQueueAfter </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>toAdd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>afterThis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>destToAdd</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>destAfterThis</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inserts the sprite into the <a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a> after the specified sprite. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa0acdc9f36c84436ab9854510d4fc25a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlManager::moveInRenderQueueBefore </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>toAdd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>beforeThis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>destToAdd</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>destBeforeThis</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inserts the sprite into the <a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a> before the specified sprite. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5f9e699b4d7d23a5a99a520835e5ea82"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -918,20 +797,43 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classSlManager.html">SlManager</a>* SlManager::Instance </td>
+          <td class="memname">void SlManager::moveSprite </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>destination</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>whatToDo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>coordinates</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>The running instance of <a class="el" href="classSlManager.html">SlManager</a>. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer. </p>
+<p>Move the sprite based on configuration file.\ Currently implemented whatToDo:<br />
+setOrigin </p>
 
 </div>
 </div>
@@ -1003,7 +905,7 @@ Default file name: "SlTextures.ini". </p>
 
 </div>
 </div>
-<a class="anchor" id="ac647170eb45098a435bd2de2ba80a3b8"></a>
+<a class="anchor" id="abab1340345d917c4d13f4d197bd9ba43"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1011,7 +913,7 @@ Default file name: "SlTextures.ini". </p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void SlManager::parseTexture </td>
+          <td class="memname">void SlManager::parseSpriteMovement </td>
           <td>(</td>
           <td class="paramtype">std::ifstream &amp;&#160;</td>
           <td class="paramname"><em>input</em></td><td>)</td>
@@ -1024,27 +926,7 @@ Default file name: "SlTextures.ini". </p>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Read texture configurations from file </p><h5>Example:</h5>
-<blockquote class="doxtable">
-<p>texture<br />
- type file<br />
- name tile<br />
- file resources/tacky_background.png<br />
-end<br />
-texture<br />
- type tile<br />
- name background<br />
- dimensions SCREEN_WIDTH SCREEN_HEIGHT<br />
-(can use sprite 'tile' here since it's automatically created when texture 'tile' is created )<br />
- sprite tile<br />
-end<br />
-texture<br />
- type rectangle<br />
- name tex1<br />
- dimensions 210 210<br />
- color 0x00 0x00 0xC0 0xFF<br />
-end</p>
-</blockquote>
+<p>Read sprite placement from file. </p>
 
 </div>
 </div>
@@ -1090,6 +972,54 @@ end</p>
 </table>
 </div><div class="memdoc">
 <p>Temporary solution until all rendering related stuff happens in <a class="el" href="classSlManager.html">SlManager</a> methods. </p>
+
+</div>
+</div>
+<a class="anchor" id="aee282398e2131ab14f7a51c46fccd5ca"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SlManager::screenHeight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the <a class="el" href="classSlManager.html#aa8229ee04a73c1465bf727a2d33dada2">screen_height_</a> of the window. </p>
+
+</div>
+</div>
+<a class="anchor" id="a2b88c2e3b603eca77ce0f04806a3a9f8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SlManager::screenWidth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the <a class="el" href="classSlManager.html#ac0580832c910ef5155f76a58ed899804">screen_width_</a> of the window. </p>
 
 </div>
 </div>
@@ -1328,12 +1258,45 @@ Note that the first item is in position 0. </p>
 
 </div>
 </div>
-<a class="anchor" id="aae3f3cb664f587e9305e9be3a2bb2f7b"></a>
+<a class="anchor" id="a3fa7670d56f31c8c27926863c3651b62"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool SlManager::toggleRender </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>toToggle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>destination</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>onOrOff</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Toggles rendering of an item in the <a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a> on and off. onOrOff is -1 to toggle, 0 to turn off, 1 to turn on. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac46833316edafd5917b61c1d3831e6aa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlManager::toggleRenderOff </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>toToggle</em>, </td>
@@ -1351,33 +1314,38 @@ Note that the first item is in position 0. </p>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Toggles rendering of an item in the <a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a> on and off. </p>
+<p>Turns off rendering for the specified <a class="el" href="classSlRenderItem.html">SlRenderItem</a> in the <a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a> . </p>
+
+</div>
+</div>
+<a class="anchor" id="a454c7f165a04bd612b4af6ef569fab71"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlManager::toggleRenderOn </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>toToggle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>destination</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Turns on rendering for the specified <a class="el" href="classSlRenderItem.html">SlRenderItem</a> in the <a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a> . </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a66b971d2d358eeb7f81d13eb8a37aa47"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classSlManager.html">SlManager</a> * SlManager::instance_ = nullptr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>The running instance of <a class="el" href="classSlManager.html">SlManager</a>. Currently only one manager allowed. Might change that as a way to have several windows each with a manager and a renderer.</p>
-<p>The running instance. </p>
-
-</div>
-</div>
 <a class="anchor" id="a3d3207dd3bef3e0e62c4dafee9264d25"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1462,7 +1430,7 @@ Note that the first item is in position 0. </p>
 
 </div>
 </div>
-<a class="anchor" id="aeeb8d9de3a9f1a16969fc33a1f5624e6"></a>
+<a class="anchor" id="af95c26f250b40e1c9ac15fcc0d3506f0"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1470,7 +1438,7 @@ Note that the first item is in position 0. </p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classSlSprite.html">SlSprite</a>*&gt; SlManager::sprites_</td>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classSlSprite.html">SlSprite</a>&gt; &gt; SlManager::sprites_</td>
         </tr>
       </table>
   </td>
@@ -1483,7 +1451,7 @@ Note that the first item is in position 0. </p>
 
 </div>
 </div>
-<a class="anchor" id="aa97ace1d5c7403d116e46e92e5ca1737"></a>
+<a class="anchor" id="ae777b943394db1bd976f218362ec7931"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -1491,7 +1459,7 @@ Note that the first item is in position 0. </p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classSlTexture.html">SlTexture</a>*&gt; SlManager::textures_</td>
+          <td class="memname"><a class="el" href="classSlTextureManager.html">SlTextureManager</a>* SlManager::tmngr_ = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1500,7 +1468,7 @@ Note that the first item is in position 0. </p>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Holds all SlTextures that were created using <a class="el" href="classSlManager.html">SlManager</a> methods. Texture will be deleted when the <a class="el" href="classSlManager.html">SlManager</a> instance is deleted. </p>
+<p>Texture manager, creates, stores, deletes textures </p>
 
 </div>
 </div>

@@ -7,5 +7,7 @@ var searchData=
   ['slsprite_2ecc',['SlSprite.cc',['../SlSprite_8cc.html',1,'']]],
   ['slsprite_2eh',['SlSprite.h',['../SlSprite_8h.html',1,'']]],
   ['sltexture_2ecc',['SlTexture.cc',['../SlTexture_8cc.html',1,'']]],
-  ['sltexture_2eh',['SlTexture.h',['../SlTexture_8h.html',1,'']]]
+  ['sltexture_2eh',['SlTexture.h',['../SlTexture_8h.html',1,'']]],
+  ['sltexturemanager_2ecc',['SlTextureManager.cc',['../SlTextureManager_8cc.html',1,'']]],
+  ['sltexturemanager_2eh',['SlTextureManager.h',['../SlTextureManager_8h.html',1,'']]]
 ];

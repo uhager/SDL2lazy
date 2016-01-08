@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['instance_5f',['instance_',['../classSlManager.html#a66b971d2d358eeb7f81d13eb8a37aa47',1,'SlManager']]]
+  ['mngr_5f',['mngr_',['../classSlTextureManager.html#a13d0b366ca0312ad01f27909e2058fd7',1,'SlTextureManager']]]
 ];

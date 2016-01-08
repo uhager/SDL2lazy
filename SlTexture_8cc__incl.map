@@ -1,4 +1,4 @@
 <map id="src/SlTexture.cc" name="src/SlTexture.cc">
-<area shape="rect" id="node4" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="249,80,338,107"/>
-<area shape="rect" id="node8" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="254,155,333,181"/>
+<area shape="rect" id="node4" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="266,80,345,107"/>
+<area shape="rect" id="node10" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="153,80,242,107"/>
 </map>

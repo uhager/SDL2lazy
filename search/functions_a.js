@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['render',['render',['../classSlManager.html#adc7c29a607df8cd0eb6e56617c2148f0',1,'SlManager::render()'],['../classSlSprite.html#a8b7ecec25227918f7832dbc2ee06213c',1,'SlSprite::render(SDL_Renderer *renderer)'],['../classSlSprite.html#aaefcc3e7a4ee8ee93643ba4bb8413034',1,'SlSprite::render(SDL_Renderer *renderer, unsigned int i)']]],
-  ['renderer',['renderer',['../classSlManager.html#a99b4448836d16c9a84b4afe39fb2d3db',1,'SlManager']]]
+  ['parseconfigurationfile',['parseConfigurationFile',['../classSlManager.html#a94d597105f446ddb9b872c04fc246c71',1,'SlManager']]],
+  ['parsesprite',['parseSprite',['../classSlManager.html#a611fc43d58376224873a2f79f8aa851f',1,'SlManager']]],
+  ['parsespritemovement',['parseSpriteMovement',['../classSlManager.html#abab1340345d917c4d13f4d197bd9ba43',1,'SlManager']]],
+  ['parsetexture',['parseTexture',['../classSlTextureManager.html#a0da5ad6e31d3e1c8db0def44d4c7fb7c',1,'SlTextureManager']]]
 ];

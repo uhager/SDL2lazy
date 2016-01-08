@@ -1,0 +1,6 @@
+<map id="src/SlTextureManager.cc" name="src/SlTextureManager.cc">
+<area shape="rect" id="node8" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="337,80,426,107"/>
+<area shape="rect" id="node12" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="450,80,529,107"/>
+<area shape="rect" id="node14" href="$SlManager_8h.html" title="SlManager class, has a Window with SDL_Renderer, manages textures and sprites. SlRenderItem struct fo..." alt="" coords="553,80,647,107"/>
+<area shape="rect" id="node15" href="$SlTextureManager_8h.html" title="SlTextureManager class creates and stores textures. " alt="" coords="672,80,811,107"/>
+</map>

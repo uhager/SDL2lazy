@@ -1,7 +1,7 @@
 var searchData=
 [
   ['deletesprite',['deleteSprite',['../classSlManager.html#a85c554c6fb8aa410fc936ae4a498dad3',1,'SlManager']]],
-  ['deletetexture',['deleteTexture',['../classSlManager.html#a3221e07b2068188857665b8e8d50108d',1,'SlManager']]],
+  ['deletetexture',['deleteTexture',['../classSlManager.html#a3221e07b2068188857665b8e8d50108d',1,'SlManager::deleteTexture()'],['../classSlTextureManager.html#ab14f2c7a07059de16a0eb5c2ef6b125d',1,'SlTextureManager::deleteTexture()']]],
   ['destination',['destination',['../classSlSprite.html#ae57f5294f0931f8990ea873334c51a1a',1,'SlSprite']]],
   ['destination_5f',['destination_',['../classSlRenderItem.html#a94fb50c022d1f511dfdeeb1d5dab759c',1,'SlRenderItem']]],
   ['destinationdimension',['destinationDimension',['../classSlSprite.html#aa90f58310139fee549ccc6253960a99f',1,'SlSprite']]],

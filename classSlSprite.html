@@ -113,8 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7bb3b9e857d6a3a1b91e1550fdc2bfd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a633bf4ba55a165f8c716d710a7ca625d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a633bf4ba55a165f8c716d710a7ca625d">addDestination</a> (int x, int y, uint32_t renderOptions=SL_RENDER_DEFAULT)</td></tr>
 <tr class="separator:a633bf4ba55a165f8c716d710a7ca625d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a83569b4d3738e26c2d9b2a56a2a659"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a1a83569b4d3738e26c2d9b2a56a2a659">centerInSprite</a> (<a class="el" href="classSlSprite.html">SlSprite</a> *otherSprite, unsigned int destionationThis=0, unsigned int destinationOther=0)</td></tr>
-<tr class="separator:a1a83569b4d3738e26c2d9b2a56a2a659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9bb346dfb16932135e5e9ece33d06c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#aa9bb346dfb16932135e5e9ece33d06c2">centerInSprite</a> (std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt; otherSprite, unsigned int destionationThis=0, unsigned int destinationOther=0)</td></tr>
+<tr class="separator:aa9bb346dfb16932135e5e9ece33d06c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa35430177caab5f667abc6407f033773"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#aa35430177caab5f667abc6407f033773">clearDestinations</a> ()</td></tr>
 <tr class="separator:aa35430177caab5f667abc6407f033773"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae57f5294f0931f8990ea873334c51a1a"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#ae57f5294f0931f8990ea873334c51a1a">destination</a> (unsigned int i=0)</td></tr>
@@ -135,6 +135,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0797c39233d3aafa20edeaacfffcf4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99b68d51e8b87d8dd2caeb0b05123e71"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a99b68d51e8b87d8dd2caeb0b05123e71">setDestination</a> (SDL_Rect dstRect, unsigned int i=0)</td></tr>
 <tr class="separator:a99b68d51e8b87d8dd2caeb0b05123e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc91c4635a36680557565e526e0ff782"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#acc91c4635a36680557565e526e0ff782">setDestination</a> (int x, int y, int w, int h, unsigned int i=0)</td></tr>
+<tr class="separator:acc91c4635a36680557565e526e0ff782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a81d2127b0b2d0da7252553cefc8746"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a6a81d2127b0b2d0da7252553cefc8746">setDestinationDimension</a> (int width, int height, unsigned int i=0)</td></tr>
 <tr class="separator:a6a81d2127b0b2d0da7252553cefc8746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecb6d5a8268ea50061b1180608ed6af1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#aecb6d5a8268ea50061b1180608ed6af1">setDestinationOrigin</a> (int x, int y, unsigned int i=0)</td></tr>
@@ -167,6 +169,9 @@ Friends</h2></td></tr>
 <tr class="memitem:a1ac5f695eebccd1c881a50a30a87d953"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ac5f695eebccd1c881a50a30a87d953"></a>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>SlManager</b></td></tr>
 <tr class="separator:a1ac5f695eebccd1c881a50a30a87d953"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae370a68af6cb1ad867cf6aa7219707e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae370a68af6cb1ad867cf6aa7219707e4"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>SlRenderItem</b></td></tr>
+<tr class="separator:ae370a68af6cb1ad867cf6aa7219707e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines a part of a texture to be rendered with given settings.<br />
@@ -377,14 +382,14 @@ The default values will use the whole texture as a sprite. Calls <a class="el" h
 
 </div>
 </div>
-<a class="anchor" id="a1a83569b4d3738e26c2d9b2a56a2a659"></a>
+<a class="anchor" id="aa9bb346dfb16932135e5e9ece33d06c2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void SlSprite::centerInSprite </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classSlSprite.html">SlSprite</a> *&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt;&#160;</td>
           <td class="paramname"><em>otherSprite</em>, </td>
         </tr>
         <tr>
@@ -673,6 +678,52 @@ The default values will use the whole texture as a sprite. Calls <a class="el" h
           <td>(</td>
           <td class="paramtype">SDL_Rect&#160;</td>
           <td class="paramname"><em>dstRect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>i</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Changes destinationRect for position i of <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">destinations_</a>.</p>
+<p>Sets where and how large the texture will be rendered. </p>
+
+</div>
+</div>
+<a class="anchor" id="acc91c4635a36680557565e526e0ff782"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlSprite::setDestination </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

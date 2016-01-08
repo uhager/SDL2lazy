@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7esltexture',['~SlTexture',['../classSlTexture.html#aceb8c5b741d0fbbbb088b0db2e19ae57',1,'SlTexture']]]
+  ['window_5f',['window_',['../classSlManager.html#a99a4d49c5a4b2ce673590402121569a7',1,'SlManager']]]
 ];
