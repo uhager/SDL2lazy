@@ -63,7 +63,7 @@ SlTextureManager::clear()
 
 
 SlTexture*
-SlTextureManager::createTextureFromFile(std::string name, std::string filename)
+SlTextureManager::createTextureFromFile(const std::string& name, const std::string& filename)
 {
   SlTexture* toAdd = findTexture(name);
   if ( toAdd ) {
@@ -90,7 +90,7 @@ SlTextureManager::createTextureFromFile(std::string name, std::string filename)
 
 
 SlTexture*
-SlTextureManager::createTextureFromRectangle(std::string name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
+SlTextureManager::createTextureFromRectangle(const std::string& name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
 {
   SlTexture* toAdd = findTexture(name);
   if ( toAdd ) {
@@ -117,7 +117,7 @@ SlTextureManager::createTextureFromRectangle(std::string name, int width, int he
 
 
 SlTexture*
-SlTextureManager::createTextureFromSpriteOnTexture(std::string name, std::string backgroundTexture, std::string foregroundSprite)
+SlTextureManager::createTextureFromSpriteOnTexture(const std::string& name, const std::string& backgroundTexture, const std::string& foregroundSprite)
 {
   SlTexture* toAdd = findTexture(name);
   if ( toAdd ) {
@@ -159,7 +159,7 @@ SlTextureManager::createTextureFromSpriteOnTexture(std::string name, std::string
 
 
 SlTexture*
-SlTextureManager::createTextureFromTile(std::string name, std::string sprite, int width, int height)
+SlTextureManager::createTextureFromTile(const std::string& name, const std::string& sprite, int width, int height)
 {
   SlTexture* toAdd = findTexture(name);
   if ( toAdd ) {
@@ -195,7 +195,7 @@ SlTextureManager::createTextureFromTile(std::string name, std::string sprite, in
 
 
 void
-SlTextureManager::deleteTexture(std::string name)
+SlTextureManager::deleteTexture(const std::string& name)
 {
   mngr_->deleteSprite(name);
   std::vector<SlTexture*>::iterator iter;
@@ -211,7 +211,7 @@ SlTextureManager::deleteTexture(std::string name)
 
 
 SlTexture*
-SlTextureManager::findTexture(std::string name)
+SlTextureManager::findTexture(const std::string& name)
 {
   SlTexture* result = nullptr;
   std::vector<SlTexture*>::iterator iter;

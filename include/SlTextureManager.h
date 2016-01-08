@@ -40,29 +40,29 @@ class SlTextureManager
 
   /*! Load texture from image filename
    */
-  SlTexture* createTextureFromFile(std::string name, std::string filename);
+  SlTexture* createTextureFromFile(const std::string& name, const std::string& filename);
   /*! Creates SlTexture using a rectangle of dimension width x height filled with the specified colour. \n
     Creates SlSprite of same name that holds the whole texture.
    */
-  SlTexture* createTextureFromRectangle(std::string name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF);
+  SlTexture* createTextureFromRectangle(const std::string& name, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF);
   /*! Create a new texture by rendering a sprite on this texture.  \n
     Creates SlSprite of same name that holds the whole texture.
    */
-  SlTexture* createTextureFromSpriteOnTexture(std::string name, std::string backgroundTexture, std::string foregroundSprite);
+  SlTexture* createTextureFromSpriteOnTexture(const std::string& name, const std::string& backgroundTexture, const std::string& foregroundSprite);
   /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile.  \n
     Creates SlSprite of same name that holds the whole texture.
 
     The SlRenderSettings::destinationRect at position 0 in the SlSprite::destinations_ is used to determine the width of the tile. 
     If the SlSprite::destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
   */
-  SlTexture* createTextureFromTile(std::string name, std::string sprite, int width, int height);
+  SlTexture* createTextureFromTile(const std::string& name, const std::string& sprite, int width, int height);
   /*! Delete the specified texture and remove from #textures_ . \n 
     Also deletes the SlSprite of same name that was created automatically with the texture.
    */
-  void deleteTexture(std::string name);
+  void deleteTexture(const std::string& name);
   /*! Returns pointer to the texture, nullptr if not found.
    */
-  SlTexture* findTexture(std::string name);
+  SlTexture* findTexture(const std::string& name);
   /*! Read texture configurations from file
   */
   void parseTexture(std::ifstream& input);

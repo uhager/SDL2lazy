@@ -36,7 +36,7 @@ class SlTexture
 
     All textures have a name. Remember to create the actual texture!
   */
-  SlTexture(std::string name);
+  SlTexture(const std::string& name);
   /*! deletes texture_
    */
   ~SlTexture();
@@ -49,7 +49,7 @@ class SlTexture
 
   /*! Doesn't do anything yet.
    */
-  int createFromConfigFile(SDL_Renderer* renderer, std::string fileName);
+  int createFromConfigFile(SDL_Renderer* renderer, const std::string& fileName);
   /*! createFromRectangle uses SDL_FillRect to create a texture based on the given geometry and the color defined in SlTextureInfo.
    */
   int createFromRectangle(SDL_Renderer* renderer, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha );
@@ -67,7 +67,7 @@ class SlTexture
   bool dimensions(int& width, int& height);
   /*! uses IMG_LoadTexture to get texture from png image file
    */
-  bool loadFromFile(SDL_Renderer* renderer, std::string fileName);
+  bool loadFromFile(SDL_Renderer* renderer, const std::string& fileName);
 
   
  protected:

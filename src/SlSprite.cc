@@ -15,7 +15,7 @@
 #include "SlSprite.h"
 
 
-SlSprite::SlSprite(std::string name, SlTexture* texture, int x, int y, int width, int height)
+SlSprite::SlSprite(const std::string& name, SlTexture* texture, int x, int y, int width, int height)
   : name_(name)
   , texture_(texture)
 {
@@ -41,7 +41,7 @@ SlSprite::SlSprite()
 
 
 
-SlSprite::SlSprite(std::string name)
+SlSprite::SlSprite(const std::string& name)
   : name_(name)
 {
 }

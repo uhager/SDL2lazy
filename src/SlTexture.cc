@@ -18,7 +18,7 @@ SlTexture::SlTexture()
 
 
 
-SlTexture::SlTexture(std::string name)
+SlTexture::SlTexture(const std::string& name)
 {
   texture_ = nullptr;
   name_ = name;
@@ -41,7 +41,7 @@ SlTexture::~SlTexture()
 
 
 int
-SlTexture::createFromConfigFile(SDL_Renderer* renderer, std::string fileName)
+SlTexture::createFromConfigFile(SDL_Renderer* renderer, const std::string& fileName)
 {
   int created = 0;
   // to be continued
@@ -174,7 +174,7 @@ SlTexture::dimensions(int& width, int& height)
 
 
 bool
-SlTexture::loadFromFile(SDL_Renderer* renderer, std::string fileName)
+SlTexture::loadFromFile(SDL_Renderer* renderer, const std::string& fileName)
 {
   bool isLoaded = false;
   if (texture_){
@@ -191,6 +191,5 @@ SlTexture::loadFromFile(SDL_Renderer* renderer, std::string fileName)
   else{
     isLoaded = true;
   }
-
   return isLoaded;
 }

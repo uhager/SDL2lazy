@@ -81,7 +81,7 @@ class SlSprite
     The default values will use the whole texture as a sprite.
     Calls addDefaultDestination(), so if you don't want to use that, either delete or adjust that destination.
    */
-  SlSprite(std::string name, SlTexture* texture, int x = 0, int y = 0, int width = 0, int height = 0);
+  SlSprite(const std::string& name, SlTexture* texture, int x = 0, int y = 0, int width = 0, int height = 0);
   
   ~SlSprite();
   /*! Delete copy constructor. There's no reason to copy the sprite, if the goal is to render different parts of it or with different options create another sprite.
@@ -166,7 +166,7 @@ class SlSprite
   /*! Creates sprite with name.
     Remember to add a texture!
    */
-  SlSprite(std::string name);
+  SlSprite(const std::string& name);
   /*! Creates sprite with with this texture.
    */
   SlSprite(SlTexture* texture);

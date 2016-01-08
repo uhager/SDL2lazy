@@ -28,7 +28,7 @@ SlManager::SlManager()
 
 
 
-SlManager::SlManager(std::string name, int width, int height)
+SlManager::SlManager(const std::string& name, int width, int height)
 {
   this->initialize();
   this->initializeWindow(name, width, height);
@@ -49,7 +49,7 @@ SlManager::~SlManager(void)
 
 
 bool
-SlManager::appendToRenderQueue(std::string name, unsigned int destination)
+SlManager::appendToRenderQueue(const std::string& name, unsigned int destination)
 {
   bool result = true;
   SlRenderItem* toAdd = nullptr;
@@ -68,7 +68,7 @@ SlManager::appendToRenderQueue(std::string name, unsigned int destination)
 
 
 void
-SlManager::centerSpriteInSprite(std::string toCenter, std::string target, unsigned int destinationThis, unsigned int destinationOther)
+SlManager::centerSpriteInSprite(const std::string& toCenter, const std::string& target, unsigned int destinationThis, unsigned int destinationOther)
 {
   std::shared_ptr<SlSprite> sprite = findSprite(toCenter);
   if ( sprite == nullptr ) {
@@ -109,7 +109,7 @@ SlManager::clear()
 
 
 SlRenderItem* 
-SlManager::createRenderItem(std::string name, unsigned int destination)
+SlManager::createRenderItem(const std::string& name, unsigned int destination)
 {
 #ifdef DEBUG
   std::cout << "[SlManager::createRenderItem] Creating item for " << name  << std::endl;
@@ -135,7 +135,7 @@ SlManager::createRenderItem(std::string name, unsigned int destination)
 
 
 std::shared_ptr<SlSprite>
-SlManager::createSprite(std::string name, std::string textureName, int x, int y, int width, int height)
+SlManager::createSprite(const std::string& name, const std::string& textureName, int x, int y, int width, int height)
 {
   std::shared_ptr<SlSprite> toAdd = findSprite(name);
   if ( toAdd ) {
@@ -160,7 +160,7 @@ SlManager::createSprite(std::string name, std::string textureName, int x, int y,
 
 
 void
-SlManager::deleteSprite(std::string name)
+SlManager::deleteSprite(const std::string& name)
 {
   std::vector<SlRenderItem*>::iterator item = renderQueue_.end() ;
   while ( item != renderQueue_.begin() ) {
@@ -184,7 +184,7 @@ SlManager::deleteSprite(std::string name)
 
 
 void
-SlManager::deleteTexture(std::string name)
+SlManager::deleteTexture(const std::string& name)
 {
   tmngr_->deleteTexture(name);
 }
@@ -227,7 +227,7 @@ SlManager::determineValues(std::vector<std::string> stringValues, int *values, u
 
 
 std::shared_ptr<SlSprite>
-SlManager::findSprite(std::string name)
+SlManager::findSprite(const std::string& name)
 {
   std::shared_ptr<SlSprite> result = nullptr;
   std::vector<std::shared_ptr<SlSprite>>::iterator iter;
@@ -260,7 +260,7 @@ SlManager::initialize()
 
 
 void
-SlManager::initializeWindow(std::string name, int width, int height)
+SlManager::initializeWindow(const std::string& name, int width, int height)
 {
   screen_width_ = width;
   screen_height_ = height;
@@ -279,7 +279,7 @@ SlManager::initializeWindow(std::string name, int width, int height)
 
 
 bool
-SlManager::insertInRenderQueueAfter(std::string toAdd, std::string afterThis, unsigned int destToAdd, unsigned int destAfterThis)
+SlManager::insertInRenderQueueAfter(const std::string& toAdd, const std::string& afterThis, unsigned int destToAdd, unsigned int destAfterThis)
 {
   bool isInserted = false;
   SlRenderItem* toInsert = createRenderItem( toAdd, destToAdd );
@@ -310,7 +310,7 @@ SlManager::insertInRenderQueueAfter(std::string toAdd, std::string afterThis, un
 
 
 bool
-SlManager::insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, unsigned int destToAdd, unsigned int destBeforeThis)
+SlManager::insertInRenderQueueBefore(const std::string& toAdd, const std::string& beforeThis, unsigned int destToAdd, unsigned int destBeforeThis)
 {
   bool isInserted = false;
   SlRenderItem* toInsert = createRenderItem( toAdd, destToAdd );
@@ -341,7 +341,7 @@ SlManager::insertInRenderQueueBefore(std::string toAdd, std::string beforeThis, 
 
 
 bool
-SlManager::moveInRenderQueueAfter(std::string toMoveName, std::string afterThis, unsigned int destToMove, unsigned int destAfterThis)
+SlManager::moveInRenderQueueAfter(const std::string& toMoveName, const std::string& afterThis, unsigned int destToMove, unsigned int destAfterThis)
 {
   bool isMoved = false;
 
@@ -380,7 +380,7 @@ SlManager::moveInRenderQueueAfter(std::string toMoveName, std::string afterThis,
 
 
 bool
-SlManager::moveInRenderQueueBefore(std::string toMoveName, std::string afterThis, unsigned int destToMove, unsigned int destAfterThis)
+SlManager::moveInRenderQueueBefore(const std::string& toMoveName, const std::string& afterThis, unsigned int destToMove, unsigned int destAfterThis)
 {
   bool isMoved = false;
 
@@ -419,7 +419,7 @@ SlManager::moveInRenderQueueBefore(std::string toMoveName, std::string afterThis
 
 
 void
-SlManager::moveSprite(std::string name, unsigned int destination, std::string whatToDo, std::vector<std::string> coordinates)
+SlManager::moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, std::vector<std::string> coordinates)
 {
   std::shared_ptr<SlSprite> toMove = findSprite(name);
 
@@ -446,7 +446,7 @@ SlManager::moveSprite(std::string name, unsigned int destination, std::string wh
 
 
 bool
-SlManager::parseConfigurationFile(std::string filename)
+SlManager::parseConfigurationFile(const std::string& filename)
 {
   bool result = true;
   std::ifstream input(filename,std::ifstream::in);
@@ -619,7 +619,7 @@ SlManager::render()
 
 
 bool
-SlManager::setSpriteColor(std::string name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int destination)
+SlManager::setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int destination)
 {
   bool isSet = false;
   std::shared_ptr<SlSprite> sprite = findSprite(name);
@@ -637,7 +637,7 @@ SlManager::setSpriteColor(std::string name, uint8_t red, uint8_t green, uint8_t 
 
 
 bool
-SlManager::setSpriteDestinationOrigin(std::string name,  int x, int y, unsigned int destination)
+SlManager::setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination)
 {
   bool isSet = false;
   std::shared_ptr<SlSprite> sprite = findSprite(name);
@@ -654,7 +654,7 @@ SlManager::setSpriteDestinationOrigin(std::string name,  int x, int y, unsigned 
 
 
 bool
-SlManager::setSpriteRenderOptions(std::string name, uint32_t renderOptions, unsigned int destination)
+SlManager::setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination)
 {
   bool isSet = false;
   std::shared_ptr<SlSprite> sprite = findSprite(name);
@@ -671,7 +671,7 @@ SlManager::setSpriteRenderOptions(std::string name, uint32_t renderOptions, unsi
 
 
 bool
-SlManager::swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned int destToAdd, unsigned int destToRemove)
+SlManager::swapInRenderQueue(const std::string& toAdd, const std::string& toRemove, unsigned int destToAdd, unsigned int destToRemove)
 {
   bool isSwapped = false;
   SlRenderItem* item = createRenderItem( toAdd, destToAdd );
@@ -704,7 +704,7 @@ SlManager::swapInRenderQueue(std::string toAdd, std::string toRemove, unsigned i
 
 
 bool
-SlManager::swapInRenderQueueAtPosition(std::string toAdd, unsigned int destToAdd, unsigned int position )
+SlManager::swapInRenderQueueAtPosition(const std::string& toAdd, unsigned int destToAdd, unsigned int position )
 {
   bool isSwapped = false;
   if ( position >= renderQueue_.size() ) {
@@ -739,7 +739,7 @@ SlManager::swapInRenderQueueAtPosition(std::string toAdd, unsigned int destToAdd
 
 
 bool
-SlManager::swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToAdd )
+SlManager::swapInRenderQueueLastPosition(const std::string& toAdd, unsigned int destToAdd )
 {
   bool isSwapped = false;
   unsigned int position = renderQueue_.size() - 1 ;
@@ -750,7 +750,7 @@ SlManager::swapInRenderQueueLastPosition(std::string toAdd, unsigned int destToA
 
 
 bool
-SlManager::toggleRender(std::string toToggle, unsigned int destination, int onOrOff )
+SlManager::toggleRender(const std::string& toToggle, unsigned int destination, int onOrOff )
 {
   bool isToggled = false;
   if ( (onOrOff < -1) || (onOrOff > 1) ){
@@ -788,7 +788,7 @@ SlManager::toggleRender(std::string toToggle, unsigned int destination, int onOr
 
 
 bool
-SlManager::toggleRenderOff(std::string toToggle, unsigned int destination )
+SlManager::toggleRenderOff(const std::string& toToggle, unsigned int destination )
 {
   return toggleRender(toToggle, destination, 0);
 }
@@ -796,7 +796,7 @@ SlManager::toggleRenderOff(std::string toToggle, unsigned int destination )
 
 
 bool
-SlManager::toggleRenderOn(std::string toToggle, unsigned int destination )
+SlManager::toggleRenderOn(const std::string& toToggle, unsigned int destination )
 {
   return toggleRender(toToggle, destination, 1);
 }
