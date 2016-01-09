@@ -12,6 +12,7 @@
 #include <string>
 #include <stdexcept>
 #include <memory>
+#include <algorithm>
 
 #include "SlTexture.h"
 #include "SlSprite.h"
@@ -231,13 +232,13 @@ std::shared_ptr<SlSprite>
 SlManager::findSprite(const std::string& name)
 {
   std::shared_ptr<SlSprite> result = nullptr;
-  std::vector<std::shared_ptr<SlSprite>>::iterator iter;
-  for ( iter=sprites_.begin(); iter != sprites_.end(); ++iter){
-    if ( (*iter)->name_ == name){
-      result = *iter;
-      break;
-    }
-  }
+  auto iter = std::find_if( sprites_.begin(), sprites_.end() ,
+			    [name](const std::shared_ptr<SlSprite> sprite) -> bool { return sprite->name_ == name; } ) ;
+
+  if ( iter == sprites_.end() )
+    result = nullptr;
+  else
+    result = *iter;
   return result;
 }
 
