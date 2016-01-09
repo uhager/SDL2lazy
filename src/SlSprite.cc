@@ -20,7 +20,7 @@ SlSprite::SlSprite(const std::string& name, SlTexture* texture, int x, int y, in
   , texture_(texture)
 {
   if (width == 0 || height == 0) {   //! assumes whole texture to be used
-    SDL_QueryTexture(texture_->texture_, nullptr, nullptr, &sourceRect_.w, &sourceRect_.h);
+    SDL_QueryTexture(texture_->texture(), nullptr, nullptr, &sourceRect_.w, &sourceRect_.h);
   }
   else {
     sourceRect_.x = x;
@@ -30,7 +30,7 @@ SlSprite::SlSprite(const std::string& name, SlTexture* texture, int x, int y, in
   }
   addDefaultDestination();
 #ifdef DEBUG
-  std::cout << "[SlSprite::SlSprite] Created " << name_ << " from texture " << texture_->name_ << " w = " << sourceRect_.w  << " h = " << sourceRect_.h << std::endl;
+  std::cout << "[SlSprite::SlSprite] Created " << name_ << " from texture " << texture_->name() << " w = " << sourceRect_.w  << " h = " << sourceRect_.h << std::endl;
 #endif
 }
 
@@ -217,30 +217,30 @@ SlSprite::render(SDL_Renderer* renderer, unsigned int i)
   int modColor = (dest.renderOptions & SL_RENDER_COLORMOD);
   if ((modColor == SL_RENDER_COLORMOD) && !texture_->colorModIsSet) {
     //std::cout <<"[SlTexture::render] colormod on " << std::endl;
-    SDL_SetTextureColorMod(texture_->texture_, dest.color[0], dest.color[1], dest.color[2] );
+    SDL_SetTextureColorMod(texture_->texture(), dest.color[0], dest.color[1], dest.color[2] );
     texture_->colorModIsSet = true;
   }
   if (texture_->colorModIsSet && (modColor == 0)) {
     //std::cout <<"[SlTexture::render] colormod off " << std::endl;
-    SDL_SetTextureColorMod(texture_->texture_, 0xFF, 0xFF, 0xFF);
+    SDL_SetTextureColorMod(texture_->texture(), 0xFF, 0xFF, 0xFF);
     texture_->colorModIsSet = false;
   }
   
   int modAlpha = (dest.renderOptions & SL_RENDER_ALPHAMOD);
   if ((modAlpha == SL_RENDER_ALPHAMOD) && !texture_->alphaModIsSet) {
     //std::cout <<"[SlTexture::render] alphamod on " << std::endl;
-    SDL_SetTextureBlendMode( texture_->texture_, SDL_BLENDMODE_BLEND );
-    SDL_SetTextureAlphaMod(texture_->texture_, dest.color[3] );
+    SDL_SetTextureBlendMode( texture_->texture(), SDL_BLENDMODE_BLEND );
+    SDL_SetTextureAlphaMod(texture_->texture(), dest.color[3] );
     texture_->alphaModIsSet = true;
   }
   if (texture_->alphaModIsSet && (modAlpha == 0)){
     //    std::cout <<"[SlTexture::render] alphamod off " << std::endl;
-    SDL_SetTextureBlendMode( texture_->texture_, SDL_BLENDMODE_NONE );
+    SDL_SetTextureBlendMode( texture_->texture(), SDL_BLENDMODE_NONE );
     //SDL_SetTextureAlphaMod(texture_, 0xFF );
     texture_->alphaModIsSet = false;
   }
 
-  hasRendered = SDL_RenderCopy(renderer, texture_->texture_, &sourceRect_, & dest.destinationRect);
+  hasRendered = SDL_RenderCopy(renderer, texture_->texture(), &sourceRect_, & dest.destinationRect);
   if (hasRendered != 0) {
     std::cout << "[SlSprite::render] Error rendering sprite " << name_ << " detination " << i << " - " << SDL_GetError() << std::endl;
   }

@@ -25,11 +25,6 @@ class SlSprite;
 */
 class SlTexture
 {
-  /*! SlSprite is friend so SlSprites can set the alpha mod and color mod of the texture.
-   */
-  friend class SlSprite;
-  friend class SlManager;
-  friend class SlTextureManager;
 
  public:
   /*! Constructor with texture name.
@@ -47,6 +42,16 @@ class SlTexture
    */
   SlTexture &operator=(const SlTexture&) = delete;
 
+  /*! alphaModIsSet stores whether SDL_SetTextureAlphaMod has been applied. 
+    If true but the RenderOptions for the next render call don't request the mod
+    anymore, the texture is reset to default.
+  */
+  bool alphaModIsSet = false;
+  /*! colorModIsSet stores whether SDL_SetTextureColorMod has been applied. 
+    If true but the RenderOptions for the next render call don't request the mod
+    anymore, the texture is reset to default.
+  */
+  bool colorModIsSet = false;
   /*! Doesn't do anything yet.
    */
   int createFromConfigFile(const SDL_Renderer* renderer, const std::string& fileName);
@@ -68,7 +73,13 @@ class SlTexture
   /*! uses IMG_LoadTexture to get texture from png image file
    */
   bool loadFromFile(SDL_Renderer* renderer, const std::string& fileName);
-
+  /*! Returns the name of the texture.
+    Changing the name after creation is not allowed.
+   */
+  std::string name() const {return name_;}
+  /*! Returns the SDL_texture. Changing the texture is not allowed.
+   */
+  SDL_Texture* texture() {return texture_;}
   
  protected:
   SlTexture();
@@ -78,16 +89,6 @@ class SlTexture
   /*! The actual SDL_Texture.
    */
   SDL_Texture *texture_;
-  /*! alphaModIsSet stores whether SDL_SetTextureAlphaMod has been applied. 
-    If true but the RenderOptions for the next render call don't request the mod
-    anymore, the texture is reset to default.
-  */
-  bool alphaModIsSet = false;
-  /*! colorModIsSet stores whether SDL_SetTextureColorMod has been applied. 
-    If true but the RenderOptions for the next render call don't request the mod
-    anymore, the texture is reset to default.
-  */
-  bool colorModIsSet = false;
 };
 
 #endif // SLTEXTURE_H

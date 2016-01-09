@@ -47,10 +47,10 @@ SlTextureManager::addTexture(SlTexture* toAdd)
 {
   if ( toAdd == nullptr ) return;
   textures_.push_back(toAdd);
-  mngr_->createSprite(toAdd->name_, toAdd->name_);
+  mngr_->createSprite(toAdd->name(), toAdd->name());
 }
 
-  
+
 
 void
 SlTextureManager::clear()
@@ -202,7 +202,7 @@ SlTextureManager::deleteTexture(const std::string& name)
   mngr_->deleteSprite(name);
   std::vector<SlTexture*>::iterator iter;
   for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
-    if ( (*iter)->name_ == name){
+    if ( (*iter)->name() == name){
       delete (*iter);
       textures_.erase(iter);
       break;
@@ -217,7 +217,7 @@ SlTextureManager::findTexture(const std::string& name)
 {
   SlTexture* result = nullptr;
   auto iter = std::find_if( textures_.begin(), textures_.end(),
-		[name](const SlTexture* tex) -> bool {return tex->name_ == name; });
+			    [name](const SlTexture* tex) -> bool {return tex->name() == name; });
   if ( iter == textures_.end() ) {
 #ifdef DEBUG
     std::cout << "[SlTextureManager::findTexture] Couldn't find texture " << name << std::endl;
