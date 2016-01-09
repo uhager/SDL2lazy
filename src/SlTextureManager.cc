@@ -12,6 +12,7 @@
 #include <string>
 #include <stdexcept>
 #include <memory>
+#include <algorithm>
 
 #include "SlTexture.h"
 #include "SlSprite.h"
@@ -215,13 +216,15 @@ SlTexture*
 SlTextureManager::findTexture(const std::string& name)
 {
   SlTexture* result = nullptr;
-  std::vector<SlTexture*>::iterator iter;
-  for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
-    if ( (*iter)->name_ == name){
-      result = *iter;
-      break;
-    }
+  auto iter = std::find_if( textures_.begin(), textures_.end(),
+		[name](const SlTexture* tex) -> bool {return tex->name_ == name; });
+  if ( iter == textures_.end() ) {
+#ifdef DEBUG
+    std::cout << "[SlTextureManager::findTexture] Couldn't find texture " << name << std::endl;
+#endif
+    return result;
   }
+  result = *iter;
   return result;
 }
 
@@ -267,7 +270,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
 	stream >> dimensions.back();
       }
     }
-    else if ( token == "color" ) {
+    else if ( token == "color" || token == "colour") {
       while ( !stream.eof() ){
 	colors.push_back("");
 	stream >> colors.back();

@@ -408,7 +408,7 @@ SlManager::moveInRenderQueueBefore(const std::string& toMoveName, const std::str
 
 
 void
-SlManager::moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& coordinates)
+SlManager::moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters)
 {
   std::shared_ptr<SlSprite> toMove = findSprite(name);
 
@@ -427,8 +427,15 @@ SlManager::moveSprite(const std::string& name, unsigned int destination, const s
 
   if ( whatToDo == "setOrigin" ) {
     int origin[2] ;
-    bool check = determineValues( coordinates, origin, 2 );
+    bool check = determineValues( parameters, origin, 2 );
     if ( check ) toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
+  }
+  if ( whatToDo == "centerIn" ) {
+    std::string target = parameters.at(0);
+    int targetDest;
+    if ( parameters.size() > 1) targetDest = std::stoul(parameters.at(1));
+    else targetDest = 0;
+    centerSpriteInSprite( name, target, destination, targetDest) ; 
   }
 }
 
