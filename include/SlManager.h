@@ -158,6 +158,11 @@ class SlManager
   /*!  Initializes window
    */
   void initializeWindow(const std::string& name, int width, int height);
+  /*! Moves a SlRenderItem's position in the #renderQueue_ to before of after the target item.\n
+    beforeOrAfter is 0 for before, 1 for after. Larger (smaller) values will result in the target item begin inserted further upstream (downstream) of the target. 
+    (Handle with care, currently no test for valid iterators beyond +1...)
+   */
+  bool moveInRenderQueue(const std::string& toMoveName, const std::string& targetName, unsigned int destToMove = 0, unsigned int targetDest = 0, int beforeOrAfter = 0);
   /*! Move the sprite based on configuration file.\
     Currently implemented whatToDo:\n
     setOrigin

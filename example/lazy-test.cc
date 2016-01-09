@@ -55,7 +55,7 @@ int main()
   mngr->insertInRenderQueueAfter("upperleft", "background");
   mngr->insertInRenderQueueBefore("lowerleft", "minimap");
 
-  //  mngr->swapInRenderQueue( "down", "up", 0, 0 );
+  mngr->swapInRenderQueue( "down", "up", 0, 0 );
 
   bool quit = false;
   SDL_Event event;
