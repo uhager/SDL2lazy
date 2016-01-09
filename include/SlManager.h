@@ -15,6 +15,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "SlTextureManager.h"
 
 
 class SlTexture;
@@ -179,7 +180,7 @@ class SlManager
   std::vector<SlRenderItem*> renderQueue_;
   /*! Texture manager, creates, stores, deletes textures
    */
-  SlTextureManager* tmngr_ = nullptr;
+  std::unique_ptr<SlTextureManager> tmngr_  = nullptr;
   /*! Window width.
    */
   int screen_width_ ;

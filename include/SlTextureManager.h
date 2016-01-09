@@ -29,7 +29,7 @@ class SlTextureManager
    */
   SlTextureManager(SlManager* manager);
 
-  ~SlTextureManager(void);
+  ~SlTextureManager();
 
   /*! Delete copy constructor. The manager owns the window, don't want copies of that.
    */

@@ -10,7 +10,7 @@ SDL_INCLUDES = $(shell sdl2-config --cflags)
 SDL_LIBS = $(shell sdl2-config --libs) -lSDL2_image
 
 CXX = g++
-CXXFLAGS += -O2 -Wall -fPIC -std=c++11 -I$(INC)
+CXXFLAGS += -O2 -Wall -fPIC -std=c++14 -I$(INC)
 
 DEBUG_FLAGS = -g -DDEBUG 
 

@@ -39,6 +39,7 @@ SlManager::SlManager(const std::string& name, int width, int height)
 SlManager::~SlManager(void)
 {
   this->clear();
+  tmngr_ = nullptr;
   SDL_DestroyRenderer(renderer_);
   renderer_ = nullptr;
   SDL_DestroyWindow( window_ );
@@ -254,7 +255,7 @@ SlManager::initialize()
     SDL_Quit();
     exit(1);
   }
-  tmngr_ = new SlTextureManager( this );
+  tmngr_ = std::make_unique<SlTextureManager>( this );
 }
 
 

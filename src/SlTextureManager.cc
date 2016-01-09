@@ -36,6 +36,7 @@ SlTextureManager::SlTextureManager(SlManager* manager)
 SlTextureManager::~SlTextureManager(void)
 {
   this->clear();
+  mngr_ = nullptr;
 }
 
 
@@ -223,7 +224,6 @@ SlTextureManager::findTexture(const std::string& name)
   }
   return result;
 }
-
 
 
 
