@@ -194,7 +194,7 @@ SlManager::deleteTexture(const std::string& name)
 
 
 bool
-SlManager::determineValues(std::vector<std::string> stringValues, int *values, unsigned int valueSize ) 
+SlManager::determineValues(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize ) 
 {
   bool validValues = false;
   
@@ -408,7 +408,7 @@ SlManager::moveInRenderQueueBefore(const std::string& toMoveName, const std::str
 
 
 void
-SlManager::moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, std::vector<std::string> coordinates)
+SlManager::moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& coordinates)
 {
   std::shared_ptr<SlSprite> toMove = findSprite(name);
 

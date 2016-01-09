@@ -67,7 +67,7 @@ class SlManager
   void deleteTexture(const std::string& name);
   /*! Extract integer values from strings read from file.
    */
-  bool determineValues(std::vector<std::string> stringValues, int *values, unsigned int valueSize ); 
+  bool determineValues(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize ); 
   /*! Returns pointer to the sprite, nullptr if not found.
    */
   std::shared_ptr<SlSprite> findSprite(const std::string& name);
@@ -167,7 +167,7 @@ class SlManager
     Currently implemented whatToDo:\n
     setOrigin
    */
-  void moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, std::vector<std::string> coordinates);
+  void moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& coordinates);
   /*! Read sprite configurations from file
    */
   void parseSprite(std::ifstream& input);

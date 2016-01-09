@@ -41,7 +41,7 @@ SlTexture::~SlTexture()
 
 
 int
-SlTexture::createFromConfigFile(SDL_Renderer* renderer, const std::string& fileName)
+SlTexture::createFromConfigFile(const SDL_Renderer* renderer, const std::string& fileName)
 {
   int created = 0;
   // to be continued
@@ -79,7 +79,7 @@ SlTexture::createFromRectangle(SDL_Renderer* renderer, int width, int height, ui
 
 
 int
-SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgroundTexture, std::shared_ptr<SlSprite> foregroundSprite)
+SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgroundTexture, const std::shared_ptr<SlSprite> foregroundSprite)
 {
   int result = 0;
 
@@ -108,7 +108,7 @@ SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgrou
 
 
 int
-SlTexture::createFromTile(SDL_Renderer *renderer, std::shared_ptr<SlSprite> tile, int width, int height)
+SlTexture::createFromTile(SDL_Renderer *renderer, const std::shared_ptr<SlSprite> tile, int width, int height)
 {
   int result = 0;
   texture_ = SDL_CreateTexture(renderer, 0, SDL_TEXTUREACCESS_TARGET, width, height);

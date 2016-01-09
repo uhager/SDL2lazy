@@ -51,7 +51,7 @@ class SlRenderItem
 
   /*! Sets values for all data members.
    */
-  void initialize(std::shared_ptr<SlSprite> pSprite, unsigned int dest);
+  void initialize(const std::shared_ptr<SlSprite> pSprite, unsigned int dest);
   /*! The sprite that will be rendered.
    */
   std::shared_ptr<SlSprite> sprite_;

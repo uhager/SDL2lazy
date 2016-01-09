@@ -42,7 +42,7 @@ SlRenderItem::SlRenderItem(const SlRenderItem& toCopy)
 
 
 void
-SlRenderItem::initialize(std::shared_ptr<SlSprite> pSprite, unsigned int dest)
+SlRenderItem::initialize(const std::shared_ptr<SlSprite> pSprite, unsigned int dest)
 {
   destination_ = dest;
   sprite_ = pSprite;

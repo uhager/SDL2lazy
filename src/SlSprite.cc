@@ -88,7 +88,7 @@ SlSprite::addDestination(int x, int y, uint32_t renderOptions)
 
 
 void
-SlSprite::centerInSprite(std::shared_ptr<SlSprite> otherSprite, unsigned int destinationThis, unsigned int destinationOther)
+SlSprite::centerInSprite(const std::shared_ptr<SlSprite> otherSprite, unsigned int destinationThis, unsigned int destinationOther)
 {
   if ( destinationThis >= destinations_.size() || destinationOther >= otherSprite->destinations_.size() ) {
 #ifdef DEBUG
@@ -272,7 +272,7 @@ SlSprite::setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsi
 
 
 bool
-SlSprite::setDestination(SDL_Rect dstRect, unsigned int i)
+SlSprite::setDestination(const SDL_Rect& dstRect, unsigned int i)
 {
   bool hasDestination = true;
   if (i >= destinations_.size()) {

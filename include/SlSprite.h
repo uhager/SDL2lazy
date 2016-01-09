@@ -100,7 +100,7 @@ class SlSprite
   void addDestination(int x, int y, uint32_t renderOptions = SL_RENDER_DEFAULT);
   /*! Centers the destination of this sprite in the destinationRect of the other sprite.
    */
-  void centerInSprite(std::shared_ptr<SlSprite> otherSprite, unsigned int destionationThis = 0, unsigned int destinationOther = 0);
+  void centerInSprite(const std::shared_ptr<SlSprite> otherSprite, unsigned int destionationThis = 0, unsigned int destinationOther = 0);
   /*! Removes all entries from #destinations_. Sprite will not be rendered.
    */
   void clearDestinations();
@@ -136,7 +136,7 @@ class SlSprite
 
     Sets where and how large the texture will be rendered.
   */
-  bool setDestination(SDL_Rect dstRect, unsigned int i = 0);
+  bool setDestination(const SDL_Rect& dstRect, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_.
 
     Sets where and how large the texture will be rendered.
