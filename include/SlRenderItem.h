@@ -39,8 +39,8 @@ class SlRenderItem
    */
   bool operator==( const SlRenderItem& rhs)
   {
-    return ( (sprite_->name_        == rhs.sprite_->name_  ) &&
-	     (destination_          == rhs.destination_    ) );
+    return ( (sprite_->name() == rhs.sprite_->name() ) &&
+	     (destination_    == rhs.destination_    ) );
   }
   /*! SlRenderItems are equal when they have the same name and destination, i.e. the same sprite will be plotted in the same position.
    */

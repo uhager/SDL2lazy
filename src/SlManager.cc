@@ -100,12 +100,6 @@ SlManager::clear()
     delete (*item);
   }
   renderQueue_.clear();
-
-  // std::vector<std::shared_ptr<SlSprite>>::iterator sprite;
-  // for ( sprite = sprites_.begin(); sprite != sprites_.end(); ++sprite) {
-  //   delete (*sprite);
-  //   (*sprite) = nullptr ;
-  // }
   sprites_.clear();  
 }
 
@@ -124,9 +118,9 @@ SlManager::createRenderItem(const std::string& name, unsigned int destination)
 #endif
     return item;
   }
-  if (sprite->destinations_.size() <= destination){
+  if (sprite->size() <= destination){
 #ifdef DEBUG
-    std::cout << "[SlManager::createRenderItem] Failed to add sprite " << name << ": destination " << destination << " out of bounds (" << sprite->destinations_.size() << ")" <<  std::endl;
+    std::cout << "[SlManager::createRenderItem] Failed to add sprite " << name << ": destination " << destination << " out of bounds (" << sprite->size() << ")" <<  std::endl;
 #endif
     return item;
   }
@@ -167,7 +161,7 @@ SlManager::deleteSprite(const std::string& name)
   std::vector<SlRenderItem*>::iterator item = renderQueue_.end() ;
   while ( item != renderQueue_.begin() ) {
     --item;
-    if ( (*item)->sprite_->name_ == name ) {
+    if ( (*item)->sprite_->name() == name ) {
       delete (*item);
       renderQueue_.erase(item);
     }
@@ -175,7 +169,7 @@ SlManager::deleteSprite(const std::string& name)
   
   std::vector<std::shared_ptr<SlSprite>>::iterator iter;
   for ( iter=sprites_.begin(); iter != sprites_.end(); ++iter){
-    if ( (*iter)->name_ == name){
+    if ( (*iter)->name() == name){
       //      delete (*iter);
       sprites_.erase(iter);
       break;
@@ -233,7 +227,7 @@ SlManager::findSprite(const std::string& name)
 {
   std::shared_ptr<SlSprite> result = nullptr;
   auto iter = std::find_if( sprites_.begin(), sprites_.end() ,
-			    [name](const std::shared_ptr<SlSprite> sprite) -> bool { return sprite->name_ == name; } ) ;
+			    [name](const std::shared_ptr<SlSprite> sprite) -> bool { return sprite->name() == name; } ) ;
 
   if ( iter == sprites_.end() )
     result = nullptr;
@@ -294,7 +288,7 @@ SlManager::insertInRenderQueueAfter(const std::string& toAdd, const std::string&
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
-    if ( ( (*iter)->sprite_->name_ ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
+    if ( ( (*iter)->sprite_->name() ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
       renderQueue_.insert( (++iter), toInsert );
       isInserted = true;
       break;
@@ -325,7 +319,7 @@ SlManager::insertInRenderQueueBefore(const std::string& toAdd, const std::string
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
-    if ( ( (*iter)->sprite_->name_ ==  beforeThis ) && ( (*iter)->destination_ == destBeforeThis ) ) {
+    if ( ( (*iter)->sprite_->name() ==  beforeThis ) && ( (*iter)->destination_ == destBeforeThis ) ) {
       renderQueue_.insert( (iter), toInsert );
       isInserted = true;
       break;
@@ -348,7 +342,7 @@ SlManager::moveInRenderQueue(const std::string& toMoveName, const std::string& t
   bool isMoved = false;
   
   auto iter1 = std::find_if( renderQueue_.begin(), renderQueue_.end(),
-			     [toMoveName, destToMove](const SlRenderItem* item) -> bool { return ( (item)->sprite_->name_ == toMoveName && (item)->destination_ == destToMove ); } );
+			     [toMoveName, destToMove](const SlRenderItem* item) -> bool { return ( (item)->sprite_->name() == toMoveName && (item)->destination_ == destToMove ); } );
   if ( iter1 == renderQueue_.end() ) {
 #ifdef DEBUG
     std::cout << "[SlManager::moveInRenderQueueAfter] Couldn't find item to move " << toMoveName   << std::endl;
@@ -357,7 +351,7 @@ SlManager::moveInRenderQueue(const std::string& toMoveName, const std::string& t
   }
 
   auto iter2 = std::find_if( renderQueue_.begin(), renderQueue_.end(),
-			     [targetName, targetDest](const SlRenderItem* item) -> bool { return ( (item)->sprite_->name_ == targetName && (item)->destination_ == targetDest ); } );
+			     [targetName, targetDest](const SlRenderItem* item) -> bool { return ( (item)->sprite_->name() == targetName && (item)->destination_ == targetDest ); } );
   if ( iter2 == renderQueue_.end() ) {
 #ifdef DEBUG
     std::cout << "[SlManager::moveInRenderQueueAfter] Couldn't find RenderItem to insert after: " << targetName << std::endl;
@@ -418,7 +412,7 @@ SlManager::moveSprite(const std::string& name, unsigned int destination, const s
 #endif
     return;
   }
-  if ( destination >= toMove->destinations_.size() ){
+  if ( destination >= toMove->size() ){
 #ifdef DEBUG
     std::cout << "[SlManager::moveSprite] Invalid destination for sprite " << name << std::endl;
 #endif
@@ -601,7 +595,7 @@ SlManager::render()
       result = (item->sprite_)->render( renderer_, (item->destination_) );
       if (result != 0) {
 #ifdef DEBUG
-	std::cout << "[SlManager::render] Couldn't render sprite " << item->sprite_->name_ << std::endl;
+	std::cout << "[SlManager::render] Couldn't render sprite " << item->sprite_->name() << std::endl;
 #endif
 	return result;
       }
@@ -680,7 +674,7 @@ SlManager::swapInRenderQueue(const std::string& toAdd, const std::string& toRemo
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
-    if ( ( (*iter)->sprite_->name_ ==  toRemove ) && ( (*iter)->destination_ == destToRemove ) ) {
+    if ( ( (*iter)->sprite_->name() ==  toRemove ) && ( (*iter)->destination_ == destToRemove ) ) {
       delete (*iter);
       *iter = item;
       isSwapped = true;
@@ -756,7 +750,7 @@ SlManager::toggleRender(const std::string& toToggle, unsigned int destination, i
   }    
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); ( ( iter != renderQueue_.end() ) && ( !isToggled ) ) ; ++iter) {
-    if ( ( (*iter)->sprite_->name_ ==  toToggle ) && ( (*iter)->destination_ == destination ) ) {
+    if ( ( (*iter)->sprite_->name() ==  toToggle ) && ( (*iter)->destination_ == destination ) ) {
       switch (onOrOff){
       case -1:
 	(*iter)->renderMe_ = !((*iter)->renderMe_) ;

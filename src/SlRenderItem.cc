@@ -25,7 +25,7 @@ SlRenderItem::SlRenderItem(std::shared_ptr<SlSprite> pSprite, unsigned int dest)
 SlRenderItem::~SlRenderItem()
 {
 #ifdef DEBUG
-    std::cout << "[SlRenderItem::~SlRenderItem] Deleting item for sprite " << sprite_->name_  << std::endl;
+  std::cout << "[SlRenderItem::~SlRenderItem] Deleting item for sprite " << sprite_->name()  << std::endl;
 #endif
   sprite_ = nullptr;
 }

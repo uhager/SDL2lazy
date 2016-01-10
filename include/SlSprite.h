@@ -71,8 +71,6 @@ The SlSprite has a source rectangle which defines which part of the texture is r
  */
 class SlSprite
 {
-  friend class SlManager;
-  friend class SlRenderItem;
  public:
   /*! This is the constructor that should be used for creating SlSprites. 
 
@@ -118,7 +116,7 @@ class SlSprite
   bool hasDestination();
   /*! Allows reading the name, but not changing it.
    */
-  std::string name() {return name_;}
+  std::string name() const {return name_;}
 
   /*! Renders all copies of the sprite given in #destinations_.
    */
@@ -156,7 +154,9 @@ class SlSprite
     \retval false if i > #destinations_ size.
    */
   bool setRenderOptions(uint32_t renderOptions, unsigned int i = 0);
-
+  /*! Number of defined destinations. Used by the SlManager to check if requested destinations are valid.
+   */
+  unsigned int size() {return destinations_.size();}
 
   
  protected:
