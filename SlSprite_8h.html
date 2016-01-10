@@ -85,8 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">SlSprite.h File Reference</div>  </div>
 </div><!--header-->
@@ -100,19 +99,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;SDL2/SDL.h&gt;</code><br />
 <code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="SlRenderOptions_8h_source.html">SlRenderOptions.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SlSprite.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="SlSprite_8h__incl.png" border="0" usemap="#include_2SlSprite_8h" alt=""/></div>
 <map name="include_2SlSprite_8h" id="include_2SlSprite_8h">
-</map>
+<area shape="rect" id="node8" href="SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="630,80,762,107"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="SlSprite_8h__dep__incl.png" border="0" usemap="#include_2SlSprite_8hdep" alt=""/></div>
 <map name="include_2SlSprite_8hdep" id="include_2SlSprite_8hdep">
-<area shape="rect" id="node2" href="SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="140,155,264,181"/><area shape="rect" id="node3" href="SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="27,80,135,107"/><area shape="rect" id="node4" href="SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="159,80,277,107"/><area shape="rect" id="node5" href="SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="302,80,470,107"/><area shape="rect" id="node6" href="SlRenderItem_8h.html" title="SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="495,80,653,107"/><area shape="rect" id="node7" href="SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="503,155,645,181"/></map>
+<area shape="rect" id="node2" href="SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="332,155,456,181"/><area shape="rect" id="node3" href="SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="24,80,132,107"/><area shape="rect" id="node4" href="SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="156,80,314,107"/><area shape="rect" id="node5" href="SlSpriteManipulation_8cc.html" title="src/SlSpriteManipulation.cc" alt="" coords="339,80,520,107"/><area shape="rect" id="node6" href="SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="545,80,664,107"/><area shape="rect" id="node7" href="SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="688,80,856,107"/><area shape="rect" id="node8" href="SlRenderItem_8h.html" title="SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="881,80,1040,107"/><area shape="rect" id="node9" href="SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="889,155,1032,181"/></map>
 </div>
 </div>
 <p><a href="SlSprite_8h_source.html">Go to the source code of this file.</a></p>
@@ -123,43 +123,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html">SlSprite</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:af222e38a6d85bfac79864e4ad5a76622"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SlSprite_8h.html#af222e38a6d85bfac79864e4ad5a76622">SlRenderOptions</a> { <b>SL_RENDER_DEFAULT</b> = (1u &lt;&lt; 0), 
-<b>SL_RENDER_COLORMOD</b> = (1u &lt;&lt; 1), 
-<b>SL_RENDER_ALPHAMOD</b> = (1u &lt;&lt; 2)
- }</td></tr>
-<tr class="memdesc:af222e38a6d85bfac79864e4ad5a76622"><td class="mdescLeft">&#160;</td><td class="mdescRight">specifies where, what, and how to render.  <a href="SlSprite_8h.html#af222e38a6d85bfac79864e4ad5a76622">More...</a><br /></td></tr>
-<tr class="separator:af222e38a6d85bfac79864e4ad5a76622"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classSlSprite.html">SlSprite</a> class, RenderOptions enum, <a class="el" href="structSlRenderSettings.html">SlRenderSettings</a> struct. </p>
 <p>A <a class="el" href="classSlSprite.html">SlSprite</a> is any object that will be rendered from a texture. It contains a pointer to a <a class="el" href="classSlTexture.html">SlTexture</a> and has to be created after the <a class="el" href="classSlTexture.html">SlTexture</a>.<br />
 The <a class="el" href="classSlSprite.html">SlSprite</a> has a source rectangle which defines which part of the texture is rendered and cannnot be changed. It can have several destination rectangles with different render options to render it multiple times on screen. </p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a class="anchor" id="af222e38a6d85bfac79864e4ad5a76622"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="SlSprite_8h.html#af222e38a6d85bfac79864e4ad5a76622">SlRenderOptions</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>specifies where, what, and how to render. </p>
-<p>Specifies whether to use the <a class="el" href="classSlTexture.html">SlTexture</a>'s source or destination SDL_Rect. Also specifies use of colour mod and alpha mod.<br />
-Currently implemented:<br />
-sourceRect to clip part of the texture<br />
-destinationRect to specify where and how big to render<br />
-colour mod (SDL_SetTextureColorMod)<br />
-alpha mod (SDL_SetTextureAlphaMod)<br />
-</p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

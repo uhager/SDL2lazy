@@ -4,10 +4,17 @@ var searchData=
   ['slmanager_2eh',['SlManager.h',['../SlManager_8h.html',1,'']]],
   ['slrenderitem_2ecc',['SlRenderItem.cc',['../SlRenderItem_8cc.html',1,'']]],
   ['slrenderitem_2eh',['SlRenderItem.h',['../SlRenderItem_8h.html',1,'']]],
+  ['slrenderoptions_2eh',['SlRenderOptions.h',['../SlRenderOptions_8h.html',1,'']]],
   ['slsprite_2ecc',['SlSprite.cc',['../SlSprite_8cc.html',1,'']]],
   ['slsprite_2eh',['SlSprite.h',['../SlSprite_8h.html',1,'']]],
+  ['slspritemanager_2ecc',['SlSpriteManager.cc',['../SlSpriteManager_8cc.html',1,'']]],
+  ['slspritemanager_2eh',['SlSpriteManager.h',['../SlSpriteManager_8h.html',1,'']]],
+  ['slspritemanipulation_2ecc',['SlSpriteManipulation.cc',['../SlSpriteManipulation_8cc.html',1,'']]],
+  ['slspritemanipulation_2eh',['SlSpriteManipulation.h',['../SlSpriteManipulation_8h.html',1,'']]],
   ['sltexture_2ecc',['SlTexture.cc',['../SlTexture_8cc.html',1,'']]],
   ['sltexture_2eh',['SlTexture.h',['../SlTexture_8h.html',1,'']]],
   ['sltexturemanager_2ecc',['SlTextureManager.cc',['../SlTextureManager_8cc.html',1,'']]],
-  ['sltexturemanager_2eh',['SlTextureManager.h',['../SlTextureManager_8h.html',1,'']]]
+  ['sltexturemanager_2eh',['SlTextureManager.h',['../SlTextureManager_8h.html',1,'']]],
+  ['slvalueparser_2ecc',['SlValueParser.cc',['../SlValueParser_8cc.html',1,'']]],
+  ['slvalueparser_2eh',['SlValueParser.h',['../SlValueParser_8h.html',1,'']]]
 ];
