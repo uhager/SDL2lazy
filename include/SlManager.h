@@ -16,12 +16,12 @@
 #include <SDL2/SDL_image.h>
 
 #include "SlTextureManager.h"
+#include "SlSpriteManager.h"
 
 
 class SlTexture;
 class SlSprite;
 class SlRenderItem;
-class SlTextureManager;
 
 class SlManager
 {
@@ -43,35 +43,29 @@ class SlManager
     \retval false if sprite not found or destination out of bounds.
    */ 
   bool appendToRenderQueue(const std::string& name, unsigned int destination = 0);
-  /*! Centers the destination of the sprite in the destinationRect of the target sprite.\n
-    Note that if the destination dimensions are changed afterwards, the sprite will no longer be centered.
-   */
-  void centerSpriteInSprite(const std::string& toCenter, const std::string& target, unsigned int destinationThis = 0, unsigned int destinationOther = 0);
   /*! Creates new SlRenderItem for the specified sprite. \n
     \retval false if sprite not found or destination out of bounds.
    */ 
   SlRenderItem* createRenderItem(const std::string& name, unsigned int destination);
-  /*! Creates sprite based on the texture textureName.
-
-    If either width or height are 0, the texture's width and height will be used.\n
-    The default values will use the whole texture as a sprite.
-    Calls SlSprite::addDefaultDestination(), so if you don't want to use that, either delete or adjust that destination.
+  /*! Delete all render items with the specified name from the #renderQueue_ .
+    Should be called before deleteSprite(const std::string& name).
    */
-  std::shared_ptr<SlSprite> createSprite(const std::string& name, const std::string& textureName, int x = 0, int y = 0, int width = 0, int height = 0);
+  void deleteRenderItem(const std::string& name);
   /*! Delete the specified sprite and remove from #sprites_ .
+    Should be called before deleteTexture(const std::string& name).
    */
   void deleteSprite(const std::string& name);
    /*! Tells #tmngr_ to delete the specified texture and remove from SlTextureManager::textures_ . \n 
-    Also deletes the SlSprite of same name that was created automatically with the texture.
    */
   void deleteTexture(const std::string& name);
   /*! Extract integer values from strings read from file.
    */
   bool determineValues(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize ); 
-  /*! Returns pointer to the sprite, nullptr if not found.
+  /*! Returns pointer to the sprite, nullptr if not found. 
    */
   std::shared_ptr<SlSprite> findSprite(const std::string& name);
   /*! Returns pointer to the texture, nullptr if not found.
+    Calls SlTextureManager #tmngr_ .
    */
   SlTexture* findTexture(const std::string& name);
   /*! Inserts the sprite into the #renderQueue_ after the specified sprite.
@@ -163,29 +157,17 @@ class SlManager
     (Handle with care, currently no test for valid iterators beyond +1...)
    */
   bool moveInRenderQueue(const std::string& toMoveName, const std::string& targetName, unsigned int destToMove = 0, unsigned int targetDest = 0, int beforeOrAfter = 0);
-  /*! Move the sprite based on configuration file.\
-    Currently implemented whatToDo:\n
-    setOrigin
-   */
-  void moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& coordinates);
-  /*! Read sprite configurations from file
-   */
-  void parseSprite(std::ifstream& input);
-  /*! Read sprite placement from file.
-   */
-  void parseSpriteMovement(std::ifstream& input);
   
  private:
-  /*! Holds all SlSprites that were created using SlManager methods.
-    Sprites will be deleted when the SlManager instance is deleted.
-   */
-  std::vector<std::shared_ptr<SlSprite>> sprites_;
   /*! Holds the items to be rendered. The front of the queue is rendered first (background) the last element is rendered last (foreground).
    */
   std::vector<SlRenderItem*> renderQueue_;
-  /*! Texture manager, creates, stores, deletes textures
+  /*! Texture manager, creates, stores, deletes SlTexture objects.
    */
   std::unique_ptr<SlTextureManager> tmngr_  = nullptr;
+  /*! Sprite manager, creates, stores, manipulates, and deletes SlSprite objects.
+   */
+  std::unique_ptr<SlSpriteManager> smngr_  = nullptr;
   /*! Window width.
    */
   int screen_width_ ;

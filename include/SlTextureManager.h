@@ -65,7 +65,7 @@ class SlTextureManager
   SlTexture* findTexture(const std::string& name);
   /*! Read texture configurations from file
   */
-  void parseTexture(std::ifstream& input);
+  SlTexture* parseTexture(std::ifstream& input);
 					      
  protected:
   /*!Default constructor.

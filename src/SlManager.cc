@@ -18,6 +18,8 @@
 #include "SlSprite.h"
 #include "SlRenderItem.h"
 #include "SlTextureManager.h"
+#include "SlSpriteManager.h"
+
 #include "SlManager.h"
 
 
@@ -41,6 +43,7 @@ SlManager::~SlManager(void)
 {
   this->clear();
   tmngr_ = nullptr;
+  smngr_ = nullptr;
   SDL_DestroyRenderer(renderer_);
   renderer_ = nullptr;
   SDL_DestroyWindow( window_ );
@@ -70,29 +73,6 @@ SlManager::appendToRenderQueue(const std::string& name, unsigned int destination
 
 
 void
-SlManager::centerSpriteInSprite(const std::string& toCenter, const std::string& target, unsigned int destinationThis, unsigned int destinationOther)
-{
-  std::shared_ptr<SlSprite> sprite = findSprite(toCenter);
-  if ( sprite == nullptr ) {
-#ifdef DEBUG
-    std::cerr << "[SlManager::centerSpriteInSprite] Couldn't find sprite " << toCenter << std::endl;
-#endif
-    return;
-  }
-
-  std::shared_ptr<SlSprite> other = findSprite(target);
-  if ( other == nullptr ) {
-#ifdef DEBUG
-    std::cerr << "[SlManager::centerSpriteInSprite] Couldn't find sprite " << other << std::endl;
-#endif
-    return;
-  }
-
-  sprite->centerInSprite( other, destinationThis, destinationOther );
-}
-  
-
-void
 SlManager::clear()
 {
   std::vector<SlRenderItem*>::iterator item;
@@ -100,7 +80,6 @@ SlManager::clear()
     delete (*item);
   }
   renderQueue_.clear();
-  sprites_.clear();  
 }
 
 
@@ -111,7 +90,7 @@ SlManager::createRenderItem(const std::string& name, unsigned int destination)
   std::cout << "[SlManager::createRenderItem] Creating item for " << name  << std::endl;
 #endif
   SlRenderItem* item = nullptr;
-  std::shared_ptr<SlSprite> sprite = findSprite(name);
+  std::shared_ptr<SlSprite> sprite = smngr_->findSprite(name);
   if (sprite == nullptr) {
 #ifdef DEBUG
     std::cout << "[SlManager::createRenderItem] Couldn't find sprite " << name  << std::endl;
@@ -130,33 +109,8 @@ SlManager::createRenderItem(const std::string& name, unsigned int destination)
 
 
 
-std::shared_ptr<SlSprite>
-SlManager::createSprite(const std::string& name, const std::string& textureName, int x, int y, int width, int height)
-{
-  std::shared_ptr<SlSprite> toAdd = findSprite(name);
-  if ( toAdd ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createSprite] Error: Sprite of name " << name << " already exists."  << std::endl;
-#endif
-    return nullptr;
-  }
-  SlTexture* tex = tmngr_->findTexture(textureName);
-  if ( tex == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::createSprite] Couldn't find texture " << textureName << " required for sprite " << name  << std::endl;
-#endif
-  }
-  else {
-    toAdd = std::make_shared<SlSprite>(name, tex, x, y, width, height);
-    sprites_.push_back(toAdd);
-  }
-  return toAdd;
-}
-
-
-
 void
-SlManager::deleteSprite(const std::string& name)
+SlManager::deleteRenderItem(const std::string& name)
 {
   std::vector<SlRenderItem*>::iterator item = renderQueue_.end() ;
   while ( item != renderQueue_.begin() ) {
@@ -166,15 +120,15 @@ SlManager::deleteSprite(const std::string& name)
       renderQueue_.erase(item);
     }
   }
-  
-  std::vector<std::shared_ptr<SlSprite>>::iterator iter;
-  for ( iter=sprites_.begin(); iter != sprites_.end(); ++iter){
-    if ( (*iter)->name() == name){
-      //      delete (*iter);
-      sprites_.erase(iter);
-      break;
-    }
-  }
+}
+
+
+
+void
+SlManager::deleteSprite(const std::string& name)
+{
+  deleteRenderItem(name);
+  smngr_->deleteSprite(name);
 }
 
 
@@ -182,6 +136,7 @@ SlManager::deleteSprite(const std::string& name)
 void
 SlManager::deleteTexture(const std::string& name)
 {
+  deleteSprite(name);
   tmngr_->deleteTexture(name);
 }
 
@@ -225,15 +180,15 @@ SlManager::determineValues(const std::vector<std::string>& stringValues, int *va
 std::shared_ptr<SlSprite>
 SlManager::findSprite(const std::string& name)
 {
-  std::shared_ptr<SlSprite> result = nullptr;
-  auto iter = std::find_if( sprites_.begin(), sprites_.end() ,
-			    [name](const std::shared_ptr<SlSprite> sprite) -> bool { return sprite->name() == name; } ) ;
+  return smngr_->findSprite(name);
+}
 
-  if ( iter == sprites_.end() )
-    result = nullptr;
-  else
-    result = *iter;
-  return result;
+
+
+SlTexture*
+SlManager::findTexture(const std::string& name)
+{
+  return tmngr_->findTexture(name);
 }
 
 
@@ -251,6 +206,7 @@ SlManager::initialize()
     exit(1);
   }
   tmngr_ = std::make_unique<SlTextureManager>( this );
+  smngr_ = std::make_unique<SlSpriteManager>( this );
 }
 
 
@@ -401,40 +357,6 @@ SlManager::moveInRenderQueueBefore(const std::string& toMoveName, const std::str
 
 
 
-void
-SlManager::moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters)
-{
-  std::shared_ptr<SlSprite> toMove = findSprite(name);
-
-  if ( toMove == nullptr ){
-#ifdef DEBUG
-    std::cout << "[SlManager::moveSprite] Couldn't find sprite to move " << name << std::endl;
-#endif
-    return;
-  }
-  if ( destination >= toMove->size() ){
-#ifdef DEBUG
-    std::cout << "[SlManager::moveSprite] Invalid destination for sprite " << name << std::endl;
-#endif
-    return;
-  }
-
-  if ( whatToDo == "setOrigin" ) {
-    int origin[2] ;
-    bool check = determineValues( parameters, origin, 2 );
-    if ( check ) toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
-  }
-  if ( whatToDo == "centerIn" ) {
-    std::string target = parameters.at(0);
-    int targetDest;
-    if ( parameters.size() > 1) targetDest = std::stoul(parameters.at(1));
-    else targetDest = 0;
-    centerSpriteInSprite( name, target, destination, targetDest) ; 
-  }
-}
-
-
-
 bool
 SlManager::parseConfigurationFile(const std::string& filename)
 {
@@ -456,13 +378,14 @@ SlManager::parseConfigurationFile(const std::string& filename)
 	/* empty line or comment */
       }
       else if ( token == "texture" ) {
-	tmngr_->parseTexture( input );
+	SlTexture* newTexture = tmngr_->parseTexture( input );
+	if ( newTexture ) smngr_->createSprite(newTexture);
       }
       else if ( token == "sprite" ) {
-	parseSprite(input);
+	smngr_->parseSprite(input);
       }
       else if ( token == "move_sprite" ) {
-	parseSpriteMovement(input);
+	smngr_->parseSpriteMovement(input);
       }
       else {
 #ifdef DEBUG
@@ -475,110 +398,6 @@ SlManager::parseConfigurationFile(const std::string& filename)
     }
 
   return result;
-}
-
-
-
-void
-SlManager::parseSprite(std::ifstream& input)
-{
-  std::string line, token;
-  std::string name, texture;
-  std::vector<std::string> location;
-  bool endOfConfig = false;
-  
-  getline(input,line);
-  while ( !endOfConfig && input ) {
-    std::istringstream stream(line.c_str());
-    stream >> token;
-    if ( token[0] == '#' || token.empty() ) {
-      /* empty line or comment */
-    }
-    else if ( token == "end" ) {
-      endOfConfig = true;
-    }
-    else if ( token == "name" ) {
-      stream >> name ;
-    }
-    else if ( token == "texture" ) {
-      stream >> texture ;
-    }
-    else if ( token == "location" ) {
-      while ( !stream.eof() ){
-	location.push_back("");
-	stream >> location.back();
-      }
-    }
-    
-    else {
-#ifdef DEBUG
-      std::cerr << "[SlManager::parseSprite] Unknown token " << token << std::endl;
-#endif
-    }
-    
-    token.clear();
-    if ( !endOfConfig ) getline(input,line);
-  }
-
-  if ( name.empty() || texture.empty() ) {
-#ifdef DEBUG
-    std::cerr << "[SlManager::parseSprite] Name or texture missing" << std::endl;
-#endif
-    return;
-  }
-  int loc[4];
-  bool check = determineValues(location, loc, 4);
-  if ( !check ) {
-#ifdef DEBUG
-    std::cerr << "[SlManager::parseSprite] Invalid location for " << name << std::endl;
-#endif
-    return;
-  }
-  createSprite( name, texture, loc[0], loc[1], loc[2], loc[3] );
-  
-}
-
-
-void
-SlManager::parseSpriteMovement(std::ifstream& input)
-{
-  std::string line, token;
-  std::string name, whatToDo;
-  unsigned int destination;
-  std::vector<std::string> coordinates;
-  bool endOfConfig = false;
-  
-  getline(input,line);
-  while ( !endOfConfig && input ) {
-    std::istringstream stream(line.c_str());
-    stream >> token;
-    if ( token[0] == '#' || token.empty() ) {
-      /* empty line or comment */
-    }
-    else if ( token == "end" ) {
-      endOfConfig = true;
-    }
-    else {
-      try {
-	name = token ;
-	stream >> destination ;
-	stream >> whatToDo ;
-	while ( !stream.eof() ){
-	  coordinates.push_back("");
-	  stream >> coordinates.back();
-	}
-	moveSprite( name, destination, whatToDo, coordinates );
-      }
-      catch (std::exception) {
-#ifdef DEBUG
-	std::cerr << "[SlManager::parseSpriteMovement] Error at line: " << line << std::endl;
-#endif
-	;
-      }
-    }
-    token.clear();
-    if ( !endOfConfig ) getline(input,line);
-  }
 }
 
 
@@ -601,7 +420,6 @@ SlManager::render()
       }
     }
   }
-
   SDL_RenderPresent( renderer_ );
   return result;
 }
@@ -611,16 +429,7 @@ SlManager::render()
 bool
 SlManager::setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int destination)
 {
-  bool isSet = false;
-  std::shared_ptr<SlSprite> sprite = findSprite(name);
-  if (sprite == nullptr) {
-#ifdef DEBUG
-    std::cout << "[SlManager::setSpriteColor] Couldn't find sprite " << name  << std::endl;
-#endif
-    return isSet;
-  }
-  isSet = sprite->setColor(red, green, blue, alpha, destination);
-  return isSet;
+  return smngr_->setSpriteColor(name, red, green, blue, alpha, destination);
 }
 
 
@@ -629,16 +438,7 @@ SlManager::setSpriteColor(const std::string& name, uint8_t red, uint8_t green, u
 bool
 SlManager::setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination)
 {
-  bool isSet = false;
-  std::shared_ptr<SlSprite> sprite = findSprite(name);
-  if (sprite == nullptr) {
-#ifdef DEBUG
-    std::cout << "[SlManager::setSpriteDestinationOrigin] Couldn't find sprite " << name  << std::endl;
-#endif
-    return isSet;
-  }
-  isSet = sprite->setDestinationOrigin(x, y, destination);
-  return isSet;
+  return smngr_->setSpriteDestinationOrigin(name, x, y, destination);
 }
 
 
@@ -646,16 +446,7 @@ SlManager::setSpriteDestinationOrigin(const std::string& name,  int x, int y, un
 bool
 SlManager::setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination)
 {
-  bool isSet = false;
-  std::shared_ptr<SlSprite> sprite = findSprite(name);
-  if (sprite == nullptr) {
-#ifdef DEBUG
-    std::cout << "[SlManager::setSpriteRenderOptions] Couldn't find sprite " << name  << std::endl;
-#endif
-    return isSet;
-  }
-  isSet = sprite->setRenderOptions(renderOptions, destination);
-  return isSet;
+  return smngr_->setSpriteRenderOptions(name, renderOptions, destination);
 }
 
 

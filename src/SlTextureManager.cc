@@ -47,7 +47,6 @@ SlTextureManager::addTexture(SlTexture* toAdd)
 {
   if ( toAdd == nullptr ) return;
   textures_.push_back(toAdd);
-  mngr_->createSprite(toAdd->name(), toAdd->name());
 }
 
 
@@ -199,7 +198,6 @@ SlTextureManager::createTextureFromTile(const std::string& name, const std::stri
 void
 SlTextureManager::deleteTexture(const std::string& name)
 {
-  mngr_->deleteSprite(name);
   std::vector<SlTexture*>::iterator iter;
   for ( iter=textures_.begin(); iter != textures_.end(); ++iter){
     if ( (*iter)->name() == name){
@@ -230,9 +228,10 @@ SlTextureManager::findTexture(const std::string& name)
 
 
 
-void
+SlTexture*
 SlTextureManager::parseTexture(std::ifstream& input)
 {
+  SlTexture* toAdd = nullptr;
   std::string line, token;
   bool endOfConfig = false;
   std::string name, type, file, sprite, texture;
@@ -290,11 +289,11 @@ SlTextureManager::parseTexture(std::ifstream& input)
 #ifdef DEBUG
     std::cerr << "[SlTextureManager::parseTexture] No name found" << std::endl;
 #endif
-    return;
+    return toAdd;
   }
   
   if ( type == "file" ) {
-    createTextureFromFile( name, file );
+    toAdd = createTextureFromFile( name, file );
   }
   
   else if ( type == "tile" || type == "rectangle" ) {
@@ -304,11 +303,11 @@ SlTextureManager::parseTexture(std::ifstream& input)
 #ifdef DEBUG
       std::cerr << "[SlTextureManager::parseTexture] invalid dimensions for type " << type << std::endl;
 #endif
-      return;
+      return toAdd;
     }
 
     if ( type == "tile") {
-      createTextureFromTile( name, sprite, dim[0], dim[1] );
+      toAdd = createTextureFromTile( name, sprite, dim[0], dim[1] );
     }
 
     else if ( type == "rectangle" ) {
@@ -318,20 +317,21 @@ SlTextureManager::parseTexture(std::ifstream& input)
 #ifdef DEBUG
 	std::cerr << "[SlTextureManager::parseTexture] invalid color for " << name  << std::endl;
 #endif
-	return;
+	return toAdd;
       }
-      createTextureFromRectangle( name, dim[0], dim[1], colArray[0], colArray[1], colArray[2], colArray[3] );
+      toAdd = createTextureFromRectangle( name, dim[0], dim[1], colArray[0], colArray[1], colArray[2], colArray[3] );
     }
   }
 
   else if ( type == "sprite-on-texture" ) {
-    createTextureFromSpriteOnTexture( name, texture, sprite ) ;
+    toAdd = createTextureFromSpriteOnTexture( name, texture, sprite ) ;
   }
   else {
 #ifdef DEBUG
     std::cerr << "[SlTextureManager::parseTexture] Unknown type "  << type << " for texture " << name << std::endl;
 #endif
   }
+  return toAdd;
 }
 
 
