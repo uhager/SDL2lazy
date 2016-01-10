@@ -164,3 +164,37 @@ SlMCenterIn::manipulateSprite(std::string sname, unsigned int destination, const
   }
   toMove->centerInSprite( target, destination, targetDest);
 }
+
+
+/*! SlMSetOptions implementation
+ */
+SlMSetOptions::SlMSetOptions(SlSpriteManager* manager, SlValueParser** valPars)
+  : SlSpriteManipulation(manager, valPars)
+{
+  name_ = "renderOptions";
+#ifdef DEBUG
+  std::cout << "[SlMSetOptions::SlMSetOptions] Created " << name_ << std::endl;
+#endif
+}
+
+
+
+void
+SlMSetOptions::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+{
+#ifdef DEBUG
+  std::cout << "[SlMSetOptions::manipulateSprite] " << name_ << std::endl;
+#endif
+
+  std::shared_ptr<SlSprite> toChange = verifySprite(sname, destination);
+  if ( toChange == nullptr ) {
+#ifdef DEBUG
+    std::cout << "[SlMCenterIn::manipulateSprite] Invalid sprite or destination " << sname << std::endl;
+#endif
+    return;
+  }
+  
+  int options[1] ;
+  bool check = (*valParser)->stringsToInts( parameters, options, 1 );
+  if ( check ) toChange->setRenderOptions( options[0], destination );
+}

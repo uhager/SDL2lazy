@@ -33,6 +33,8 @@ SlSpriteManager::SlSpriteManager(SlManager* mngr)
   manipulations_[toAdd->name()] = toAdd;
   toAdd = new SlMCenterIn( this, &valParser );
   manipulations_[toAdd->name()] = toAdd;
+  toAdd = new SlMSetOptions( this, &valParser );
+  manipulations_[toAdd->name()] = toAdd;
 }
 
 

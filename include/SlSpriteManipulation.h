@@ -70,6 +70,17 @@ public:
 
 
 
+/*! \class SlMSetOptions derived from SlSpriteManipulation. Sets renderOptions for sprite.
+ */ 
+class SlMSetOptions : public SlSpriteManipulation
+{
+public:
+  SlMSetOptions(SlSpriteManager* manager, SlValueParser** valParser);
+  void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
 
 
 

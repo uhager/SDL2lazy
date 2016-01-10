@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+#include "SlRenderOptions.h" 
 #include "SlValueParser.h"
 
 
@@ -42,23 +43,37 @@ SlValueParser::stringsToInts(const std::vector<std::string>& stringValues, int *
 {
     bool validValues = false;
   
-  if ( stringValues.size() != valueSize ) {
+  if ( stringValues.size() < valueSize ) {
 #ifdef DEBUG
-    std::cerr << "[SlManager::determineColors] Need 4 colors, found " << stringValues.size() << std::endl;
+    std::cerr << "[SlManager::determineColors] Need 4 values, found " << stringValues.size() << std::endl;
 #endif
     return validValues;
   }
 
-  for ( unsigned int i = 0 ; i != stringValues.size() ; ++i , ++values){
+  *values = 0;
+  
+  for ( unsigned int i = 0 ; i != stringValues.size() ; ++i){
     if ( stringValues.at(i) == "SCREEN_WIDTH" ) {
       (*values) = screen_width_;
+      ++values;
     }
     else if ( stringValues.at(i) == "SCREEN_HEIGHT" ) {
       (*values) = screen_height_;
+      ++values;
     }
+    else if ( stringValues.at(i) == "default" ) {
+      (*values) |= SL_RENDER_DEFAULT;
+      }
+    else if ( stringValues.at(i) == "alpha" ) {
+      (*values) |= SL_RENDER_ALPHAMOD;
+      }
+    else if ( stringValues.at(i) == "colour" ||  stringValues.at(i) == "color" ) {
+      (*values) |= SL_RENDER_COLORMOD;
+      }
     else {
       try {
 	(*values) = std::stoi( stringValues.at(i) );
+	++values;
       }
       catch (std::invalid_argument) {
 	return validValues;
