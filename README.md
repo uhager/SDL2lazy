@@ -3,12 +3,17 @@ This is very much work-in-progress, no guarantees that anything works or ever wi
 
 Compile with make for default, 
 > $ make debug
+
 for debug options.
 
-Run \n
-> $ make dox 
+Run 
+
+> $ make dox
+
 or
-> $ doxygen Doxyfile 
+
+> $ doxygen Doxyfile
+
 to generate documentation, or go to http://uhager.github.io/SDL2lazy/index.html.
 
 The example directory contains an example program where I try to use some of the functionality already implemented in the wrapper.
