@@ -17,11 +17,12 @@
 
 #include "SlTextureManager.h"
 #include "SlSpriteManager.h"
-
+#include "SlValueParser.h"
 
 class SlTexture;
 class SlSprite;
 class SlRenderItem;
+
 
 class SlManager
 {
@@ -174,6 +175,9 @@ class SlManager
   /*! Window height
    */
   int screen_height_ ;
+  /*! Helper object to translate file input into values.
+   */
+  SlValueParser valParser_;
 
 };
 

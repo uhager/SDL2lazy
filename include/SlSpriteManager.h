@@ -19,6 +19,9 @@
 class SlSprite;
 class SlManager;
 class SlTexture;
+class SlValueParser;
+class SlSpriteManipulation;
+
 
 class SlSpriteManager
 {
@@ -80,6 +83,9 @@ class SlSpriteManager
     \retval false if i > SlSprite::destinations_ size.
    */
   bool setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination = 0);
+  /*! Helper object to translate file input into values.
+   */
+  SlValueParser* valParser = nullptr;
 					      
  protected:
   /*!Default constructor.

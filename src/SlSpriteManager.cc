@@ -167,7 +167,7 @@ SlSpriteManager::manipulateSprite(const std::string& name, unsigned int destinat
 
   if ( whatToDo == "setOrigin" ) {
     int origin[2] ;
-    bool check = mngr_->determineValues( parameters, origin, 2 );
+    bool check = valParser->stringsToInts( parameters, origin, 2 );
     if ( check ) toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
   }
   if ( whatToDo == "centerIn" ) {
@@ -229,7 +229,7 @@ SlSpriteManager::parseSprite(std::ifstream& input)
     return;
   }
   int loc[4];
-  bool check = mngr_->determineValues(location, loc, 4);
+  bool check = valParser->stringsToInts(location, loc, 4);
   if ( !check ) {
 #ifdef DEBUG
     std::cerr << "[SlSpriteManager::parseSprite] Invalid location for " << name << std::endl;

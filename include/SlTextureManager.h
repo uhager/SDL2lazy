@@ -20,6 +20,7 @@
 class SlManager;
 class SlSprite;
 class SlTexture;
+class SlValueParser;
 
 
 class SlTextureManager
@@ -66,7 +67,11 @@ class SlTextureManager
   /*! Read texture configurations from file
   */
   SlTexture* parseTexture(std::ifstream& input);
-					      
+  /*! Helper object to translate file input into values.
+   */
+  SlValueParser* valParser = nullptr;
+
+  
  protected:
   /*!Default constructor.
    */

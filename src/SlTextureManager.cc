@@ -298,7 +298,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
   
   else if ( type == "tile" || type == "rectangle" ) {
     int dim[2];
-    bool check = mngr_->determineValues( dimensions, dim, 2 );
+    bool check = valParser->stringsToInts( dimensions, dim, 2 );
     if ( !check ) {
 #ifdef DEBUG
       std::cerr << "[SlTextureManager::parseTexture] invalid dimensions for type " << type << std::endl;
@@ -312,7 +312,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
 
     else if ( type == "rectangle" ) {
       int colArray[] = {0,0,0,0};
-      bool check = mngr_->determineValues( colors, colArray, 4 );
+      bool check = valParser->stringsToInts( colors, colArray, 4 );
       if ( !check ) {
 #ifdef DEBUG
 	std::cerr << "[SlTextureManager::parseTexture] invalid color for " << name  << std::endl;

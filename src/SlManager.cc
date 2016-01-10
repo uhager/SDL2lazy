@@ -226,6 +226,10 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
     std::cerr << "Renderer could not be created " <<  SDL_GetError() << std::endl;
     exit(1);
   }
+  
+  valParser_ = SlValueParser(screen_width_, screen_height_);
+  tmngr_->valParser = &valParser_;
+  smngr_->valParser = &valParser_;
 }
 
 
