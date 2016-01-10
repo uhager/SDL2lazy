@@ -65,7 +65,7 @@ class SlSpriteManager
   void parseSprite(std::ifstream& input);
   /*! Read sprite placement from file.
    */
-  void parseSpriteMovement(std::ifstream& input);
+  void parseSpriteManipulation(std::ifstream& input);
   /*! Sets color for SlSprite name at position i of SlSprite::destinations_.
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
@@ -92,7 +92,7 @@ class SlSpriteManager
     Currently implemented whatToDo:\n
     setOrigin
    */
-  void moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters);
+  void manipulateSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters);
   
  private:
   /*! Holds all SlSprites that were created using SlSpriteManager methods.

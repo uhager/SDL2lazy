@@ -148,19 +148,19 @@ SlSpriteManager::findSprite(const std::string& name)
 
 
 void
-SlSpriteManager::moveSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters)
+SlSpriteManager::manipulateSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters)
 {
   std::shared_ptr<SlSprite> toMove = findSprite(name);
 
   if ( toMove == nullptr ){
 #ifdef DEBUG
-    std::cout << "[SlSpriteManager::moveSprite] Couldn't find sprite to move " << name << std::endl;
+    std::cout << "[SlSpriteManager::manipulateSprite] Couldn't find sprite to move " << name << std::endl;
 #endif
     return;
   }
   if ( destination >= toMove->size() ){
 #ifdef DEBUG
-    std::cout << "[SlSpriteManager::moveSprite] Invalid destination for sprite " << name << std::endl;
+    std::cout << "[SlSpriteManager::manipulateSprite] Invalid destination for sprite " << name << std::endl;
 #endif
     return;
   }
@@ -242,7 +242,7 @@ SlSpriteManager::parseSprite(std::ifstream& input)
 
 
 void
-SlSpriteManager::parseSpriteMovement(std::ifstream& input)
+SlSpriteManager::parseSpriteManipulation(std::ifstream& input)
 {
   std::string line, token;
   std::string name, whatToDo;
@@ -269,11 +269,11 @@ SlSpriteManager::parseSpriteMovement(std::ifstream& input)
 	  coordinates.push_back("");
 	  stream >> coordinates.back();
 	}
-	moveSprite( name, destination, whatToDo, coordinates );
+	manipulateSprite( name, destination, whatToDo, coordinates );
       }
       catch (std::exception) {
 #ifdef DEBUG
-	std::cerr << "[SlSpriteManager::parseSpriteMovement] Error at line: " << line << std::endl;
+	std::cerr << "[SlSpriteManager::parseSpriteManipulation] Error at line: " << line << std::endl;
 #endif
 	;
       }

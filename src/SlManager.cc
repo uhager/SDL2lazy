@@ -385,7 +385,7 @@ SlManager::parseConfigurationFile(const std::string& filename)
 	smngr_->parseSprite(input);
       }
       else if ( token == "move_sprite" ) {
-	smngr_->parseSpriteMovement(input);
+	smngr_->parseSpriteManipulation(input);
       }
       else {
 #ifdef DEBUG
