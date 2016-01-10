@@ -17,6 +17,7 @@
 #include "SlSprite.h"
 #include "SlTexture.h"
 #include "SlManager.h"
+#include "SlSpriteManipulation.h"
 
 #include "SlSpriteManager.h"
 
@@ -26,6 +27,12 @@
 SlSpriteManager::SlSpriteManager(SlManager* mngr)
   : mngr_(mngr)
 {
+  SlSpriteManipulation* toAdd;
+  
+  toAdd = new SlMSetOrigin( this, &valParser );
+  manipulations_[toAdd->name()] = toAdd;
+  toAdd = new SlMCenterIn( this, &valParser );
+  manipulations_[toAdd->name()] = toAdd;
 }
 
 
@@ -63,6 +70,10 @@ SlSpriteManager::centerSpriteInSprite(const std::string& toCenter, const std::st
 void
 SlSpriteManager::clear()
 {
+  for (auto iter = manipulations_.begin(); iter != manipulations_.end(); ++iter ) {
+    delete iter->second;
+  }
+  manipulations_.clear();
   sprites_.clear();  
 }
 
@@ -150,36 +161,19 @@ SlSpriteManager::findSprite(const std::string& name)
 void
 SlSpriteManager::manipulateSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters)
 {
-  std::shared_ptr<SlSprite> toMove = findSprite(name);
 
-  if ( toMove == nullptr ){
+  auto iter = manipulations_.find(whatToDo);
+  if ( iter == manipulations_.end() ) {
 #ifdef DEBUG
-    std::cout << "[SlSpriteManager::manipulateSprite] Couldn't find sprite to move " << name << std::endl;
+    std::cout << "[SlSpriteManager::manipulateSprite] Couldn't find object to manipulate sprite " << name << std::endl;
 #endif
     return;
   }
-  if ( destination >= toMove->size() ){
-#ifdef DEBUG
-    std::cout << "[SlSpriteManager::manipulateSprite] Invalid destination for sprite " << name << std::endl;
-#endif
-    return;
-  }
-
-  if ( whatToDo == "setOrigin" ) {
-    int origin[2] ;
-    bool check = valParser->stringsToInts( parameters, origin, 2 );
-    if ( check ) toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
-  }
-  if ( whatToDo == "centerIn" ) {
-    std::string target = parameters.at(0);
-    int targetDest;
-    if ( parameters.size() > 1) targetDest = std::stoul(parameters.at(1));
-    else targetDest = 0;
-    centerSpriteInSprite( name, target, destination, targetDest) ; 
-  }
+  iter->second->manipulateSprite(name, destination, parameters);
+  return;
 }
 
-
+ 
 
 void
 SlSpriteManager::parseSprite(std::ifstream& input)

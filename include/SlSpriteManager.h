@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <map>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -108,6 +109,10 @@ class SlSpriteManager
   /*! The running SlManager that called the constructor.
    */
   SlManager* mngr_ = nullptr;
+  /*! Holds the various SlSpriteManipulations for the different tasks.
+    The map key is the name of the manipulation, which is also the keyword used in the configuration file, the mapped value is the object that will do the actual work.
+   */
+  std::map<std::string, SlSpriteManipulation*> manipulations_;
 };
 
 
