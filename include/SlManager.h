@@ -52,11 +52,10 @@ class SlManager
     Should be called before deleteSprite(const std::string& name).
    */
   void deleteRenderItem(const std::string& name);
-  /*! Delete the specified sprite and remove from #sprites_ .
-    Should be called before deleteTexture(const std::string& name).
+  /*! Tells #smngr_ to delete the specified sprite. Also deletes all associated entries in #renderQueue_ .
    */
   void deleteSprite(const std::string& name);
-   /*! Tells #tmngr_ to delete the specified texture and remove from SlTextureManager::textures_ . \n 
+   /*! Tells #tmngr_ to delete the specified texture and remove from SlTextureManager::textures_ . Also deletes all associates SlSprites.
    */
   void deleteTexture(const std::string& name);
   /*! Extract integer values from strings read from file.

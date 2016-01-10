@@ -11,7 +11,8 @@
 #include <string>
 #include <vector>
 
-/*! \class SlValueParser. Translate string input from configuration files to int output.
+/*! \class SlValueParser
+  Translate string input from configuration files to int output.
  */
 class SlValueParser
 {
@@ -33,8 +34,12 @@ class SlValueParser
   SlValueParser(const SlValueParser& toCopy);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
    */
-  bool stringsToInts(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize ); 
+  bool stringsToInts(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize );
+  /*! Window dimensions can be read but not set after construction.
+   */
   int screenWidth() {return screen_width_;}
+  /*! Window dimensions can be read but not set after construction.
+   */
   int screenHeight() {return screen_height_;}
 
  private:

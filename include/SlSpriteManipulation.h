@@ -26,14 +26,23 @@ class SlSpriteManipulation
   SlSpriteManipulation(SlSpriteManager* spritemanager, SlValueParser** valParser);
   virtual ~SlSpriteManipulation();
 
+  /*! Copy constructor. The #smngr_ and #valParser pointers of both objects will point to the same object; 
+   */
   SlSpriteManipulation(const SlSpriteManipulation& toCopy) ;
+  /*! Assignment. The #smngr_ and #valParser pointers of both objects will point to the same object; 
+   */
   SlSpriteManipulation& operator=(const SlSpriteManipulation& rhs) ;
 
   /*! The actual sprite manipulation, implemented in the derived classes.
    */
   virtual void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters);
+  /*! Checks the existence of the named sprite and the validity of the destinations.
+    \retval nullptr if sprite not found or destination out of bounds.
+    \retval sprite of that name if name and destination valid.
+   */
   std::shared_ptr<SlSprite> verifySprite(std::string name, unsigned int destination);
-
+  /*! Name can be read but not set. It is defined by the function that the derived class implements so that the correct derived class can be called based on a keyword.
+   */
   std::string name() {return name_;}
   /*! Helper class to translate strings read from file into integers
    */
@@ -44,6 +53,8 @@ class SlSpriteManipulation
   /*! Name of the object must be identical to the keyword used in the configuration file.
    */
   std::string name_ = "spriteManipulation";
+  /*! The SlSpriteManager that initialized this instance. Needed to find sprites.
+   */
   SlSpriteManager* smngr_ = nullptr;
 };
 
