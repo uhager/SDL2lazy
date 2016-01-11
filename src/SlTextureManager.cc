@@ -19,6 +19,7 @@
 #include "SlTexture.h"
 #include "SlSprite.h"
 #include "SlManager.h"
+#include "SlFont.h"
 #include "SlTextureManager.h"
 
 
@@ -43,7 +44,6 @@ SlTextureManager::SlTextureManager(SlManager* manager)
 SlTextureManager::~SlTextureManager(void)
 {
   this->clear();
-  if (font_) TTF_CloseFont(font_);
   TTF_Quit();
   mngr_ = nullptr;
 }
@@ -236,6 +236,49 @@ SlTextureManager::findTexture(const std::string& name)
 
 
 
+SlFont*
+SlTextureManager::parseFont(std::ifstream& input)
+{
+  SlFont* toAdd = nullptr;
+  std::string line, token;
+  bool endOfConfig = false;
+  std::string name, file;
+  std::vector<std::string> colors;
+  int fontsize;
+  
+  getline(input,line);
+  while ( !endOfConfig && input ) {
+    std::istringstream stream(line.c_str());
+    stream >> token;
+    if ( token[0] == '#' || token.empty() || token[0] == '\n' ) {
+      /* empty line or comment */
+    }
+    else if ( token == "end" ) {
+      endOfConfig = true;
+    }
+    else if ( token == "name" ) {
+      stream >> name ;
+    }
+    else if ( token == "file" ) {
+      stream >> file ;
+    }
+    else if ( token == "size" ) {
+      stream >> fontsize;
+    }
+    else {
+#ifdef DEBUG
+      std::cerr << "[SlTextureManager::parseTexture] Unknown token " << token << std::endl;
+#endif
+    }
+    token.clear();
+    if (  !endOfConfig ) getline(input,line);
+  }
+  return toAdd;
+}
+
+
+
+
 SlTexture*
 SlTextureManager::parseTexture(std::ifstream& input)
 {
@@ -344,17 +387,3 @@ SlTextureManager::parseTexture(std::ifstream& input)
 
 
 
-bool
-SlTextureManager::setFont(std::string fontfile, int fontsize)
-{
-  bool hasfont = false;
-  font_ = TTF_OpenFont(fontfile.c_str(), fontsize);
-  if ( !font_ ) {
-#ifdef DEBUG
-    std::cerr << "[SlTextureManager::setFont] Error: couldn't open font from file" << fontfile << std::endl;
-#endif
-    return hasfont;
-  }
-  
-  return true;
-}

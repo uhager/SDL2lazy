@@ -356,6 +356,9 @@ SlManager::parseConfigurationFile(const std::string& filename)
       else if ( token == "manipulate" ) {
 	smngr_->parseSpriteManipulation(input);
       }
+      else if ( token == "font" ) {
+	tmngr_->parseFont( input );
+      }
       else {
 #ifdef DEBUG
 	std::cerr << "[SlManager::parseConfigurationFile] Unknown token " << token << std::endl;

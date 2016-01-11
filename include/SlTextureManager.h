@@ -22,6 +22,7 @@ class SlManager;
 class SlSprite;
 class SlTexture;
 class SlValueParser;
+class SlFont;
 
 
 class SlTextureManager
@@ -65,16 +66,15 @@ class SlTextureManager
   /*! Returns pointer to the texture, nullptr if not found.
    */
   SlTexture* findTexture(const std::string& name);
+  /*! Read font file, size, colour from file
+  */
+  SlFont* parseFont(std::ifstream& input);
   /*! Read texture configurations from file
   */
   SlTexture* parseTexture(std::ifstream& input);
   /*! Helper object to translate file input into values.
    */
   SlValueParser* valParser = nullptr;
-  /*! Font must be set before rendering fonts.
-    To do: find a way to set font size only when creating the texture.
-   */
-  bool setFont(std::string fontfile, int fontsize);
   
  protected:
   /*!Default constructor.
