@@ -23,7 +23,7 @@ all: $(ALL)
 example: example/lazy-test
 lib: lib/libSDL2lazy.so
 debug: CXXFLAGS += $(DEBUG_FLAGS)
-debug: clean all
+debug: all
 
 .PHONY: clean
 

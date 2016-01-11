@@ -37,10 +37,11 @@ int main()
 
   mngr->setSpriteColor("minimap", 0x40, 0xAA, 0xBB, 0xA0);
 
+  /*
   mngr->setSpriteDestinationOrigin("upperright", SCREEN_WIDTH - 120,                 0  );
   mngr->setSpriteDestinationOrigin("lowerright", SCREEN_WIDTH - 120, SCREEN_HEIGHT - 120);
   mngr->setSpriteDestinationOrigin("lowerleft" ,                0  , SCREEN_HEIGHT - 120); 
-  
+  */
   mngr->appendToRenderQueue("background", 0);    
   mngr->appendToRenderQueue("upperright");
   mngr->appendToRenderQueue("lowerright");

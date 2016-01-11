@@ -243,7 +243,6 @@ SlSpriteManager::parseSpriteManipulation(std::ifstream& input)
   std::string line, token;
   std::string name, whatToDo;
   unsigned int destination;
-  std::vector<std::string> coordinates;
   bool endOfConfig = false;
   
   getline(input,line);
@@ -261,6 +260,7 @@ SlSpriteManager::parseSpriteManipulation(std::ifstream& input)
 	name = token ;
 	stream >> destination ;
 	stream >> whatToDo ;
+	std::vector<std::string> coordinates;
 	while ( !stream.eof() ){
 	  coordinates.push_back("");
 	  stream >> coordinates.back();

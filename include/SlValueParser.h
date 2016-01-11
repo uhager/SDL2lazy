@@ -32,6 +32,10 @@ class SlValueParser
   /*! Copy constructor.
    */
   SlValueParser(const SlValueParser& toCopy);
+
+  /*! Calculates the results of a formula (only + and - implemented).
+   */
+  bool parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, int& value);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
    */
   bool stringsToInts(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize );
@@ -41,6 +45,9 @@ class SlValueParser
   /*! Window dimensions can be read but not set after construction.
    */
   int screenHeight() {return screen_height_;}
+  /*! Returns the integer value for a string. Understands SCREEN_WIDTH and SCREEN_HEIGHT.
+   */
+  bool valueFromString(const std::string& value, int& i);
 
  private:
   /*! Screen dimensions are needed to define a texture as having the dimensions of the window.

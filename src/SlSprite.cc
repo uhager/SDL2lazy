@@ -70,6 +70,7 @@ SlSprite::addDefaultDestination()
 {
   SlRenderSettings defSet;
   defSet.destinationRect = sourceRect_;
+  defSet.destinationRect.x = defSet.destinationRect.y = 0;
   destinations_.push_back(defSet);
 }
 
