@@ -130,9 +130,7 @@ SlValueParser::stringsToInts(const std::vector<std::string>& stringValues, int* 
       (*values) |= SL_RENDER_COLORMOD;
     }
     else if ( stringValues.at(i)[0] == '\"' ) {
-      std::cout << "[SlValueParser::stringsToInts] found formula at position " << i << std::endl; 
       parseFormula(stringValues, i, *values);
-      std::cout << "[SlValueParser::stringsToInts] formula ends at position " << i  << " - Result is " << *values << std::endl;
       ++values;
     }
     else {

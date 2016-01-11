@@ -170,8 +170,9 @@ SlManager::initialize()
     SDL_Quit();
     exit(1);
   }
-  tmngr_ = std::make_unique<SlTextureManager>( this );
-  smngr_ = std::make_unique<SlSpriteManager>( this );
+  tmngr_ = std::unique_ptr<SlTextureManager>(new SlTextureManager( this ));
+  //  smngr_ = std::make_unique<SlSpriteManager>( this );
+  smngr_ = std::unique_ptr<SlSpriteManager>(new SlSpriteManager( this ));
 }
 
 
