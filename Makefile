@@ -7,7 +7,7 @@ LIB = ./lib
 EXAMPLE = ./example
 
 SDL_INCLUDES = $(shell sdl2-config --cflags)
-SDL_LIBS = $(shell sdl2-config --libs) -lSDL2_image
+SDL_LIBS = $(shell sdl2-config --libs) -lSDL2_image -lSDL2_ttf
 
 CXX = g++
 CXXFLAGS += -O2 -Wall -fPIC -std=c++14 -I$(INC)

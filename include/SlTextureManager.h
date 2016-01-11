@@ -14,6 +14,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 
 
@@ -70,7 +71,10 @@ class SlTextureManager
   /*! Helper object to translate file input into values.
    */
   SlValueParser* valParser = nullptr;
-
+  /*! Font must be set before rendering fonts.
+    To do: find a way to set font size only when creating the texture.
+   */
+  bool setFont(std::string fontfile, int fontsize);
   
  protected:
   /*!Default constructor.
@@ -92,6 +96,9 @@ class SlTextureManager
   /*! Pointer to the running SlManager that created this TextureManager.
    */
   SlManager* mngr_ = nullptr;
+  /*! Font used for rendering. This is kept open until program exits to reduce overhead from opening and closing font file.
+   */
+  TTF_Font* font_ ;
 
 };
 

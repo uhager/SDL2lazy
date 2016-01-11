@@ -58,9 +58,6 @@ class SlManager
    /*! Tells #tmngr_ to delete the specified texture and remove from SlTextureManager::textures_ . Also deletes all associates SlSprites.
    */
   void deleteTexture(const std::string& name);
-  /*! Extract integer values from strings read from file.
-   */
-  bool determineValues(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize ); 
   /*! Returns pointer to the sprite, nullptr if not found. 
    */
   std::shared_ptr<SlSprite> findSprite(const std::string& name);

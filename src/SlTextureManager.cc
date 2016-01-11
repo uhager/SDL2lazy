@@ -14,6 +14,8 @@
 #include <memory>
 #include <algorithm>
 
+#include "SDL2/SDL_ttf.h"
+
 #include "SlTexture.h"
 #include "SlSprite.h"
 #include "SlManager.h"
@@ -29,7 +31,11 @@ SlTextureManager::SlTextureManager()
 SlTextureManager::SlTextureManager(SlManager* manager)
   : mngr_(manager)
 {
-
+  if (TTF_Init() != 0){
+    std::cerr << "[SlTextureManager::SlTextureManager] Error in TTF_init: " << SDL_GetError() << std::endl;
+    SDL_Quit();
+    exit(1);
+  }
 }
 
 
@@ -37,6 +43,8 @@ SlTextureManager::SlTextureManager(SlManager* manager)
 SlTextureManager::~SlTextureManager(void)
 {
   this->clear();
+  if (font_) TTF_CloseFont(font_);
+  TTF_Quit();
   mngr_ = nullptr;
 }
 
@@ -335,3 +343,18 @@ SlTextureManager::parseTexture(std::ifstream& input)
 }
 
 
+
+bool
+SlTextureManager::setFont(std::string fontfile, int fontsize)
+{
+  bool hasfont = false;
+  font_ = TTF_OpenFont(fontfile.c_str(), fontsize);
+  if ( !font_ ) {
+#ifdef DEBUG
+    std::cerr << "[SlTextureManager::setFont] Error: couldn't open font from file" << fontfile << std::endl;
+#endif
+    return hasfont;
+  }
+  
+  return true;
+}

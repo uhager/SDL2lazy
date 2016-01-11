@@ -142,41 +142,6 @@ SlManager::deleteTexture(const std::string& name)
 
 
 
-bool
-SlManager::determineValues(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize ) 
-{
-  bool validValues = false;
-  
-  if ( stringValues.size() != valueSize ) {
-#ifdef DEBUG
-    std::cerr << "[SlManager::determineColors] Need 4 colors, found " << stringValues.size() << std::endl;
-#endif
-    return validValues;
-  }
-
-  for ( unsigned int i = 0 ; i != stringValues.size() ; ++i , ++values){
-    if ( stringValues.at(i) == "SCREEN_WIDTH" ) {
-      (*values) = screen_width_;
-    }
-    else if ( stringValues.at(i) == "SCREEN_HEIGHT" ) {
-      (*values) = screen_height_;
-    }
-    else {
-      try {
-	(*values) = std::stoi( stringValues.at(i) );
-      }
-      catch (std::invalid_argument) {
-	return validValues;
-      }
-    }
-  }
-
-  validValues = true;
-  return validValues;
-}
-
-
-
 std::shared_ptr<SlSprite>
 SlManager::findSprite(const std::string& name)
 {
