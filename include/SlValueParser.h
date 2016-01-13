@@ -35,10 +35,12 @@ class SlValueParser
 
   /*! Calculates the results of a formula (only + and - implemented).
    */
-  bool parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, int& value);
+  template<typename T>
+  bool parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, T& value);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
    */
-  bool stringsToInts(const std::vector<std::string>& stringValues, int *values, unsigned int valueSize );
+  template<typename T>
+    bool stringsToInts(const std::vector<std::string>& stringValues, T *array, int length );
   /*! Window dimensions can be read but not set after construction.
    */
   int screenWidth() {return screen_width_;}
@@ -47,7 +49,8 @@ class SlValueParser
   int screenHeight() {return screen_height_;}
   /*! Returns the integer value for a string. Understands SCREEN_WIDTH and SCREEN_HEIGHT.
    */
-  bool valueFromString(const std::string& value, int& i);
+  template<typename T>
+  bool valueFromString(const std::string& value, T& i);
 
  private:
   /*! Screen dimensions are needed to define a texture as having the dimensions of the window.
@@ -59,5 +62,8 @@ class SlValueParser
 
 };
 
+/*! Include template implementation so the compiler can generate the required functions.
+ */
+#include "SlValueParser.t"
 
 #endif /* SLVALUEPARSER_H */

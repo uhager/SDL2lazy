@@ -225,7 +225,7 @@ SlSpriteManager::parseSprite(std::ifstream& input)
     return;
   }
   int loc[4];
-  bool check = valParser->stringsToInts(location, loc, 4);
+  bool check = valParser->stringsToInts<int>(location, loc, 4);
   if ( !check ) {
 #ifdef DEBUG
     std::cerr << "[SlSpriteManager::parseSprite] Invalid location for " << name << std::endl;

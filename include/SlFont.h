@@ -20,10 +20,20 @@ class SlFont
   SlFont(std::string name);
   ~SlFont();
 
-  uint8_t color[4] = {0x00, 0x00, 0x00, 0xFF};
-  
+  short color[4] = {0, 0, 0, 255};
+  std::string message;
+
   bool loadFont(std::string fontfile, int fontsize);
   std::string name(){ return name_;}
+  /*! Set alpha, leaving colours unchanged.
+   */
+  void setAlpha(uint8_t alpha);
+  /*! Set colours and alpha directly without needing to create an array.
+   */
+  void setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+  /*! Set colours directly without needing to create an array. Leaves alpha unchanged.
+   */
+  void setColor(uint8_t red, uint8_t green, uint8_t blue);
 
  private:
   TTF_Font* font_;

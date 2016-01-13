@@ -1,4 +1,10 @@
+// part of SDL2lazy
+// author: Ulrike Hager
 
+/*! \file SlFont.cc
+
+  SlFont implementation
+*/
 
 #include <iostream>
 
@@ -28,6 +34,35 @@ SlFont::loadFont(std::string fontfile, int fontsize)
 #endif
     return hasfont;
   }
-  
   return true;
 }
+
+
+
+void 
+SlFont::setAlpha(uint8_t alpha)
+{
+  color[3] = alpha;
+}
+
+
+
+void 
+SlFont::setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha)
+{
+  color[0] = red;
+  color[1] = green;
+  color[2] = blue;
+  color[3] = alpha;
+}
+
+
+
+void 
+SlFont::setColor(uint8_t red, uint8_t green, uint8_t blue)
+{
+  color[0] = red;
+  color[1] = green;
+  color[2] = blue;
+}
+

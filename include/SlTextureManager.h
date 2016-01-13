@@ -68,7 +68,7 @@ class SlTextureManager
   SlTexture* findTexture(const std::string& name);
   /*! Read font file, size, colour from file
   */
-  SlFont* parseFont(std::ifstream& input);
+  std::shared_ptr<SlFont> parseFont(std::ifstream& input);
   /*! Read texture configurations from file
   */
   SlTexture* parseTexture(std::ifstream& input);
@@ -98,7 +98,7 @@ class SlTextureManager
   SlManager* mngr_ = nullptr;
   /*! Font used for rendering. This is kept open until program exits to reduce overhead from opening and closing font file.
    */
-  TTF_Font* font_ ;
+std::vector<std::shared_ptr<SlFont>> fonts_ ;
 
 };
 

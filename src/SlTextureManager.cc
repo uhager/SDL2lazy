@@ -67,6 +67,7 @@ SlTextureManager::clear()
     delete (*iter);
   }
   textures_.clear();
+  fonts_.clear();
 }
 
 
@@ -236,10 +237,10 @@ SlTextureManager::findTexture(const std::string& name)
 
 
 
-SlFont*
+std::shared_ptr<SlFont>
 SlTextureManager::parseFont(std::ifstream& input)
 {
-  SlFont* toAdd = nullptr;
+  std::shared_ptr<SlFont> toAdd = nullptr;
   std::string line, token;
   bool endOfConfig = false;
   std::string name, file;
@@ -265,6 +266,12 @@ SlTextureManager::parseFont(std::ifstream& input)
     else if ( token == "size" ) {
       stream >> fontsize;
     }
+    else if ( token == "color" || token == "colour") {
+      while ( !stream.eof() ){
+	colors.push_back("");
+	stream >> colors.back();
+      }
+    }
     else {
 #ifdef DEBUG
       std::cerr << "[SlTextureManager::parseTexture] Unknown token " << token << std::endl;
@@ -272,6 +279,28 @@ SlTextureManager::parseFont(std::ifstream& input)
     }
     token.clear();
     if (  !endOfConfig ) getline(input,line);
+  }
+
+  if ( name.empty() ) {
+#ifdef DEBUG
+    std::cerr << "[SlTextureManager::parseFont] No name found" << std::endl;
+#endif
+    return toAdd;
+  }
+
+  toAdd = std::make_shared<SlFont>(name);
+  bool check = valParser->stringsToInts<short>( colors, toAdd->color, 4 );
+  if ( !check ) {
+#ifdef DEBUG
+    std::cout << "[SlTextureManager::parseFont] invalid color for " << name  << std::endl;
+#endif
+  }
+  bool hasFont = toAdd->loadFont(file, fontsize);
+  if ( !hasFont ) {
+#ifdef DEBUG
+    std::cerr << "[SlTextureManager::parseFont] Error: invalid font for " << name  << std::endl;
+#endif
+    return nullptr;
   }
   return toAdd;
 }
@@ -349,7 +378,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
   
   else if ( type == "tile" || type == "rectangle" ) {
     int dim[2];
-    bool check = valParser->stringsToInts( dimensions, dim, 2 );
+    bool check = valParser->stringsToInts<int>( dimensions, dim, 2 );
     if ( !check ) {
 #ifdef DEBUG
       std::cerr << "[SlTextureManager::parseTexture] invalid dimensions for type " << type << std::endl;
@@ -362,8 +391,8 @@ SlTextureManager::parseTexture(std::ifstream& input)
     }
 
     else if ( type == "rectangle" ) {
-      int colArray[] = {0,0,0,0};
-      bool check = valParser->stringsToInts( colors, colArray, 4 );
+      short colArray[] = {0,0,0,0};
+      bool check = valParser->stringsToInts<short>( colors, colArray, 4 );
       if ( !check ) {
 #ifdef DEBUG
 	std::cerr << "[SlTextureManager::parseTexture] invalid color for " << name  << std::endl;

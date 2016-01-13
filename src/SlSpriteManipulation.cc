@@ -117,7 +117,7 @@ SlMSetOrigin::manipulateSprite(std::string sname, unsigned int destination, cons
   }
 
   int origin[2] ;
-  bool check = (*valParser)->stringsToInts( parameters, origin, 2 );
+  bool check = (*valParser)->stringsToInts<int>( parameters, origin, 2 );
   if ( check ) toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
 }
 
@@ -195,6 +195,6 @@ SlMSetOptions::manipulateSprite(std::string sname, unsigned int destination, con
   }
   
   int options[1] ;
-  bool check = (*valParser)->stringsToInts( parameters, options, 1 );
+  bool check = (*valParser)->stringsToInts<int>( parameters, options, 1 );
   if ( check ) toChange->setRenderOptions( options[0], destination );
 }
