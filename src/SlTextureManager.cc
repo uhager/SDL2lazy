@@ -169,7 +169,7 @@ SlTextureManager::createTextureFromSpriteOnTexture(const std::string& name, cons
 
 
 SlTexture* 
-SlTextureManager::createTextureFromText(const std::string& name, const std::string& fontname, const std::string& message)
+SlTextureManager::createTextureFromText(const std::string& name, const std::string& fontname, const std::string& message, int width)
 {
   SlTexture* toAdd = findTexture(name);
   if ( toAdd ) {
@@ -187,7 +187,7 @@ SlTextureManager::createTextureFromText(const std::string& name, const std::stri
   }
 
   toAdd = new SlTexture(name);
-  int check = toAdd->createFromText(mngr_->renderer(), font, message);
+  int check = toAdd->createFromText(mngr_->renderer(), font, message, width );
 
   if (check != 0) {
 #ifdef DEBUG
@@ -411,7 +411,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
     else if ( token == "texture" ) {
       stream >> texture ;
     }
-    else if ( token == "dimensions" ) {
+    else if ( token == "dimensions" || token == "width" ) {
       while ( !stream.eof() ){
 	dimensions.push_back("");
 	stream >> dimensions.back();
@@ -475,7 +475,15 @@ SlTextureManager::parseTexture(std::ifstream& input)
     toAdd = createTextureFromSpriteOnTexture( name, texture, sprite ) ;
   }
   else if ( type == "text" ) {
-    toAdd = createTextureFromText( name, font, message ) ;
+    int width[1];
+    bool check = valParser->stringsToInts<int>(dimensions, width, 1);
+      if ( !check ) {
+#ifdef DEBUG
+	std::cerr << "[SlTextureManager::parseTexture] invalid width for " << name  << std::endl;
+#endif
+	return toAdd;
+      }
+    toAdd = createTextureFromText( name, font, message, width[0] ) ;
   }
   else {
 #ifdef DEBUG

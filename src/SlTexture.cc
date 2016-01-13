@@ -112,10 +112,10 @@ SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgrou
 
 
 int 
-SlTexture::createFromText(SDL_Renderer *renderer, const std::shared_ptr<SlFont> font, const std::string& message)
+SlTexture::createFromText(SDL_Renderer *renderer, const std::shared_ptr<SlFont> font, const std::string& message, int width)
 {
   int result = 0;
-  SDL_Surface *surf = TTF_RenderText_Blended(font->font(), message.c_str(), font->sdlcolor());
+  SDL_Surface *surf = TTF_RenderText_Blended_Wrapped(font->font(), message.c_str(), font->sdlcolor(), width);
   if (surf == nullptr){
 #ifdef DEBUG
     std::cout << "[SlTexture::createFromText] Error Failed to create " << name_ << ": " << SDL_GetError() << std::endl;

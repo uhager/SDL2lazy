@@ -52,9 +52,9 @@ class SlTextureManager
     Creates SlSprite of same name that holds the whole texture.
    */
   SlTexture* createTextureFromSpriteOnTexture(const std::string& name, const std::string& backgroundTexture, const std::string& foregroundSprite);
-/*! Create a new texture from the message using the specified font.
+/*! Create a new texture from the message using the specified font. The text will be wrapped to fit the width.
  */
-SlTexture* createTextureFromText(const std::string& name, const std::string& fontname, const std::string& message); 
+SlTexture* createTextureFromText(const std::string& name, const std::string& fontname, const std::string& message, int width); 
   /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile.  \n
     Creates SlSprite of same name that holds the whole texture.
 
