@@ -47,6 +47,7 @@ int main()
   mngr->appendToRenderQueue("lowerright");
   mngr->appendToRenderQueue("minimap", 0);
   mngr->appendToRenderQueue("up");
+  mngr->appendToRenderQueue("message1");
 
   mngr->insertInRenderQueueAfter("upperleft", "background");
   mngr->insertInRenderQueueBefore("lowerleft", "minimap");

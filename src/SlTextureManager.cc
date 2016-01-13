@@ -168,6 +168,42 @@ SlTextureManager::createTextureFromSpriteOnTexture(const std::string& name, cons
 
 
 
+SlTexture* 
+SlTextureManager::createTextureFromText(const std::string& name, const std::string& fontname, const std::string& message)
+{
+  SlTexture* toAdd = findTexture(name);
+  if ( toAdd ) {
+#ifdef DEBUG
+    std::cout << "[SlTextureManager::createTextureFromText] Error: texture of name " << name << " already exists."  << std::endl;
+#endif
+    return nullptr;
+  }
+  std::shared_ptr<SlFont> font = findFont(fontname);
+  if ( font == nullptr ) {
+#ifdef DEBUG
+    std::cout << "[SlTextureManager::createTextureFromText] Failed to create " << name << ": Couldn't find font " << fontname << std::endl;
+#endif
+    return toAdd;
+  }
+
+  toAdd = new SlTexture(name);
+  int check = toAdd->createFromText(mngr_->renderer(), font, message);
+
+  if (check != 0) {
+#ifdef DEBUG
+    std::cout << "[SlTextureManager::createTextureFromText] Couldn't create texture."  << std::endl;
+#endif
+    delete toAdd;
+    toAdd = nullptr;
+  }
+  else {
+    addTexture(toAdd);
+  }
+  return toAdd;
+}
+
+
+
 SlTexture*
 SlTextureManager::createTextureFromTile(const std::string& name, const std::string& sprite, int width, int height)
 {
@@ -219,6 +255,23 @@ SlTextureManager::deleteTexture(const std::string& name)
 
 
 
+std::shared_ptr<SlFont>
+SlTextureManager::findFont(const std::string& name)
+{
+  std::shared_ptr<SlFont> found = nullptr;
+  auto iter = std::find_if( fonts_.begin(), fonts_.end(), 
+			    [name](const std::shared_ptr<SlFont> font) -> bool {return font->name() == name; } );
+  if ( iter == fonts_.end() ) {
+#ifdef DEBUG
+    std::cout << "[SlTextureManager::findFont] Couldn't find font " << name << std::endl;
+#endif
+    return found;
+  }
+  found = *iter;
+  return found;
+}
+
+
 SlTexture*
 SlTextureManager::findTexture(const std::string& name)
 {
@@ -245,7 +298,7 @@ SlTextureManager::parseFont(std::ifstream& input)
   bool endOfConfig = false;
   std::string name, file;
   std::vector<std::string> colors;
-  int fontsize;
+  int fontsize = 0;
   
   getline(input,line);
   while ( !endOfConfig && input ) {
@@ -274,7 +327,7 @@ SlTextureManager::parseFont(std::ifstream& input)
     }
     else {
 #ifdef DEBUG
-      std::cerr << "[SlTextureManager::parseTexture] Unknown token " << token << std::endl;
+      std::cerr << "[SlTextureManager::parseFont] Unknown token " << token << std::endl;
 #endif
     }
     token.clear();
@@ -284,6 +337,12 @@ SlTextureManager::parseFont(std::ifstream& input)
   if ( name.empty() ) {
 #ifdef DEBUG
     std::cerr << "[SlTextureManager::parseFont] No name found" << std::endl;
+#endif
+    return toAdd;
+  }
+  if ( fontsize == 0 ) {
+#ifdef DEBUG
+    std::cerr << "[SlTextureManager::parseFont] No size found for font " << name << std::endl;
 #endif
     return toAdd;
   }
@@ -302,6 +361,8 @@ SlTextureManager::parseFont(std::ifstream& input)
 #endif
     return nullptr;
   }
+
+  fonts_.push_back(toAdd);
   return toAdd;
 }
 
@@ -314,7 +375,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
   SlTexture* toAdd = nullptr;
   std::string line, token;
   bool endOfConfig = false;
-  std::string name, type, file, sprite, texture;
+  std::string name, type, file, sprite, font, texture, message;
   std::vector<std::string> dimensions;
   std::vector<std::string> colors;
   
@@ -331,14 +392,21 @@ SlTextureManager::parseTexture(std::ifstream& input)
     else if ( token == "type" ) {
       stream >> type;
     }
-    else if ( token == "sprite" ) {
-      stream >> sprite;
-    }
     else if ( token == "name" ) {
       stream >> name ;
     }
+    else if ( token == "sprite" ) {
+      stream >> sprite;
+    }
     else if ( token == "file" ) {
       stream >> file ;
+    }
+    else if ( token == "font" ) {
+      stream >> font ;
+    }
+    else if ( token == "text" ) {
+    getline(stream, message);
+    message = message.substr(1);   //! <- message[0] is space between token and beginning of text.
     }
     else if ( token == "texture" ) {
       stream >> texture ;
@@ -405,6 +473,9 @@ SlTextureManager::parseTexture(std::ifstream& input)
 
   else if ( type == "sprite-on-texture" ) {
     toAdd = createTextureFromSpriteOnTexture( name, texture, sprite ) ;
+  }
+  else if ( type == "text" ) {
+    toAdd = createTextureFromText( name, font, message ) ;
   }
   else {
 #ifdef DEBUG

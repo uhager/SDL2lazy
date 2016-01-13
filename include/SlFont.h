@@ -23,8 +23,13 @@ class SlFont
   short color[4] = {0, 0, 0, 255};
   std::string message;
 
+
+  TTF_Font* font() {return font_;} 
   bool loadFont(std::string fontfile, int fontsize);
   std::string name(){ return name_;}
+  /*! Returns the colour as a SDL_Color struct
+   */
+  SDL_Color sdlcolor();
   /*! Set alpha, leaving colours unchanged.
    */
   void setAlpha(uint8_t alpha);

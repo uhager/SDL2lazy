@@ -18,6 +18,7 @@
 
 
 class SlSprite;
+class SlFont;
 
 /*! \class SlTexture
 
@@ -61,6 +62,9 @@ class SlTexture
   /*! Create a new texture by rendering a sprite on this texture.
    */
   int createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgroundTexture, const std::shared_ptr<SlSprite> foregroundSprite);
+  /*! Create a new texture from the message using the specified SlFont.
+ */
+  int createFromText(SDL_Renderer *renderer, const std::shared_ptr<SlFont> font, const std::string& message);
   /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile. 
 
     The SlRenderSettings::destinationRect at position 0 in the sprite's lSprite::destinations_ is used to determine the width of the tile. 

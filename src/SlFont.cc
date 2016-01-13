@@ -39,6 +39,16 @@ SlFont::loadFont(std::string fontfile, int fontsize)
 
 
 
+SDL_Color 
+SlFont::sdlcolor()
+{
+  SDL_Color scol = {static_cast<uint8_t>(color[0]), static_cast<uint8_t>(color[1]), static_cast<uint8_t>(color[2]), static_cast<uint8_t>(color[3])};
+  return scol;
+}
+
+
+
+
 void 
 SlFont::setAlpha(uint8_t alpha)
 {

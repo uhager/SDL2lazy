@@ -9,7 +9,11 @@
 #include <string>
 
 #include "SlSprite.h"
+#include "SlFont.h"
+
 #include "SlTexture.h"
+
+
 
 SlTexture::SlTexture()
 {
@@ -106,6 +110,28 @@ SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgrou
 }
 
 
+
+int 
+SlTexture::createFromText(SDL_Renderer *renderer, const std::shared_ptr<SlFont> font, const std::string& message)
+{
+  int result = 0;
+  SDL_Surface *surf = TTF_RenderText_Blended(font->font(), message.c_str(), font->sdlcolor());
+  if (surf == nullptr){
+#ifdef DEBUG
+    std::cout << "[SlTexture::createFromText] Error Failed to create " << name_ << ": " << SDL_GetError() << std::endl;
+#endif
+    return 1;
+  }
+  texture_ = SDL_CreateTextureFromSurface(renderer, surf);
+  SDL_FreeSurface(surf);
+  if (texture_ == nullptr) {
+#ifdef DEBUG
+    std::cerr << "[SlTexture::createFromText] Failed to create texture: " << SDL_GetError() << std::endl;
+#endif
+    return 1;
+  }
+  return result; 
+}
 
 int
 SlTexture::createFromTile(SDL_Renderer *renderer, const std::shared_ptr<SlSprite> tile, int width, int height)

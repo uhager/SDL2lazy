@@ -52,6 +52,9 @@ class SlTextureManager
     Creates SlSprite of same name that holds the whole texture.
    */
   SlTexture* createTextureFromSpriteOnTexture(const std::string& name, const std::string& backgroundTexture, const std::string& foregroundSprite);
+/*! Create a new texture from the message using the specified font.
+ */
+SlTexture* createTextureFromText(const std::string& name, const std::string& fontname, const std::string& message); 
   /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile.  \n
     Creates SlSprite of same name that holds the whole texture.
 
@@ -63,7 +66,12 @@ class SlTextureManager
     Also deletes the SlSprite of same name that was created automatically with the texture.
    */
   void deleteTexture(const std::string& name);
-  /*! Returns pointer to the texture, nullptr if not found.
+  /*! Returns pointer to the named font. 
+    \retval nullptr if not found
+   */
+  std::shared_ptr<SlFont> findFont(const std::string& name);
+  /*! Returns pointer to the named texture.
+    \retval nullptr if not found
    */
   SlTexture* findTexture(const std::string& name);
   /*! Read font file, size, colour from file
