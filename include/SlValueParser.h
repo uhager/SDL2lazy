@@ -41,7 +41,7 @@ class SlValueParser
   bool parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
    */
-  bool stringsToDoubles(const std::vector<std::string>& stringValues, double *values, unsigned int length );
+  bool stringsToDoubles(const std::vector<std::string>& stringValues, double* values, unsigned int length );
   /*! Takes a vector of strings, converts the strings to type T (floating point or integer types) and returns them as an array.
    */
   template<typename T>

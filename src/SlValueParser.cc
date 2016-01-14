@@ -109,7 +109,7 @@ SlValueParser::parseFormula(const std::vector<std::string>& stringValues, unsign
 
 
 bool 
-SlValueParser::stringsToDoubles(const std::vector<std::string>& stringValues, double *values, unsigned int length )
+SlValueParser::stringsToDoubles(const std::vector<std::string>& stringValues, double* values, unsigned int length )
 {
   bool validValues =  false;
   if ( stringValues.size() < length ) {
@@ -120,14 +120,20 @@ SlValueParser::stringsToDoubles(const std::vector<std::string>& stringValues, do
   }
 
   for ( unsigned int i = 0 ; i != stringValues.size() ; ++i) {
+    double current = 0.0;
     if ( stringValues.at(i)[0] == '\"' ) {
       parseFormula(stringValues, i, *values);
-      ++values;
     }
     else {
       bool check = doubleFromString( stringValues.at(i), *values ) ;
-      if (check) ++values;
+      if ( !check ) { 
+#ifdef DEBUG
+	std::cerr << "[SlManager::stringsToDoubles] Error: Couldn't convert to double " << stringValues.at(i) << std::endl;
+#endif
+	return validValues;
+      }
     }
+	++values;
   }
   return true;
 }
