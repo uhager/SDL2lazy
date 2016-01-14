@@ -7,6 +7,8 @@
 */
 
 #include <iostream>
+#include <algorithm>
+#include <sstream>
 
 #include "SlRenderOptions.h" 
 #include "SlValueParser.h"

@@ -6,10 +6,6 @@
   SlValueParser template implementation, included in SlValueParser.h
 */
 
-#include <iostream>
-#include <sstream>
-#include <algorithm>
-
 
 
 
