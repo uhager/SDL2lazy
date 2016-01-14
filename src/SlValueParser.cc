@@ -36,3 +36,28 @@ SlValueParser::operator=(const SlValueParser& rhs)
   return *this;
 }
 
+
+
+bool
+SlValueParser::stringsToRenderOptions(const std::vector<std::string>& stringValues, int& options )
+{
+  options = 0;
+  for ( unsigned int i = 0 ; i != stringValues.size() ; ++i) {
+    if ( stringValues.at(i) == "default" ) {
+      (options) |= SL_RENDER_DEFAULT;
+    }
+    else if ( stringValues.at(i) == "alpha" ) {
+      (options) |= SL_RENDER_ALPHAMOD;
+    }
+    else if ( stringValues.at(i) == "colour" ||  stringValues.at(i) == "color" ) {
+      (options) |= SL_RENDER_COLORMOD;
+    }
+    else {
+#ifdef DEBUG
+    std::cerr << "[SlManager::stringsToRenderOptions] Unknown token " << stringValues.at(i) << std::endl;
+#endif
+    return false;
+    }
+  }
+      return true;
+}

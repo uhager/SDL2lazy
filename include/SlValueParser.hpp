@@ -87,23 +87,13 @@ SlValueParser::stringsToInts(const std::vector<std::string>& stringValues, T *va
   
   if ( stringValues.size() < length ) {
 #ifdef DEBUG
-    std::cerr << "[SlManager::determineColors] Need " << length << " values, found " << stringValues.size() << std::endl;
+    std::cerr << "[SlManager::stringsToInts] Need " << length << " values, found " << stringValues.size() << std::endl;
 #endif
     return validValues;
   }
 
-  *values = 0;
   for ( unsigned int i = 0 ; i != stringValues.size() ; ++i) {
-    if ( stringValues.at(i) == "default" ) {
-      (*values) |= SL_RENDER_DEFAULT;
-    }
-    else if ( stringValues.at(i) == "alpha" ) {
-      (*values) |= SL_RENDER_ALPHAMOD;
-    }
-    else if ( stringValues.at(i) == "colour" ||  stringValues.at(i) == "color" ) {
-      (*values) |= SL_RENDER_COLORMOD;
-    }
-    else if ( stringValues.at(i)[0] == '\"' ) {
+    if ( stringValues.at(i)[0] == '\"' ) {
       parseFormula<T>(stringValues, i, *values);
       ++values;
     }

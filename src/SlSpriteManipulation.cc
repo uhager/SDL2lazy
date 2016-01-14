@@ -194,7 +194,7 @@ SlMSetOptions::manipulateSprite(std::string sname, unsigned int destination, con
     return;
   }
   
-  int options[1] ;
-  bool check = (*valParser)->stringsToInts<int>( parameters, options, 1 );
-  if ( check ) toChange->setRenderOptions( options[0], destination );
+  int options ;
+  bool check = (*valParser)->stringsToRenderOptions( parameters, options );
+  if ( check ) toChange->setRenderOptions( options, destination );
 }

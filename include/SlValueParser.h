@@ -41,6 +41,9 @@ class SlValueParser
    */
   template<typename T>
     bool stringsToInts(const std::vector<std::string>& stringValues, T *array, int length );
+  /*! Translates strings into SlRenderOptions.
+   */
+  bool stringsToRenderOptions(const std::vector<std::string>& stringValues, int& options );
   /*! Window dimensions can be read but not set after construction.
    */
   int screenWidth() {return screen_width_;}
