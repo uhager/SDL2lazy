@@ -9,7 +9,8 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
-
+#include <stdexcept>
+	
 #include "SlRenderOptions.h" 
 #include "SlValueParser.h"
 
@@ -40,10 +41,9 @@ SlValueParser::operator=(const SlValueParser& rhs)
 
 
 
-bool
+void
 SlValueParser::parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value)
 {
-  bool parsed = false;
   std::vector<double> numbers;
   std::vector<std::string> operators;
   operators.push_back("+");   //! <- The first number is always added to the result. 
@@ -59,7 +59,7 @@ SlValueParser::parseFormula(const std::vector<std::string>& stringValues, unsign
 #ifdef DEBUG
     std::cerr << "[SlManager::parseFormula] Error: couldn't find end of formula." << std::endl;
 #endif
-    return parsed;
+    throw std::invalid_argument("Couldn't find end of formula.");
   }
 
   formula.pop_back();    //! <- Remove trailing '"'
@@ -88,7 +88,7 @@ SlValueParser::parseFormula(const std::vector<std::string>& stringValues, unsign
 #ifdef DEBUG
       std::cerr << "[SlManager::parseFormula] Error: Wrong number of operators to combine numbers." << std::endl;
 #endif
-      return parsed;
+      throw std::invalid_argument("Formula has wrong number of values / operators.");
   }
   value = 0;
   for ( decltype(numbers.size()) j = 0 ; j < numbers.size() ; ++j ) {
@@ -100,42 +100,33 @@ SlValueParser::parseFormula(const std::vector<std::string>& stringValues, unsign
 #ifdef DEBUG
       std::cerr << "[SlManager::parseFormula] Error: Unknown operator " << operators.at(j) << std::endl;
 #endif
+      throw std::invalid_argument("Unknown operator: " + operators.at(j) );   
     }
 
   }
-  return true;
 }
 
 
 
-bool 
+void
 SlValueParser::stringsToDoubles(const std::vector<std::string>& stringValues, double* values, unsigned int length )
 {
-  bool validValues =  false;
   if ( stringValues.size() < length ) {
 #ifdef DEBUG
     std::cerr << "[SlManager::stringsToDoubles] Need " << length << " values, found " << stringValues.size() << std::endl;
 #endif
-    return validValues;
+    throw std::invalid_argument("Too few values.");
   }
 
   for ( unsigned int i = 0 ; i != stringValues.size() ; ++i) {
-    double current = 0.0;
     if ( stringValues.at(i)[0] == '\"' ) {
       parseFormula(stringValues, i, *values);
     }
     else {
-      bool check = doubleFromString( stringValues.at(i), *values ) ;
-      if ( !check ) { 
-#ifdef DEBUG
-	std::cerr << "[SlManager::stringsToDoubles] Error: Couldn't convert to double " << stringValues.at(i) << std::endl;
-#endif
-	return validValues;
-      }
+      doubleFromString( stringValues.at(i), *values ) ;
     }
-	++values;
+    ++values;
   }
-  return true;
 }
 
 
@@ -167,10 +158,9 @@ SlValueParser::stringsToRenderOptions(const std::vector<std::string>& stringValu
 
 
 
-bool
+void
 SlValueParser::doubleFromString(const std::string& svalue, double& dvalue)
 {
-  bool isInt = false;
   if ( svalue == "SCREEN_WIDTH" ) {
     dvalue = screen_width_;
   }
@@ -178,12 +168,8 @@ SlValueParser::doubleFromString(const std::string& svalue, double& dvalue)
     dvalue = screen_height_;
   }
   else {
-      try {
-	std::istringstream (svalue) >> dvalue;
-      }
-      catch (std::invalid_argument) {
-	return isInt;
-      }
+    std::istringstream is(svalue);
+    if ( !(is >> dvalue) ) 
+      throw std::runtime_error("Invalid conversion to double of string " + svalue);
   }
-  return true;
 }

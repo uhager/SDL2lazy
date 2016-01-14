@@ -35,17 +35,17 @@ class SlValueParser
 
   /*! Returns the double value for a string. Understands SCREEN_WIDTH and SCREEN_HEIGHT.
    */
-  bool doubleFromString(const std::string& value, double& i);
+  void doubleFromString(const std::string& value, double& i);
   /*! Calculates the results of a formula (only + and - implemented).
    */
-  bool parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value);
+  void parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
    */
-  bool stringsToDoubles(const std::vector<std::string>& stringValues, double* values, unsigned int length );
+  void stringsToDoubles(const std::vector<std::string>& stringValues, double* values, unsigned int length );
   /*! Takes a vector of strings, converts the strings to type T (floating point or integer types) and returns them as an array.
    */
   template<typename T>
-    bool stringsToNumbers(const std::vector<std::string>& stringValues, T *array, unsigned int length );
+    void stringsToNumbers(const std::vector<std::string>& stringValues, T *array, unsigned int length );
   /*! Translates strings into SlRenderOptions.
    */
   bool stringsToRenderOptions(const std::vector<std::string>& stringValues, int& options );

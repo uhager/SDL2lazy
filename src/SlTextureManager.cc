@@ -279,9 +279,6 @@ SlTextureManager::findTexture(const std::string& name)
   auto iter = std::find_if( textures_.begin(), textures_.end(),
 			    [name](const SlTexture* tex) -> bool {return tex->name() == name; });
   if ( iter == textures_.end() ) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::findTexture] Couldn't find texture " << name << std::endl;
-#endif
     return result;
   }
   result = *iter;
@@ -347,13 +344,9 @@ SlTextureManager::parseFont(std::ifstream& input)
     return toAdd;
   }
 
+  try {
   toAdd = std::make_shared<SlFont>(name);
-  bool check = valParser->stringsToNumbers<short>( colors, toAdd->color, 4 );
-  if ( !check ) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::parseFont] invalid color for " << name  << std::endl;
-#endif
-  }
+  valParser->stringsToNumbers<short>( colors, toAdd->color, 4 );
   bool hasFont = toAdd->loadFont(file, fontsize);
   if ( !hasFont ) {
 #ifdef DEBUG
@@ -363,6 +356,16 @@ SlTextureManager::parseFont(std::ifstream& input)
   }
 
   fonts_.push_back(toAdd);
+  }
+  catch (const std::invalid_argument& expt){
+    std::cout << "[SlTextureManager::parseFont] " << expt.what() << std::endl; 
+  }
+  catch (const std::runtime_error& expt){
+    std::cout << "[SlTextureManager::parseFont] " << expt.what() << std::endl; 
+  }
+  catch (...) {
+    std::cerr << "[SlTextureManager::parseFont] Unknown exception for " << name  << std::endl;
+  }
   return toAdd;
 }
 
@@ -432,27 +435,21 @@ SlTextureManager::parseTexture(std::ifstream& input)
     if (  !endOfConfig ) getline(input,line);
   }
 
-  
   if ( name.empty() ) {
 #ifdef DEBUG
     std::cerr << "[SlTextureManager::parseTexture] No name found" << std::endl;
 #endif
     return toAdd;
   }
-  
+
+  try {  
   if ( type == "file" ) {
     toAdd = createTextureFromFile( name, file );
   }
   
   else if ( type == "tile" || type == "rectangle" ) {
     int dim[2];
-    bool check = valParser->stringsToNumbers<int>( dimensions, dim, 2 );
-    if ( !check ) {
-#ifdef DEBUG
-      std::cerr << "[SlTextureManager::parseTexture] invalid dimensions for type " << type << std::endl;
-#endif
-      return toAdd;
-    }
+    valParser->stringsToNumbers<int>( dimensions, dim, 2 );
 
     if ( type == "tile") {
       toAdd = createTextureFromTile( name, sprite, dim[0], dim[1] );
@@ -460,13 +457,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
 
     else if ( type == "rectangle" ) {
       short colArray[] = {0,0,0,0};
-      bool check = valParser->stringsToNumbers<short>( colors, colArray, 4 );
-      if ( !check ) {
-#ifdef DEBUG
-	std::cerr << "[SlTextureManager::parseTexture] invalid color for " << name  << std::endl;
-#endif
-	return toAdd;
-      }
+      valParser->stringsToNumbers<short>( colors, colArray, 4 );
       toAdd = createTextureFromRectangle( name, dim[0], dim[1], colArray[0], colArray[1], colArray[2], colArray[3] );
     }
   }
@@ -476,19 +467,23 @@ SlTextureManager::parseTexture(std::ifstream& input)
   }
   else if ( type == "text" ) {
     int width[1];
-    bool check = valParser->stringsToNumbers<int>(dimensions, width, 1);
-      if ( !check ) {
-#ifdef DEBUG
-	std::cerr << "[SlTextureManager::parseTexture] invalid width for " << name  << std::endl;
-#endif
-	return toAdd;
-      }
+    valParser->stringsToNumbers<int>(dimensions, width, 1);
     toAdd = createTextureFromText( name, font, message, width[0] ) ;
   }
   else {
 #ifdef DEBUG
     std::cerr << "[SlTextureManager::parseTexture] Unknown type "  << type << " for texture " << name << std::endl;
 #endif
+  }
+  }
+  catch (const std::invalid_argument& expt) {
+    std::cout << "[SlTextureManager::parseTexture] " << expt.what() << std::endl;
+  }
+  catch (const std::runtime_error& expt) {
+    std::cout << "[SlTextureManager::parseTexture] " << expt.what() << std::endl;
+  }
+  catch (...) {
+    std::cout << "[SlTextureManager::parseTexture] Unknown exception" << std::endl;
   }
   return toAdd;
 }

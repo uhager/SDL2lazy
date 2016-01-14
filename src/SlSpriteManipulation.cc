@@ -21,9 +21,6 @@ SlSpriteManipulation::SlSpriteManipulation(SlSpriteManager* manager, SlValuePars
 {
   smngr_ = manager;
   valParser = valPars;
-#ifdef DEBUG
-  std::cout << "[SlSpriteManipulation::SlSpriteManipulation] Created " << name_ << std::endl;
-#endif
 }
 
 
@@ -71,18 +68,11 @@ std::shared_ptr<SlSprite>
 SlSpriteManipulation::verifySprite(std::string sname, unsigned int destination)
 {
   std::shared_ptr<SlSprite> verified = smngr_->findSprite(sname);
-  if ( verified == nullptr ){
-#ifdef DEBUG
-    std::cout << "[SlSpriteManipulation::verifySprite] Couldn't find sprite to move " << sname << std::endl;
-#endif
-    return verified;
-  }
-  if ( destination >= verified->size() ){
-#ifdef DEBUG
-    std::cout << "[SlSpriteManipulation::verifySprite] Invalid destination for sprite " << sname << std::endl;
-#endif
-    verified = nullptr;
-  }
+  if ( verified == nullptr )
+    throw std::invalid_argument("Couldn't find sprite " + sname);
+
+  if ( destination >= verified->size() )
+    throw std::invalid_argument("Invalid destination for sprite " + sname);
   return verified;
 }
 
@@ -94,9 +84,6 @@ SlMSetOrigin::SlMSetOrigin(SlSpriteManager* manager, SlValueParser** valPars)
   : SlSpriteManipulation(manager, valPars)
 {
   name_ = "setOrigin";
-#ifdef DEBUG
-  std::cout << "[SlMSetOrigin::SlMSetOrigin] Created " << name_ << std::endl;
-#endif
 }
 
 
@@ -104,21 +91,11 @@ SlMSetOrigin::SlMSetOrigin(SlSpriteManager* manager, SlValueParser** valPars)
 void
 SlMSetOrigin::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
 {
-#ifdef DEBUG
-  std::cout << "[SlMSetOrigin::manipulateSprite] " << name_ << std::endl;
-#endif
-  
   std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
-  if ( toMove == nullptr ){
-#ifdef DEBUG
-    std::cout << "[SlMSetOrigin::manipulateSprite] Invalid sprite or destination " << sname << std::endl;
-#endif
-    return;
-  }
 
   int origin[2] ;
-  bool check = (*valParser)->stringsToNumbers<int>( parameters, origin, 2 );
-  if ( check ) toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
+  (*valParser)->stringsToNumbers<int>( parameters, origin, 2 );
+  toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
 }
 
 
@@ -129,9 +106,6 @@ SlMCenterIn::SlMCenterIn(SlSpriteManager* manager, SlValueParser** valPars)
   : SlSpriteManipulation(manager, valPars)
 {
   name_ = "centerIn";
-#ifdef DEBUG
-  std::cout << "[SlMCenterIn::SlMCenterIn] Created " << name_ << std::endl;
-#endif
 }
 
 
@@ -139,29 +113,13 @@ SlMCenterIn::SlMCenterIn(SlSpriteManager* manager, SlValueParser** valPars)
 void
 SlMCenterIn::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
 {
-#ifdef DEBUG
-  std::cout << "[SlMCenterIn::manipulateSprite] " << name_ << std::endl;
-#endif
-
   std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
-  if ( toMove == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlMCenterIn::manipulateSprite] Invalid sprite or destination " << sname << std::endl;
-#endif
-    return;
-  }
 
   std::string targetname = parameters.at(0);
   int targetDest;
   if ( parameters.size() > 1) targetDest = std::stoul(parameters.at(1));
   else targetDest = 0;
   std::shared_ptr<SlSprite> target = verifySprite(targetname, targetDest);
-  if ( target == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlMSetOrigin::manipulateSprite] Invalid sprite or destination " << target << std::endl;
-#endif
-    return;
-  }
   toMove->centerInSprite( target, destination, targetDest);
 }
 
@@ -172,9 +130,6 @@ SlMSetOptions::SlMSetOptions(SlSpriteManager* manager, SlValueParser** valPars)
   : SlSpriteManipulation(manager, valPars)
 {
   name_ = "renderOptions";
-#ifdef DEBUG
-  std::cout << "[SlMSetOptions::SlMSetOptions] Created " << name_ << std::endl;
-#endif
 }
 
 
@@ -182,17 +137,7 @@ SlMSetOptions::SlMSetOptions(SlSpriteManager* manager, SlValueParser** valPars)
 void
 SlMSetOptions::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
 {
-#ifdef DEBUG
-  std::cout << "[SlMSetOptions::manipulateSprite] " << name_ << std::endl;
-#endif
-
   std::shared_ptr<SlSprite> toChange = verifySprite(sname, destination);
-  if ( toChange == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlMCenterIn::manipulateSprite] Invalid sprite or destination " << sname << std::endl;
-#endif
-    return;
-  }
   
   int options ;
   bool check = (*valParser)->stringsToRenderOptions( parameters, options );

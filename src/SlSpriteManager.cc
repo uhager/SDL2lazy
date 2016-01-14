@@ -224,16 +224,20 @@ SlSpriteManager::parseSprite(std::ifstream& input)
 #endif
     return;
   }
+  try {
   int loc[4];
-  bool check = valParser->stringsToNumbers<int>(location, loc, 4);
-  if ( !check ) {
-#ifdef DEBUG
-    std::cerr << "[SlSpriteManager::parseSprite] Invalid location for " << name << std::endl;
-#endif
-    return;
-  }
+  valParser->stringsToNumbers<int>(location, loc, 4);
   createSprite( name, texture, loc[0], loc[1], loc[2], loc[3] );
-  
+  }
+  catch (const std::invalid_argument& expt) {
+    std::cerr << "[SlSpriteManager::parseSprite] " << expt.what() << std::endl;
+  }
+  catch (const std::runtime_error& expt) {
+    std::cerr << "[SlSpriteManager::parseSprite] " << expt.what() << std::endl;
+  }
+  catch (...) {
+    std::cerr << "[SlSpriteManager::parseSprite] Unknown exception" << std::endl;
+  }
 }
 
 
@@ -260,18 +264,21 @@ SlSpriteManager::parseSpriteManipulation(std::ifstream& input)
 	name = token ;
 	stream >> destination ;
 	stream >> whatToDo ;
-	std::vector<std::string> coordinates;
+	std::vector<std::string> parameters;
 	while ( !stream.eof() ){
-	  coordinates.push_back("");
-	  stream >> coordinates.back();
+	  parameters.push_back("");
+	  stream >> parameters.back();
 	}
-	manipulateSprite( name, destination, whatToDo, coordinates );
+	manipulateSprite( name, destination, whatToDo, parameters );
       }
-      catch (std::exception) {
-#ifdef DEBUG
-	std::cerr << "[SlSpriteManager::parseSpriteManipulation] Error at line: " << line << std::endl;
-#endif
-	;
+      catch (const std::invalid_argument& expt) {
+	std::cerr << "[SlSpriteManager::parseSpriteManipulation] " << expt.what() << std::endl;
+      }
+      catch (const std::runtime_error& expt) {
+	std::cerr << "[SlSpriteManager::parseSpriteManipulation] " << expt.what() << std::endl;
+      }
+      catch (...) {
+	std::cerr << "[SlSpriteManager::parseSpriteManipulation] Unknown exception at line: " << line << std::endl;
       }
     }
     token.clear();
