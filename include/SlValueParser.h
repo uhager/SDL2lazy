@@ -64,6 +64,6 @@ class SlValueParser
 
 /*! Include template implementation so the compiler can generate the required functions.
  */
-#include "SlValueParser.t"
+#include "SlValueParser.hpp"
 
 #endif /* SLVALUEPARSER_H */

@@ -1,7 +1,7 @@
 // part of SDL2lazy
 // author: Ulrike Hager
 
-/*! \file SlValueParser.t
+/*! \file SlValueParser.hpp
 
   SlValueParser template implementation, included in SlValueParser.h
 */

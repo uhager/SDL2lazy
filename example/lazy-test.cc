@@ -46,8 +46,8 @@ int main()
   mngr->appendToRenderQueue("upperright");
   mngr->appendToRenderQueue("lowerright");
   mngr->appendToRenderQueue("minimap", 0);
-  mngr->appendToRenderQueue("up");
   mngr->appendToRenderQueue("message1");
+  mngr->appendToRenderQueue("up");
 
   mngr->insertInRenderQueueAfter("upperleft", "background");
   mngr->insertInRenderQueueBefore("lowerleft", "minimap");
@@ -73,11 +73,11 @@ int main()
 	      mngr->setSpriteRenderOptions( "background", SL_RENDER_COLORMOD );
 	      break;
 	    case SDLK_LEFT:
-	      mngr->swapInRenderQueueLastPosition( "left" );
+	      mngr->swapInRenderQueueAtPosition( "left", 0, 7 );
 	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_DEFAULT );
 	      break;
 	    case SDLK_RIGHT:
-	      mngr->swapInRenderQueueAtPosition( "right", 0, 6 );
+	      mngr->swapInRenderQueueAtPosition( "right", 0, 7 );
 	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_ALPHAMOD );
 	      break;
 	    case SDLK_1:
