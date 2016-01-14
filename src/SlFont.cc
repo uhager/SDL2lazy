@@ -7,6 +7,7 @@
 */
 
 #include <iostream>
+#include <stdexcept>
 
 #include "SlFont.h"
 
@@ -23,18 +24,12 @@ SlFont::~SlFont()
 }
 
 
-bool
+void
 SlFont::loadFont(std::string fontfile, int fontsize)
 {
-  bool hasfont = false;
   font_ = TTF_OpenFont(fontfile.c_str(), fontsize);
-  if ( !font_ ) {
-#ifdef DEBUG
-    std::cerr << "[SlTextureManager::setFont] Error: couldn't open font from file" << fontfile << std::endl;
-#endif
-    return hasfont;
-  }
-  return true;
+  if ( !font_ )
+    throw std::runtime_error( "TTF_OpenFont: " + std::string( TTF_GetError() ) );
 }
 
 
@@ -45,7 +40,6 @@ SlFont::sdlcolor()
   SDL_Color scol = {static_cast<uint8_t>(color[0]), static_cast<uint8_t>(color[1]), static_cast<uint8_t>(color[2]), static_cast<uint8_t>(color[3])};
   return scol;
 }
-
 
 
 

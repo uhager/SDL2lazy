@@ -25,7 +25,7 @@ class SlFont
 
 
   TTF_Font* font() {return font_;} 
-  bool loadFont(std::string fontfile, int fontsize);
+  void loadFont(std::string fontfile, int fontsize);
   std::string name(){ return name_;}
   /*! Returns the colour as a SDL_Color struct
    */

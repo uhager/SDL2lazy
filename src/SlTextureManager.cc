@@ -83,17 +83,8 @@ SlTextureManager::createTextureFromFile(const std::string& name, const std::stri
     return nullptr;
   }
   toAdd = new SlTexture(name);
-  bool check = toAdd->loadFromFile(mngr_->renderer(), filename);
-  if (check == false) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::createTextureFromFile] Couldn't load texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
-  }
+  toAdd->loadFromFile(mngr_->renderer(), filename);
+  addTexture(toAdd);
   return toAdd;
 }
 
@@ -110,17 +101,8 @@ SlTextureManager::createTextureFromRectangle(const std::string& name, int width,
     return nullptr;
   }
   toAdd = new SlTexture(name);
-  int check = toAdd->createFromRectangle(mngr_->renderer(), width, height, red, green, blue, alpha);
-  if (check != 0) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::createTextureFromRectangle] Couldn't create texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
-  }
+  toAdd->createFromRectangle(mngr_->renderer(), width, height, red, green, blue, alpha);
+  addTexture(toAdd);
   return toAdd;
 }
 
@@ -152,17 +134,8 @@ SlTextureManager::createTextureFromSpriteOnTexture(const std::string& name, cons
     return toAdd;
   }
   toAdd = new SlTexture(name);
-  int check = toAdd->createFromSpriteOnTexture(mngr_->renderer(), background, foreground);
-  if (check != 0) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::createTextureFromSpriteOnTexture] Couldn't create texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
-  }
+  toAdd->createFromSpriteOnTexture(mngr_->renderer(), background, foreground);
+  addTexture(toAdd);
   return toAdd;
 }
 
@@ -187,18 +160,8 @@ SlTextureManager::createTextureFromText(const std::string& name, const std::stri
   }
 
   toAdd = new SlTexture(name);
-  int check = toAdd->createFromText(mngr_->renderer(), font, message, width );
-
-  if (check != 0) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::createTextureFromText] Couldn't create texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
-  }
+  toAdd->createFromText(mngr_->renderer(), font, message, width );
+  addTexture(toAdd);
   return toAdd;
 }
 
@@ -224,17 +187,8 @@ SlTextureManager::createTextureFromTile(const std::string& name, const std::stri
   }
 
   toAdd = new SlTexture(name);
-  int check = toAdd->createFromTile(mngr_->renderer(), tile, width, height);
-  if (check != 0) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::createTextureFromTile] Couldn't create texture."  << std::endl;
-#endif
-    delete toAdd;
-    toAdd = nullptr;
-  }
-  else {
-    addTexture(toAdd);
-  }
+  toAdd->createFromTile(mngr_->renderer(), tile, width, height);
+  addTexture(toAdd);
   return toAdd;
 }
 
@@ -347,14 +301,7 @@ SlTextureManager::parseFont(std::ifstream& input)
   try {
   toAdd = std::make_shared<SlFont>(name);
   valParser->stringsToNumbers<short>( colors, toAdd->color, 4 );
-  bool hasFont = toAdd->loadFont(file, fontsize);
-  if ( !hasFont ) {
-#ifdef DEBUG
-    std::cerr << "[SlTextureManager::parseFont] Error: invalid font for " << name  << std::endl;
-#endif
-    return nullptr;
-  }
-
+  toAdd->loadFont(file, fontsize);
   fonts_.push_back(toAdd);
   }
   catch (const std::invalid_argument& expt){
@@ -443,38 +390,38 @@ SlTextureManager::parseTexture(std::ifstream& input)
   }
 
   try {  
-  if ( type == "file" ) {
-    toAdd = createTextureFromFile( name, file );
-  }
+    if ( type == "file" ) {
+      toAdd = createTextureFromFile( name, file );
+    }
   
-  else if ( type == "tile" || type == "rectangle" ) {
-    int dim[2];
-    valParser->stringsToNumbers<int>( dimensions, dim, 2 );
+    else if ( type == "tile" || type == "rectangle" ) {
+      int dim[2];
+      valParser->stringsToNumbers<int>( dimensions, dim, 2 );
 
-    if ( type == "tile") {
-      toAdd = createTextureFromTile( name, sprite, dim[0], dim[1] );
+      if ( type == "tile") {
+	toAdd = createTextureFromTile( name, sprite, dim[0], dim[1] );
+      }
+
+      else if ( type == "rectangle" ) {
+	short colArray[] = {0,0,0,0};
+	valParser->stringsToNumbers<short>( colors, colArray, 4 );
+	toAdd = createTextureFromRectangle( name, dim[0], dim[1], colArray[0], colArray[1], colArray[2], colArray[3] );
+      }
     }
 
-    else if ( type == "rectangle" ) {
-      short colArray[] = {0,0,0,0};
-      valParser->stringsToNumbers<short>( colors, colArray, 4 );
-      toAdd = createTextureFromRectangle( name, dim[0], dim[1], colArray[0], colArray[1], colArray[2], colArray[3] );
+    else if ( type == "sprite-on-texture" ) {
+      toAdd = createTextureFromSpriteOnTexture( name, texture, sprite ) ;
     }
-  }
-
-  else if ( type == "sprite-on-texture" ) {
-    toAdd = createTextureFromSpriteOnTexture( name, texture, sprite ) ;
-  }
-  else if ( type == "text" ) {
-    int width[1];
-    valParser->stringsToNumbers<int>(dimensions, width, 1);
-    toAdd = createTextureFromText( name, font, message, width[0] ) ;
-  }
-  else {
+    else if ( type == "text" ) {
+      int width[1];
+      valParser->stringsToNumbers<int>(dimensions, width, 1);
+      toAdd = createTextureFromText( name, font, message, width[0] ) ;
+    }
+    else {
 #ifdef DEBUG
-    std::cerr << "[SlTextureManager::parseTexture] Unknown type "  << type << " for texture " << name << std::endl;
+      std::cerr << "[SlTextureManager::parseTexture] Unknown type "  << type << " for texture " << name << std::endl;
 #endif
-  }
+    }
   }
   catch (const std::invalid_argument& expt) {
     std::cout << "[SlTextureManager::parseTexture] " << expt.what() << std::endl;
