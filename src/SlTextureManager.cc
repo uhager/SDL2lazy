@@ -348,7 +348,7 @@ SlTextureManager::parseFont(std::ifstream& input)
   }
 
   toAdd = std::make_shared<SlFont>(name);
-  bool check = valParser->stringsToInts<short>( colors, toAdd->color, 4 );
+  bool check = valParser->stringsToNumbers<short>( colors, toAdd->color, 4 );
   if ( !check ) {
 #ifdef DEBUG
     std::cout << "[SlTextureManager::parseFont] invalid color for " << name  << std::endl;
@@ -446,7 +446,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
   
   else if ( type == "tile" || type == "rectangle" ) {
     int dim[2];
-    bool check = valParser->stringsToInts<int>( dimensions, dim, 2 );
+    bool check = valParser->stringsToNumbers<int>( dimensions, dim, 2 );
     if ( !check ) {
 #ifdef DEBUG
       std::cerr << "[SlTextureManager::parseTexture] invalid dimensions for type " << type << std::endl;
@@ -460,7 +460,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
 
     else if ( type == "rectangle" ) {
       short colArray[] = {0,0,0,0};
-      bool check = valParser->stringsToInts<short>( colors, colArray, 4 );
+      bool check = valParser->stringsToNumbers<short>( colors, colArray, 4 );
       if ( !check ) {
 #ifdef DEBUG
 	std::cerr << "[SlTextureManager::parseTexture] invalid color for " << name  << std::endl;
@@ -476,7 +476,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
   }
   else if ( type == "text" ) {
     int width[1];
-    bool check = valParser->stringsToInts<int>(dimensions, width, 1);
+    bool check = valParser->stringsToNumbers<int>(dimensions, width, 1);
       if ( !check ) {
 #ifdef DEBUG
 	std::cerr << "[SlTextureManager::parseTexture] invalid width for " << name  << std::endl;

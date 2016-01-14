@@ -33,14 +33,19 @@ class SlValueParser
    */
   SlValueParser(const SlValueParser& toCopy);
 
+  /*! Returns the double value for a string. Understands SCREEN_WIDTH and SCREEN_HEIGHT.
+   */
+  bool doubleFromString(const std::string& value, double& i);
   /*! Calculates the results of a formula (only + and - implemented).
    */
-  template<typename T>
-  bool parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, T& value);
+  bool parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
    */
+  bool stringsToDoubles(const std::vector<std::string>& stringValues, double *values, unsigned int length );
+  /*! Takes a vector of strings, converts the strings to type T (floating point or integer types) and returns them as an array.
+   */
   template<typename T>
-    bool stringsToInts(const std::vector<std::string>& stringValues, T *array, int length );
+    bool stringsToNumbers(const std::vector<std::string>& stringValues, T *array, unsigned int length );
   /*! Translates strings into SlRenderOptions.
    */
   bool stringsToRenderOptions(const std::vector<std::string>& stringValues, int& options );
@@ -50,10 +55,6 @@ class SlValueParser
   /*! Window dimensions can be read but not set after construction.
    */
   int screenHeight() {return screen_height_;}
-  /*! Returns the integer value for a string. Understands SCREEN_WIDTH and SCREEN_HEIGHT.
-   */
-  template<typename T>
-  bool valueFromString(const std::string& value, T& i);
 
  private:
   /*! Screen dimensions are needed to define a texture as having the dimensions of the window.
