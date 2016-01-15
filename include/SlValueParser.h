@@ -34,12 +34,15 @@ class SlValueParser
   SlValueParser(const SlValueParser& toCopy);
 
   /*! Returns the double value for a string. Understands SCREEN_WIDTH and SCREEN_HEIGHT.
+    \throws std::runtime_error if the string can't be converted to double.
    */
   void doubleFromString(const std::string& value, double& i);
   /*! Calculates the results of a formula (only + and - implemented).
+    \throws std::invalid_argument if the end of the formula can't be found, or if the formula can't be calculated (unknown operator).
    */
   void parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
+    \throws std::invalid_argument if the size of stringValues is less than length, i.e. to few parameters given. 
    */
   void stringsToDoubles(const std::vector<std::string>& stringValues, double* values, unsigned int length );
   /*! Takes a vector of strings, converts the strings to type T (floating point or integer types) and returns them as an array.

@@ -37,8 +37,8 @@ class SlSpriteManipulation
    */
   virtual void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters);
   /*! Checks the existence of the named sprite and the validity of the destinations.
-    \retval nullptr if sprite not found or destination out of bounds.
     \retval sprite of that name if name and destination valid.
+    \throws std::invalid_argument if invalid name or destination.
    */
   std::shared_ptr<SlSprite> verifySprite(std::string name, unsigned int destination);
   /*! Name can be read but not set. It is defined by the function that the derived class implements so that the correct derived class can be called based on a keyword.

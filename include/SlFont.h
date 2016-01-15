@@ -24,7 +24,10 @@ class SlFont
   std::string message;
 
 
-  TTF_Font* font() {return font_;} 
+  TTF_Font* font() {return font_;}
+  /*! Loads font from fontfile. Hangs on to the font until destructor is called.\n
+    \throws std::runtime_error if font can't be loaded.
+   */ 
   void loadFont(std::string fontfile, int fontsize);
   std::string name(){ return name_;}
   /*! Returns the colour as a SDL_Color struct

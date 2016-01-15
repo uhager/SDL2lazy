@@ -54,24 +54,28 @@ class SlTexture
   */
   bool colorModIsSet = false;
   /*! createFromRectangle uses SDL_FillRect to create a texture based on the given geometry and the color defined in SlTextureInfo.
+    \throws std::runtime_error if texture can't be created or rectangle can't be rendered.
    */
   void createFromRectangle(SDL_Renderer* renderer, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha );
-  /*! Create a new texture by rendering a sprite on this texture.
+  /*! Create a new texture by rendering a sprite on this texture. Calls SlSprite::render() for the sprite.
+    \throws std::runtime_error if texture can't be created or rendered.    
    */
   void createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgroundTexture, const std::shared_ptr<SlSprite> foregroundSprite);
   /*! Create a new texture from the message using the specified SlFont.
+    \throws std::runtime_error if surface or texture can't be created.
  */
   void createFromText(SDL_Renderer *renderer, const std::shared_ptr<SlFont> font, const std::string& message, int width);
-  /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile. 
-
-    The SlRenderSettings::destinationRect at position 0 in the sprite's lSprite::destinations_ is used to determine the width of the tile. 
+  /*! Creates a new texture with dimensions w x h and fills it with tiles of SlSprite tile. \n
+    The SlRenderSettings::destinationRect at position 0 in the sprite's lSprite::destinations_ is used to determine the width of the tile. \n 
     If the sprite's SlSprite::destinations_ is empty, addDefaultDestination() is called which sets the destinationRect to equal the sourceRect.
+    \throws std::runtime_error if the texture can't be created or the step size for placing the tiles it <= 0.
   */
   void createFromTile(SDL_Renderer *renderer, const std::shared_ptr<SlSprite> tile, int width, int height);
   /*! Returns the dimensions of the SDL_Texture.
    */
   bool dimensions(int& width, int& height);
   /*! uses IMG_LoadTexture to get texture from png image file
+    \throws std::runtime_error if object already has a texture or texture can't be loaded.    
    */
   void loadFromFile(SDL_Renderer* renderer, const std::string& fileName);
   /*! Returns the name of the texture.

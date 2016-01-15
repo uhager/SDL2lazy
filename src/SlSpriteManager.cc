@@ -229,10 +229,7 @@ SlSpriteManager::parseSprite(std::ifstream& input)
   valParser->stringsToNumbers<int>(location, loc, 4);
   createSprite( name, texture, loc[0], loc[1], loc[2], loc[3] );
   }
-  catch (const std::invalid_argument& expt) {
-    std::cerr << "[SlSpriteManager::parseSprite] " << expt.what() << std::endl;
-  }
-  catch (const std::runtime_error& expt) {
+  catch (const std::exception& expt) {
     std::cerr << "[SlSpriteManager::parseSprite] " << expt.what() << std::endl;
   }
   catch (...) {
@@ -271,10 +268,7 @@ SlSpriteManager::parseSpriteManipulation(std::ifstream& input)
 	}
 	manipulateSprite( name, destination, whatToDo, parameters );
       }
-      catch (const std::invalid_argument& expt) {
-	std::cerr << "[SlSpriteManager::parseSpriteManipulation] " << expt.what() << std::endl;
-      }
-      catch (const std::runtime_error& expt) {
+      catch (const std::exception& expt) {
 	std::cerr << "[SlSpriteManager::parseSpriteManipulation] " << expt.what() << std::endl;
       }
       catch (...) {

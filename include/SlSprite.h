@@ -106,7 +106,8 @@ class SlSprite
   /*! Renders all copies of the sprite given in #destinations_.
    */
   void render(SDL_Renderer* renderer);
-  /*! Renders the copy of the sprite at position i in render settings
+  /*! Renders the copy of the sprite at position i in render settings.\n
+    \throws std::runtime_error if invalid destination or unable to render.
    */
   void render(SDL_Renderer* renderer, unsigned int i);
 

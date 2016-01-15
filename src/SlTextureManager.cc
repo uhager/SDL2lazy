@@ -304,10 +304,7 @@ SlTextureManager::parseFont(std::ifstream& input)
   toAdd->loadFont(file, fontsize);
   fonts_.push_back(toAdd);
   }
-  catch (const std::invalid_argument& expt){
-    std::cout << "[SlTextureManager::parseFont] " << expt.what() << std::endl; 
-  }
-  catch (const std::runtime_error& expt){
+  catch (const std::exception& expt){
     std::cout << "[SlTextureManager::parseFont] " << expt.what() << std::endl; 
   }
   catch (...) {
@@ -423,10 +420,7 @@ SlTextureManager::parseTexture(std::ifstream& input)
 #endif
     }
   }
-  catch (const std::invalid_argument& expt) {
-    std::cout << "[SlTextureManager::parseTexture] " << expt.what() << std::endl;
-  }
-  catch (const std::runtime_error& expt) {
+  catch (const std::exception& expt) {
     std::cout << "[SlTextureManager::parseTexture] " << expt.what() << std::endl;
   }
   catch (...) {

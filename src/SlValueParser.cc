@@ -71,7 +71,6 @@ SlValueParser::parseFormula(const std::vector<std::string>& stringValues, unsign
   std::cout << "[SlValueParser::parseFormula] formula " << formula << std::endl;
 #endif
 
-  
   decltype( formula.find_first_of("+") ) pos = 0;
   while ( pos != std::string::npos ) {
     pos = formula.find_first_of("+-");
