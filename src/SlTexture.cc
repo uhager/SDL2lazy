@@ -132,10 +132,7 @@ SlTexture::createFromTile(SDL_Renderer *renderer, const std::shared_ptr<SlSprite
       currYPos += stepHeight;
     }
   }
-  int check = tile->render(renderer);
-  if ( check != 0 )
-    throw std::runtime_error("Couldn't render tile: " + std::string( SDL_GetError() ));
-
+  tile->render(renderer);
   tile->clearDestinations();
   
   SDL_SetRenderTarget(renderer, nullptr);

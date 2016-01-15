@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
 #include <SDL2/SDL.h>
 
@@ -184,35 +185,26 @@ SlSprite::hasDestination()
 
 
 
-int
+void
 SlSprite::render(SDL_Renderer* renderer)
 {
-  int hasRendered = 0;
 #ifdef DEBUG
   if (destinations_.size() > 1) std::cout << "[SlSprite::render] " << name_ << ": rendering " << destinations_.size() << " destinations" << std::endl;
 #endif
 
   for (unsigned int i = 0; i < destinations_.size() ; ++i){
-    hasRendered = render(renderer, i);
-    if (hasRendered != 0) {
-      return hasRendered;
-    }
+    render(renderer, i);
   }
-  return hasRendered;
 }
 
 
 
-int
+void
 SlSprite::render(SDL_Renderer* renderer, unsigned int i)
 {
-  int hasRendered = 0;
-  if (i >= destinations_.size() ){
-#ifdef DEBUG
-    std::cout << "[SlSprite::render] attempting to render destination " << i << " out of " << destinations_.size() << std::endl;
-#endif
-    return -1;
-  }
+  if (i >= destinations_.size() )
+    throw std::runtime_error("Invalid render destination for " + name_ );
+
   SlRenderSettings& dest = destinations_.at(i);
     
   int modColor = (dest.renderOptions & SL_RENDER_COLORMOD);
@@ -241,11 +233,10 @@ SlSprite::render(SDL_Renderer* renderer, unsigned int i)
     texture_->alphaModIsSet = false;
   }
 
-  hasRendered = SDL_RenderCopy(renderer, texture_->texture(), &sourceRect_, & dest.destinationRect);
+  int hasRendered = SDL_RenderCopy(renderer, texture_->texture(), &sourceRect_, & dest.destinationRect);
   if (hasRendered != 0) {
-    std::cout << "[SlSprite::render] Error rendering sprite " << name_ << " detination " << i << " - " << SDL_GetError() << std::endl;
+    throw std::runtime_error("Error rendering " + name_ + ": " + std::string( SDL_GetError() ) );
   }
-  return hasRendered;
 }
 
 

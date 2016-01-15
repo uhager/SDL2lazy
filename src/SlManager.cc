@@ -375,26 +375,23 @@ SlManager::parseConfigurationFile(const std::string& filename)
 
 
 
-int
+void
 SlManager::render()
 {
-  int result;
-  
   SDL_RenderClear( renderer_ );
  
   for (auto& item: renderQueue_){
     if ( item->renderMe_ ) {
-      result = (item->sprite_)->render( renderer_, (item->destination_) );
-      if (result != 0) {
-#ifdef DEBUG
-	std::cout << "[SlManager::render] Couldn't render sprite " << item->sprite_->name() << std::endl;
-#endif
-	return result;
+      try {
+        (item->sprite_)->render( renderer_, (item->destination_) );
+      }
+      catch (const std::runtime_error& expt){
+	std::cerr << expt.what() << std::endl;
       }
     }
   }
+
   SDL_RenderPresent( renderer_ );
-  return result;
 }
 
 

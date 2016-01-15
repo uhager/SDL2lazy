@@ -105,10 +105,10 @@ class SlSprite
 
   /*! Renders all copies of the sprite given in #destinations_.
    */
-  int render(SDL_Renderer* renderer);
+  void render(SDL_Renderer* renderer);
   /*! Renders the copy of the sprite at position i in render settings
    */
-  int render(SDL_Renderer* renderer, unsigned int i);
+  void render(SDL_Renderer* renderer, unsigned int i);
 
   /*! Sets color for position i of #destinations_.
 

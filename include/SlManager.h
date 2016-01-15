@@ -84,7 +84,7 @@ class SlManager
   /*! Render all items in the #renderQueue_ .
     \retval 0 if all renders well.
    */
-  int render();
+  void render();
   /*! Temporary solution until all rendering related stuff happens in SlManager methods.
    */
   SDL_Renderer* renderer(){return renderer_;}
