@@ -1,7 +1,7 @@
 <map id="include/SlTexture.h" name="include/SlTexture.h">
-<area shape="rect" id="node2" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="5,80,129,107"/>
-<area shape="rect" id="node3" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="153,80,261,107"/>
-<area shape="rect" id="node4" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="285,80,444,107"/>
-<area shape="rect" id="node5" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="468,80,587,107"/>
+<area shape="rect" id="node2" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node3" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="153,80,260,107"/>
+<area shape="rect" id="node4" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="285,80,443,107"/>
+<area shape="rect" id="node5" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="467,80,585,107"/>
 <area shape="rect" id="node6" href="$SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="611,80,779,107"/>
 </map>

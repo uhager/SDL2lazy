@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['renderer_5f',['renderer_',['../classSlManager.html#a3d3207dd3bef3e0e62c4dafee9264d25',1,'SlManager']]],
-  ['renderme_5f',['renderMe_',['../classSlRenderItem.html#a9bc18ee1f238cc178f7929852ac9b2dc',1,'SlRenderItem']]],
-  ['renderoptions',['renderOptions',['../structSlRenderSettings.html#a7d2848b536f71f4ddc1cb950a3fc924d',1,'SlRenderSettings']]],
-  ['renderqueue_5f',['renderQueue_',['../classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82',1,'SlManager']]]
+  ['name_5f',['name_',['../classSlFont.html#af07ff8c6b7b7cf79c1a940513d39bb0e',1,'SlFont::name_()'],['../classSlSprite.html#a390f5e40313754666ca0749f63ff38db',1,'SlSprite::name_()'],['../classSlSpriteManipulation.html#a41c78bb3bb9841bcf186d039ef0328b4',1,'SlSpriteManipulation::name_()'],['../classSlTexture.html#a0c17a906576f0aa5c74a6d42840f7520',1,'SlTexture::name_()']]]
 ];

@@ -1,12 +1,12 @@
 <map id="include/SlRenderOptions.h" name="include/SlRenderOptions.h">
-<area shape="rect" id="node2" href="$SlValueParser_8cc.html" title="src/SlValueParser.cc" alt="" coords="198,80,344,107"/>
-<area shape="rect" id="node3" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="368,80,492,107"/>
-<area shape="rect" id="node4" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="332,229,456,256"/>
-<area shape="rect" id="node5" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="24,155,132,181"/>
+<area shape="rect" id="node2" href="$SlValueParser_8cc.html" title="src/SlValueParser.cc" alt="" coords="198,80,343,107"/>
+<area shape="rect" id="node3" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="368,80,491,107"/>
+<area shape="rect" id="node4" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="332,229,455,256"/>
+<area shape="rect" id="node5" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="24,155,131,181"/>
 <area shape="rect" id="node6" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="156,155,314,181"/>
 <area shape="rect" id="node7" href="$SlSpriteManipulation_8cc.html" title="src/SlSpriteManipulation.cc" alt="" coords="339,155,520,181"/>
-<area shape="rect" id="node8" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="545,155,664,181"/>
+<area shape="rect" id="node8" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="545,155,663,181"/>
 <area shape="rect" id="node9" href="$SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="688,155,856,181"/>
-<area shape="rect" id="node10" href="$SlRenderItem_8h.html" title="SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="881,155,1040,181"/>
-<area shape="rect" id="node11" href="$SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="889,229,1032,256"/>
+<area shape="rect" id="node10" href="$SlRenderItem_8h.html" title="SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="881,155,1039,181"/>
+<area shape="rect" id="node11" href="$SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="889,229,1031,256"/>
 </map>

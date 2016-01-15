@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['loadfromfile',['loadFromFile',['../classSlTexture.html#ad36a68ee8cedfd3977779428ed335686',1,'SlTexture']]]
+  ['loadfont',['loadFont',['../classSlFont.html#a679c1ca891fda346e965a190355edcea',1,'SlFont']]],
+  ['loadfromfile',['loadFromFile',['../classSlTexture.html#a2de31cb43d6556236207d2081975c67d',1,'SlTexture']]]
 ];

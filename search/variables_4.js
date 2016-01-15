@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['name_5f',['name_',['../classSlSprite.html#a390f5e40313754666ca0749f63ff38db',1,'SlSprite::name_()'],['../classSlSpriteManipulation.html#a41c78bb3bb9841bcf186d039ef0328b4',1,'SlSpriteManipulation::name_()'],['../classSlTexture.html#a0c17a906576f0aa5c74a6d42840f7520',1,'SlTexture::name_()']]]
+  ['manipulations_5f',['manipulations_',['../classSlSpriteManager.html#a5433a1078c832d2c969612b8dffddb54',1,'SlSpriteManager']]],
+  ['mngr_5f',['mngr_',['../classSlSpriteManager.html#af713fe41beaf56721c54ee29673ca538',1,'SlSpriteManager::mngr_()'],['../classSlTextureManager.html#a13d0b366ca0312ad01f27909e2058fd7',1,'SlTextureManager::mngr_()']]]
 ];

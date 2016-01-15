@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['slfont',['SlFont',['../classSlFont.html',1,'']]],
   ['slmanager',['SlManager',['../classSlManager.html',1,'']]],
   ['slmcenterin',['SlMCenterIn',['../classSlMCenterIn.html',1,'']]],
   ['slmsetoptions',['SlMSetOptions',['../classSlMSetOptions.html',1,'']]],

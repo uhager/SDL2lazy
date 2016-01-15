@@ -6,6 +6,6 @@ var searchData=
   ['destination',['destination',['../classSlSprite.html#ae57f5294f0931f8990ea873334c51a1a',1,'SlSprite']]],
   ['destinationdimension',['destinationDimension',['../classSlSprite.html#aa90f58310139fee549ccc6253960a99f',1,'SlSprite']]],
   ['destinationorigin',['destinationOrigin',['../classSlSprite.html#a346891f73e17e04fc9b253ec41c4d28c',1,'SlSprite']]],
-  ['determinevalues',['determineValues',['../classSlManager.html#ab1dcbba5cf4d946d226cc0b850a0d857',1,'SlManager']]],
-  ['dimensions',['dimensions',['../classSlTexture.html#a782c3388f2e3879a724e6fef4e39b2d8',1,'SlTexture']]]
+  ['dimensions',['dimensions',['../classSlTexture.html#a782c3388f2e3879a724e6fef4e39b2d8',1,'SlTexture']]],
+  ['doublefromstring',['doubleFromString',['../classSlValueParser.html#a0a6c4f29b118cae67ea0389a6fa9b6dc',1,'SlValueParser']]]
 ];

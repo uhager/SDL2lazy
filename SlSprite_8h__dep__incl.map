@@ -1,10 +1,10 @@
 <map id="include/SlSprite.h" name="include/SlSprite.h">
-<area shape="rect" id="node2" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="332,155,456,181"/>
-<area shape="rect" id="node3" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="24,80,132,107"/>
+<area shape="rect" id="node2" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="332,155,455,181"/>
+<area shape="rect" id="node3" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="24,80,131,107"/>
 <area shape="rect" id="node4" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="156,80,314,107"/>
 <area shape="rect" id="node5" href="$SlSpriteManipulation_8cc.html" title="src/SlSpriteManipulation.cc" alt="" coords="339,80,520,107"/>
-<area shape="rect" id="node6" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="545,80,664,107"/>
+<area shape="rect" id="node6" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="545,80,663,107"/>
 <area shape="rect" id="node7" href="$SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="688,80,856,107"/>
-<area shape="rect" id="node8" href="$SlRenderItem_8h.html" title="SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="881,80,1040,107"/>
-<area shape="rect" id="node9" href="$SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="889,155,1032,181"/>
+<area shape="rect" id="node8" href="$SlRenderItem_8h.html" title="SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="881,80,1039,107"/>
+<area shape="rect" id="node9" href="$SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="889,155,1031,181"/>
 </map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['manipulations_5f',['manipulations_',['../classSlSpriteManager.html#a5433a1078c832d2c969612b8dffddb54',1,'SlSpriteManager']]],
-  ['mngr_5f',['mngr_',['../classSlSpriteManager.html#af713fe41beaf56721c54ee29673ca538',1,'SlSpriteManager::mngr_()'],['../classSlTextureManager.html#a13d0b366ca0312ad01f27909e2058fd7',1,'SlTextureManager::mngr_()']]]
+  ['font_5f',['font_',['../classSlFont.html#ad560f286f9479134390b114e4769b457',1,'SlFont']]],
+  ['fonts_5f',['fonts_',['../classSlTextureManager.html#a89a266445869197f2a2e0b81907cba2b',1,'SlTextureManager']]]
 ];
