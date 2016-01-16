@@ -76,6 +76,7 @@ class SlValueParser
    */
   std::string assembleFormula(const std::vector<std::string>& stringValues, unsigned int& i);
   /*! Uses the outputQueue from shuntFormula() to calculate the result of the equation.
+    \throws std::runtime_error if the items in the provided queue do not match the expected Reverse Polish notation or if an unknown operator is encountered.
    */
   double calculateFormula(std::queue<SlFormulaItem>& outputQueue);
   /*! Parses equation from assembleFormula() in infix notation and sorts it into Reverse Polish notation.

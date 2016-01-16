@@ -97,7 +97,6 @@ SlValueParser::calculateFormula(std::queue<SlFormulaItem>& outputQueue)
 	operants[j] = tempStorage.top();
 	tempStorage.pop();
       }
-      std::cout << std::endl;
       switch ( item.what ){
       case '+':
 	tempStorage.push( operants[1] + operants[0] );
@@ -198,7 +197,9 @@ SlValueParser::stringsToDoubles(const std::vector<std::string>& stringValues, do
   }
 
   for ( unsigned int i = 0 ; i != stringValues.size() ; ++i) {
-    if ( stringValues.at(i)[0] == '\"' ) {
+    //! Skip trailing whitespace at end of line otherwise causes exception.
+    if ( stringValues.at(i).empty() ) continue;
+    else if ( stringValues.at(i)[0] == '\"' ) {
       parseFormula(stringValues, i, *values);
     }
     else {
@@ -231,7 +232,7 @@ SlValueParser::stringsToRenderOptions(const std::vector<std::string>& stringValu
     return false;
     }
   }
-      return true;
+  return true;
 }
 
 
