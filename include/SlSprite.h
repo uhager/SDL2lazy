@@ -83,7 +83,10 @@ class SlSprite
   void addDestination(int x, int y, uint32_t renderOptions = SL_RENDER_DEFAULT);
   /*! Centers the destination of this sprite in the destinationRect of the other sprite.
    */
-  void centerInSprite(const std::shared_ptr<SlSprite> otherSprite, unsigned int destionationThis = 0, unsigned int destinationOther = 0);
+  void centerInSprite(const std::shared_ptr<SlSprite> otherSprite, unsigned int destinationThis = 0, unsigned int destinationOther = 0);
+  /*! Centers the destination of this sprite at the specified coordinates.
+   */
+  void centerAt( unsigned int x, unsigned int y, unsigned int destination = 0);
   /*! Removes all entries from #destinations_. Sprite will not be rendered.
    */
   void clearDestinations();

@@ -92,12 +92,14 @@ public:
 
 
 
-
-
-
-
-
-
+/*! \class SlMCenterIn derived from SlSpriteManipulation. Centers sprite in another sprite.
+ */ 
+class SlMCenterAt : public SlSpriteManipulation
+{
+public:
+  SlMCenterAt(SlSpriteManager* manager, SlValueParser** valParser);
+  void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
 
 
 

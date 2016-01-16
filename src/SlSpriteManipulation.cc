@@ -124,6 +124,7 @@ SlMCenterIn::manipulateSprite(std::string sname, unsigned int destination, const
 }
 
 
+
 /*! SlMSetOptions implementation
  */
 SlMSetOptions::SlMSetOptions(SlSpriteManager* manager, SlValueParser** valPars)
@@ -143,3 +144,27 @@ SlMSetOptions::manipulateSprite(std::string sname, unsigned int destination, con
   bool check = (*valParser)->stringsToRenderOptions( parameters, options );
   if ( check ) toChange->setRenderOptions( options, destination );
 }
+
+
+
+/*! SlMCenterAt implementation
+ */
+SlMCenterAt::SlMCenterAt(SlSpriteManager* manager, SlValueParser** valPars)
+  : SlSpriteManipulation(manager, valPars)
+{
+  name_ = "centerAt";
+}
+
+
+
+void
+SlMCenterAt::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
+
+  int targetLocation[2];
+  (*valParser)->stringsToNumbers<int>( parameters, targetLocation, 2 );
+  toMove->centerAt( targetLocation[0], targetLocation[1] );
+}
+
+

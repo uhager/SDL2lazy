@@ -89,6 +89,19 @@ SlSprite::addDestination(int x, int y, uint32_t renderOptions)
 
 
 
+void 
+SlSprite::centerAt( unsigned int x, unsigned int y, unsigned int destination)
+{
+  if ( destination >= destinations_.size() )
+    throw std::invalid_argument("Invalid sprite destination index.");
+  
+  SDL_Rect& dest = destinations_.at(destination).destinationRect ;
+  dest.x = x - dest.w / 2 ;
+  dest.y = y - dest.h / 2 ;
+}
+
+
+
 void
 SlSprite::centerInSprite(const std::shared_ptr<SlSprite> otherSprite, unsigned int destinationThis, unsigned int destinationOther)
 {
