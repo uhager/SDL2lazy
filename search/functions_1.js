@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['centerinsprite',['centerInSprite',['../classSlSprite.html#a8f85eeb84efa6ed14848e2d0f4ca6e7c',1,'SlSprite']]],
+  ['calculateformula',['calculateFormula',['../classSlValueParser.html#ab003e0931f2865d4ce5f475647e55056',1,'SlValueParser']]],
+  ['centerat',['centerAt',['../classSlSprite.html#a5517721d673587999acfdb6c13d7744d',1,'SlSprite']]],
+  ['centerinsprite',['centerInSprite',['../classSlSprite.html#aa646f4e6fa19a441481d0ef15e282808',1,'SlSprite']]],
   ['centerspriteinsprite',['centerSpriteInSprite',['../classSlSpriteManager.html#aca089fcffed94c6c6832dfffcad2607e',1,'SlSpriteManager']]],
   ['clear',['clear',['../classSlManager.html#a6d2025542e2b1b948f6fd8a34b01b223',1,'SlManager::clear()'],['../classSlSpriteManager.html#afd8def5a6411ab9e4c4ad1a587c57045',1,'SlSpriteManager::clear()'],['../classSlTextureManager.html#aae932c43baaf3ddf79c179fdbfd271b1',1,'SlTextureManager::clear()']]],
   ['cleardestinations',['clearDestinations',['../classSlSprite.html#aa35430177caab5f667abc6407f033773',1,'SlSprite']]],

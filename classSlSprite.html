@@ -112,8 +112,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7bb3b9e857d6a3a1b91e1550fdc2bfd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a633bf4ba55a165f8c716d710a7ca625d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a633bf4ba55a165f8c716d710a7ca625d">addDestination</a> (int x, int y, uint32_t renderOptions=SL_RENDER_DEFAULT)</td></tr>
 <tr class="separator:a633bf4ba55a165f8c716d710a7ca625d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f85eeb84efa6ed14848e2d0f4ca6e7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a8f85eeb84efa6ed14848e2d0f4ca6e7c">centerInSprite</a> (const std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt; otherSprite, unsigned int destionationThis=0, unsigned int destinationOther=0)</td></tr>
-<tr class="separator:a8f85eeb84efa6ed14848e2d0f4ca6e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa646f4e6fa19a441481d0ef15e282808"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#aa646f4e6fa19a441481d0ef15e282808">centerInSprite</a> (const std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt; otherSprite, unsigned int destinationThis=0, unsigned int destinationOther=0)</td></tr>
+<tr class="separator:aa646f4e6fa19a441481d0ef15e282808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5517721d673587999acfdb6c13d7744d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a5517721d673587999acfdb6c13d7744d">centerAt</a> (unsigned int x, unsigned int y, unsigned int <a class="el" href="classSlSprite.html#ae57f5294f0931f8990ea873334c51a1a">destination</a>=0)</td></tr>
+<tr class="separator:a5517721d673587999acfdb6c13d7744d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa35430177caab5f667abc6407f033773"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#aa35430177caab5f667abc6407f033773">clearDestinations</a> ()</td></tr>
 <tr class="separator:aa35430177caab5f667abc6407f033773"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae57f5294f0931f8990ea873334c51a1a"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#ae57f5294f0931f8990ea873334c51a1a">destination</a> (unsigned int i=0)</td></tr>
@@ -374,7 +376,40 @@ The default values will use the whole texture as a sprite. Calls <a class="el" h
 
 </div>
 </div>
-<a class="anchor" id="a8f85eeb84efa6ed14848e2d0f4ca6e7c"></a>
+<a class="anchor" id="a5517721d673587999acfdb6c13d7744d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlSprite::centerAt </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>destination</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Centers the destination of this sprite at the specified coordinates. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa646f4e6fa19a441481d0ef15e282808"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -388,7 +423,7 @@ The default values will use the whole texture as a sprite. Calls <a class="el" h
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>destionationThis</em> = <code>0</code>, </td>
+          <td class="paramname"><em>destinationThis</em> = <code>0</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

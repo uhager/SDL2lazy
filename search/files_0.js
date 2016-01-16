@@ -2,6 +2,8 @@ var searchData=
 [
   ['slfont_2ecc',['SlFont.cc',['../SlFont_8cc.html',1,'']]],
   ['slfont_2eh',['SlFont.h',['../SlFont_8h.html',1,'']]],
+  ['slformulaitem_2ecc',['SlFormulaItem.cc',['../SlFormulaItem_8cc.html',1,'']]],
+  ['slformulaitem_2eh',['SlFormulaItem.h',['../SlFormulaItem_8h.html',1,'']]],
   ['slmanager_2ecc',['SlManager.cc',['../SlManager_8cc.html',1,'']]],
   ['slmanager_2eh',['SlManager.h',['../SlManager_8h.html',1,'']]],
   ['slrenderitem_2ecc',['SlRenderItem.cc',['../SlRenderItem_8cc.html',1,'']]],

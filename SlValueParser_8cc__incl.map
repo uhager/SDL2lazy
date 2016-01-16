@@ -1,5 +1,6 @@
 <map id="src/SlValueParser.cc" name="src/SlValueParser.cc">
-<area shape="rect" id="node6" href="$SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="397,80,528,107"/>
-<area shape="rect" id="node7" href="$SlValueParser_8h.html" title="SlValueParser helper object to translate file input into values. " alt="" coords="553,80,668,107"/>
-<area shape="rect" id="node10" href="$SlValueParser_8hpp.html" title="SlValueParser.hpp" alt="" coords="664,155,795,181"/>
+<area shape="rect" id="node8" href="$SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="810,80,941,107"/>
+<area shape="rect" id="node9" href="$SlFormulaItem_8h.html" title="SlFormulaItem helper object to translate file input into values. " alt="" coords="527,80,645,107"/>
+<area shape="rect" id="node11" href="$SlValueParser_8h.html" title="SlValueParser helper object to translate file input into values. " alt="" coords="670,80,785,107"/>
+<area shape="rect" id="node13" href="$SlValueParser_8hpp.html" title="SlValueParser.hpp" alt="" coords="765,155,896,181"/>
 </map>

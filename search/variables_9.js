@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['valparser',['valParser',['../classSlSpriteManager.html#ae12e3ffc1e500abf0860a6977e32d5de',1,'SlSpriteManager::valParser()'],['../classSlSpriteManipulation.html#a08c7a79483dec54888402ec5cf367d5e',1,'SlSpriteManipulation::valParser()'],['../classSlTextureManager.html#a8def4783c0ccc6e2b50f716987ca3d2b',1,'SlTextureManager::valParser()']]],
-  ['valparser_5f',['valParser_',['../classSlManager.html#ae87b0eaa73cb1ccefbbf2da3a7401ecc',1,'SlManager']]]
+  ['texture_5f',['texture_',['../classSlSprite.html#a4a3dde5bcc06276d710e4b52321dc55f',1,'SlSprite::texture_()'],['../classSlTexture.html#abeed33bb9d24730e5ea428b0e04a62ef',1,'SlTexture::texture_()']]],
+  ['textures_5f',['textures_',['../classSlTextureManager.html#a29b251d227346d2730179db2f1e71ef6',1,'SlTextureManager']]],
+  ['tmngr_5f',['tmngr_',['../classSlManager.html#af54efde697703042a41dedad123b0cde',1,'SlManager']]]
 ];

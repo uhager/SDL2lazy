@@ -83,6 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classSlValueParser-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -119,6 +120,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aed6a7bbc696392b6a4430a773debbc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06e5d2b2325ca3b02d733e837aed1971"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlValueParser.html#a06e5d2b2325ca3b02d733e837aed1971">screenHeight</a> ()</td></tr>
 <tr class="separator:a06e5d2b2325ca3b02d733e837aed1971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aa1010627a8d30ea6f403c505030d1336"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlValueParser.html#aa1010627a8d30ea6f403c505030d1336">assembleFormula</a> (const std::vector&lt; std::string &gt; &amp;stringValues, unsigned int &amp;i)</td></tr>
+<tr class="separator:aa1010627a8d30ea6f403c505030d1336"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab003e0931f2865d4ce5f475647e55056"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlValueParser.html#ab003e0931f2865d4ce5f475647e55056">calculateFormula</a> (std::queue&lt; <a class="el" href="classSlFormulaItem.html">SlFormulaItem</a> &gt; &amp;outputQueue)</td></tr>
+<tr class="separator:ab003e0931f2865d4ce5f475647e55056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a549fb890936fbd930503635e3e8b0c14"><td class="memItemLeft" align="right" valign="top">std::queue&lt; <a class="el" href="classSlFormulaItem.html">SlFormulaItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlValueParser.html#a549fb890936fbd930503635e3e8b0c14">shuntFormula</a> (std::string &amp;formula)</td></tr>
+<tr class="separator:a549fb890936fbd930503635e3e8b0c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -223,6 +233,83 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aa1010627a8d30ea6f403c505030d1336"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string SlValueParser::assembleFormula </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>stringValues</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int &amp;&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Generates the formula string from stringValues. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if the end of the formula can't be found. </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>&lt; already determined position 0 is '"'</p>
+<p>&lt; Remove trailing '"'</p>
+<p>&lt; This is where stringsToInts will continue </p>
+
+</div>
+</div>
+<a class="anchor" id="ab003e0931f2865d4ce5f475647e55056"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double SlValueParser::calculateFormula </td>
+          <td>(</td>
+          <td class="paramtype">std::queue&lt; <a class="el" href="classSlFormulaItem.html">SlFormulaItem</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>outputQueue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Uses the outputQueue from <a class="el" href="classSlValueParser.html#a549fb890936fbd930503635e3e8b0c14">shuntFormula()</a> to calculate the result of the equation. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the items in the provided queue do not match the expected Reverse Polish notation or if an unknown operator is encountered. </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>&lt; number</p>
+<p>&lt; need two numbers to use operator </p>
+
+</div>
+</div>
 <a class="anchor" id="a0a6c4f29b118cae67ea0389a6fa9b6dc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -253,6 +340,7 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<p>&lt; account for unary - </p>
 
 </div>
 </div>
@@ -305,14 +393,10 @@ Private Attributes</h2></td></tr>
 <p>Calculates the results of a formula (only + and - implemented). </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">std::invalid_argument</td><td>if the end of the formula can't be found, or if the formula can't be calculated (unknown operator). </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>if the formula can't be calculated (unknown operator). </td></tr>
   </table>
   </dd>
 </dl>
-<p>&lt;- The first number is always added to the result.</p>
-<p>&lt;- already determined position 0 is '"'</p>
-<p>&lt;- Remove trailing '"'</p>
-<p>&lt;- This is where stringsToInts will continue </p>
 
 </div>
 </div>
@@ -364,6 +448,32 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a549fb890936fbd930503635e3e8b0c14"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::queue&lt; <a class="el" href="classSlFormulaItem.html">SlFormulaItem</a> &gt; SlValueParser::shuntFormula </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>formula</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Parses equation from <a class="el" href="classSlValueParser.html#aa1010627a8d30ea6f403c505030d1336">assembleFormula()</a> in infix notation and sorts it into Reverse Polish notation. </p>
+<p>&lt; allows for negative numbers at start of formula. </p>
+
+</div>
+</div>
 <a class="anchor" id="a74820a4f37fe5075d5b13b675eb641d5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -400,6 +510,7 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<p>Skip trailing whitespace at end of line otherwise causes exception. </p>
 
 </div>
 </div>
