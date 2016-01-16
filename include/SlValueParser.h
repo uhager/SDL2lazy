@@ -10,6 +10,10 @@
 
 #include <string>
 #include <vector>
+#include <queue>
+
+
+class SlFormulaItem;
 
 /*! \class SlValueParser
   Translate string input from configuration files to int output.
@@ -32,13 +36,13 @@ class SlValueParser
   /*! Copy constructor.
    */
   SlValueParser(const SlValueParser& toCopy);
-
+  
   /*! Returns the double value for a string. Understands SCREEN_WIDTH and SCREEN_HEIGHT.
     \throws std::runtime_error if the string can't be converted to double.
    */
   void doubleFromString(const std::string& value, double& i);
   /*! Calculates the results of a formula (only + and - implemented).
-    \throws std::invalid_argument if the end of the formula can't be found, or if the formula can't be calculated (unknown operator).
+    \throws std::invalid_argument if the formula can't be calculated (unknown operator).
    */
   void parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
@@ -66,6 +70,17 @@ class SlValueParser
   /*! Screen dimensions are needed to define a texture as having the dimensions of the window.
    */
   int screen_height_;
+
+  /*! Generates the formula string from stringValues.
+    \throws std::invalid_argument if the end of the formula can't be found.
+   */
+  std::string assembleFormula(const std::vector<std::string>& stringValues, unsigned int& i);
+  /*! Uses the outputQueue from shuntFormula() to calculate the result of the equation.
+   */
+  double calculateFormula(std::queue<SlFormulaItem>& outputQueue);
+  /*! Parses equation from assembleFormula() in infix notation and sorts it into Reverse Polish notation.
+   */
+  std::queue<SlFormulaItem> shuntFormula(std::string& formula);
 
 };
 

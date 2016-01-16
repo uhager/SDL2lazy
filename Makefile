@@ -14,7 +14,7 @@ CXXFLAGS += -O2 -Wall -fPIC -std=c++11 -I$(INC)
 
 DEBUG_FLAGS = -g -DDEBUG 
 
-OBJS = $(SRC)/SlTexture.o $(SRC)/SlSprite.o $(SRC)/SlRenderItem.o $(SRC)/SlManager.o $(SRC)/SlTextureManager.o $(SRC)/SlSpriteManager.o $(SRC)/SlSpriteManipulation.o $(SRC)/SlValueParser.o $(SRC)/SlFont.o 
+OBJS = $(SRC)/SlTexture.o $(SRC)/SlSprite.o $(SRC)/SlRenderItem.o $(SRC)/SlManager.o $(SRC)/SlTextureManager.o $(SRC)/SlSpriteManager.o $(SRC)/SlSpriteManipulation.o $(SRC)/SlValueParser.o $(SRC)/SlFont.o $(SRC)/SlFormulaItem.o 
 EXAMPLE_OBJS = $(EXAMPLE)/lazy-test.o
 ALL += lib/libSDL2lazy.so example/lazy-test
 
