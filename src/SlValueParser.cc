@@ -51,7 +51,7 @@ std::string
 SlValueParser::assembleFormula(const std::vector<std::string>& stringValues, unsigned int& i)
 {
   std::string formula;
-  formula = stringValues.at(i).substr(1); //! <- already determined position 0 is '"'
+  formula = stringValues.at(i).substr(1); //!< already determined position 0 is '"'
   ++i;
   
   while ( ( formula.back() != '\"' ) && ( i < stringValues.size() ) ){
@@ -65,13 +65,13 @@ SlValueParser::assembleFormula(const std::vector<std::string>& stringValues, uns
     throw std::invalid_argument("Couldn't find end of formula.");
   }
 
-  formula.pop_back();    //! <- Remove trailing '"'
-  --i;                   //! <- This is where stringsToInts will continue
+  formula.pop_back();    //!< Remove trailing '"'
+  --i;                   //!< This is where stringsToInts will continue
   auto iter = std::remove_if(formula.begin(), formula.end(), ::isspace);
   formula.erase( iter, formula.end() );
 
 #ifdef DEBUG
-  std::cout << "[SlValueParser::assembleFormula] formula " << formula << std::endl;
+  std::cout << "[SlValueParser::assembleFormula] formula \"" << formula << "\"" << std::endl;
 #endif
   return formula;
 }
@@ -85,11 +85,11 @@ SlValueParser::calculateFormula(std::queue<SlFormulaItem>& outputQueue)
 
   for ( ; !outputQueue.empty() ; outputQueue.pop() ) {
     SlFormulaItem item = outputQueue.front();
-    if ( item.what == 'n' ) {   //! <- number
+    if ( item.what == 'n' ) {   //!< number
       tempStorage.push(item);
     }
     else {
-      if ( tempStorage.size() < 2 )   //! <- need two numbers to use operator
+      if ( tempStorage.size() < 2 )   //!< need two numbers to use operator
 	throw std::runtime_error("Bad formula");
       
       SlFormulaItem operants[2] ;
@@ -127,17 +127,27 @@ SlValueParser::calculateFormula(std::queue<SlFormulaItem>& outputQueue)
 void
 SlValueParser::doubleFromString(const std::string& svalue, double& dvalue)
 {
-  if ( svalue == "SCREEN_WIDTH" ) {
+  std::string absolute = svalue;
+  int multiplier = 1 ;          //!< account for unary -
+  if ( absolute[0] == '-' ) {
+    multiplier = -1;
+    absolute = absolute.substr(1);
+  }
+  else if ( absolute[0] == '+' ) {
+    absolute = absolute.substr(1);  
+  }
+  if ( absolute == "SCREEN_WIDTH" ) {
     dvalue = screen_width_;
   }
-  else if ( svalue == "SCREEN_HEIGHT" ) {
+  else if ( absolute == "SCREEN_HEIGHT" ) {
     dvalue = screen_height_;
   }
   else {
-    std::istringstream is(svalue);
+    std::istringstream is(absolute);
     if ( !(is >> dvalue) ) 
-      throw std::runtime_error("Invalid conversion to double of string: \"" + svalue + "\"");
+      throw std::runtime_error("Invalid conversion to double of string: \"" + absolute + "\"");
   }
+  dvalue *= multiplier;
 }
 
 
@@ -162,7 +172,11 @@ SlValueParser::shuntFormula(std::string& formula)
 
   decltype( formula.find_first_of("+") ) pos = 0;
   while ( pos != std::string::npos ) {
-    pos = formula.find_first_of("+-*/");
+    if ( formula[0] == '+' || formula[0] == '-' ) {  //!< allows for negative numbers at start of formula.
+      pos = formula.find_first_of("+-*/()", 1);
+    }
+    else
+      pos = formula.find_first_of("+-*/()");
     std::string number = formula.substr(0, pos);
     double data;
     doubleFromString( number, data );
