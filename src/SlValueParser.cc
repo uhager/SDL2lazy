@@ -152,6 +152,38 @@ SlValueParser::doubleFromString(const std::string& svalue, double& dvalue)
 
 
 
+SlFormulaItem
+SlValueParser::getNextItem(std::string& formula)
+{
+  decltype( formula.find_first_of("+") ) pos = 0;
+  switch (formula[0] ){
+  case '+': case '-': case '*': case '/': case '(': case ')':
+    pos = 1;
+    break;
+  default:  
+    pos = formula.find_first_of("+-*/()");
+    break;
+  }
+  std::cout << "[SlValueParser::getNextItem] Formula: \"" << formula << "\". Item length: " << pos << std::endl;
+  if ( pos == std::string::npos ) {
+    pos = formula.size();
+  }
+  std::string itemString = formula.substr(0, pos);
+  SlFormulaItem result;
+  if ( itemString.size() == 1 && !isdigit(itemString[0]) ) {
+    result = SlFormulaItem( itemString[0] );
+  }
+  else {
+    double data;
+    doubleFromString( itemString, data );
+    result = SlFormulaItem( data );
+  }
+  formula = formula.substr( pos );
+  return result;
+}
+
+
+
 void
 SlValueParser::parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value)
 {
@@ -169,35 +201,48 @@ SlValueParser::shuntFormula(std::string& formula)
   std::queue<SlFormulaItem> outputQueue;
   std::stack<SlFormulaItem> operatorStack; 
 
-
-  decltype( formula.find_first_of("+") ) pos = 0;
-  while ( pos != std::string::npos ) {
-    if ( formula[0] == '+' || formula[0] == '-' ) {  //!< allows for negative numbers at start of formula.
-      pos = formula.find_first_of("+-*/()", 1);
-    }
-    else
-      pos = formula.find_first_of("+-*/()");
-    std::string number = formula.substr(0, pos);
-    double data;
-    doubleFromString( number, data );
-    outputQueue.push( SlFormulaItem(data) );
-    if ( pos != std::string::npos ) {
-      char op = formula.substr(pos, 1)[0];
-      SlFormulaItem opItem(op);
-      while ( !operatorStack.empty() && operatorStack.top().precedence > opItem.precedence ) {
+  bool isNegative = false;                   //!< Check for leading unary -.
+  while ( !formula.empty() ) {
+    SlFormulaItem currentItem = getNextItem( formula );
+    switch (currentItem.what) {
+    case 'n':
+      if ( isNegative ) {
+	currentItem.data *= -1;
+	isNegative = false;
+      }
+      outputQueue.push( currentItem );
+      break;
+    case '+': case '-': case '*': case '/':
+      if ( outputQueue.empty() ) {              //!< Leading unary - (or plus)
+	if ( currentItem.what == '-' ) isNegative = true;
+	break;
+      }
+      while ( !operatorStack.empty() && operatorStack.top().precedence > currentItem.precedence ) {
 	outputQueue.push( operatorStack.top() );
 	operatorStack.pop();
       }
-      operatorStack.push(opItem);
-      formula = formula.substr(pos+1);
-    }
-  }
-  while ( !operatorStack.empty() ) {
+      operatorStack.push(currentItem);
+      break;
+    case '(':
+      operatorStack.push(currentItem);
+      break;
+    case ')':
+      while ( !operatorStack.empty() && operatorStack.top().what != '(' ) {
 	outputQueue.push( operatorStack.top() );
 	operatorStack.pop();
+      }
+      operatorStack.pop();   //!< Should be '(' on top, discard.
+      break;
+    }
   }
-    return outputQueue;
+      
+  while ( !operatorStack.empty() ) {
+    outputQueue.push( operatorStack.top() );
+    operatorStack.pop();
+  }
+  return outputQueue;
 }
+
 
 
 void

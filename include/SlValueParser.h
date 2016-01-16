@@ -79,6 +79,9 @@ class SlValueParser
     \throws std::runtime_error if the items in the provided queue do not match the expected Reverse Polish notation or if an unknown operator is encountered.
    */
   double calculateFormula(std::queue<SlFormulaItem>& outputQueue);
+  /*! Extracts the next item from the given string, and cuts the corresponding part from the input string.
+   */
+  SlFormulaItem getNextItem(std::string& formula);
   /*! Parses equation from assembleFormula() in infix notation and sorts it into Reverse Polish notation.
    */
   std::queue<SlFormulaItem> shuntFormula(std::string& formula);

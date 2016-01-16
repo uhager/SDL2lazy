@@ -24,6 +24,9 @@ SlFormulaItem::SlFormulaItem(char c)
     case '*': case '/':
       precedence = 3;
       break;
+    case '(': case ')':
+      precedence = 1;
+      break;
     default:
       throw std::invalid_argument("Unknown operator " + c);
     }
