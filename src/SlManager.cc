@@ -93,7 +93,7 @@ SlManager::createRenderItem(const std::string& name, unsigned int destination)
   std::shared_ptr<SlSprite> sprite = smngr_->findSprite(name);
   if (sprite == nullptr) {
 #ifdef DEBUG
-    std::cout << "[SlManager::createRenderItem] Couldn't find sprite " << name  << std::endl;
+    std::cerr << "[SlManager::createRenderItem] Couldn't find sprite " << name  << std::endl;
 #endif
     return item;
   }
