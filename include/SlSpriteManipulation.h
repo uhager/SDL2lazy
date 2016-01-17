@@ -59,51 +59,48 @@ class SlSpriteManipulation
 };
 
 
-/*! \class SlMSetOrigin derived from SlSpriteManipulation. Sets sprite origin to given x and y coordinates.
+
+/*! \class SlSMCenterIn derived from SlSpriteManipulation. Centers sprite in another sprite.
  */ 
-class SlMSetOrigin : public SlSpriteManipulation
+class SlSMcenterAt : public SlSpriteManipulation
 {
 public:
-  SlMSetOrigin(SlSpriteManager* manager, SlValueParser** valParser);
+  SlSMcenterAt(SlSpriteManager* manager, SlValueParser** valParser);
   void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
 
 
-/*! \class SlMCenterIn derived from SlSpriteManipulation. Centers sprite in another sprite.
+/*! \class SlSMCenterIn derived from SlSpriteManipulation. Centers sprite in another sprite.
  */ 
-class SlMCenterIn : public SlSpriteManipulation
+class SlSMcenterIn : public SlSpriteManipulation
 {
 public:
-  SlMCenterIn(SlSpriteManager* manager, SlValueParser** valParser);
+  SlSMcenterIn(SlSpriteManager* manager, SlValueParser** valParser);
   void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
 
 
-/*! \class SlMSetOptions derived from SlSpriteManipulation. Sets renderOptions for sprite.
+/*! \class SlSMSetOptions derived from SlSpriteManipulation. Sets renderOptions for sprite.
  */ 
-class SlMSetOptions : public SlSpriteManipulation
+class SlSMsetOptions : public SlSpriteManipulation
 {
 public:
-  SlMSetOptions(SlSpriteManager* manager, SlValueParser** valParser);
+  SlSMsetOptions(SlSpriteManager* manager, SlValueParser** valParser);
   void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
 
 
-/*! \class SlMCenterIn derived from SlSpriteManipulation. Centers sprite in another sprite.
+/*! \class SlSMSetOrigin derived from SlSpriteManipulation. Sets sprite origin to given x and y coordinates.
  */ 
-class SlMCenterAt : public SlSpriteManipulation
+class SlSMsetOrigin : public SlSpriteManipulation
 {
 public:
-  SlMCenterAt(SlSpriteManager* manager, SlValueParser** valParser);
+  SlSMsetOrigin(SlSpriteManager* manager, SlValueParser** valParser);
   void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
-
-
-
-
 
 
 

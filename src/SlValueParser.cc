@@ -164,7 +164,6 @@ SlValueParser::getNextItem(std::string& formula)
     pos = formula.find_first_of("+-*/()");
     break;
   }
-  std::cout << "[SlValueParser::getNextItem] Formula: \"" << formula << "\". Item length: " << pos << std::endl;
   if ( pos == std::string::npos ) {
     pos = formula.size();
   }

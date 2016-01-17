@@ -29,13 +29,13 @@ SlSpriteManager::SlSpriteManager(SlManager* mngr)
 {
   SlSpriteManipulation* toAdd;
   
-  toAdd = new SlMSetOrigin( this, &valParser );
+  toAdd = new SlSMsetOrigin( this, &valParser );
   manipulations_[toAdd->name()] = toAdd;
-  toAdd = new SlMCenterIn( this, &valParser );
+  toAdd = new SlSMcenterIn( this, &valParser );
   manipulations_[toAdd->name()] = toAdd;
-  toAdd = new SlMSetOptions( this, &valParser );
+  toAdd = new SlSMsetOptions( this, &valParser );
   manipulations_[toAdd->name()] = toAdd;
-  toAdd = new SlMCenterAt( this, &valParser );
+  toAdd = new SlSMcenterAt( this, &valParser );
   manipulations_[toAdd->name()] = toAdd;
 }
 

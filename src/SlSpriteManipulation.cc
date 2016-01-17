@@ -78,31 +78,31 @@ SlSpriteManipulation::verifySprite(std::string sname, unsigned int destination)
 
 
 
-/*! SlMSetOrigin implementation
+/*! SlSMcenterAt implementation
  */
-SlMSetOrigin::SlMSetOrigin(SlSpriteManager* manager, SlValueParser** valPars)
+SlSMcenterAt::SlSMcenterAt(SlSpriteManager* manager, SlValueParser** valPars)
   : SlSpriteManipulation(manager, valPars)
 {
-  name_ = "setOrigin";
+  name_ = "centerAt";
 }
 
 
 
 void
-SlMSetOrigin::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMcenterAt::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
 {
   std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
 
-  int origin[2] ;
-  (*valParser)->stringsToNumbers<int>( parameters, origin, 2 );
-  toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
+  int targetLocation[2];
+  (*valParser)->stringsToNumbers<int>( parameters, targetLocation, 2 );
+  toMove->centerAt( targetLocation[0], targetLocation[1] );
 }
 
 
 
-/*! SlMCenterIn implementation
+/*! SlSMcenterIn implementation
  */
-SlMCenterIn::SlMCenterIn(SlSpriteManager* manager, SlValueParser** valPars)
+SlSMcenterIn::SlSMcenterIn(SlSpriteManager* manager, SlValueParser** valPars)
   : SlSpriteManipulation(manager, valPars)
 {
   name_ = "centerIn";
@@ -111,7 +111,7 @@ SlMCenterIn::SlMCenterIn(SlSpriteManager* manager, SlValueParser** valPars)
 
 
 void
-SlMCenterIn::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMcenterIn::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
 {
   std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
 
@@ -125,9 +125,9 @@ SlMCenterIn::manipulateSprite(std::string sname, unsigned int destination, const
 
 
 
-/*! SlMSetOptions implementation
+/*! SlSMsetOptions implementation
  */
-SlMSetOptions::SlMSetOptions(SlSpriteManager* manager, SlValueParser** valPars)
+SlSMsetOptions::SlSMsetOptions(SlSpriteManager* manager, SlValueParser** valPars)
   : SlSpriteManipulation(manager, valPars)
 {
   name_ = "renderOptions";
@@ -136,7 +136,7 @@ SlMSetOptions::SlMSetOptions(SlSpriteManager* manager, SlValueParser** valPars)
 
 
 void
-SlMSetOptions::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMsetOptions::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
 {
   std::shared_ptr<SlSprite> toChange = verifySprite(sname, destination);
   
@@ -147,24 +147,24 @@ SlMSetOptions::manipulateSprite(std::string sname, unsigned int destination, con
 
 
 
-/*! SlMCenterAt implementation
+/*! SlSMsetOrigin implementation
  */
-SlMCenterAt::SlMCenterAt(SlSpriteManager* manager, SlValueParser** valPars)
+SlSMsetOrigin::SlSMsetOrigin(SlSpriteManager* manager, SlValueParser** valPars)
   : SlSpriteManipulation(manager, valPars)
 {
-  name_ = "centerAt";
+  name_ = "setOrigin";
 }
 
 
 
 void
-SlMCenterAt::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMsetOrigin::manipulateSprite(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
 {
   std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
 
-  int targetLocation[2];
-  (*valParser)->stringsToNumbers<int>( parameters, targetLocation, 2 );
-  toMove->centerAt( targetLocation[0], targetLocation[1] );
+  int origin[2] ;
+  (*valParser)->stringsToNumbers<int>( parameters, origin, 2 );
+  toMove->setDestinationOrigin( origin[0], origin[1], destination) ; 
 }
 
 
