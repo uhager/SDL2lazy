@@ -42,6 +42,8 @@ SlManager::SlManager(const std::string& name, int width, int height)
   renderManip_[toAdd->name()] = toAdd;
   toAdd = new SlRMinsertAfter( smngr_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMinsertBefore( smngr_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
 }
 
 
@@ -82,6 +84,12 @@ SlManager::appendToRenderQueue(const std::string& name, unsigned int destination
 void
 SlManager::clear()
 {
+  std::map<std::string, SlRenderQueueManipulation*>::iterator mapItem;
+  for (mapItem = renderManip_.begin(); mapItem != renderManip_.end() ; ++mapItem ) {
+    delete ( mapItem->second );
+  }
+  renderManip_.clear();
+
   std::vector<SlRenderItem*>::iterator item;
   for ( item = renderQueue_.begin(); item != renderQueue_.end() ; ++item) {
     delete (*item);

@@ -78,5 +78,16 @@ class SlRMinsertAfter : public SlRenderQueueManipulation
 
 
 
+/*! \class SlRMinsertBefore
+ */
+class SlRMinsertBefore : public SlRenderQueueManipulation
+{
+ public:
+  SlRMinsertBefore(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue);
+  void manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
 
 #endif   /* SLRENDERQUEUEMANIPULATION_H */
