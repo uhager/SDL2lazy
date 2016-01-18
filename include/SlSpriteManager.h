@@ -97,7 +97,7 @@ class SlSpriteManager
   void clear();
   /*! Move the sprite based on configuration file.\
     Currently implemented whatToDo:\n
-    setOrigin
+    setOrigin, centerAt, centerIn, setOptions
    */
   void manipulateSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters);
   

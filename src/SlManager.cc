@@ -19,6 +19,7 @@
 #include "SlRenderItem.h"
 #include "SlTextureManager.h"
 #include "SlSpriteManager.h"
+#include "SlRenderQueueManipulation.h"
 
 #include "SlManager.h"
 
@@ -35,6 +36,10 @@ SlManager::SlManager(const std::string& name, int width, int height)
 {
   this->initialize();
   this->initializeWindow(name, width, height);
+
+  SlRenderQueueManipulation* toAdd;
+  toAdd = new SlRMappend( smngr_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
 }
 
 
@@ -172,7 +177,7 @@ SlManager::initialize()
   }
   tmngr_ = std::unique_ptr<SlTextureManager>(new SlTextureManager( this ));
   //  smngr_ = std::make_unique<SlSpriteManager>( this );
-  smngr_ = std::unique_ptr<SlSpriteManager>(new SlSpriteManager( this ));
+  smngr_ = std::shared_ptr<SlSpriteManager>(new SlSpriteManager( this )); //!< Needs to be shared with SlRenderQueueManipulation items.
 }
 
 
@@ -258,6 +263,22 @@ SlManager::insertInRenderQueueBefore(const std::string& toAdd, const std::string
 #endif
   }
   return isInserted;
+}
+
+
+
+void
+SlManager::manipulateRenderQueue( const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters )
+{
+  auto iter = renderManip_.find(whatToDo);
+  if ( iter == renderManip_.end() ) {
+#ifdef DEBUG
+    std::cerr << "[SlManager::manipulateRenderQueue] Couldn't find object " << name << std::endl;
+#endif
+    return;
+  }
+  iter->second->manipulateQueue(name, destination, parameters);
+  return;
 }
 
 
@@ -360,6 +381,9 @@ SlManager::parseConfigurationFile(const std::string& filename)
       else if ( token == "font" ) {
 	tmngr_->parseFont( input );
       }
+      else if ( token == "renderqueue" ) {
+	parseRenderQueueManipulation( input );
+      }
       else {
 #ifdef DEBUG
 	std::cerr << "[SlManager::parseConfigurationFile] Unknown token " << token << std::endl;
@@ -371,6 +395,49 @@ SlManager::parseConfigurationFile(const std::string& filename)
     }
 
   return result;
+}
+
+
+void
+SlManager::parseRenderQueueManipulation( std::ifstream& input )
+{
+  std::string line, token;
+  std::string name, whatToDo;
+  unsigned int destination;
+  bool endOfConfig = false;
+  
+  getline(input,line);
+  while ( !endOfConfig && input ) {
+    std::istringstream stream(line.c_str());
+    stream >> token;
+    if ( token[0] == '#' || token.empty() ) {
+      /* empty line or comment */
+    }
+    else if ( token == "end" ) {
+      endOfConfig = true;
+    }
+    else {
+      try {
+	name = token ;
+	stream >> destination ;
+	stream >> whatToDo ;
+	std::vector<std::string> parameters;
+	while ( !stream.eof() ){
+	  parameters.push_back("");
+	  stream >> parameters.back();
+	}
+	manipulateRenderQueue( name, destination, whatToDo, parameters );
+      }
+      catch (const std::exception& expt) {
+	std::cerr << "[SlManager::parseRenderQueueManipulation] " << expt.what() << std::endl;
+      }
+      catch (...) {
+	std::cerr << "[SlManager::parseRenderQueueManipulation] Unknown exception at line: " << line << std::endl;
+      }
+    }
+    token.clear();
+    if ( !endOfConfig ) getline(input,line);
+  }
 }
 
 

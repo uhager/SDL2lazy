@@ -7,6 +7,7 @@
 */
 
 
+#include <iostream>
 #include <stdexcept>
 #include <memory>
 #include <string>
@@ -17,10 +18,33 @@
 #include "SlRenderQueueManipulation.h"
 
 
-SlRenderQueueManipulation::SlRenderQueueManipulation(SlSpriteManager* smngr, std::vector<SlRenderItem*>* renderQueue)
+SlRenderQueueManipulation::SlRenderQueueManipulation(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue)
   : smngr_(smngr)
   , renderQueue_(renderQueue)
 {
+}
+
+
+
+SlRenderQueueManipulation::~SlRenderQueueManipulation()
+{
+  smngr_ = nullptr;
+  renderQueue_ = nullptr;
+#ifdef DEBUG
+  std::cout << "[SlRenderQueueManipulation] deleting " << name_ << std::endl;
+#endif
+}
+
+
+
+SlRenderItem* 
+SlRenderQueueManipulation::createRenderItem(const std::string& name, unsigned int destination)
+{
+#ifdef DEBUG
+  std::cout << "[SlRenderQueueManipulation::createRenderItem] Creating item for " << name  << std::endl;
+#endif
+  std::shared_ptr<SlSprite> sprite = verifySprite(name, destination);
+  return new SlRenderItem(sprite, destination);
 }
 
 
@@ -45,4 +69,27 @@ SlRenderQueueManipulation::verifySprite(std::string sname, unsigned int destinat
   if ( destination >= verified->size() )
     throw std::invalid_argument("Invalid destination for sprite " + sname);
   return verified;
+}
+
+
+
+
+/*! \class SlRMappend implementation
+ */
+SlRMappend::SlRMappend(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, renderQueue )
+{
+  name_ = "append";
+}
+
+
+
+void 
+SlRMappend::manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters)
+{
+  SlRenderItem* toAdd = nullptr;
+  toAdd = createRenderItem(name, destination);
+  if ( toAdd ) {
+    renderQueue_->push_back(toAdd);
+  }
 }

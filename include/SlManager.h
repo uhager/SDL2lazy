@@ -22,6 +22,7 @@
 class SlTexture;
 class SlSprite;
 class SlRenderItem;
+class SlRenderQueueManipulation;
 
 
 class SlManager
@@ -45,7 +46,7 @@ class SlManager
    */ 
   bool appendToRenderQueue(const std::string& name, unsigned int destination = 0);
   /*! Creates new SlRenderItem for the specified sprite. \n
-    \retval false if sprite not found or destination out of bounds.
+    \retval nullptr if sprite not found or destination out of bounds.
    */ 
   SlRenderItem* createRenderItem(const std::string& name, unsigned int destination);
   /*! Delete all render items with the specified name from the #renderQueue_ .
@@ -77,6 +78,14 @@ class SlManager
   /*! Inserts the sprite into the #renderQueue_ before the specified sprite.
    */
   bool insertInRenderQueueBefore(const std::string& toAdd, const std::string& beforeThis, unsigned int destToAdd = 0, unsigned int destBeforeThis = 0);
+  /*! Move the render item based on configuration file.\
+    Currently implemented whatToDo:\n
+    append
+   */
+  void manipulateRenderQueue(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters );
+  /*! Add sprites to render queue, change to order of the queue. (Currently only implemented: append.)
+   */
+  void parseRenderQueueManipulation( std::ifstream& input );
   /*! Read texture and sprite definitions from configuration file.\n
     Default file name: "SlTextures.ini".
    */
@@ -164,7 +173,7 @@ class SlManager
   std::unique_ptr<SlTextureManager> tmngr_  = nullptr;
   /*! Sprite manager, creates, stores, manipulates, and deletes SlSprite objects.
    */
-  std::unique_ptr<SlSpriteManager> smngr_  = nullptr;
+  std::shared_ptr<SlSpriteManager> smngr_  = nullptr;
   /*! Window width.
    */
   int screen_width_ ;
@@ -174,6 +183,10 @@ class SlManager
   /*! Helper object to translate file input into values.
    */
   SlValueParser valParser_;
+  /*! Holds the various SlRenderQueueManipulations for the different tasks.
+    The map key is the name of the manipulation, which is also the keyword used in the configuration file, the mapped value is the object that will do the actual work.
+   */
+  std::map<std::string, SlRenderQueueManipulation*> renderManip_;
 
 };
 

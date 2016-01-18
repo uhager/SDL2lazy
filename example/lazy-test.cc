@@ -41,7 +41,6 @@ int main()
   mngr->setSpriteDestinationOrigin("upperright", SCREEN_WIDTH - 120,                 0  );
   mngr->setSpriteDestinationOrigin("lowerright", SCREEN_WIDTH - 120, SCREEN_HEIGHT - 120);
   mngr->setSpriteDestinationOrigin("lowerleft" ,                0  , SCREEN_HEIGHT - 120); 
-  */
   mngr->appendToRenderQueue("background", 0);    
   mngr->appendToRenderQueue("upperright");
   mngr->appendToRenderQueue("lowerright");
@@ -49,6 +48,7 @@ int main()
   mngr->appendToRenderQueue("message1");
   mngr->appendToRenderQueue("message2");
   mngr->appendToRenderQueue("up");
+  */
 
   mngr->insertInRenderQueueAfter("upperleft", "background");
   mngr->insertInRenderQueueBefore("lowerleft", "minimap");
