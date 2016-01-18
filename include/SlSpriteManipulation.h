@@ -104,6 +104,16 @@ public:
 
 
 
+/*! \class SlSMcolor derived from SlSpriteManipulation. Sets renderOptions for sprite.
+ */ 
+class SlSMcolor : public SlSpriteManipulation
+{
+public:
+  SlSMcolor(SlSpriteManager* manager, SlValueParser** valParser);
+  void manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
 
 
 

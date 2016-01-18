@@ -168,3 +168,23 @@ SlSMsetOrigin::manipulateSprite(std::string sname, unsigned int destination, con
 }
 
 
+
+/*! SlSMcolor implementation
+ */
+SlSMcolor::SlSMcolor(SlSpriteManager* manager, SlValueParser** valParser)
+  : SlSpriteManipulation(manager, valParser)
+{
+  name_ = "color";
+}
+
+
+
+void 
+SlSMcolor::manipulateSprite(std::string name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  std::shared_ptr<SlSprite> toChange = verifySprite(name, destination);
+  
+  short colours[4] ;
+  (*valParser)->stringsToNumbers<short>( parameters, colours, 4 );
+  toChange->setColor( colours[0], colours[1], colours[2], colours[3], destination );
+}

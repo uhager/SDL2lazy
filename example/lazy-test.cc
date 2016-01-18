@@ -23,7 +23,7 @@ int main()
   // }
 
   mngr->parseConfigurationFile();
-  mngr->setSpriteColor("background", 0x40, 0xAA, 0xBB, 0xFF);
+  // mngr->setSpriteColor("background", 0x40, 0xAA, 0xBB, 0xFF);
 
    
   //  mngr->setSpriteDestinationOrigin("tex2", 12, 12);
