@@ -40,6 +40,8 @@ SlManager::SlManager(const std::string& name, int width, int height)
   SlRenderQueueManipulation* toAdd;
   toAdd = new SlRMappend( smngr_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMinsertAfter( smngr_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
 }
 
 
@@ -271,14 +273,10 @@ void
 SlManager::manipulateRenderQueue( const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters )
 {
   auto iter = renderManip_.find(whatToDo);
-  if ( iter == renderManip_.end() ) {
-#ifdef DEBUG
-    std::cerr << "[SlManager::manipulateRenderQueue] Couldn't find object " << name << std::endl;
-#endif
-    return;
-  }
-  iter->second->manipulateQueue(name, destination, parameters);
-  return;
+  if ( iter == renderManip_.end() ) 
+    throw std::invalid_argument("[SlManager::manipulateRenderQueue] Couldn't find object " + name );
+
+    iter->second->manipulateQueue(name, destination, parameters);
 }
 
 

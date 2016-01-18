@@ -56,13 +56,24 @@ class SlRenderQueueManipulation
 };
 
 
+/*! \class SlRMappend
+ */
 class SlRMappend : public SlRenderQueueManipulation
 {
  public:
   SlRMappend(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue);
   void manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
+};
 
 
+
+/*! \class SlRMinsertAfter
+ */
+class SlRMinsertAfter : public SlRenderQueueManipulation
+{
+ public:
+  SlRMinsertAfter(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue);
+  void manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
 };
 
 

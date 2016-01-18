@@ -93,3 +93,42 @@ SlRMappend::manipulateQueue(const std::string& name, int destination, const std:
     renderQueue_->push_back(toAdd);
   }
 }
+
+
+
+/*! \class SlRMinsertAfter implementation
+ */
+SlRMinsertAfter::SlRMinsertAfter(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, renderQueue )
+{
+  name_ = "insertAfter";
+}
+
+
+
+void 
+SlRMinsertAfter::manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters)
+{
+  if (parameters.size() != 2 )
+      throw std::invalid_argument("[SlRMinsertAfter::manipulateQueue] Error: no name given for object to insert after.");
+
+  std::string afterThis = parameters.at(0);
+  unsigned int destAfterThis = std::stoi( parameters.at(1) );
+
+  SlRenderItem* toAdd = nullptr;
+  toAdd = createRenderItem(name, destination);
+  if ( !toAdd ) 
+    throw std::runtime_error("[SlRMinsertAfter::manipulateQueue] Couldn't create render item for " + name);
+
+  std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_->begin(); iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
+      renderQueue_->insert( (++iter), toAdd );
+      break;
+    }
+  }
+
+  if ( iter == renderQueue_->end() )
+    throw std::runtime_error("[SlRMinsertAfter::manipulateQueue] Couldn't find RenderItem " + afterThis + " to insert after.");
+
+}

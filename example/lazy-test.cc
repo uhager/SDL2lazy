@@ -50,7 +50,7 @@ int main()
   mngr->appendToRenderQueue("up");
   */
 
-  mngr->insertInRenderQueueAfter("upperleft", "background");
+  //  mngr->insertInRenderQueueAfter("upperleft", "background");
   mngr->insertInRenderQueueBefore("lowerleft", "minimap");
 
   mngr->swapInRenderQueue( "down", "up", 0, 0 );
