@@ -161,6 +161,19 @@ SlSpriteManager::deleteSprite(const std::string& name)
 
 
 
+void
+SlSpriteManager::deleteSprites(const std::string& textureName)
+{
+  for ( int i = sprites_.size()-1; i >= 0 ; --i ) {
+    if ( sprites_.at(i)->textureName() == textureName) {
+      mngr_->deleteRenderItem( sprites_.at(i)->name() );
+      sprites_.erase( sprites_.begin() + i );
+    }
+  }
+}
+
+
+
 std::shared_ptr<SlSprite>
 SlSpriteManager::findSprite(const std::string& name)
 {

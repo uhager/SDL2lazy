@@ -66,6 +66,9 @@ class SlSpriteManager
   /*! Delete the specified sprite and remove from #sprites_ .
    */
   void deleteSprite(const std::string& name);
+  /*! Delete the sprite that are based on the named SlTexture.
+   */
+  void deleteSprites(const std::string& textureName);
   /*! Returns pointer to the sprite, nullptr if not found.
    */
   std::shared_ptr<SlSprite> findSprite(const std::string& name);

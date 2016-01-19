@@ -21,8 +21,7 @@ The SlSprite has a source rectangle which defines which part of the texture is r
 #include <SDL2/SDL_image.h>
 
 #include "SlRenderOptions.h"
-
-class SlTexture;
+#include "SlTexture.h"
 
 
 
@@ -105,7 +104,6 @@ class SlSprite
   /*! Allows reading the name, but not changing it.
    */
   std::string name() const {return name_;}
-
   /*! Renders all copies of the sprite given in #destinations_.
    */
   void render(SDL_Renderer* renderer);
@@ -146,6 +144,9 @@ class SlSprite
   /*! Number of defined destinations. Used by the SlManager to check if requested destinations are valid.
    */
   unsigned int size() {return destinations_.size();}
+  /*! Access to the name of the underlying SlTexture.
+   */
+  std::string textureName() const {return texture_->name();}
 
   
  protected:

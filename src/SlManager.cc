@@ -51,8 +51,8 @@ SlManager::SlManager(const std::string& name, int width, int height)
 SlManager::~SlManager(void)
 {
   this->clear();
-  tmngr_ = nullptr;
   smngr_ = nullptr;
+  tmngr_ = nullptr;
   SDL_DestroyRenderer(renderer_);
   renderer_ = nullptr;
   SDL_DestroyWindow( window_ );
@@ -150,7 +150,7 @@ SlManager::deleteSprite(const std::string& name)
 void
 SlManager::deleteTexture(const std::string& name)
 {
-  deleteSprite(name);
+  smngr_->deleteSprites(name);
   tmngr_->deleteTexture(name);
 }
 
