@@ -127,12 +127,6 @@ SlTextureManager::createTextureFromSpriteOnTexture(const std::string& name, cons
     return toAdd;
   }
   std::shared_ptr<SlSprite> foreground = mngr_->findSprite(foregroundSprite);
-  if (foreground == nullptr) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::createTextureFromSpriteOnTexture] Failed to create " << name << ": Couldn't find foreground sprite " << foregroundSprite << std::endl;
-#endif
-    return toAdd;
-  }
   toAdd = new SlTexture(name);
   toAdd->createFromSpriteOnTexture(mngr_->renderer(), background, foreground);
   addTexture(toAdd);
@@ -179,12 +173,6 @@ SlTextureManager::createTextureFromTile(const std::string& name, const std::stri
   }
 
   std::shared_ptr<SlSprite> tile = mngr_->findSprite(sprite);
-  if (tile == nullptr) {
-#ifdef DEBUG
-    std::cout << "[SlTextureManager::createTextureFromTile] Failed to create " << name << ": Couldn't find sprite " << sprite << std::endl;
-#endif
-    return toAdd;
-  }
 
   toAdd = new SlTexture(name);
   toAdd->createFromTile(mngr_->renderer(), tile, width, height);

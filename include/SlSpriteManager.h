@@ -44,6 +44,11 @@ class SlSpriteManager
     Note that if the destination dimensions are changed afterwards, the sprite will no longer be centered.
    */
   void centerSpriteInSprite(const std::string& toCenter, const std::string& target, unsigned int destinationThis = 0, unsigned int destinationOther = 0);
+  /*! Checks if a sprite of the given name already exists. Calls findSprite(const std::string& name).
+    \retval true is sprite exists.
+    \retval false if no sprite of that name exists.
+   */
+  bool checkSpriteName(const std::string& name);
   /*! Creates sprite based on the texture textureName.
 
     If either width or height are 0, the texture's width and height will be used.\n
@@ -74,16 +79,16 @@ class SlSpriteManager
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
    */
-  bool setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int destination = 0);
+  void setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int destination = 0);
   /*! Changes destinationRect for SlSprite name at position destination of SlSprite::destinations_.
 
     Sets where the sprite will be rendered.
   */
-  bool setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination = 0);
+  void setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination = 0);
   /*! Sets SlRenderOptions for SlSprite name at position i of SlSprite::destinations_.
     \retval false if i > SlSprite::destinations_ size.
    */
-  bool setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination = 0);
+  void setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination = 0);
   /*! Helper object to translate file input into values.
    */
   SlValueParser* valParser = nullptr;

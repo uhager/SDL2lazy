@@ -105,20 +105,19 @@ SlManager::createRenderItem(const std::string& name, unsigned int destination)
   std::cout << "[SlManager::createRenderItem] Creating item for " << name  << std::endl;
 #endif
   SlRenderItem* item = nullptr;
-  std::shared_ptr<SlSprite> sprite = smngr_->findSprite(name);
-  if (sprite == nullptr) {
+  try {
+    std::shared_ptr<SlSprite> sprite = smngr_->findSprite(name);
+    if (sprite->size() <= destination){
 #ifdef DEBUG
-    std::cerr << "[SlManager::createRenderItem] Couldn't find sprite " << name  << std::endl;
+      std::cout << "[SlManager::createRenderItem] Failed to add sprite " << name << ": destination " << destination << " out of bounds (" << sprite->size() << ")" <<  std::endl;
 #endif
-    return item;
+      return item;
+    }
+    item = new SlRenderItem(sprite, destination);
   }
-  if (sprite->size() <= destination){
-#ifdef DEBUG
-    std::cout << "[SlManager::createRenderItem] Failed to add sprite " << name << ": destination " << destination << " out of bounds (" << sprite->size() << ")" <<  std::endl;
-#endif
-    return item;
+  catch (const std::exception& expt) {
+    std::cerr << expt.what() << std::endl;
   }
-  item = new SlRenderItem(sprite, destination);
   return item;
 }
 
@@ -469,27 +468,27 @@ SlManager::render()
 
 
 
-bool
+void
 SlManager::setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int destination)
 {
-  return smngr_->setSpriteColor(name, red, green, blue, alpha, destination);
+  smngr_->setSpriteColor(name, red, green, blue, alpha, destination);
 }
 
 
 
 
-bool
+void
 SlManager::setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination)
 {
-  return smngr_->setSpriteDestinationOrigin(name, x, y, destination);
+  smngr_->setSpriteDestinationOrigin(name, x, y, destination);
 }
 
 
 
-bool
+void
 SlManager::setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination)
 {
-  return smngr_->setSpriteRenderOptions(name, renderOptions, destination);
+   smngr_->setSpriteRenderOptions(name, renderOptions, destination);
 }
 
 

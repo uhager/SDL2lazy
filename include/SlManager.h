@@ -107,16 +107,16 @@ class SlManager
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
    */
-  bool setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int destination = 0);
+  void setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int destination = 0);
   /*! Changes destinationRect for SlSprite name at position destination of SlSprite::destinations_.
 
     Sets where the sprite will be rendered.
   */
-  bool setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination = 0);
+  void setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination = 0);
   /*! Sets SlRenderOptions for SlSprite name at position i of SlSprite::destinations_.
     \retval false if i > SlSprite::destinations_ size.
    */
-  bool setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination = 0);
+  void setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination = 0);
   /*! Replaces the sprite 'toRemove' in the #renderQueue_ with sprite 'toAdd' .
     \retval false if sprite not found or destination out of bounds.
    */ 

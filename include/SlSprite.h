@@ -95,10 +95,10 @@ class SlSprite
   SDL_Rect destination(unsigned int i = 0);
   /*! Returns the dimension of the texture in the window, i.e. destinationRect width, height for #destinations_ at position i.
    */
-  bool destinationDimension(int& width, int& height, unsigned int i = 0);
+  void destinationDimension(int& width, int& height, unsigned int i = 0);
   /*! Returns the origin of the texture in the window, i.e. destinationRect x,y coordinates for #destinations_ at position i.
    */
-  bool destinationOrigin(int& x, int& y, unsigned int i = 0);
+  void destinationOrigin(int& x, int& y, unsigned int i = 0);
   /*! Checks if any destinations are defined, i.e. if #destinations_ has size > 0;
    */
   bool hasDestination();
@@ -118,31 +118,31 @@ class SlSprite
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
    */
-  bool setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int i = 0);
+  void setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_.
 
     Sets where and how large the texture will be rendered.
   */
-  bool setDestination(const SDL_Rect& dstRect, unsigned int i = 0);
+  void setDestination(const SDL_Rect& dstRect, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_.
 
     Sets where and how large the texture will be rendered.
   */
-  bool setDestination(int x, int y, int w, int h, unsigned int i = 0);
+  void setDestination(int x, int y, int w, int h, unsigned int i = 0);
  /*! Changes destinationRect for position i of #destinations_.
 
     Sets how large the texture will be rendered.
   */
-  bool setDestinationDimension(int width, int height, unsigned int i = 0);
+  void setDestinationDimension(int width, int height, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_ .
 
     Sets where the sprite will be rendered.
   */
-  bool setDestinationOrigin(int x, int y, unsigned int i = 0);
+  void setDestinationOrigin(int x, int y, unsigned int i = 0);
   /*! Sets SlRenderOptions for position i of #destinations_.
     \retval false if i > #destinations_ size.
    */
-  bool setRenderOptions(uint32_t renderOptions, unsigned int i = 0);
+  void setRenderOptions(uint32_t renderOptions, unsigned int i = 0);
   /*! Number of defined destinations. Used by the SlManager to check if requested destinations are valid.
    */
   unsigned int size() {return destinations_.size();}
