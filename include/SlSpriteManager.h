@@ -24,7 +24,7 @@ class SlValueParser;
 class SlSpriteManipulation;
 
 
-class SlSpriteManager
+class SlSpriteManager 
 {
  public:
   /*! Initializes SDL, creates window with name and width, height
@@ -72,6 +72,9 @@ class SlSpriteManager
   /*! Returns pointer to the sprite, nullptr if not found.
    */
   std::shared_ptr<SlSprite> findSprite(const std::string& name);
+  /*! set #valueParser and load manipulations.
+   */
+  void initialize( SlValueParser* valPars);
   /*! Read sprite configurations from file
    */
   void parseSprite(std::ifstream& input);

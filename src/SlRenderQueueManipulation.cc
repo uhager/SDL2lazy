@@ -18,17 +18,17 @@
 #include "SlRenderQueueManipulation.h"
 
 
-SlRenderQueueManipulation::SlRenderQueueManipulation(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue)
-  : smngr_(smngr)
-  , renderQueue_(renderQueue)
+SlRenderQueueManipulation::SlRenderQueueManipulation(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlManipulation(smngr, valPars)
 {
+  renderQueue_ = renderQueue;
+  name_ = "renderQueueManipulation";
 }
 
 
 
 SlRenderQueueManipulation::~SlRenderQueueManipulation()
 {
-  smngr_ = nullptr;
   renderQueue_ = nullptr;
 #ifdef DEBUG
   std::cout << "[SlRenderQueueManipulation] deleting " << name_ << std::endl;
@@ -50,34 +50,19 @@ SlRenderQueueManipulation::createRenderItem(const std::string& name, unsigned in
 
 
 void 
-SlRenderQueueManipulation::manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRenderQueueManipulation::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
 {
 #ifdef DEBUG
-  std::cout << "[SlRenderQueueManipulation::manipulateQueue]" << std::endl;
+  std::cout << "[SlRenderQueueManipulation::manipulate]" << std::endl;
 #endif
 }
 
 
 
-std::shared_ptr<SlSprite>
-SlRenderQueueManipulation::verifySprite(std::string sname, unsigned int destination)
-{
-  std::shared_ptr<SlSprite> verified = smngr_->findSprite(sname);
-  if ( verified == nullptr )
-    throw std::invalid_argument("Couldn't find sprite " + sname);
-
-  if ( destination >= verified->size() )
-    throw std::invalid_argument("Invalid destination for sprite " + sname);
-  return verified;
-}
-
-
-
-
 /*! \class SlRMappend implementation
  */
-SlRMappend::SlRMappend(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue)
-  : SlRenderQueueManipulation( smngr, renderQueue )
+SlRMappend::SlRMappend(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
 {
   name_ = "append";
 }
@@ -85,7 +70,7 @@ SlRMappend::SlRMappend(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRen
 
 
 void 
-SlRMappend::manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMappend::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
 {
   SlRenderItem* toAdd = nullptr;
   toAdd = createRenderItem(name, destination);
@@ -98,8 +83,8 @@ SlRMappend::manipulateQueue(const std::string& name, int destination, const std:
 
 /*! \class SlRMinsertAfter implementation
  */
-SlRMinsertAfter::SlRMinsertAfter(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue)
-  : SlRenderQueueManipulation( smngr, renderQueue )
+SlRMinsertAfter::SlRMinsertAfter(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
 {
   name_ = "insertAfter";
 }
@@ -107,10 +92,10 @@ SlRMinsertAfter::SlRMinsertAfter(std::shared_ptr<SlSpriteManager> smngr, std::ve
 
 
 void 
-SlRMinsertAfter::manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMinsertAfter::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
 {
   if (parameters.size() != 2 )
-      throw std::invalid_argument("[SlRMinsertAfter::manipulateQueue] Error: no name given for object to insert after.");
+      throw std::invalid_argument("[SlRMinsertAfter::manipulate] Error: no name given for object to insert after.");
 
   std::string afterThis = parameters.at(0);
   unsigned int destAfterThis = std::stoi( parameters.at(1) );
@@ -118,7 +103,7 @@ SlRMinsertAfter::manipulateQueue(const std::string& name, int destination, const
   SlRenderItem* toAdd = nullptr;
   toAdd = createRenderItem(name, destination);
   if ( !toAdd ) 
-    throw std::runtime_error("[SlRMinsertAfter::manipulateQueue] Couldn't create render item for " + name);
+    throw std::runtime_error("[SlRMinsertAfter::manipulate] Couldn't create render item for " + name);
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_->begin(); iter != renderQueue_->end() ; ++iter) {
@@ -129,15 +114,15 @@ SlRMinsertAfter::manipulateQueue(const std::string& name, int destination, const
   }
 
   if ( iter == renderQueue_->end() )
-    throw std::runtime_error("[SlRMinsertAfter::manipulateQueue] Couldn't find RenderItem " + afterThis + " to insert after.");
+    throw std::runtime_error("[SlRMinsertAfter::manipulate] Couldn't find RenderItem " + afterThis + " to insert after.");
 }
 
 
 
 /*! \class SlRMinsertBefore implementation
  */
-SlRMinsertBefore::SlRMinsertBefore(std::shared_ptr<SlSpriteManager> smngr, std::vector<SlRenderItem*>* renderQueue)
-  : SlRenderQueueManipulation( smngr, renderQueue )
+SlRMinsertBefore::SlRMinsertBefore(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
 {
   name_ = "insertBefore";
 }
@@ -145,10 +130,10 @@ SlRMinsertBefore::SlRMinsertBefore(std::shared_ptr<SlSpriteManager> smngr, std::
 
 
 void 
-SlRMinsertBefore::manipulateQueue(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMinsertBefore::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
 {
   if (parameters.size() != 2 )
-      throw std::invalid_argument("[SlRMinsertBefore::manipulateQueue] Error: no name given for object to insert before.");
+      throw std::invalid_argument("[SlRMinsertBefore::manipulate] Error: no name given for object to insert before.");
 
   std::string beforeThis = parameters.at(0);
   unsigned int destBeforeThis = std::stoi( parameters.at(1) );
@@ -156,7 +141,7 @@ SlRMinsertBefore::manipulateQueue(const std::string& name, int destination, cons
   SlRenderItem* toAdd = nullptr;
   toAdd = createRenderItem(name, destination);
   if ( !toAdd ) 
-    throw std::runtime_error("[SlRMinsertBefore::manipulateQueue] Couldn't create render item for " + name);
+    throw std::runtime_error("[SlRMinsertBefore::manipulate] Couldn't create render item for " + name);
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_->begin(); iter != renderQueue_->end() ; ++iter) {
@@ -167,6 +152,6 @@ SlRMinsertBefore::manipulateQueue(const std::string& name, int destination, cons
   }
 
   if ( iter == renderQueue_->end() )
-    throw std::runtime_error("[SlRMinsertBefore::manipulateQueue] Couldn't find RenderItem " + beforeThis + " to insert before.");
+    throw std::runtime_error("[SlRMinsertBefore::manipulate] Couldn't find RenderItem " + beforeThis + " to insert before.");
 
 }

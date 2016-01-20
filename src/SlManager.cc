@@ -38,11 +38,11 @@ SlManager::SlManager(const std::string& name, int width, int height)
   this->initializeWindow(name, width, height);
 
   SlRenderQueueManipulation* toAdd;
-  toAdd = new SlRMappend( smngr_, &renderQueue_ );
+  toAdd = new SlRMappend( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
-  toAdd = new SlRMinsertAfter( smngr_, &renderQueue_ );
+  toAdd = new SlRMinsertAfter( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
-  toAdd = new SlRMinsertBefore( smngr_, &renderQueue_ );
+  toAdd = new SlRMinsertBefore( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
 }
 
@@ -208,8 +208,11 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
   }
   
   valParser_ = SlValueParser(screen_width_, screen_height_);
+  tmngr_ = std::unique_ptr<SlTextureManager>(new SlTextureManager( this ));
+  smngr_ = std::shared_ptr<SlSpriteManager>(new SlSpriteManager( this )); //!< Needs to be shared with SlRenderQueueManipulation items.
+
   tmngr_->valParser = &valParser_;
-  smngr_->valParser = &valParser_;
+  smngr_->initialize( &valParser_ );
 }
 
 
@@ -283,7 +286,7 @@ SlManager::manipulateRenderQueue( const std::string& name, unsigned int destinat
   if ( iter == renderManip_.end() ) 
     throw std::invalid_argument("[SlManager::manipulateRenderQueue] Couldn't find object " + name );
 
-    iter->second->manipulateQueue(name, destination, parameters);
+    iter->second->manipulate(name, destination, parameters);
 }
 
 

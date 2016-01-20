@@ -27,17 +27,6 @@
 SlSpriteManager::SlSpriteManager(SlManager* mngr)
   : mngr_(mngr)
 {
-  SlSpriteManipulation* toAdd;
-  toAdd = new SlSMsetOrigin( this, &valParser );
-  manipulations_[toAdd->name()] = toAdd;
-  toAdd = new SlSMcenterIn( this, &valParser );
-  manipulations_[toAdd->name()] = toAdd;
-  toAdd = new SlSMsetOptions( this, &valParser );
-  manipulations_[toAdd->name()] = toAdd;
-  toAdd = new SlSMcenterAt( this, &valParser );
-  manipulations_[toAdd->name()] = toAdd;
-  toAdd = new SlSMcolor( this, &valParser );
-  manipulations_[toAdd->name()] = toAdd;
 }
 
 
@@ -189,16 +178,36 @@ SlSpriteManager::findSprite(const std::string& name)
 
 
 void
+SlSpriteManager::initialize( SlValueParser* valPars)
+{
+  valParser = valPars;
+  
+  SlSpriteManipulation* toAdd;
+  toAdd = new SlSMsetOrigin( this, valParser );
+  manipulations_[toAdd->name()] = toAdd;
+  toAdd = new SlSMcenterIn( this, valParser );
+  manipulations_[toAdd->name()] = toAdd;
+  toAdd = new SlSMsetOptions( this, valParser );
+  manipulations_[toAdd->name()] = toAdd;
+  toAdd = new SlSMcenterAt( this, valParser );
+  manipulations_[toAdd->name()] = toAdd;
+  toAdd = new SlSMcolor( this, valParser );
+  manipulations_[toAdd->name()] = toAdd;
+}
+
+
+
+void
 SlSpriteManager::manipulateSprite(const std::string& name, unsigned int destination, const std::string& whatToDo, const std::vector<std::string>& parameters)
 {
   auto iter = manipulations_.find(whatToDo);
   if ( iter == manipulations_.end() ) {
 #ifdef DEBUG
-    std::cerr << "[SlSpriteManager::manipulateSprite] Couldn't find object to manipulate sprite " << name << std::endl;
+    std::cerr << "[SlSpriteManager::manipulate] Couldn't find object to manipulate sprite " << name << std::endl;
 #endif
     return;
   }
-  iter->second->manipulateSprite(name, destination, parameters);
+  iter->second->manipulate(name, destination, parameters);
   return;
 }
 
