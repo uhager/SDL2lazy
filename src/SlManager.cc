@@ -44,6 +44,8 @@ SlManager::SlManager(const std::string& name, int width, int height)
   renderManip_[toAdd->name()] = toAdd;
   toAdd = new SlRMinsertBefore( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMswapIn( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
 }
 
 

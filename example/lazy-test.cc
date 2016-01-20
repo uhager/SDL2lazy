@@ -17,43 +17,11 @@ int main()
 {
   SlManager *mngr = new SlManager("lazy-test", SCREEN_WIDTH, SCREEN_HEIGHT) ;  
 
-  // SlTexture* wrongFileTest = mngr->createTextureFromFile("tile","resources/tacky_backgroun.png");
-  // if (wrongFileTest == nullptr) {
-  //   std::cout << "wrong file! " << std::endl;
-  // }
-
   mngr->parseConfigurationFile();
-  // mngr->setSpriteColor("background", 0x40, 0xAA, 0xBB, 0xFF);
-
-   
-  //  mngr->setSpriteDestinationOrigin("tex2", 12, 12);
-  //mngr->createTextureFromSpriteOnTexture("minimap", "tex1", "tex2");
-  //  mngr->setSpriteDestinationOrigin("minimap", 20, 20 );
-  //  mngr->setSpriteRenderOptions("minimap");
 
   mngr->appendToRenderQueue("tex2"); // appending just to check deleting.
   mngr->deleteTexture("tex1");
   mngr->deleteTexture("tex2");
-
-  mngr->setSpriteColor("minimap", 0x40, 0xAA, 0xBB, 0xA0);
-
-  /*
-  mngr->setSpriteDestinationOrigin("upperright", SCREEN_WIDTH - 120,                 0  );
-  mngr->setSpriteDestinationOrigin("lowerright", SCREEN_WIDTH - 120, SCREEN_HEIGHT - 120);
-  mngr->setSpriteDestinationOrigin("lowerleft" ,                0  , SCREEN_HEIGHT - 120); 
-  mngr->appendToRenderQueue("background", 0);    
-  mngr->appendToRenderQueue("upperright");
-  mngr->appendToRenderQueue("lowerright");
-  mngr->appendToRenderQueue("minimap", 0);
-  mngr->appendToRenderQueue("message1");
-  mngr->appendToRenderQueue("message2");
-  mngr->appendToRenderQueue("up");
-  */
-
-  //  mngr->insertInRenderQueueAfter("upperleft", "background");
-  //mngr->insertInRenderQueueBefore("lowerleft", "minimap");
-
-  mngr->swapInRenderQueue( "down", "up", 0, 0 );
 
   bool quit = false;
   SDL_Event event;

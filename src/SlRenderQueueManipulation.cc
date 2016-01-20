@@ -155,3 +155,42 @@ SlRMinsertBefore::manipulate(const std::string& name, int destination, const std
     throw std::runtime_error("[SlRMinsertBefore::manipulate] Couldn't find RenderItem " + beforeThis + " to insert before.");
 
 }
+
+
+
+/*! \class SlRMswapIn implementation
+ */
+SlRMswapIn::SlRMswapIn(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "swap";
+}
+
+
+
+void 
+SlRMswapIn::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+{
+  if (parameters.size() != 2 )
+      throw std::invalid_argument("[SlRMswapIn::manipulate] Error: no name given for object to insert before.");
+
+  std::string toReplace = parameters.at(0);
+  unsigned int destToReplace = std::stoi( parameters.at(1) );
+
+  SlRenderItem* toAdd = nullptr;
+  toAdd = createRenderItem(name, destination);
+  if ( !toAdd ) 
+    throw std::runtime_error("[SlRMswapIn::manipulate] Couldn't create render item for " + name);
+
+  std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_->begin(); iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  toReplace ) && ( (*iter)->destination_ == destToReplace ) ) {
+      delete (*iter);
+      *iter = toAdd;
+      break;
+    }
+  }
+
+  if ( iter == renderQueue_->end() )
+    throw std::runtime_error("[SlRMswapIn::manipulate] Couldn't find RenderItem " + toReplace + " to swap with.");
+}

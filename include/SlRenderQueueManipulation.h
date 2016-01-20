@@ -44,6 +44,7 @@ class SlRenderQueueManipulation : public SlManipulation
 
 
 /*! \class SlRMappend
+  Append new SlRenderItem to render queue.
  */
 class SlRMappend : public SlRenderQueueManipulation
 {
@@ -55,6 +56,7 @@ class SlRMappend : public SlRenderQueueManipulation
 
 
 /*! \class SlRMinsertAfter
+  Insert new render item after the given one.
  */
 class SlRMinsertAfter : public SlRenderQueueManipulation
 {
@@ -66,11 +68,24 @@ class SlRMinsertAfter : public SlRenderQueueManipulation
 
 
 /*! \class SlRMinsertBefore
+  Insert new render item in render queue before the given one.
  */
 class SlRMinsertBefore : public SlRenderQueueManipulation
 {
  public:
   SlRMinsertBefore(SlSpriteManager* smngr, SlValueParser* valParser, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMswapIn
+  Swap new render item in place of other item in render queue.
+ */
+class SlRMswapIn : public SlRenderQueueManipulation
+{
+ public:
+  SlRMswapIn(SlSpriteManager* smngr, SlValueParser* valParser, std::vector<SlRenderItem*>* renderQueue);
   void manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
 };
 
