@@ -219,6 +219,8 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
   renderManip_[toAdd->name()] = toAdd;
   toAdd = new SlRMswapIn( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMtoggleOnOff( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
 
 }
 
@@ -291,7 +293,7 @@ SlManager::manipulateRenderQueue( const std::string& name, unsigned int destinat
 {
   auto iter = renderManip_.find(whatToDo);
   if ( iter == renderManip_.end() ) 
-    throw std::invalid_argument("[SlManager::manipulateRenderQueue] Couldn't find object " + name );
+    throw std::invalid_argument("[SlManager::manipulateRenderQueue] Couldn't find object " + whatToDo );
 
     iter->second->manipulate(name, destination, parameters);
 }

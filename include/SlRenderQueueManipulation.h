@@ -24,7 +24,7 @@ class SlSprite;
 class SlRenderQueueManipulation : public SlManipulation
 {
  public:
-  SlRenderQueueManipulation(SlSpriteManager* smngr, SlValueParser* valParser, std::vector<SlRenderItem*>* renderQueue);
+  SlRenderQueueManipulation(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
   virtual ~SlRenderQueueManipulation();
 
   /*! Creates new SlRenderItem for the specified sprite. \n
@@ -49,7 +49,7 @@ class SlRenderQueueManipulation : public SlManipulation
 class SlRMappend : public SlRenderQueueManipulation
 {
  public:
-  SlRMappend(SlSpriteManager* smngr, SlValueParser* valParser, std::vector<SlRenderItem*>* renderQueue);
+  SlRMappend(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
   void manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
 };
 
@@ -61,7 +61,7 @@ class SlRMappend : public SlRenderQueueManipulation
 class SlRMinsertAfter : public SlRenderQueueManipulation
 {
  public:
-  SlRMinsertAfter(SlSpriteManager* smngr, SlValueParser* valParser, std::vector<SlRenderItem*>* renderQueue);
+  SlRMinsertAfter(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
   void manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
 };
 
@@ -73,7 +73,7 @@ class SlRMinsertAfter : public SlRenderQueueManipulation
 class SlRMinsertBefore : public SlRenderQueueManipulation
 {
  public:
-  SlRMinsertBefore(SlSpriteManager* smngr, SlValueParser* valParser, std::vector<SlRenderItem*>* renderQueue);
+  SlRMinsertBefore(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
   void manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
 };
 
@@ -85,7 +85,20 @@ class SlRMinsertBefore : public SlRenderQueueManipulation
 class SlRMswapIn : public SlRenderQueueManipulation
 {
  public:
-  SlRMswapIn(SlSpriteManager* smngr, SlValueParser* valParser, std::vector<SlRenderItem*>* renderQueue);
+  SlRMswapIn(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMtoggleOnOff
+  Toggles rendering of an item in the #renderQueue_ on and off. 
+  Behaviour determined by int parameter: -1 to toggle, 0 to turn off, 1 to turn on.
+ */
+class SlRMtoggleOnOff : public SlRenderQueueManipulation
+{
+ public:
+  SlRMtoggleOnOff(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
   void manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
 };
 

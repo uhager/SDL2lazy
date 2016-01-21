@@ -194,3 +194,52 @@ SlRMswapIn::manipulate(const std::string& name, int destination, const std::vect
   if ( iter == renderQueue_->end() )
     throw std::runtime_error("[SlRMswapIn::manipulate] Couldn't find RenderItem " + toReplace + " to swap with.");
 }
+
+
+
+/*! \class SlRMtoggleOnOff implementation
+ */
+SlRMtoggleOnOff::SlRMtoggleOnOff(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "toggleOnOff";
+}
+
+
+
+void
+SlRMtoggleOnOff::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+{
+  int onOrOff = -1;
+  if ( parameters.size() == 1 ) {
+    try {
+      onOrOff = std::stoi( parameters.at(0) );
+    }
+    catch (const std::exception& expt) {
+      std::cerr << "[SlRMtoggleOnOff::manipulate] Error: " << expt.what() << std::endl ;
+    }
+  }
+  
+ if ( (onOrOff < -1) || (onOrOff > 1) )
+   throw std::invalid_argument( "[SlRMtoggleOnOff::manipulate] Invalid toggle option " + parameters.at(0) );
+
+ std::vector<SlRenderItem*>::iterator iter;
+  for ( iter = renderQueue_->begin(); iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  name ) && ( (*iter)->destination_ == destination ) ) {
+      switch (onOrOff){
+      case -1:
+	(*iter)->renderMe_ = !((*iter)->renderMe_) ;
+	return;
+      case 0:	
+	(*iter)->renderMe_ = false ;
+	return;
+      case 1:
+	(*iter)->renderMe_ = true ;
+	return;
+      }
+    }
+  }
+
+  if ( iter == renderQueue_->end() ) 
+    throw std::invalid_argument( "[SlRMtoggleOnOff::manipulate] Couldn't find sprite to toggle: " + name );
+}
