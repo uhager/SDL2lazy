@@ -28,6 +28,7 @@
 SlManager::SlManager()
 {
   this->initialize();
+  parseIniFile();
 }
 
 
@@ -37,15 +38,6 @@ SlManager::SlManager(const std::string& name, int width, int height)
   this->initialize();
   this->initializeWindow(name, width, height);
 
-  SlRenderQueueManipulation* toAdd;
-  toAdd = new SlRMappend( smngr_.get(), &valParser_, &renderQueue_ );
-  renderManip_[toAdd->name()] = toAdd;
-  toAdd = new SlRMinsertAfter( smngr_.get(), &valParser_, &renderQueue_ );
-  renderManip_[toAdd->name()] = toAdd;
-  toAdd = new SlRMinsertBefore( smngr_.get(), &valParser_, &renderQueue_ );
-  renderManip_[toAdd->name()] = toAdd;
-  toAdd = new SlRMswapIn( smngr_.get(), &valParser_, &renderQueue_ );
-  renderManip_[toAdd->name()] = toAdd;
 }
 
 
@@ -186,6 +178,8 @@ SlManager::initialize()
     SDL_Quit();
     exit(1);
   }
+  
+  valParser_ = SlValueParser();
   tmngr_ = std::unique_ptr<SlTextureManager>(new SlTextureManager( this ));
   //  smngr_ = std::make_unique<SlSpriteManager>( this );
   smngr_ = std::shared_ptr<SlSpriteManager>(new SlSpriteManager( this )); //!< Needs to be shared with SlRenderQueueManipulation items.
@@ -209,12 +203,23 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
     exit(1);
   }
   
-  valParser_ = SlValueParser(screen_width_, screen_height_);
-  tmngr_ = std::unique_ptr<SlTextureManager>(new SlTextureManager( this ));
-  smngr_ = std::shared_ptr<SlSpriteManager>(new SlSpriteManager( this )); //!< Needs to be shared with SlRenderQueueManipulation items.
+  valParser_.setDimensions(screen_width_, screen_height_);
+  // tmngr_ = std::unique_ptr<SlTextureManager>(new SlTextureManager( this ));
+  // smngr_ = std::shared_ptr<SlSpriteManager>(new SlSpriteManager( this )); //!< Needs to be shared with SlRenderQueueManipulation items.
 
   tmngr_->valParser = &valParser_;
   smngr_->initialize( &valParser_ );
+
+  SlRenderQueueManipulation* toAdd;
+  toAdd = new SlRMappend( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMinsertAfter( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMinsertBefore( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMswapIn( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
+
 }
 
 
@@ -363,12 +368,9 @@ SlManager::parseConfigurationFile(const std::string& filename)
 {
   bool result = true;
   std::ifstream input(filename,std::ifstream::in);
-  if ( !input.is_open() ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::parseConfigurationFile] Couldn't open file " << filename << std::endl;
-#endif
-    return false;
-  }
+  if ( !input.is_open() ) 
+    throw std::runtime_error("[SlManager::parseConfigurationFile] Couldn't open file " + filename );
+  
   std::string line, token;
   getline(input,line);
   while ( input )
@@ -406,6 +408,53 @@ SlManager::parseConfigurationFile(const std::string& filename)
 
   return result;
 }
+
+
+
+void
+SlManager::parseIniFile(const std::string& filename)
+{
+  std::ifstream input(filename,std::ifstream::in);
+  if ( !input.is_open() ) 
+    throw std::runtime_error("[SlManager::parseIniFile] Couldn't open ini file " + filename );
+  
+  std::string line, token, name;
+  std::vector<std::string> dimensions;
+  getline(input,line);
+  while ( input )
+    {
+      std::istringstream stream(line.c_str());
+      stream >> token;
+      if ( token[0] == '#' || token.empty() || token[0] == '\n' ) {
+	/* empty line or comment */
+      }
+      else if ( token == "window" ) {
+	std::string name;
+	stream >> name;
+	while ( !stream.eof() ){
+	  dimensions.push_back("");
+	  stream >> dimensions.back();
+	}
+	unsigned int dims[2];
+	valParser_.stringsToNumbers<unsigned int>( dimensions, dims, 2);
+	initializeWindow( name, dims[0], dims[1] );
+      }
+      else if ( token == "file" ) {
+	std::string filename;
+	stream >> filename;
+	parseConfigurationFile(filename);
+      }
+      else {
+#ifdef DEBUG
+	std::cerr << "[SlManager::parseConfigurationFile] Unknown token " << token << std::endl;
+#endif
+      }
+	
+      token.clear();
+      if ( input) getline(input,line);
+    }
+}
+
 
 
 void

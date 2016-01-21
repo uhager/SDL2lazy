@@ -245,6 +245,15 @@ SlValueParser::shuntFormula(std::string& formula)
 
 
 void
+SlValueParser::setDimensions(const int& width, const int& height)
+{
+  screen_width_ = width;
+  screen_height_ = height;
+}
+
+
+
+void
 SlValueParser::stringsToDoubles(const std::vector<std::string>& stringValues, double* values, unsigned int length )
 {
   if ( stringValues.size() < length ) {

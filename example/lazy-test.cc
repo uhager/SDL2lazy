@@ -9,15 +9,16 @@
 #include "SlSprite.h"
 #include "SlManager.h"
 
-const int SCREEN_WIDTH = 1000;
-const int SCREEN_HEIGHT = 800;
+// const int SCREEN_WIDTH = 1000;
+// const int SCREEN_HEIGHT = 800;
 
 
 int main()
 {
-  SlManager *mngr = new SlManager("lazy-test", SCREEN_WIDTH, SCREEN_HEIGHT) ;  
+  SlManager *mngr = new SlManager() ;  
 
-  mngr->parseConfigurationFile();
+  // SlManager *mngr = new SlManager("lazy-test", SCREEN_WIDTH, SCREEN_HEIGHT) ;  
+  // mngr->parseIniFile();
 
   mngr->appendToRenderQueue("tex2"); // appending just to check deleting.
   mngr->deleteTexture("tex1");

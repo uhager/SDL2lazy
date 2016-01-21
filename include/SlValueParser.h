@@ -45,6 +45,9 @@ class SlValueParser
     \throws std::invalid_argument if the formula can't be calculated (unknown operator).
    */
   void parseFormula(const std::vector<std::string>& stringValues, unsigned int& i, double& value);
+  /*! Sets the values used for keywords SCREEN_WIDTH, SCREEN_HEIGHT.
+   */
+  void setDimensions(const int& width, const int& height);
   /*! Takes a vector of strings, converts the strings to ints and returns them as an array.
     \throws std::invalid_argument if the size of stringValues is less than length, i.e. to few parameters given. 
    */
@@ -56,20 +59,20 @@ class SlValueParser
   /*! Translates strings into SlRenderOptions.
    */
   bool stringsToRenderOptions(const std::vector<std::string>& stringValues, int& options );
-  /*! Window dimensions can be read but not set after construction.
+  /*! Window width.
    */
   int screenWidth() {return screen_width_;}
-  /*! Window dimensions can be read but not set after construction.
+  /*! Window height.
    */
   int screenHeight() {return screen_height_;}
 
  private:
   /*! Screen dimensions are needed to define a texture as having the dimensions of the window.
    */
-  int screen_width_;
+  int screen_width_ = 0;
   /*! Screen dimensions are needed to define a texture as having the dimensions of the window.
    */
-  int screen_height_;
+  int screen_height_ = 0;
 
   /*! Generates the formula string from stringValues.
     \throws std::invalid_argument if the end of the formula can't be found.

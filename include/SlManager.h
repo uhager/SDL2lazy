@@ -28,6 +28,9 @@ class SlRenderQueueManipulation;
 class SlManager
 {
  public:
+  /*!Default constructor. Parses "SlApplication.ini" for window name and dimensions, and configuration file names.
+   */
+  SlManager();
   /*! Initializes SDL, creates window with name and width, height
    */
   SlManager(const std::string& name, int width, int height);
@@ -90,6 +93,9 @@ class SlManager
     Default file name: "SlTextures.ini".
    */
   bool parseConfigurationFile(const std::string& filename = "SlTextureConfig.ini");
+  /*! Reads application name, screen dimensions and config file names from from ini file "SlApplication.ini".\n
+   */
+  void parseIniFile(const std::string& filename = "SlApplication.ini");
   /*! Render all items in the #renderQueue_ .
     \retval 0 if all renders well.
    */
@@ -146,9 +152,6 @@ class SlManager
   /*! The renderer tied to the main window.
    */
   SDL_Renderer* renderer_ = nullptr;
-  /*!Default constructor.
-   */
-  SlManager(void);
   /*! Deletes all textures and sprites, empties render queue.
    */
   void clear();
