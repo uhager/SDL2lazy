@@ -9,9 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include <stdexcept>
-#include <memory>
 #include <algorithm>
 
 #include "SDL2/SDL_ttf.h"

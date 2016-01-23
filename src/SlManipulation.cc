@@ -7,11 +7,11 @@
 */
 
 #include <iostream>
-#include <memory>
 
 #include "SlSpriteManager.h"
 #include "SlSprite.h"
 #include "SlValueParser.h"
+
 #include "SlManipulation.h"
 
 

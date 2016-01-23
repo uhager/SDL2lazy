@@ -12,10 +12,12 @@
 
 #include <string>
 #include <memory>
-
+#include <vector>
 
 class SlSpriteManager;
 class SlSprite;
+class SlValueParser;
+
 
 class SlManipulation
 {
