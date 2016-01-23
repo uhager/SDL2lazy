@@ -219,6 +219,8 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
   renderManip_[toAdd->name()] = toAdd;
   toAdd = new SlRMswapIn( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMswapAt( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
   toAdd = new SlRMtoggleOnOff( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
 
@@ -226,64 +228,45 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
 
 
 
-bool
+void
 SlManager::insertInRenderQueueAfter(const std::string& toAdd, const std::string& afterThis, unsigned int destToAdd, unsigned int destAfterThis)
 {
-  bool isInserted = false;
   SlRenderItem* toInsert = createRenderItem( toAdd, destToAdd );
-  if ( toInsert == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toAdd  << std::endl;
-#endif
-    return isInserted;
-  }
+  if ( toInsert == nullptr ) 
+    throw std::runtime_error( "[SlManager::insertInRenderQueueAfter] Couldn't create SlRenderItem for " + toAdd ) ;
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
     if ( ( (*iter)->sprite_->name() ==  afterThis ) && ( (*iter)->destination_ == destAfterThis ) ) {
       renderQueue_.insert( (++iter), toInsert );
-      isInserted = true;
-      break;
+      return;
     }
   }
 
-  if ( !isInserted ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::insertInRenderQueueAfter] Couldn't find RenderItem " << afterThis << " to insert after."  << std::endl;
-#endif
-  }
-  return isInserted;
+  if ( iter == renderQueue_.end() ) 
+    throw std::runtime_error( "[SlManager::insertInRenderQueueAfter] Couldn't find RenderItem " + afterThis + " to insert after." );
 }
 
 
 
-bool
+void
 SlManager::insertInRenderQueueBefore(const std::string& toAdd, const std::string& beforeThis, unsigned int destToAdd, unsigned int destBeforeThis)
 {
-  bool isInserted = false;
+
   SlRenderItem* toInsert = createRenderItem( toAdd, destToAdd );
-  if ( toInsert == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toAdd  << std::endl;
-#endif
-    return isInserted;
-  }
+  if ( toInsert == nullptr ) 
+    throw std::runtime_error( "[SlManager::insertInRenderQueueBefore] Couldn't create SlRenderItem for " + toAdd );
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
     if ( ( (*iter)->sprite_->name() ==  beforeThis ) && ( (*iter)->destination_ == destBeforeThis ) ) {
       renderQueue_.insert( (iter), toInsert );
-      isInserted = true;
-      break;
+      return;
     }
   }
 
-  if ( !isInserted ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::insertInRenderQueueBefore] Couldn't find RenderItem " << beforeThis << " to insert before."  << std::endl;
-#endif
-  }
-  return isInserted;
+  if ( iter == renderQueue_.end() )
+    throw std::runtime_error( "[SlManager::insertInRenderQueueBefore] Couldn't find RenderItem " + beforeThis + " to insert before." );
 }
 
 

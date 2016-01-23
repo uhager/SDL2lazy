@@ -104,5 +104,17 @@ class SlRMtoggleOnOff : public SlRenderQueueManipulation
 
 
 
+/*! \class SlRMswapAt
+  Swap new render item in place of other item in render queue.
+ */
+class SlRMswapAt : public SlRenderQueueManipulation
+{
+ public:
+  SlRMswapAt(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
 
 #endif   /* SLRENDERQUEUEMANIPULATION_H */

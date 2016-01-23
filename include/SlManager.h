@@ -71,16 +71,16 @@ class SlManager
   SlTexture* findTexture(const std::string& name);
   /*! Inserts the sprite into the #renderQueue_ after the specified sprite.
    */
-  bool insertInRenderQueueAfter(const std::string& toAdd, const std::string& afterThis, unsigned int destToAdd = 0, unsigned int destAfterThis = 0);
+  void insertInRenderQueueAfter(const std::string& toAdd, const std::string& afterThis, unsigned int destToAdd = 0, unsigned int destAfterThis = 0);
   /*! Inserts the sprite into the #renderQueue_ before the specified sprite.
+   */
+  void insertInRenderQueueBefore(const std::string& toAdd, const std::string& beforeThis, unsigned int destToAdd = 0, unsigned int destBeforeThis = 0);
+  /*! Moves the render item into the #renderQueue_ before the specified sprite.
    */
   bool moveInRenderQueueBefore(const std::string& toAdd, const std::string& beforeThis, unsigned int destToAdd = 0, unsigned int destBeforeThis = 0);
-  /*! Inserts the sprite into the #renderQueue_ after the specified sprite.
+  /*! Moves the render item into the #renderQueue_ after the specified sprite.
    */
   bool moveInRenderQueueAfter(const std::string& toAdd, const std::string& afterThis, unsigned int destToAdd = 0, unsigned int destAfterThis = 0);
-  /*! Inserts the sprite into the #renderQueue_ before the specified sprite.
-   */
-  bool insertInRenderQueueBefore(const std::string& toAdd, const std::string& beforeThis, unsigned int destToAdd = 0, unsigned int destBeforeThis = 0);
   /*! Move the render item based on configuration file.\
     Currently implemented whatToDo:\n
     append

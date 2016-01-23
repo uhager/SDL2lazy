@@ -243,3 +243,40 @@ SlRMtoggleOnOff::manipulate(const std::string& name, int destination, const std:
   if ( iter == renderQueue_->end() ) 
     throw std::invalid_argument( "[SlRMtoggleOnOff::manipulate] Couldn't find sprite to toggle: " + name );
 }
+
+
+
+
+/*! \class SlRMswapAt implementation
+ */
+SlRMswapAt::SlRMswapAt(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "swapAt";
+}
+
+
+
+void 
+SlRMswapAt::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+{
+  if (parameters.size() != 1 )
+      throw std::invalid_argument("[SlRMswapAt::manipulate] Error: No position given to swap in object " + name);
+
+  unsigned int position = std::stoi( parameters.at(0) );
+  if ( position < 0 || position >= renderQueue_->size() )
+    throw std::invalid_argument("[SlRMswapAt::manipulate] Error: Invalid position " + std::to_string(position) + " to swap in object " + name);
+    
+  SlRenderItem* toAdd = nullptr;
+  toAdd = createRenderItem(name, destination);
+  if ( !toAdd ) 
+    throw std::runtime_error("[SlRMswapAt::manipulate] Couldn't create render item for " + name);
+
+  std::vector<SlRenderItem*>::iterator iter = renderQueue_->begin() + position;
+  delete (*iter);
+  renderQueue_->erase( iter );
+  renderQueue_->insert( iter, toAdd );
+
+}
+
+
