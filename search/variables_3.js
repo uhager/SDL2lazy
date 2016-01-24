@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['manipulations_5f',['manipulations_',['../classSlSpriteManager.html#a5433a1078c832d2c969612b8dffddb54',1,'SlSpriteManager']]],
-  ['mngr_5f',['mngr_',['../classSlSpriteManager.html#af713fe41beaf56721c54ee29673ca538',1,'SlSpriteManager::mngr_()'],['../classSlTextureManager.html#a13d0b366ca0312ad01f27909e2058fd7',1,'SlTextureManager::mngr_()']]]
+  ['eventactions_5f',['eventActions_',['../classSlEventHandler.html#a830cdb63ccf96a2796b2d50bd7556510',1,'SlEventHandler']]],
+  ['eventhandler_5f',['eventHandler_',['../classSlManager.html#af5f6fa7d704fef9c24674d042b00ab5b',1,'SlManager']]]
 ];

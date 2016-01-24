@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['findsprite',['findSprite',['../classSlManager.html#a7b2d3614d390ec9a9b6ebd7586864b39',1,'SlManager::findSprite()'],['../classSlSpriteManager.html#a8134ef4ee4152634aa4eb47dbdea0804',1,'SlSpriteManager::findSprite()']]],
-  ['findtexture',['findTexture',['../classSlManager.html#af81b19f39ce9286f7f6fa71eabfa849b',1,'SlManager::findTexture()'],['../classSlTextureManager.html#aff88468331d02e7552f25e7c661943ef',1,'SlTextureManager::findTexture()']]]
+  ['eventactions_5f',['eventActions_',['../classSlEventHandler.html#a830cdb63ccf96a2796b2d50bd7556510',1,'SlEventHandler']]],
+  ['eventhandler_5f',['eventHandler_',['../classSlManager.html#af5f6fa7d704fef9c24674d042b00ab5b',1,'SlManager']]]
 ];

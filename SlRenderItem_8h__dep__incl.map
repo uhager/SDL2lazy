@@ -1,4 +1,5 @@
 <map id="include/SlRenderItem.h" name="include/SlRenderItem.h">
 <area shape="rect" id="node2" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="5,80,129,107"/>
 <area shape="rect" id="node3" href="$SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="153,80,296,107"/>
+<area shape="rect" id="node4" href="$SlRenderQueueManipulation_8cc.html" title="src/SlRenderQueueManipulation.cc" alt="" coords="321,80,547,107"/>
 </map>

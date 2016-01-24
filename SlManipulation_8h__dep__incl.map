@@ -1,0 +1,10 @@
+<map id="include/SlManipulation.h" name="include/SlManipulation.h">
+<area shape="rect" id="node2" href="$SlEventHandler_8cc.html" title="src/SlEventHandler.cc" alt="" coords="5,80,159,107"/>
+<area shape="rect" id="node3" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="200,155,324,181"/>
+<area shape="rect" id="node4" href="$SlManipulation_8cc.html" title="src/SlManipulation.cc" alt="" coords="234,80,381,107"/>
+<area shape="rect" id="node5" href="$SlRenderQueueManipulation_8h.html" title="SlRenderQueueManipulation class; base class for changing the render queue. " alt="" coords="405,80,647,107"/>
+<area shape="rect" id="node7" href="$SlSpriteManipulation_8h.html" title="SlSpriteManipulation class; base class for changing sprite properties. " alt="" coords="671,80,869,107"/>
+<area shape="rect" id="node6" href="$SlRenderQueueManipulation_8cc.html" title="src/SlRenderQueueManipulation.cc" alt="" coords="413,155,639,181"/>
+<area shape="rect" id="node8" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="677,155,836,181"/>
+<area shape="rect" id="node9" href="$SlSpriteManipulation_8cc.html" title="src/SlSpriteManipulation.cc" alt="" coords="861,155,1042,181"/>
+</map>

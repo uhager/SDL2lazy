@@ -1,5 +1,7 @@
 <map id="include/SlManager.h" name="include/SlManager.h">
-<area shape="rect" id="node7" href="$SlTextureManager_8h.html" title="SlTextureManager class creates and stores textures. " alt="" coords="216,80,354,107"/>
-<area shape="rect" id="node8" href="$SlSpriteManager_8h.html" title="SlSpriteManager class, has a vector of sprites and various methods to manipulate them. " alt="" coords="430,80,559,107"/>
-<area shape="rect" id="node10" href="$SlValueParser_8h.html" title="SlValueParser helper object to translate file input into values. " alt="" coords="24,80,140,107"/>
+<area shape="rect" id="node7" href="$SlTextureManager_8h.html" title="SlTextureManager class creates and stores textures. " alt="" coords="695,80,833,107"/>
+<area shape="rect" id="node9" href="$SlSpriteManager_8h.html" title="SlSpriteManager class, has a vector of sprites and various methods to manipulate them. " alt="" coords="490,80,619,107"/>
+<area shape="rect" id="node11" href="$SlValueParser_8h.html" title="SlValueParser helper object to translate file input into values. " alt="" coords="99,80,215,107"/>
+<area shape="rect" id="node14" href="$SlEventHandler_8h.html" title="SlEventHandler class. " alt="" coords="342,80,466,107"/>
+<area shape="rect" id="node13" href="$SlValueParser_8hpp.html" title="SlValueParser.hpp" alt="" coords="5,155,136,181"/>
 </map>

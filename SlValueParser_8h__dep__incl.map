@@ -1,8 +1,9 @@
 <map id="include/SlValueParser.h" name="include/SlValueParser.h">
-<area shape="rect" id="node2" href="$SlSpriteManipulation_8cc.html" title="src/SlSpriteManipulation.cc" alt="" coords="5,80,187,107"/>
-<area shape="rect" id="node3" href="$SlValueParser_8cc.html" title="src/SlValueParser.cc" alt="" coords="211,80,357,107"/>
-<area shape="rect" id="node4" href="$SlManager_8h.html" title="SlManager class, has a Window with SDL_Renderer, manages textures and sprites. SlRenderItem struct fo..." alt="" coords="381,80,521,107"/>
-<area shape="rect" id="node5" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="223,155,347,181"/>
-<area shape="rect" id="node6" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="371,155,530,181"/>
-<area shape="rect" id="node7" href="$SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="555,155,723,181"/>
+<area shape="rect" id="node2" href="$SlManipulation_8cc.html" title="src/SlManipulation.cc" alt="" coords="5,80,152,107"/>
+<area shape="rect" id="node3" href="$SlSpriteManipulation_8cc.html" title="src/SlSpriteManipulation.cc" alt="" coords="176,80,357,107"/>
+<area shape="rect" id="node4" href="$SlValueParser_8cc.html" title="src/SlValueParser.cc" alt="" coords="382,80,527,107"/>
+<area shape="rect" id="node5" href="$SlManager_8h.html" title="SlManager class, has a Window with SDL_Renderer, manages textures and sprites. SlRenderItem struct fo..." alt="" coords="551,80,691,107"/>
+<area shape="rect" id="node6" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="394,155,518,181"/>
+<area shape="rect" id="node7" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="542,155,701,181"/>
+<area shape="rect" id="node8" href="$SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="725,155,893,181"/>
 </map>

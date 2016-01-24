@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['render',['render',['../classSlManager.html#adc7c29a607df8cd0eb6e56617c2148f0',1,'SlManager::render()'],['../classSlSprite.html#a8b7ecec25227918f7832dbc2ee06213c',1,'SlSprite::render(SDL_Renderer *renderer)'],['../classSlSprite.html#aaefcc3e7a4ee8ee93643ba4bb8413034',1,'SlSprite::render(SDL_Renderer *renderer, unsigned int i)']]],
-  ['renderer',['renderer',['../classSlManager.html#a99b4448836d16c9a84b4afe39fb2d3db',1,'SlManager']]],
-  ['renderer_5f',['renderer_',['../classSlManager.html#a3d3207dd3bef3e0e62c4dafee9264d25',1,'SlManager']]],
-  ['renderme_5f',['renderMe_',['../classSlRenderItem.html#a9bc18ee1f238cc178f7929852ac9b2dc',1,'SlRenderItem']]],
-  ['renderoptions',['renderOptions',['../structSlRenderSettings.html#a7d2848b536f71f4ddc1cb950a3fc924d',1,'SlRenderSettings']]],
-  ['renderqueue_5f',['renderQueue_',['../classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82',1,'SlManager']]]
+  ['operator_21_3d',['operator!=',['../classSlRenderItem.html#af6c508eb7108a11d2847939ef516a302',1,'SlRenderItem']]],
+  ['operator_2a',['operator*',['../classSlFormulaItem.html#a7c603a8c3ac3b0deef83272954846d25',1,'SlFormulaItem']]],
+  ['operator_2b',['operator+',['../classSlFormulaItem.html#a06a466ebc8b2c9d7624071e5e5e7688f',1,'SlFormulaItem']]],
+  ['operator_2d',['operator-',['../classSlFormulaItem.html#a31082c8336260835865a180d2ce3579f',1,'SlFormulaItem']]],
+  ['operator_2f',['operator/',['../classSlFormulaItem.html#ac8f5da995afdb102b9d70b887ef91b65',1,'SlFormulaItem']]],
+  ['operator_3d',['operator=',['../classSlEventObject.html#a2ea7568c450b5912dd80aa84bdec6dcc',1,'SlEventObject::operator=()'],['../classSlEventHandler.html#a3365bdedcc82fcb4242e6deb721b0e50',1,'SlEventHandler::operator=()'],['../classSlManager.html#a0994550a822ff9ccf8f5dbcf13e7eeb8',1,'SlManager::operator=()'],['../classSlManipulation.html#a0629c38b217ba5cc5dbb239f66e6497c',1,'SlManipulation::operator=()'],['../classSlRenderItem.html#aa5ce28ce823ca22e30b150381093ca32',1,'SlRenderItem::operator=()'],['../classSlSprite.html#a0f505a5fd6e704bd5c39eadc31de859d',1,'SlSprite::operator=()'],['../classSlSpriteManager.html#a38083ab721a820971a1f9ccbf65845b7',1,'SlSpriteManager::operator=()'],['../classSlTexture.html#a0906e2dd8a0b0d514302ee6dce049601',1,'SlTexture::operator=()'],['../classSlTextureManager.html#a3f31882b67f89f9e4ad1043166a015fe',1,'SlTextureManager::operator=()'],['../classSlValueParser.html#a68dfc497664465adf3cf70138c20c1e7',1,'SlValueParser::operator=()']]],
+  ['operator_3d_3d',['operator==',['../classSlRenderItem.html#adc49109b6f96dcbec0e81247c495a2ec',1,'SlRenderItem']]]
 ];

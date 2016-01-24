@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['valparser',['valParser',['../classSlSpriteManager.html#ae12e3ffc1e500abf0860a6977e32d5de',1,'SlSpriteManager::valParser()'],['../classSlSpriteManipulation.html#a08c7a79483dec54888402ec5cf367d5e',1,'SlSpriteManipulation::valParser()'],['../classSlTextureManager.html#a8def4783c0ccc6e2b50f716987ca3d2b',1,'SlTextureManager::valParser()']]],
-  ['valparser_5f',['valParser_',['../classSlManager.html#ae87b0eaa73cb1ccefbbf2da3a7401ecc',1,'SlManager']]]
+  ['renderer_5f',['renderer_',['../classSlManager.html#a3d3207dd3bef3e0e62c4dafee9264d25',1,'SlManager']]],
+  ['rendermanip_5f',['renderManip_',['../classSlManager.html#ad853bf60aa8109b3453da74e98891fe6',1,'SlManager']]],
+  ['renderme_5f',['renderMe_',['../classSlRenderItem.html#a9bc18ee1f238cc178f7929852ac9b2dc',1,'SlRenderItem']]],
+  ['renderoptions',['renderOptions',['../structSlRenderSettings.html#a7d2848b536f71f4ddc1cb950a3fc924d',1,'SlRenderSettings']]],
+  ['renderqueue_5f',['renderQueue_',['../classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82',1,'SlManager::renderQueue_()'],['../classSlRenderQueueManipulation.html#a3727034caee485f9b36be4a37af76a98',1,'SlRenderQueueManipulation::renderQueue_()']]]
 ];

@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['manipulatesprite',['manipulateSprite',['../classSlSpriteManager.html#a83e678cfb10eeaeab8cc99b15f141bcf',1,'SlSpriteManager::manipulateSprite()'],['../classSlSpriteManipulation.html#a95bc877273f0cb3ed7a7605e690d8a39',1,'SlSpriteManipulation::manipulateSprite()'],['../classSlMSetOrigin.html#a8d5450c24a4d93e65b434f5729486dfe',1,'SlMSetOrigin::manipulateSprite()'],['../classSlMCenterIn.html#a9e0e0cf82e17bd6f23034f8034524199',1,'SlMCenterIn::manipulateSprite()'],['../classSlMSetOptions.html#aa057265ed4b327a0d7613c2fa9b3c173',1,'SlMSetOptions::manipulateSprite()']]],
-  ['manipulations_5f',['manipulations_',['../classSlSpriteManager.html#a5433a1078c832d2c969612b8dffddb54',1,'SlSpriteManager']]],
-  ['mngr_5f',['mngr_',['../classSlSpriteManager.html#af713fe41beaf56721c54ee29673ca538',1,'SlSpriteManager::mngr_()'],['../classSlTextureManager.html#a13d0b366ca0312ad01f27909e2058fd7',1,'SlTextureManager::mngr_()']]],
-  ['moveinrenderqueue',['moveInRenderQueue',['../classSlManager.html#ac6f24730677dcf585706e22824067db0',1,'SlManager']]],
-  ['moveinrenderqueueafter',['moveInRenderQueueAfter',['../classSlManager.html#a6919dcc9288e7fbba03d67a4fb68127a',1,'SlManager']]],
-  ['moveinrenderqueuebefore',['moveInRenderQueueBefore',['../classSlManager.html#acf788bf20f1f5c7061623d32d6a52b67',1,'SlManager']]]
+  ['initialize',['initialize',['../classSlManager.html#a7d1e2aa30a4e8c75367b323e478cf3ef',1,'SlManager::initialize()'],['../classSlRenderItem.html#a8e5f4c57794cf557fd61d9e3b1296b14',1,'SlRenderItem::initialize()'],['../classSlSpriteManager.html#ae216d95060ee452f2925704f55096e7a',1,'SlSpriteManager::initialize()']]],
+  ['initializewindow',['initializeWindow',['../classSlManager.html#a750d32c61c3f985be9f8f2b3667a5462',1,'SlManager']]],
+  ['insertinrenderqueueafter',['insertInRenderQueueAfter',['../classSlManager.html#a1018152baa5a873f4c10640dffab605c',1,'SlManager']]],
+  ['insertinrenderqueuebefore',['insertInRenderQueueBefore',['../classSlManager.html#abb6cd2175eae5ccd489f6327e87f3523',1,'SlManager']]]
 ];

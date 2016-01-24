@@ -1,0 +1,7 @@
+<map id="include/SlEventHandler.h" name="include/SlEventHandler.h">
+<area shape="rect" id="node2" href="$SlEventHandler_8cc.html" title="src/SlEventHandler.cc" alt="" coords="5,80,159,107"/>
+<area shape="rect" id="node3" href="$SlManager_8h.html" title="SlManager class, has a Window with SDL_Renderer, manages textures and sprites. SlRenderItem struct fo..." alt="" coords="183,80,323,107"/>
+<area shape="rect" id="node4" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="25,155,149,181"/>
+<area shape="rect" id="node5" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="173,155,332,181"/>
+<area shape="rect" id="node6" href="$SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="357,155,525,181"/>
+</map>

@@ -114,12 +114,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aabec4c8603c2a8afeda55e83a5cf48c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac601eef92ff010dcc4daa25f9358a0ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#ac601eef92ff010dcc4daa25f9358a0ef">createTextureFromSpriteOnTexture</a> (const std::string &amp;name, const std::string &amp;backgroundTexture, const std::string &amp;foregroundSprite)</td></tr>
 <tr class="separator:ac601eef92ff010dcc4daa25f9358a0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa33b81dfc2f90f731bc3d4b0eee1d49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#afa33b81dfc2f90f731bc3d4b0eee1d49">createTextureFromText</a> (const std::string &amp;name, const std::string &amp;fontname, const std::string &amp;message, int width)</td></tr>
+<tr class="separator:afa33b81dfc2f90f731bc3d4b0eee1d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8890c2092920ae605b0d7aee1bac6ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#ae8890c2092920ae605b0d7aee1bac6ce">createTextureFromTile</a> (const std::string &amp;name, const std::string &amp;sprite, int width, int height)</td></tr>
 <tr class="separator:ae8890c2092920ae605b0d7aee1bac6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bcc8108c269db8d9fb014b807e646bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#a3bcc8108c269db8d9fb014b807e646bf">deleteTexture</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:a3bcc8108c269db8d9fb014b807e646bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fcc960ca21ae9dea17110b0ef5d47fe"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSlFont.html">SlFont</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#a8fcc960ca21ae9dea17110b0ef5d47fe">findFont</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a8fcc960ca21ae9dea17110b0ef5d47fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff88468331d02e7552f25e7c661943ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#aff88468331d02e7552f25e7c661943ef">findTexture</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:aff88468331d02e7552f25e7c661943ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9080e2c4e9b72ddd6dd2511d9f4142ae"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classSlFont.html">SlFont</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#a9080e2c4e9b72ddd6dd2511d9f4142ae">parseFont</a> (std::ifstream &amp;input)</td></tr>
+<tr class="separator:a9080e2c4e9b72ddd6dd2511d9f4142ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d0d5951ac6ee83f04dc00e3a1f94bcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlTexture.html">SlTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#a6d0d5951ac6ee83f04dc00e3a1f94bcf">parseTexture</a> (std::ifstream &amp;input)</td></tr>
 <tr class="separator:a6d0d5951ac6ee83f04dc00e3a1f94bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -143,6 +149,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a29b251d227346d2730179db2f1e71ef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13d0b366ca0312ad01f27909e2058fd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlManager.html">SlManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#a13d0b366ca0312ad01f27909e2058fd7">mngr_</a> = nullptr</td></tr>
 <tr class="separator:a13d0b366ca0312ad01f27909e2058fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89a266445869197f2a2e0b81907cba2b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classSlFont.html">SlFont</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlTextureManager.html#a89a266445869197f2a2e0b81907cba2b">fonts_</a></td></tr>
+<tr class="separator:a89a266445869197f2a2e0b81907cba2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a52566d7c9b3e3f836b15e0a44adeb4c2"></a>
@@ -381,6 +389,45 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
 
 </div>
 </div>
+<a class="anchor" id="afa33b81dfc2f90f731bc3d4b0eee1d49"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSlTexture.html">SlTexture</a> * SlTextureManager::createTextureFromText </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fontname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create a new texture from the message using the specified font. The text will be wrapped to fit the width. </p>
+
+</div>
+</div>
 <a class="anchor" id="ae8890c2092920ae605b0d7aee1bac6ce"></a>
 <div class="memitem">
 <div class="memproto">
@@ -440,6 +487,28 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
 
 </div>
 </div>
+<a class="anchor" id="a8fcc960ca21ae9dea17110b0ef5d47fe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classSlFont.html">SlFont</a> &gt; SlTextureManager::findFont </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns pointer to the named font. </p><dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">nullptr</td><td>if not found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="aff88468331d02e7552f25e7c661943ef"></a>
 <div class="memitem">
 <div class="memproto">
@@ -453,7 +522,12 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns pointer to the texture, nullptr if not found. </p>
+<p>Returns pointer to the named texture. </p><dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">nullptr</td><td>if not found </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -482,6 +556,23 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
 
 </div>
 </div>
+<a class="anchor" id="a9080e2c4e9b72ddd6dd2511d9f4142ae"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classSlFont.html">SlFont</a> &gt; SlTextureManager::parseFont </td>
+          <td>(</td>
+          <td class="paramtype">std::ifstream &amp;&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Read font file, size, colour from file </p>
+
+</div>
+</div>
 <a class="anchor" id="a6d0d5951ac6ee83f04dc00e3a1f94bcf"></a>
 <div class="memitem">
 <div class="memproto">
@@ -496,10 +587,32 @@ Creates <a class="el" href="classSlSprite.html">SlSprite</a> of same name that h
       </table>
 </div><div class="memdoc">
 <p>Read texture configurations from file </p>
+<p>&lt;- message[0] is space between token and beginning of text. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a89a266445869197f2a2e0b81907cba2b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classSlFont.html">SlFont</a>&gt; &gt; SlTextureManager::fonts_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Font used for rendering. This is kept open until program exits to reduce overhead from opening and closing font file. </p>
+
+</div>
+</div>
 <a class="anchor" id="a13d0b366ca0312ad01f27909e2058fd7"></a>
 <div class="memitem">
 <div class="memproto">

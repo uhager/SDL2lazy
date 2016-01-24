@@ -1,5 +1,6 @@
 <map id="src/SlTexture.cc" name="src/SlTexture.cc">
-<area shape="rect" id="node4" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="328,80,407,107"/>
-<area shape="rect" id="node11" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="215,80,304,107"/>
-<area shape="rect" id="node10" href="$SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="547,155,679,181"/>
+<area shape="rect" id="node5" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="357,80,435,107"/>
+<area shape="rect" id="node12" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="310,155,399,181"/>
+<area shape="rect" id="node13" href="$SlFont_8h.html" title="SlFont class holds font information. " alt="" coords="62,155,133,181"/>
+<area shape="rect" id="node11" href="$SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="659,155,791,181"/>
 </map>

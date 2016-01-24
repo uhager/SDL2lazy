@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['parseconfigurationfile',['parseConfigurationFile',['../classSlManager.html#a517fe517f627c4b9e399e42a7a322ac5',1,'SlManager']]],
-  ['parsesprite',['parseSprite',['../classSlSpriteManager.html#a4db809c7dcadc1f712f6e02dcaeefeed',1,'SlSpriteManager']]],
-  ['parsespritemanipulation',['parseSpriteManipulation',['../classSlSpriteManager.html#a71f5066173bd77e0742ddced1c07eb23',1,'SlSpriteManager']]],
-  ['parsetexture',['parseTexture',['../classSlTextureManager.html#a6d0d5951ac6ee83f04dc00e3a1f94bcf',1,'SlTextureManager']]]
+  ['name',['name',['../classSlEventAction.html#aceed1145626dcff9838ce609dae0a2f7',1,'SlEventAction::name()'],['../classSlFont.html#acb8a958f4e5e3ca08ab839ed5bbacd0b',1,'SlFont::name()'],['../classSlManipulation.html#a2018cc38778e82a677af2f90b51bfed1',1,'SlManipulation::name()'],['../classSlSprite.html#a8fda18ad89a74e10a9884386dd19a008',1,'SlSprite::name()'],['../classSlTexture.html#a013a1bf12347ddd17e9fd1cba3e1cf2d',1,'SlTexture::name()']]],
+  ['name_5f',['name_',['../classSlFont.html#af07ff8c6b7b7cf79c1a940513d39bb0e',1,'SlFont::name_()'],['../classSlManipulation.html#a8c1949708926fbc829b220bfdee4a5d2',1,'SlManipulation::name_()'],['../classSlSprite.html#a390f5e40313754666ca0749f63ff38db',1,'SlSprite::name_()'],['../classSlTexture.html#a0c17a906576f0aa5c74a6d42840f7520',1,'SlTexture::name_()']]]
 ];

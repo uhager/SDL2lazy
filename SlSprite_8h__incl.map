@@ -1,3 +1,4 @@
 <map id="include/SlSprite.h" name="include/SlSprite.h">
-<area shape="rect" id="node8" href="$SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="630,80,762,107"/>
+<area shape="rect" id="node8" href="$SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="498,80,630,107"/>
+<area shape="rect" id="node9" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="149,80,238,107"/>
 </map>

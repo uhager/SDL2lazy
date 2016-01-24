@@ -1,7 +1,13 @@
 <map id="include/SlTexture.h" name="include/SlTexture.h">
-<area shape="rect" id="node2" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="5,80,129,107"/>
-<area shape="rect" id="node3" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="153,80,261,107"/>
-<area shape="rect" id="node4" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="285,80,444,107"/>
-<area shape="rect" id="node5" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="468,80,587,107"/>
-<area shape="rect" id="node6" href="$SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="611,80,779,107"/>
+<area shape="rect" id="node2" href="$SlManager_8cc.html" title="src/SlManager.cc" alt="" coords="644,229,768,256"/>
+<area shape="rect" id="node3" href="$SlSprite_8cc.html" title="src/SlSprite.cc" alt="" coords="42,155,150,181"/>
+<area shape="rect" id="node4" href="$SlSpriteManager_8cc.html" title="src/SlSpriteManager.cc" alt="" coords="174,155,332,181"/>
+<area shape="rect" id="node5" href="$SlTexture_8cc.html" title="src/SlTexture.cc" alt="" coords="967,155,1086,181"/>
+<area shape="rect" id="node6" href="$SlTextureManager_8cc.html" title="src/SlTextureManager.cc" alt="" coords="1110,155,1278,181"/>
+<area shape="rect" id="node7" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="556,80,680,107"/>
+<area shape="rect" id="node8" href="$SlManipulation_8cc.html" title="src/SlManipulation.cc" alt="" coords="357,155,504,181"/>
+<area shape="rect" id="node9" href="$SlSpriteManipulation_8cc.html" title="src/SlSpriteManipulation.cc" alt="" coords="528,155,709,181"/>
+<area shape="rect" id="node10" href="$SlRenderItem_8h.html" title="SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="784,155,943,181"/>
+<area shape="rect" id="node11" href="$SlRenderItem_8cc.html" title="Implementation of SlRenderItem class for SlRenderItem&#39;s renderQueue entries. " alt="" coords="792,229,935,256"/>
+<area shape="rect" id="node12" href="$SlRenderQueueManipulation_8cc.html" title="src/SlRenderQueueManipulation.cc" alt="" coords="960,229,1186,256"/>
 </map>

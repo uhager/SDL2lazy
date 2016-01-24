@@ -1,10 +1,13 @@
 <map id="src/SlSpriteManager.cc" name="src/SlSpriteManager.cc">
-<area shape="rect" id="node9" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="161,155,240,181"/>
-<area shape="rect" id="node15" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="264,155,353,181"/>
-<area shape="rect" id="node16" href="$SlManager_8h.html" title="SlManager class, has a Window with SDL_Renderer, manages textures and sprites. SlRenderItem struct fo..." alt="" coords="608,80,703,107"/>
-<area shape="rect" id="node18" href="$SlSpriteManager_8h.html" title="SlSpriteManager class, has a vector of sprites and various methods to manipulate them. " alt="" coords="693,155,823,181"/>
-<area shape="rect" id="node21" href="$SlSpriteManipulation_8h.html" title="SlSpriteManipulation class; base class for changing sprite properties. " alt="" coords="898,155,1050,181"/>
-<area shape="rect" id="node14" href="$SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="5,229,137,256"/>
-<area shape="rect" id="node17" href="$SlTextureManager_8h.html" title="SlTextureManager class creates and stores textures. " alt="" coords="479,155,618,181"/>
-<area shape="rect" id="node20" href="$SlValueParser_8h.html" title="SlValueParser helper object to translate file input into values. " alt="" coords="1075,155,1191,181"/>
+<area shape="rect" id="node9" href="$SlSprite_8h.html" title="SlSprite class, RenderOptions enum, SlRenderSettings struct. " alt="" coords="439,80,518,107"/>
+<area shape="rect" id="node15" href="$SlTexture_8h.html" title="SlTexture class for creating SDL_Textures. " alt="" coords="169,155,258,181"/>
+<area shape="rect" id="node16" href="$SlManager_8h.html" title="SlManager class, has a Window with SDL_Renderer, manages textures and sprites. SlRenderItem struct fo..." alt="" coords="783,80,878,107"/>
+<area shape="rect" id="node19" href="$SlSpriteManager_8h.html" title="SlSpriteManager class, has a vector of sprites and various methods to manipulate them. " alt="" coords="906,155,1035,181"/>
+<area shape="rect" id="node25" href="$SlSpriteManipulation_8h.html" title="SlSpriteManipulation class; base class for changing sprite properties. " alt="" coords="1412,80,1564,107"/>
+<area shape="rect" id="node14" href="$SlRenderOptions_8h.html" title="enum SlRenderOptions " alt="" coords="282,155,414,181"/>
+<area shape="rect" id="node17" href="$SlTextureManager_8h.html" title="SlTextureManager class creates and stores textures. " alt="" coords="743,155,881,181"/>
+<area shape="rect" id="node21" href="$SlValueParser_8h.html" title="SlValueParser helper object to translate file input into values. " alt="" coords="1759,155,1875,181"/>
+<area shape="rect" id="node24" href="$SlEventHandler_8h.html" title="SlEventHandler class. " alt="" coords="1162,155,1286,181"/>
+<area shape="rect" id="node23" href="$SlValueParser_8hpp.html" title="SlValueParser.hpp" alt="" coords="1692,229,1823,256"/>
+<area shape="rect" id="node26" href="$SlManipulation_8h.html" title="SlManipulation class; base class for changing the render queue. " alt="" coords="1413,155,1531,181"/>
 </map>

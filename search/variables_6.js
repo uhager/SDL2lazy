@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['screen_5fheight_5f',['screen_height_',['../classSlManager.html#aa8229ee04a73c1465bf727a2d33dada2',1,'SlManager::screen_height_()'],['../classSlValueParser.html#a5124f624d3527e7d09d6e463b62bfee6',1,'SlValueParser::screen_height_()']]],
-  ['screen_5fwidth_5f',['screen_width_',['../classSlManager.html#ac0580832c910ef5155f76a58ed899804',1,'SlManager::screen_width_()'],['../classSlValueParser.html#a1e29655f070c62a6926342b847ba831f',1,'SlValueParser::screen_width_()']]],
-  ['smngr_5f',['smngr_',['../classSlManager.html#aea5f06df8844b2199cafff5636c8bf78',1,'SlManager::smngr_()'],['../classSlSpriteManipulation.html#a1749a85b47a9749ca96c8bf7a4bb70bf',1,'SlSpriteManipulation::smngr_()']]],
-  ['sourcerect_5f',['sourceRect_',['../classSlSprite.html#aed8f77e81a75b66c45250cb2b934cdbf',1,'SlSprite']]],
-  ['sprite_5f',['sprite_',['../classSlRenderItem.html#ace66481218d99066f1b0eb80f0924d0c',1,'SlRenderItem']]],
-  ['sprites_5f',['sprites_',['../classSlSpriteManager.html#ae5091efeddbce3af46d33992a440910b',1,'SlSpriteManager']]]
+  ['name',['name',['../classSlEventAction.html#aceed1145626dcff9838ce609dae0a2f7',1,'SlEventAction']]],
+  ['name_5f',['name_',['../classSlFont.html#af07ff8c6b7b7cf79c1a940513d39bb0e',1,'SlFont::name_()'],['../classSlManipulation.html#a8c1949708926fbc829b220bfdee4a5d2',1,'SlManipulation::name_()'],['../classSlSprite.html#a390f5e40313754666ca0749f63ff38db',1,'SlSprite::name_()'],['../classSlTexture.html#a0c17a906576f0aa5c74a6d42840f7520',1,'SlTexture::name_()']]]
 ];
