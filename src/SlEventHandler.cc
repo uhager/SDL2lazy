@@ -6,6 +6,10 @@
   SlEventHandler, SlEventObject, SlEventAction implementation
 */
 
+#include <sstream>
+#include <fstream>
+#include <iostream>
+
 #include "SlManipulation.h"
 
 #include "SlEventHandler.h"
@@ -131,5 +135,44 @@ SlEventHandler::handleEvent(const SDL_Event& event)
 void
 SlEventHandler::parseEvent(std::ifstream& input)
 {
+  std::string line, token;
+  std::string key, whatToDo, spritename;
+  int destination ;
+  std::vector<std::string> parameters;
+  bool endOfConfig = false;
+  
+  getline(input,line);
+  while ( !endOfConfig && input ) {
+    std::istringstream stream(line.c_str());
+    stream >> token;
+    if ( token[0] == '#' || token.empty() || token[0] == '\n'  ) {
+      /* empty line or comment */
+    }
+    else if ( token == "end" ) {
+      endOfConfig = true;
+    }
+    else {
+      try {
+	key = token;
+	stream >> whatToDo;
+	stream >> spritename;
+	stream >> destination;
+	while ( !stream.eof() ){
+	  parameters.push_back("");
+	  stream >> parameters.back();
+	}
+	std::string keyword = "is_" + key;
+	SlManipulation* manip = manipulations_[whatToDo];
+	SlEventObject& obj = eventActions_[keyword];
+	obj.addAction(spritename, destination, manip, parameters);
+      }
+      catch (const std::exception& expt ) {
+	std::cerr << "[SlEventHandler::parseEvent] Error: " << expt.what() << std::endl;
+      }
+    }
+    token.clear();
+    parameters.clear();
+    if ( !endOfConfig ) getline(input,line);
+  }
 }
 
