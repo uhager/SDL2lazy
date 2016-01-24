@@ -60,7 +60,7 @@ SlValueParser::assembleFormula(const std::vector<std::string>& stringValues, uns
   }
   if ( formula.back() != '\"' ) {
 #ifdef DEBUG
-    std::cerr << "[SlManager::parseFormula] Error: couldn't find end of formula." << std::endl;
+    std::cerr << "[SlValueParser::parseFormula] Error: couldn't find end of formula." << std::endl;
 #endif
     throw std::invalid_argument("Couldn't find end of formula.");
   }
@@ -258,7 +258,7 @@ SlValueParser::stringsToDoubles(const std::vector<std::string>& stringValues, do
 {
   if ( stringValues.size() < length ) {
 #ifdef DEBUG
-    std::cerr << "[SlManager::stringsToDoubles] Need " << length << " values, found " << stringValues.size() << std::endl;
+    std::cerr << "[SlValueParser::stringsToDoubles] Need " << length << " values, found " << stringValues.size() << std::endl;
 #endif
     throw std::invalid_argument("Too few values.");
   }
@@ -294,7 +294,7 @@ SlValueParser::stringsToRenderOptions(const std::vector<std::string>& stringValu
     }
     else {
 #ifdef DEBUG
-    std::cerr << "[SlManager::stringsToRenderOptions] Unknown token " << stringValues.at(i) << std::endl;
+    std::cerr << "[SlValueParser::stringsToRenderOptions] Unknown token " << stringValues.at(i) << std::endl;
 #endif
     return false;
     }

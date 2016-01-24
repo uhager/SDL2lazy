@@ -35,40 +35,10 @@ int main()
 	{
 	  switch(event.key.keysym.sym)
 	    {
-	    case SDLK_UP:
-	      mngr->swapInRenderQueueLastPosition( "up", 0 );
-	      mngr->setSpriteRenderOptions( "background", SL_RENDER_DEFAULT );
-	      break;
-	    case SDLK_DOWN:
-	      mngr->swapInRenderQueueLastPosition( "down", 0 );
-	      mngr->setSpriteRenderOptions( "background", SL_RENDER_COLORMOD );
-	      break;
-	    case SDLK_LEFT:
-	      mngr->swapInRenderQueueAtPosition( "left", 0, 8 );
-	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_DEFAULT );
-	      break;
-	    case SDLK_RIGHT:
-	      mngr->swapInRenderQueueAtPosition( "right", 0, 8 );
-	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_ALPHAMOD );
-	      break;
-	    // case SDLK_1:
-	    //   mngr->toggleRender("upperleft");
+	    // case SDLK_UP:
+	    //   mngr->swapInRenderQueueLastPosition( "up", 0 );
+	    //   mngr->setSpriteRenderOptions( "background", SL_RENDER_DEFAULT );
 	    //   break;
-	    case SDLK_2:
-	      mngr->toggleRender("upperright");
-	      break;
-	    case SDLK_3:
-	      mngr->toggleRender("lowerright");
-	      break;
-	    case SDLK_4:
-	      mngr->toggleRender("lowerleft");
-	      break;
-	    case SDLK_m:
-	      mngr->toggleRenderOn("minimap");
-	      break;
-	    case SDLK_n:
-	      mngr->toggleRenderOff("minimap");
-	      break;
 	    case SDLK_b:
 	      mngr->moveInRenderQueueBefore("upperleft", "minimap");
 	      break;

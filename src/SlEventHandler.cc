@@ -65,9 +65,6 @@ SlEventObject::addAction(std::string name, int destination, SlManipulation* mani
 void
 SlEventObject::trigger()
 {
-#ifdef DEBUG
-  std::cout << "[SlEventObject::trigger]" << std::endl;
-#endif
   for (auto action: actions_) {
     action.act();
   }
@@ -181,9 +178,12 @@ SlEventHandler::parseEvent(std::ifstream& input)
 	  stream >> parameters.back();
 	}
 	std::string keyword = "is_" + key;
-	SlManipulation* manip = manipulations_[whatToDo];
+	auto manip = manipulations_.find( whatToDo );
+	if ( manip == manipulations_.end() )
+	  throw std::invalid_argument( "[SlEventHandler::parseEvent] Error: invalid manipulation " + whatToDo ); 
+
 	SlEventObject& obj = eventActions_[keyword];
-	obj.addAction(spritename, destination, manip, parameters);
+	obj.addAction(spritename, destination, manip->second, parameters);
       }
       catch (const std::exception& expt ) {
 	std::cerr << "[SlEventHandler::parseEvent] Error: " << expt.what() << std::endl;
