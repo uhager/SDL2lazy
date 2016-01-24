@@ -181,7 +181,7 @@ class SlManager
   /*! Sprite manager, creates, stores, manipulates, and deletes SlSprite objects.
    */
   std::shared_ptr<SlSpriteManager> smngr_  = nullptr;
-  /*! 
+  /*! Event handler, parses events in configuration file, triggers SlManipulation on key input.
    */
   std::unique_ptr<SlEventHandler> eventHandler_  = nullptr;
   /*! Window width.

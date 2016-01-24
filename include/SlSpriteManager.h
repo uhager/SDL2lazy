@@ -72,7 +72,7 @@ class SlSpriteManager
   /*! Returns pointer to the sprite, nullptr if not found.
    */
   std::shared_ptr<SlSprite> findSprite(const std::string& name);
-  /*! set #valueParser and load manipulations.
+  /*! set #valParser and load manipulations.
    */
   void initialize( SlValueParser* valPars);
   /*! Get the map of SlManipulations.

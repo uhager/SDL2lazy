@@ -24,7 +24,11 @@ class SlSprite;
 class SlRenderQueueManipulation : public SlManipulation
 {
  public:
+  /*! Use this constructor to set the required pointers. 
+   */
   SlRenderQueueManipulation(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  /*! Default destructor.
+   */
   virtual ~SlRenderQueueManipulation();
 
   /*! Creates new SlRenderItem for the specified sprite. \n

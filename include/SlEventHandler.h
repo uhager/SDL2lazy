@@ -63,7 +63,7 @@ class SlEventObject
   /*! Deleted, same reason as copy constructor.
    */
   SlEventObject& operator=(const SlEventObject&) = delete;
-  /*! Adds a new SlEventAction to #actions.
+  /*! Adds a new SlEventAction to #actions_.
    */
   void addAction(std::string name, int destination, SlManipulation* manip, std::vector<std::string> params );
   /*! Triggers the SlEventAction::act() for all objects in #actions_.
