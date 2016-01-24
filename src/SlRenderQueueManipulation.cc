@@ -23,6 +23,9 @@ SlRenderQueueManipulation::SlRenderQueueManipulation(SlSpriteManager* smngr, SlV
 {
   renderQueue_ = renderQueue;
   name_ = "renderQueueManipulation";
+#ifdef DEBUG
+  std::cout << "[SlRenderQueueManipulation::SlRenderQueueManipulation] Created " << name_ << std::endl;
+#endif
 }
 
 
@@ -31,7 +34,7 @@ SlRenderQueueManipulation::~SlRenderQueueManipulation()
 {
   renderQueue_ = nullptr;
 #ifdef DEBUG
-  std::cout << "[SlRenderQueueManipulation] deleting " << name_ << std::endl;
+  std::cout << "[SlRenderQueueManipulation::~SlRenderQueueManipulation] deleting " << name_ << std::endl;
 #endif
 }
 
@@ -50,10 +53,10 @@ SlRenderQueueManipulation::createRenderItem(const std::string& name, unsigned in
 
 
 void 
-SlRenderQueueManipulation::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRenderQueueManipulation::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
 #ifdef DEBUG
-  std::cout << "[SlRenderQueueManipulation::manipulate]" << std::endl;
+  std::cout << "[SlRenderQueueManipulation::manipulate] " << name_ << std::endl;
 #endif
 }
 
@@ -65,13 +68,19 @@ SlRMappend::SlRMappend(SlSpriteManager* smngr, SlValueParser* valPars, std::vect
   : SlRenderQueueManipulation( smngr, valPars, renderQueue )
 {
   name_ = "append";
+#ifdef DEBUG
+  std::cout << "[SlRMappend::SlRMappend] Created " << name_ << std::endl;
+#endif
 }
 
 
 
 void 
-SlRMappend::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMappend::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
+#ifdef DEBUG
+  std::cout << "[SlRMappend::manipulate]" << name << std::endl;
+#endif
   SlRenderItem* toAdd = nullptr;
   toAdd = createRenderItem(name, destination);
   if ( toAdd ) {
@@ -92,7 +101,7 @@ SlRMinsertAfter::SlRMinsertAfter(SlSpriteManager* smngr, SlValueParser* valPars,
 
 
 void 
-SlRMinsertAfter::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMinsertAfter::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
   if (parameters.size() != 2 )
       throw std::invalid_argument("[SlRMinsertAfter::manipulate] Error: no name given for object to insert after.");
@@ -130,7 +139,7 @@ SlRMinsertBefore::SlRMinsertBefore(SlSpriteManager* smngr, SlValueParser* valPar
 
 
 void 
-SlRMinsertBefore::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMinsertBefore::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
   if (parameters.size() != 2 )
       throw std::invalid_argument("[SlRMinsertBefore::manipulate] Error: no name given for object to insert before.");
@@ -169,7 +178,7 @@ SlRMswapIn::SlRMswapIn(SlSpriteManager* smngr, SlValueParser* valPars, std::vect
 
 
 void 
-SlRMswapIn::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMswapIn::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
   if (parameters.size() != 2 )
       throw std::invalid_argument("[SlRMswapIn::manipulate] Error: no name given for object to insert before.");
@@ -208,7 +217,7 @@ SlRMtoggleOnOff::SlRMtoggleOnOff(SlSpriteManager* smngr, SlValueParser* valPars,
 
 
 void
-SlRMtoggleOnOff::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMtoggleOnOff::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
   int onOrOff = -1;
   if ( parameters.size() == 1 ) {
@@ -258,7 +267,7 @@ SlRMswapAt::SlRMswapAt(SlSpriteManager* smngr, SlValueParser* valPars, std::vect
 
 
 void 
-SlRMswapAt::manipulate(const std::string& name, int destination, const std::vector<std::string>& parameters)
+SlRMswapAt::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
   if (parameters.size() != 1 )
       throw std::invalid_argument("[SlRMswapAt::manipulate] Error: No position given to swap in object " + name);

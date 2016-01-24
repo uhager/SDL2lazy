@@ -182,7 +182,7 @@ SlSpriteManager::initialize( SlValueParser* valPars)
 {
   valParser = valPars;
   
-  SlSpriteManipulation* toAdd;
+  SlManipulation* toAdd;
   toAdd = new SlSMsetOrigin( this, valParser );
   manipulations_[toAdd->name()] = toAdd;
   toAdd = new SlSMcenterIn( this, valParser );

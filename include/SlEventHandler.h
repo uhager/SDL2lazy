@@ -93,7 +93,7 @@ class SlEventHandler
   SlEventHandler& operator=(const SlEventHandler&) = delete;
   /*! Adds the given SlManipulations to #manipulations_.
    */
-  void addManipulations(std::map<std::string, SlManipulation*> manip);
+  void addManipulations(const std::map<std::string, SlManipulation*>& manip);
   /*! The actual event handling, checking what SDL_Event was registered. Limited implimentation.
    */
   void handleEvent(const SDL_Event& event);

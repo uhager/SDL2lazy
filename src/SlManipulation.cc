@@ -21,6 +21,9 @@ SlManipulation::SlManipulation(SlSpriteManager* manager, SlValueParser* valPars)
 {
   smngr_ = manager;
   valParser = valPars;
+#ifdef DEBUG
+  std::cout << "[SlManipulation::SlManipulation] Creating " << name_ << std::endl;
+#endif
 }
 
 
@@ -55,7 +58,7 @@ SlManipulation::operator=(const SlManipulation& rhs)
 
 
 void
-SlManipulation::manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters)
+SlManipulation::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
 #ifdef DEBUG
   std::cout << "[SlManipulation::manipulate] " << name_ << std::endl;
@@ -65,7 +68,7 @@ SlManipulation::manipulate(std::string name, unsigned int destination, const std
 
 
 std::shared_ptr<SlSprite>
-SlManipulation::verifySprite(std::string sname, unsigned int destination)
+SlManipulation::verifySprite(const std::string& sname, unsigned int destination)
 {
   std::shared_ptr<SlSprite> verified = smngr_->findSprite(sname);
   if ( verified == nullptr )

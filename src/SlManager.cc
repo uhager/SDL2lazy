@@ -19,6 +19,7 @@
 #include "SlRenderItem.h"
 #include "SlTextureManager.h"
 #include "SlSpriteManager.h"
+#include "SlManipulation.h"
 #include "SlRenderQueueManipulation.h"
 
 #include "SlManager.h"
@@ -78,7 +79,7 @@ SlManager::appendToRenderQueue(const std::string& name, unsigned int destination
 void
 SlManager::clear()
 {
-  std::map<std::string, SlRenderQueueManipulation*>::iterator mapItem;
+  std::map<std::string, SlManipulation*>::iterator mapItem;
   for (mapItem = renderManip_.begin(); mapItem != renderManip_.end() ; ++mapItem ) {
     delete ( mapItem->second );
   }
@@ -183,6 +184,7 @@ SlManager::initialize()
   tmngr_ = std::unique_ptr<SlTextureManager>(new SlTextureManager( this ));
   //  smngr_ = std::make_unique<SlSpriteManager>( this );
   smngr_ = std::shared_ptr<SlSpriteManager>(new SlSpriteManager( this )); //!< Needs to be shared with SlRenderQueueManipulation items.
+  eventHandler_ = std::unique_ptr<SlEventHandler>( new SlEventHandler() );
 }
 
 
@@ -210,7 +212,7 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
   tmngr_->valParser = &valParser_;
   smngr_->initialize( &valParser_ );
 
-  SlRenderQueueManipulation* toAdd;
+  SlManipulation* toAdd;
   toAdd = new SlRMappend( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
   toAdd = new SlRMinsertAfter( smngr_.get(), &valParser_, &renderQueue_ );
@@ -224,6 +226,8 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
   toAdd = new SlRMtoggleOnOff( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
 
+  eventHandler_->addManipulations( renderManip_ );
+  eventHandler_->addManipulations( smngr_->manipulations() );
 }
 
 

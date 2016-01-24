@@ -21,7 +21,7 @@ class SlSprite;
 class SlManager;
 class SlTexture;
 class SlValueParser;
-class SlSpriteManipulation;
+class SlManipulation;
 
 
 class SlSpriteManager 
@@ -75,6 +75,9 @@ class SlSpriteManager
   /*! set #valueParser and load manipulations.
    */
   void initialize( SlValueParser* valPars);
+  /*! Get the map of SlManipulations.
+   */
+  std::map<std::string, SlManipulation*> manipulations(){ return manipulations_; }
   /*! Read sprite configurations from file
    */
   void parseSprite(std::ifstream& input);
@@ -123,7 +126,7 @@ class SlSpriteManager
   /*! Holds the various SlSpriteManipulations for the different tasks.
     The map key is the name of the manipulation, which is also the keyword used in the configuration file, the mapped value is the object that will do the actual work.
    */
-  std::map<std::string, SlSpriteManipulation*> manipulations_;
+  std::map<std::string, SlManipulation*> manipulations_;
 };
 
 

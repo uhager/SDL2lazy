@@ -18,11 +18,12 @@
 #include "SlTextureManager.h"
 #include "SlSpriteManager.h"
 #include "SlValueParser.h"
+#include "SlEventHandler.h"
 
 class SlTexture;
 class SlSprite;
 class SlRenderItem;
-class SlRenderQueueManipulation;
+class SlManipulation;
 
 
 class SlManager
@@ -177,6 +178,9 @@ class SlManager
   /*! Sprite manager, creates, stores, manipulates, and deletes SlSprite objects.
    */
   std::shared_ptr<SlSpriteManager> smngr_  = nullptr;
+  /*! 
+   */
+  std::unique_ptr<SlEventHandler> eventHandler_  = nullptr;
   /*! Window width.
    */
   int screen_width_ ;
@@ -189,7 +193,7 @@ class SlManager
   /*! Holds the various SlRenderQueueManipulations for the different tasks.
     The map key is the name of the manipulation, which is also the keyword used in the configuration file, the mapped value is the object that will do the actual work.
    */
-  std::map<std::string, SlRenderQueueManipulation*> renderManip_;
+  std::map<std::string, SlManipulation*> renderManip_;
 
 };
 

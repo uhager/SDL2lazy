@@ -21,12 +21,24 @@ SlSpriteManipulation::SlSpriteManipulation(SlSpriteManager* manager, SlValuePars
   : SlManipulation(manager, valPars)
 {
   name_ = "spriteManipulation";
+#ifdef DEBUG
+  std::cout << "[SlSpriteManipulation::SlSpriteManipulation] Created " << name_ << std::endl;
+#endif
 }
 
 
 
+SlSpriteManipulation::~SlSpriteManipulation()
+{
+#ifdef DEBUG
+  std::cout << "[SlSpriteManipulation::~SlSpriteManipulation] Deleting " << name_ << std::endl;
+#endif
+}
+  
+
+
 void
-SlSpriteManipulation::manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters)
+SlSpriteManipulation::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
 #ifdef DEBUG
   std::cout << "[SlSpriteManipulation::manipulate] " << name_ << std::endl;
@@ -46,9 +58,9 @@ SlSMcenterAt::SlSMcenterAt(SlSpriteManager* manager, SlValueParser* valPars)
 
 
 void
-SlSMcenterAt::manipulate(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMcenterAt::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
-  std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
+  std::shared_ptr<SlSprite> toMove = verifySprite(name, destination);
 
   int targetLocation[2];
   valParser->stringsToNumbers<int>( parameters, targetLocation, 2 );
@@ -63,14 +75,20 @@ SlSMcenterIn::SlSMcenterIn(SlSpriteManager* manager, SlValueParser* valPars)
   : SlSpriteManipulation(manager, valPars)
 {
   name_ = "centerIn";
+#ifdef DEBUG
+  std::cout << "[SlSMcenterIn::SlSMcenterIn] Created " << name_ << std::endl;
+#endif
 }
 
 
 
 void
-SlSMcenterIn::manipulate(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMcenterIn::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
-  std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
+#ifdef DEBUG
+  std::cout << "[SlSMcenterIn::manipulate] " << name << std::endl;
+#endif
+  std::shared_ptr<SlSprite> toMove = verifySprite(name, destination);
 
   std::string targetname = parameters.at(0);
   int targetDest;
@@ -93,9 +111,9 @@ SlSMsetOptions::SlSMsetOptions(SlSpriteManager* manager, SlValueParser* valPars)
 
 
 void
-SlSMsetOptions::manipulate(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMsetOptions::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
-  std::shared_ptr<SlSprite> toChange = verifySprite(sname, destination);
+  std::shared_ptr<SlSprite> toChange = verifySprite(name, destination);
   
   int options ;
   bool check = valParser->stringsToRenderOptions( parameters, options );
@@ -115,9 +133,9 @@ SlSMsetOrigin::SlSMsetOrigin(SlSpriteManager* manager, SlValueParser* valPars)
 
 
 void
-SlSMsetOrigin::manipulate(std::string sname, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMsetOrigin::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
-  std::shared_ptr<SlSprite> toMove = verifySprite(sname, destination);
+  std::shared_ptr<SlSprite> toMove = verifySprite(name, destination);
 
   int origin[2] ;
   valParser->stringsToNumbers<int>( parameters, origin, 2 );
@@ -137,7 +155,7 @@ SlSMcolor::SlSMcolor(SlSpriteManager* manager, SlValueParser* valParser)
 
 
 void 
-SlSMcolor::manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters)
+SlSMcolor::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
   std::shared_ptr<SlSprite> toChange = verifySprite(name, destination);
   

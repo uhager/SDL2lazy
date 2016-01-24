@@ -70,7 +70,7 @@ SlEventHandler::~SlEventHandler()
 
 
 void
-SlEventHandler::addManipulations(std::map<std::string, SlManipulation*> manip)
+SlEventHandler::addManipulations(const std::map<std::string, SlManipulation*>& manip)
 {
   manipulations_.insert( manip.begin(), manip.end() );
 }

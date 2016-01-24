@@ -24,9 +24,10 @@ class SlSpriteManipulation : public SlManipulation
 {
  public:
   SlSpriteManipulation(SlSpriteManager* spritemanager, SlValueParser* valPars);
+  virtual ~SlSpriteManipulation();
   /*! The actual sprite manipulation, implemented in the derived classes.
    */
-  virtual void manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters);
+  virtual void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters);
 };
 
 
@@ -37,7 +38,7 @@ class SlSMcenterAt : public SlSpriteManipulation
 {
 public:
   SlSMcenterAt(SlSpriteManager* manager, SlValueParser* valPars);
-  void manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
 
@@ -48,7 +49,7 @@ class SlSMcenterIn : public SlSpriteManipulation
 {
 public:
   SlSMcenterIn(SlSpriteManager* manager, SlValueParser* valPars);
-  void manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
 
@@ -59,7 +60,7 @@ class SlSMsetOptions : public SlSpriteManipulation
 {
 public:
   SlSMsetOptions(SlSpriteManager* manager, SlValueParser* valPars);
-  void manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
 
@@ -70,7 +71,7 @@ class SlSMsetOrigin : public SlSpriteManipulation
 {
 public:
   SlSMsetOrigin(SlSpriteManager* manager, SlValueParser* valPars);
-  void manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
 
@@ -81,7 +82,7 @@ class SlSMcolor : public SlSpriteManipulation
 {
 public:
   SlSMcolor(SlSpriteManager* manager, SlValueParser* valPars);
-  void manipulate(std::string name, unsigned int destination, const std::vector<std::string>& parameters) override;
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
 
