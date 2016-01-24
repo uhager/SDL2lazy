@@ -49,12 +49,28 @@ SlEventObject::~SlEventObject()
 void
 SlEventObject::addAction(std::string name, int destination, SlManipulation* manip, std::vector<std::string> params )
 {
+#ifdef DEBUG
+  std::cout << "[SlEventObject::addAction] added manipulation " << manip->name() << " for sprite " << name << std::endl;
+#endif
   SlEventAction toAdd;
   toAdd.name = name;
   toAdd.destination = destination;
   toAdd.manipulation = manip;
   toAdd.parameters = params;
-  actions.push_back( toAdd );
+  actions_.push_back( toAdd );
+}
+
+
+
+void
+SlEventObject::trigger()
+{
+#ifdef DEBUG
+  std::cout << "[SlEventObject::trigger]" << std::endl;
+#endif
+  for (auto action: actions_) {
+    action.act();
+  }
 }
 
 
@@ -127,7 +143,10 @@ SlEventHandler::handleEvent(const SDL_Event& event)
 	  break;
 	}
     }
-  
+
+  auto iter = eventActions_.find( keyword );
+  if ( iter == eventActions_.end() ) return;  //!< undefined input is ignored.
+  iter->second.trigger();
 }
 
 

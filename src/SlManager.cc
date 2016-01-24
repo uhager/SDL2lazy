@@ -168,6 +168,14 @@ SlManager::findTexture(const std::string& name)
 
 
 void
+SlManager::handleEvent(const SDL_Event& event)
+{
+  eventHandler_->handleEvent(event);
+}
+
+
+
+void
 SlManager::initialize()
 {
   if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
@@ -384,6 +392,9 @@ SlManager::parseConfigurationFile(const std::string& filename)
       }
       else if ( token == "renderqueue" ) {
 	parseRenderQueueManipulation( input );
+      }
+      else if ( token == "event" ) {
+	eventHandler_->parseEvent( input );
       }
       else {
 #ifdef DEBUG

@@ -70,6 +70,9 @@ class SlManager
     Calls SlTextureManager #tmngr_ .
    */
   SlTexture* findTexture(const std::string& name);
+  /*! Pass event on to SlEventHandler #eventHandler_ .
+   */ 
+  void handleEvent(const SDL_Event& event);
   /*! Inserts the sprite into the #renderQueue_ after the specified sprite.
    */
   void insertInRenderQueueAfter(const std::string& toAdd, const std::string& afterThis, unsigned int destToAdd = 0, unsigned int destAfterThis = 0);

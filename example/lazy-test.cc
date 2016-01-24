@@ -29,6 +29,7 @@ int main()
     
   while (!quit) {
     while (SDL_PollEvent(&event)) {
+      mngr->handleEvent(event);
       if (event.type == SDL_QUIT) quit = true;
       else if (event.type == SDL_KEYDOWN)
 	{
@@ -50,9 +51,9 @@ int main()
 	      mngr->swapInRenderQueueAtPosition( "right", 0, 8 );
 	      mngr->setSpriteRenderOptions( "minimap", SL_RENDER_ALPHAMOD );
 	      break;
-	    case SDLK_1:
-	      mngr->toggleRender("upperleft");
-	      break;
+	    // case SDLK_1:
+	    //   mngr->toggleRender("upperleft");
+	    //   break;
 	    case SDLK_2:
 	      mngr->toggleRender("upperright");
 	      break;

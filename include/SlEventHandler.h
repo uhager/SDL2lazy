@@ -66,10 +66,13 @@ class SlEventObject
   /*! Adds a new SlEventAction to #actions.
    */
   void addAction(std::string name, int destination, SlManipulation* manip, std::vector<std::string> params );
+  /*! Triggers the SlEventAction::act() for all objects in #actions_.
+   */
+  void trigger();
  private:
   /*! The SlEventActions that will be performed when this object is triggered.
    */
-  std::vector<SlEventAction> actions ;
+  std::vector<SlEventAction> actions_ ;
 };
 
 
@@ -98,6 +101,7 @@ class SlEventHandler
    */
   void handleEvent(const SDL_Event& event);
   /*! Parse configuration file entry.
+    Pattern: key   what      spritename     sprite_destination      parameters
    */ 
   void parseEvent(std::ifstream& input);
   
