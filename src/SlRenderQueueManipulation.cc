@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <memory>
 #include <string>
+#include <algorithm>
 
 #include "SlSpriteManager.h"
 #include "SlRenderItem.h"
@@ -59,6 +60,40 @@ SlRenderQueueManipulation::manipulate(const std::string& name, unsigned int dest
   std::cout << "[SlRenderQueueManipulation::manipulate] " << name_ << std::endl;
 #endif
 }
+
+
+
+void
+SlRenderQueueManipulation::moveInRenderQueue(const std::string& toMoveName, const std::string& targetName, unsigned int destToMove, unsigned int targetDest, int beforeOrAfter)
+{
+  
+  auto iter1 = std::find_if( renderQueue_->begin(), renderQueue_->end(),
+			     [toMoveName, destToMove](const SlRenderItem* item) -> bool { return ( (item)->sprite_->name() == toMoveName && (item)->destination_ == destToMove ); } );
+  if ( iter1 == renderQueue_->end() ) 
+    throw std::invalid_argument( "[SlManager::moveInRenderQueueAfter] Couldn't find item to move " + toMoveName );
+
+  auto iter2 = std::find_if( renderQueue_->begin(), renderQueue_->end(),
+			     [targetName, targetDest](const SlRenderItem* item) -> bool { return ( (item)->sprite_->name() == targetName && (item)->destination_ == targetDest ); } );
+  if ( iter2 == renderQueue_->end() )
+    throw std::invalid_argument( "[SlManager::moveInRenderQueueAfter] Couldn't find item to move after " + targetName );
+
+
+  /* Cheat sheet
+    std::rotate( iter2, iter1, iter1+1 );   // insert before, iter1 > iter 2
+    std::rotate( iter2+1, iter1, iter1+1 );  // insert after, iter1 > iter 2
+    std::rotate( iter1, iter1+1, iter2 );   // insert before, iter1 < iter 2
+    std::rotate( iter1, iter1+1, iter2+1 );  // insert after, iter1 < iter 2
+  */
+
+  if ( iter1 == iter2 ) 
+    return ;
+  else if ( iter1 > iter2 )
+    std::rotate( iter2 + beforeOrAfter, iter1, iter1+1 ); 
+  else if ( iter1 < iter2 ) 
+    std::rotate( iter1, iter1+1, iter2 + beforeOrAfter );
+}
+
+
 
 
 
@@ -163,6 +198,52 @@ SlRMinsertBefore::manipulate(const std::string& name, unsigned int destination, 
   if ( iter == renderQueue_->end() )
     throw std::runtime_error("[SlRMinsertBefore::manipulate] Couldn't find RenderItem " + beforeThis + " to insert before.");
 
+}
+
+
+
+/*! \class SlRMmoveBefore implementation
+ */
+SlRMmoveBefore::SlRMmoveBefore(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "moveBefore";
+}
+
+
+
+void 
+SlRMmoveBefore::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  if (parameters.size() != 2 )
+      throw std::invalid_argument("[SlRMmoveBefore::manipulate] Error: Wrong number of parameters.");
+
+  std::string beforeThis = parameters.at(0);
+  unsigned int destBeforeThis = std::stoi( parameters.at(1) );
+  moveInRenderQueue(name, beforeThis, destination, destBeforeThis, 0);
+}
+
+
+
+/*! \class SlRMmoveAfter implementation
+ */
+SlRMmoveAfter::SlRMmoveAfter(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "moveAfter";
+}
+
+
+
+void 
+SlRMmoveAfter::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  if (parameters.size() != 2 )
+    throw std::invalid_argument("[SlRMmoveAfter::manipulate] Error: Wrong number of parameters: Need 2 found " + std::to_string( parameters.size() ) );
+
+  std::string beforeThis = parameters.at(0);
+  unsigned int destBeforeThis = std::stoi( parameters.at(1) );
+  moveInRenderQueue(name, beforeThis, destination, destBeforeThis, 1);
 }
 
 

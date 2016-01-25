@@ -9,6 +9,7 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
+#include <stdexcept>
 
 #include "SlManipulation.h"
 
@@ -20,7 +21,12 @@
 void
 SlEventAction::act()
 {
-  manipulation->manipulate( name, destination, parameters );
+  try {
+    manipulation->manipulate( name, destination, parameters );
+  }
+  catch (const std::exception& expt) {
+    std::cerr << expt.what() << std::endl;
+  }
 }
 
 
@@ -177,6 +183,8 @@ SlEventHandler::parseEvent(std::ifstream& input)
 	  parameters.push_back("");
 	  stream >> parameters.back();
 	}
+	if ( parameters.back().empty() )
+	  parameters.pop_back();
 	std::string keyword = "is_" + key;
 	auto manip = manipulations_.find( whatToDo );
 	if ( manip == manipulations_.end() )

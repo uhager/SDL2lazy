@@ -233,6 +233,10 @@ SlManager::initializeWindow(const std::string& name, int width, int height)
   renderManip_[toAdd->name()] = toAdd;
   toAdd = new SlRMtoggleOnOff( smngr_.get(), &valParser_, &renderQueue_ );
   renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMmoveAfter( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
+  toAdd = new SlRMmoveBefore( smngr_.get(), &valParser_, &renderQueue_ );
+  renderManip_[toAdd->name()] = toAdd;
 
   eventHandler_->addManipulations( renderManip_ );
   eventHandler_->addManipulations( smngr_->manipulations() );

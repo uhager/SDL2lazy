@@ -35,16 +35,6 @@ int main()
 	{
 	  switch(event.key.keysym.sym)
 	    {
-	    // case SDLK_UP:
-	    //   mngr->swapInRenderQueueLastPosition( "up", 0 );
-	    //   mngr->setSpriteRenderOptions( "background", SL_RENDER_DEFAULT );
-	    //   break;
-	    case SDLK_b:
-	      mngr->moveInRenderQueueBefore("upperleft", "minimap");
-	      break;
-	    case SDLK_f:
-	      mngr->moveInRenderQueueAfter("upperleft", "minimap", 0, 0);
-	      break;
 	    case SDLK_ESCAPE:
 	      quit = true;
 	      break;

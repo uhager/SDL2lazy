@@ -37,6 +37,10 @@ class SlRenderQueueManipulation : public SlManipulation
   /*! The actual render queue manipulation, implemented in the derived classes.
    */
   virtual void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters);
+  /*! Moves sprite with name toMoveName at destination destToMove before or after sprite with name targetName at destination targetDest.
+    beforeOrAfter is 0 for before, 1 for after. Larger (smaller) values will result in the target item begin inserted further upstream (downstream) of the target. 
+    (Handle with care, currently no test for valid iterators beyond +1...)   */
+  void moveInRenderQueue(const std::string& toMoveName, const std::string& targetName, unsigned int destToMove, unsigned int targetDest, int beforeOrAfter);
 
  protected:
   /*! Holds the items to be rendered. The front of the queue is rendered first (background) the last element is rendered last (foreground).
@@ -78,6 +82,30 @@ class SlRMinsertBefore : public SlRenderQueueManipulation
 {
  public:
   SlRMinsertBefore(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMmoveAfter
+  Insert new render item in render queue before the given one.
+ */
+class SlRMmoveAfter : public SlRenderQueueManipulation
+{
+ public:
+  SlRMmoveAfter(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMmoveBefore
+  Insert new render item in render queue before the given one.
+ */
+class SlRMmoveBefore : public SlRenderQueueManipulation
+{
+ public:
+  SlRMmoveBefore(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
   void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
