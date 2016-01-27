@@ -527,6 +527,17 @@ SlManager::render()
 
 
 void
+SlManager::run()
+{
+  int quit = 0;
+  while ( !quit ) {
+    quit = eventHandler_->pollEvent();
+    render();
+  }
+}
+
+
+void
 SlManager::setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, unsigned int destination)
 {
   smngr_->setSpriteColor(name, red, green, blue, alpha, destination);

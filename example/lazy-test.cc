@@ -24,28 +24,8 @@ int main()
   mngr->deleteTexture("tex1");
   mngr->deleteTexture("tex2");
 
-  bool quit = false;
-  SDL_Event event;
-    
-  while (!quit) {
-    while (SDL_PollEvent(&event)) {
-      mngr->handleEvent(event);
-      if (event.type == SDL_QUIT) quit = true;
-      else if (event.type == SDL_KEYDOWN)
-	{
-	  switch(event.key.keysym.sym)
-	    {
-	    case SDLK_ESCAPE:
-	      quit = true;
-	      break;
-	    }
-	}
-    }
-
-     mngr->render();
- 
-  }
-  
+  mngr->run();
+   
   delete mngr;
   
   return 0;

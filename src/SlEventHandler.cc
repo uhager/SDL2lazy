@@ -100,11 +100,12 @@ SlEventHandler::addManipulations(const std::map<std::string, SlManipulation*>& m
 
 
 
-void
+int
 SlEventHandler::handleEvent(const SDL_Event& event)
 {
   std::string keyword = "";
-  if (event.type == SDL_KEYDOWN)
+  if (event.type == SDL_QUIT) return 1;
+  else if (event.type == SDL_KEYDOWN)
     {
       switch(event.key.keysym.sym)
 	{
@@ -144,12 +145,16 @@ SlEventHandler::handleEvent(const SDL_Event& event)
 	case SDLK_f:
 	  keyword = "is_f";
 	  break;
+	case SDLK_ESCAPE:
+	  return 1;
 	}
     }
 
   auto iter = eventActions_.find( keyword );
-  if ( iter == eventActions_.end() ) return;  //!< undefined input is ignored.
-  iter->second.trigger();
+  if ( iter != eventActions_.end() )   //!< undefined input is ignored.
+    iter->second.trigger();
+  
+  return 0;
 }
 
 
@@ -203,3 +208,14 @@ SlEventHandler::parseEvent(std::ifstream& input)
   }
 }
 
+
+
+int
+SlEventHandler::pollEvent()
+{
+  int result = 0;  //!< 0 means don't quit, 1 means quit
+  while (SDL_PollEvent(&event_)) {
+    result = handleEvent(event_);
+  }
+  return result;
+}

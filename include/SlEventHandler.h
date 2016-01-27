@@ -98,12 +98,20 @@ class SlEventHandler
    */
   void addManipulations(const std::map<std::string, SlManipulation*>& manip);
   /*! The actual event handling, checking what SDL_Event was registered. Limited implimentation.
+    \retval 1 if event was quit.
+    \retval 0 otherwise.
    */
-  void handleEvent(const SDL_Event& event);
+  int handleEvent(const SDL_Event& event);
   /*! Parse configuration file entry.
     Pattern: key   what      spritename     sprite_destination      parameters
    */ 
   void parseEvent(std::ifstream& input);
+  /*! Check for events. 
+    \retval 1 if event was quit.
+    \retval 0 otherwise.
+   */
+  int pollEvent();
+
   
  private:
   /*! The string is the keyword for the event handling.
@@ -112,6 +120,10 @@ class SlEventHandler
   /*! Contains pointers to all SlSpriteManipulations and SlRenderManipulations
    */
   std::map<std::string, SlManipulation*> manipulations_;
+  /*! The event used for polling.
+   */
+  SDL_Event event_;
+
 };
 
 

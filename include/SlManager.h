@@ -70,7 +70,7 @@ class SlManager
     Calls SlTextureManager #tmngr_ .
    */
   SlTexture* findTexture(const std::string& name);
-  /*! Pass event on to SlEventHandler #eventHandler_ .
+  /*! Pass event on to SlEventHandler #eventHandler_ . Deprecated, just call run().
    */ 
   void handleEvent(const SDL_Event& event);
   /*! Inserts the sprite into the #renderQueue_ after the specified sprite.
@@ -107,6 +107,9 @@ class SlManager
   /*! Temporary solution until all rendering related stuff happens in SlManager methods.
    */
   SDL_Renderer* renderer(){return renderer_;}
+  /*! Run the event - render loop.
+   */
+  void run();
   /*! Returns the #screen_width_ of the window.
    */
   int screenWidth(){ return screen_width_; }
