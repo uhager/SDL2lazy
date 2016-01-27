@@ -101,6 +101,9 @@ class SlSprite
   /*! Checks if any destinations are defined, i.e. if #destinations_ has size > 0;
    */
   bool hasDestination();
+  /*! Checks whether the given coordinates are inside the specified destination for this sprite.
+   */
+  bool is_inside(const int& x, const int& y, const unsigned int& dest = 0);
   /*! Allows reading the name, but not changing it.
    */
   std::string name() const {return name_;}

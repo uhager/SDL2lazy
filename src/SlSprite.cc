@@ -171,6 +171,18 @@ SlSprite::hasDestination()
   
 
 
+bool
+SlSprite::is_inside(const int& x, const int& y, const unsigned int& dest)
+{
+  bool result = true;
+  SDL_Rect& destRect = destinations_.at(dest).destinationRect;
+  if ( x < destRect.x || x > destRect.x + destRect.w ||
+       y < destRect.y || y > destRect.y + destRect.h )
+    result = false;
+  return result;
+}
+
+
 
 void
 SlSprite::render(SDL_Renderer* renderer)

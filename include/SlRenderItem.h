@@ -52,6 +52,9 @@ class SlRenderItem
   /*! Sets values for all data members.
    */
   void initialize(const std::shared_ptr<SlSprite> pSprite, unsigned int dest);
+  /*! Checks if the provided coordinates are inside the destination of this render item.
+   */
+  bool is_inside(const int& x, const int& y);
   /*! The sprite that will be rendered.
    */
   std::shared_ptr<SlSprite> sprite_;

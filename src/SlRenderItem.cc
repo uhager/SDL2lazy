@@ -8,7 +8,10 @@
 #include <iostream>
 #include <string>
 
+#include "SDL2/SDL.h"
+
 #include "SlRenderItem.h"
+
 
 SlRenderItem::SlRenderItem()
 {
@@ -41,6 +44,17 @@ SlRenderItem::SlRenderItem(const SlRenderItem& toCopy)
 
 
 
+SlRenderItem&
+SlRenderItem::operator=(const SlRenderItem& rhs)
+{
+  sprite_ = rhs.sprite_;
+  destination_ = rhs.destination_;
+  renderMe_ = false ;
+  return *this;
+}
+
+
+
 void
 SlRenderItem::initialize(const std::shared_ptr<SlSprite> pSprite, unsigned int dest)
 {
@@ -51,12 +65,11 @@ SlRenderItem::initialize(const std::shared_ptr<SlSprite> pSprite, unsigned int d
 
 
 
-SlRenderItem&
-SlRenderItem::operator=(const SlRenderItem& rhs)
+bool
+SlRenderItem::is_inside(const int& x, const int& y)
 {
-  sprite_ = rhs.sprite_;
-  destination_ = rhs.destination_;
-  renderMe_ = false ;
-  return *this;
+  return sprite_->is_inside(x, y, destination_);
 }
+
+
 
