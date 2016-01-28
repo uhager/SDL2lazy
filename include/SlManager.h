@@ -72,7 +72,7 @@ class SlManager
   SlTexture* findTexture(const std::string& name);
   /*! Pass event on to SlEventHandler #eventHandler_ . Deprecated, just call run().
    */ 
-  void handleEvent(const SDL_Event& event);
+  inline void handleEvent(const SDL_Event& event);
   /*! Inserts the sprite into the #renderQueue_ after the specified sprite.
    */
   void insertInRenderQueueAfter(const std::string& toAdd, const std::string& afterThis, unsigned int destToAdd = 0, unsigned int destAfterThis = 0);
@@ -120,37 +120,37 @@ class SlManager
 
     Color is use when using color mod to render, and when creating a texture from a rectangle.
    */
-  void setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int destination = 0);
+  inline void setSpriteColor(const std::string& name, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int destination = 0);
   /*! Changes destinationRect for SlSprite name at position destination of SlSprite::destinations_.
 
     Sets where the sprite will be rendered.
   */
-  void setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination = 0);
+  inline void setSpriteDestinationOrigin(const std::string& name,  int x, int y, unsigned int destination = 0);
   /*! Sets SlRenderOptions for SlSprite name at position i of SlSprite::destinations_.
     \retval false if i > SlSprite::destinations_ size.
    */
-  void setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination = 0);
+  inline void setSpriteRenderOptions(const std::string& name, uint32_t renderOptions, unsigned int destination = 0);
   /*! Replaces the sprite 'toRemove' in the #renderQueue_ with sprite 'toAdd' .
     \retval false if sprite not found or destination out of bounds.
    */ 
-  bool swapInRenderQueue(const std::string& toAdd, const std::string& toRemove, unsigned int destToAdd = 0, unsigned int destToRemove = 0);
+  void swapInRenderQueue(const std::string& toAdd, const std::string& toRemove, unsigned int destToAdd = 0, unsigned int destToRemove = 0);
   /*! Replaces the SlRenderItem at 'position' in the #renderQueue_ with sprite 'toAdd'. \n
     Note that the first item is in position 0.
    */
-  bool swapInRenderQueueAtPosition(const std::string& toAdd, unsigned int destToAdd, unsigned int position );
+  void swapInRenderQueueAtPosition(const std::string& toAdd, unsigned int destToAdd, unsigned int position );
   /*! Replaces the last item in the #renderQueue_ with sprite toAdd.
    */
-  bool swapInRenderQueueLastPosition(const std::string& toAdd, unsigned int destToAdd = 0 );
+  void swapInRenderQueueLastPosition(const std::string& toAdd, unsigned int destToAdd = 0 );
   /*! Toggles rendering of an item in the #renderQueue_ on and off. 
     onOrOff is -1 to toggle, 0 to turn off, 1 to turn on.
    */
-  bool toggleRender(const std::string& toToggle, unsigned int destination = 0, int onOrOff = -1);
+  void toggleRender(const std::string& toToggle, unsigned int destination = 0, int onOrOff = -1);
   /*! Turns off rendering for the specified SlRenderItem in the #renderQueue_ .
    */
-  bool toggleRenderOff(const std::string& toToggle, unsigned int destination = 0);
+  inline void toggleRenderOff(const std::string& toToggle, unsigned int destination = 0);
   /*! Turns on rendering for the specified SlRenderItem in the #renderQueue_ .
    */
-  bool toggleRenderOn(const std::string& toToggle, unsigned int destination = 0);
+  inline void toggleRenderOn(const std::string& toToggle, unsigned int destination = 0);
 					      
  protected:
   /*! The main (and only) window.

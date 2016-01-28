@@ -562,96 +562,63 @@ SlManager::setSpriteRenderOptions(const std::string& name, uint32_t renderOption
 
 
 
-bool
+void
 SlManager::swapInRenderQueue(const std::string& toAdd, const std::string& toRemove, unsigned int destToAdd, unsigned int destToRemove)
 {
-  bool isSwapped = false;
   SlRenderItem* item = createRenderItem( toAdd, destToAdd );
-  if ( item == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toAdd  << std::endl;
-#endif
-    return isSwapped;
-  }
+  if ( item == nullptr )
+    throw std::runtime_error( "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " + toAdd );
 
   std::vector<SlRenderItem*>::iterator iter;
   for ( iter = renderQueue_.begin(); iter != renderQueue_.end() ; ++iter) {
     if ( ( (*iter)->sprite_->name() ==  toRemove ) && ( (*iter)->destination_ == destToRemove ) ) {
       delete (*iter);
       *iter = item;
-      isSwapped = true;
-      break;
+      return;
     }
   }
 
-  if ( !isSwapped ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::swapInRenderQueue] Couldn't find RenderItem " << toRemove << " to swap for"  << std::endl;
-#endif
-  }
-  return isSwapped;
+  if ( iter == renderQueue_.end() )
+    throw std::runtime_error( "[SlManager::swapInRenderQueue] Couldn't find RenderItem " + toRemove + " to swap for." );
 }
 
 
 
-bool
+void
 SlManager::swapInRenderQueueAtPosition(const std::string& toAdd, unsigned int destToAdd, unsigned int position )
 {
-  bool isSwapped = false;
-  if ( position >= renderQueue_.size() ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::swapInRenderQueue] Error: Position " << position << " is out of bounds. Render queue size is " << renderQueue_.size()  << std::endl;
-#endif
-    return isSwapped;
-  }
+  if ( position >= renderQueue_.size() ) 
+    throw std::invalid_argument( "[SlManager::swapInRenderQueue] Error: Position " + std::to_string(position) + " is out of bounds. Render queue size is " + std::to_string(renderQueue_.size()) );
   
   SlRenderItem* item = createRenderItem( toAdd, destToAdd );
-  if ( item == nullptr ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " << toAdd  << std::endl;
-#endif
-    return isSwapped;
-  }
+  if ( item == nullptr )
+    throw std::runtime_error( "[SlManager::swapInRenderQueue] Couldn't create SlRenderItem for " + toAdd );
 
   std::vector<SlRenderItem*>::iterator iter = renderQueue_.begin() + position;
   delete (*iter);
   renderQueue_.erase( iter );
   renderQueue_.insert( iter, item );
-  isSwapped = true;
-
-  if ( !isSwapped ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::swapInRenderQueueAtPosition] Couldn't swap in sprite " << toAdd << " at position " << position << "."  << std::endl;
-#endif
-  }
-  return isSwapped;
 }
 
 
 
-bool
+void
 SlManager::swapInRenderQueueLastPosition(const std::string& toAdd, unsigned int destToAdd )
 {
-  bool isSwapped = false;
   unsigned int position = renderQueue_.size() - 1 ;
-  isSwapped = swapInRenderQueueAtPosition( toAdd, destToAdd, position );
-  return isSwapped;
+  swapInRenderQueueAtPosition( toAdd, destToAdd, position );
 }
 
 
 
-bool
+void
 SlManager::toggleRender(const std::string& toToggle, unsigned int destination, int onOrOff )
 {
-  bool isToggled = false;
-  if ( (onOrOff < -1) || (onOrOff > 1) ){
-#ifdef DEBUG
-    std::cout << "[SlManager::toggleRender] Unknown onOrOff selection " << onOrOff << std::endl;
-#endif
-    return isToggled;
-  }    
+  if ( (onOrOff < -1) || (onOrOff > 1) )
+    throw std::invalid_argument( "[SlManager::toggleRender] Unknown onOrOff selection " + std::to_string( onOrOff ) );
+
   std::vector<SlRenderItem*>::iterator iter;
-  for ( iter = renderQueue_.begin(); ( ( iter != renderQueue_.end() ) && ( !isToggled ) ) ; ++iter) {
+  for ( iter = renderQueue_.begin();  iter != renderQueue_.end() ; ++iter) {
     if ( ( (*iter)->sprite_->name() ==  toToggle ) && ( (*iter)->destination_ == destination ) ) {
       switch (onOrOff){
       case -1:
@@ -664,30 +631,26 @@ SlManager::toggleRender(const std::string& toToggle, unsigned int destination, i
 	(*iter)->renderMe_ = true ;
 	break;
       }
-      isToggled = true;
+      return;
     }
   }
 
-  if ( !isToggled ) {
-#ifdef DEBUG
-    std::cout << "[SlManager::toggleRender] Couldn't toggle sprite " << toToggle << " - sprite not in render queue."  << std::endl;
-#endif
-  }
-  return isToggled;
+  if ( iter == renderQueue_.end() ) 
+    throw std::runtime_error( "[SlManager::toggleRender] Couldn't toggle sprite " + toToggle + " - sprite not in render queue." );
 }
 
 
 
-bool
+void
 SlManager::toggleRenderOff(const std::string& toToggle, unsigned int destination )
 {
-  return toggleRender(toToggle, destination, 0);
+  toggleRender(toToggle, destination, 0);
 }
 
 
 
-bool
+void
 SlManager::toggleRenderOn(const std::string& toToggle, unsigned int destination )
 {
-  return toggleRender(toToggle, destination, 1);
+  toggleRender(toToggle, destination, 1);
 }
