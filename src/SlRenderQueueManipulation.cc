@@ -15,6 +15,7 @@
 
 #include "SlSpriteManager.h"
 #include "SlRenderItem.h"
+#include "SlValueParser.h"
 
 #include "SlRenderQueueManipulation.h"
 
@@ -370,3 +371,120 @@ SlRMswapAt::manipulate(const std::string& name, unsigned int destination, const 
 }
 
 
+
+/*! \class SlRMactivate implementation
+ */
+SlRMactivate::SlRMactivate(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "activate";
+}
+
+
+
+void
+SlRMactivate::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  auto iter = renderQueue_->begin();
+  for ( ; iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  name ) && ( (*iter)->destination_ == destination ) ) {
+      (*iter)->isActive = true;
+      return;
+    }
+  }
+
+  if ( iter == renderQueue_->end() )
+    throw std::runtime_error( "[SlRMactivate::manipulate] Error: Couldn't find SlRenderItem for " + name ) ;
+}
+
+
+
+/*! \class SlRMactivateIfInside implementation
+ */
+SlRMactivateIfInside::SlRMactivateIfInside(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "activateIfInside";
+}
+
+
+
+void
+SlRMactivateIfInside::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+
+  auto iter = renderQueue_->begin();
+  for ( ; iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  name ) && ( (*iter)->destination_ == destination ) ) {
+      break;
+    }
+  }
+
+  if ( iter == renderQueue_->end() )
+    throw std::runtime_error( "[SlRMactivateIfInside::manipulate] Error: Couldn't find SlRenderItem for " + name ) ;
+
+  int coord[2];
+  valParser->stringsToNumbers<int>( parameters, coord, 2 );
+  if ( (*iter)->is_inside( coord[0], coord[1] )) 
+    (*iter)->isActive = true;
+}
+
+
+
+/*! \class SlRMdeactivate implementation
+ */
+SlRMdeactivate::SlRMdeactivate(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "deactivate";
+}
+
+
+
+void
+SlRMdeactivate::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  auto iter = renderQueue_->begin();
+  for ( ; iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  name ) && ( (*iter)->destination_ == destination ) ) {
+      (*iter)->isActive = false;
+      return;
+    }
+  }
+
+  if ( iter == renderQueue_->end() )
+    throw std::runtime_error( "[SlRMdeactivate::manipulate] Error: Couldn't find SlRenderItem for " + name ) ;
+}
+
+
+
+
+/*! \class SlRMdeactivateIfInside implementation
+ */
+SlRMdeactivateIfInside::SlRMdeactivateIfInside(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "deactivateIfInside";
+}
+
+
+
+void
+SlRMdeactivateIfInside::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+
+  auto iter = renderQueue_->begin();
+  for ( ; iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  name ) && ( (*iter)->destination_ == destination ) ) {
+      break;
+    }
+  }
+
+  if ( iter == renderQueue_->end() )
+    throw std::runtime_error( "[SlRMactivateIfInside::manipulate] Error: Couldn't find SlRenderItem for " + name ) ;
+
+  int coord[2];
+  valParser->stringsToNumbers<int>( parameters, coord, 2 );
+  if ( (*iter)->is_inside( coord[0], coord[1] ) )
+    (*iter)->isActive = false;
+}

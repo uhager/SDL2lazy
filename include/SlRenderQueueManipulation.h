@@ -148,5 +148,53 @@ class SlRMswapAt : public SlRenderQueueManipulation
 
 
 
+/*! \class SlRMactivate
+  Swap new render item in place of other item in render queue.
+ */
+class SlRMactivate : public SlRenderQueueManipulation
+{
+ public:
+  SlRMactivate(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMdeactivate
+  Swap new render item in place of other item in render queue.
+ */
+class SlRMdeactivate : public SlRenderQueueManipulation
+{
+ public:
+  SlRMdeactivate(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMactivateIfInside
+  Swap new render item in place of other item in render queue.
+ */
+class SlRMactivateIfInside : public SlRenderQueueManipulation
+{
+ public:
+  SlRMactivateIfInside(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMdeactivateIfInside
+  Swap new render item in place of other item in render queue.
+ */
+class SlRMdeactivateIfInside : public SlRenderQueueManipulation
+{
+ public:
+  SlRMdeactivateIfInside(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
 
 #endif   /* SLRENDERQUEUEMANIPULATION_H */

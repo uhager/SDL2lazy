@@ -55,13 +55,20 @@ class SlRenderItem
   /*! Checks if the provided coordinates are inside the destination of this render item.
    */
   bool is_inside(const int& x, const int& y);
+  /*! The name of the sprite.
+   */
+  std::string name() {return sprite_->name();}
+
   /*! The sprite that will be rendered.
    */
   std::shared_ptr<SlSprite> sprite_;
   /*! The position in SlSprite::destinations_ .
    */
   unsigned int destination_ ;
-  /*! Determines whether the item will be rendered. This avoids having to delete an item and create a new one each in the same position if a sprite is toggled on and off often.
+   /*! State of the render item, used to determine if it was previously grabbed by mouse.
+   */
+  bool isActive = false;
+ /*! Determines whether the item will be rendered. This avoids having to delete an item and create a new one each in the same position if a sprite is toggled on and off often.
    */
   bool renderMe_;
 };

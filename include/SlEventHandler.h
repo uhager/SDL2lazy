@@ -16,7 +16,7 @@
 
 
 class SlManipulation;
-
+class SlRenderItem;
 
 /*! \class SlEventAction
   This describes a single action that will be taken as a result of an input. 
@@ -26,6 +26,10 @@ class SlEventAction
  public:
   SlEventAction(){};
   ~SlEventAction();
+  /*! Calls the SlManipulation
+   */
+  void act(int mouse_x = -1, int mouse_y = -1);
+
   /*! The manipulation object that handles the action.
    */
   SlManipulation* manipulation = nullptr;
@@ -39,9 +43,6 @@ class SlEventAction
   /*! The parameters with which the SlManipulation is called.
    */
   std::vector<std::string> parameters;
-  /*! Calls the SlManipulation
-   */
-  void act();
 };
 
 
@@ -68,7 +69,7 @@ class SlEventObject
   void addAction(std::string name, int destination, SlManipulation* manip, std::vector<std::string> params );
   /*! Triggers the SlEventAction::act() for all objects in #actions_.
    */
-  void trigger();
+  void trigger(int mouse_x = -1, int mouse_y = -1);
  private:
   /*! The SlEventActions that will be performed when this object is triggered.
    */
@@ -97,6 +98,10 @@ class SlEventHandler
   /*! Adds the given SlManipulations to #manipulations_.
    */
   void addManipulations(const std::map<std::string, SlManipulation*>& manip);
+  /*! Returns specified SlManipulation from #manipulations_ based on whatToDo keyword.
+    \throws std::invalid_argument if not found.
+   */
+  SlManipulation* getManipulation(const std::string& whatToDo);
   /*! The actual event handling, checking what SDL_Event was registered. Limited implimentation.
     \retval 1 if event was quit.
     \retval 0 otherwise.

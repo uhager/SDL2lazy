@@ -10,8 +10,10 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 #include "SlManipulation.h"
+#include "SlRenderItem.h"
 
 #include "SlEventHandler.h"
 
@@ -19,7 +21,7 @@
 /*! \class SlEventAction
  */
 void
-SlEventAction::act()
+SlEventAction::act(int mouse_x, int mouse_y)
 {
   try {
     manipulation->manipulate( name, destination, parameters );
@@ -68,8 +70,9 @@ SlEventObject::addAction(std::string name, int destination, SlManipulation* mani
 
 
 
+
 void
-SlEventObject::trigger()
+SlEventObject::trigger(int mouse_x, int mouse_y)
 {
   for (auto action: actions_) {
     action.act();
@@ -100,11 +103,39 @@ SlEventHandler::addManipulations(const std::map<std::string, SlManipulation*>& m
 
 
 
+SlManipulation*
+SlEventHandler::getManipulation(const std::string& whatToDo)
+{
+  auto manip = manipulations_.find( whatToDo );
+  if ( manip == manipulations_.end() )
+    throw std::invalid_argument( "[SlEventHandler::getManipulation] Error: invalid manipulation " + whatToDo );
+  return manip->second;
+}
+
+
+
+
 int
 SlEventHandler::handleEvent(const SDL_Event& event)
 {
   std::string keyword = "";
+  int mouse_x = -1, mouse_y = -1;
+
   if (event.type == SDL_QUIT) return 1;
+  else if (event.type == SDL_MOUSEBUTTONDOWN)
+    {
+      SDL_GetMouseState( &mouse_x, &mouse_y );
+      keyword = "is_mouse-down";
+    }
+  else if (event.type == SDL_MOUSEBUTTONUP) {
+      SDL_GetMouseState( &mouse_x, &mouse_y );
+      keyword = "is_mouse-up";
+  }
+  else if (event.type == SDL_MOUSEMOTION) {
+    //    int relx, rely;
+    SDL_GetMouseState( &mouse_x, &mouse_y );
+    //   SDL_GetRelativeMouseState(&relx, &rely);
+  }
   else if (event.type == SDL_KEYDOWN)
     {
       switch(event.key.keysym.sym)
@@ -152,7 +183,7 @@ SlEventHandler::handleEvent(const SDL_Event& event)
 
   auto iter = eventActions_.find( keyword );
   if ( iter != eventActions_.end() )   //!< undefined input is ignored.
-    iter->second.trigger();
+    iter->second.trigger(mouse_x, mouse_y);
   
   return 0;
 }
@@ -190,13 +221,10 @@ SlEventHandler::parseEvent(std::ifstream& input)
 	}
 	if ( parameters.back().empty() )
 	  parameters.pop_back();
+	SlManipulation* manip = getManipulation( whatToDo );
 	std::string keyword = "is_" + key;
-	auto manip = manipulations_.find( whatToDo );
-	if ( manip == manipulations_.end() )
-	  throw std::invalid_argument( "[SlEventHandler::parseEvent] Error: invalid manipulation " + whatToDo ); 
-
 	SlEventObject& obj = eventActions_[keyword];
-	obj.addAction(spritename, destination, manip->second, parameters);
+	obj.addAction(spritename, destination, manip, parameters);
       }
       catch (const std::exception& expt ) {
 	std::cerr << "[SlEventHandler::parseEvent] Error: " << expt.what() << std::endl;
