@@ -45,7 +45,7 @@ SlTexture::~SlTexture()
 
 
 
-void
+SlTexture*
 SlTexture::createFromRectangle(SDL_Renderer* renderer, int width, int height, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha )
 {
   texture_ = SDL_CreateTexture(renderer, 0, SDL_TEXTUREACCESS_TARGET, width, height);
@@ -62,11 +62,13 @@ SlTexture::createFromRectangle(SDL_Renderer* renderer, int width, int height, ui
   SDL_SetRenderTarget(renderer, nullptr);
   SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0xFF );
   SDL_RenderClear(renderer);
+
+  return this;
 }
 
 
 
-void
+SlTexture*
 SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgroundTexture, const std::shared_ptr<SlSprite> foregroundSprite)
 {
   int width, height;
@@ -85,11 +87,13 @@ SlTexture::createFromSpriteOnTexture(SDL_Renderer *renderer, SlTexture* backgrou
   SDL_SetRenderTarget(renderer, nullptr);
   SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0xFF );
   SDL_RenderClear(renderer);
+
+  return this;
 }
 
 
 
-void
+SlTexture*
 SlTexture::createFromText(SDL_Renderer *renderer, const std::shared_ptr<SlFont> font, const std::string& message, int width)
 {
   SDL_Surface *surf = TTF_RenderText_Blended_Wrapped(font->font(), message.c_str(), font->sdlcolor(), width);
@@ -100,9 +104,13 @@ SlTexture::createFromText(SDL_Renderer *renderer, const std::shared_ptr<SlFont> 
   SDL_FreeSurface(surf);
   if (texture_ == nullptr) 
     throw std::runtime_error("Failed to create texture " + std::string( SDL_GetError() ));
+
+  return this;
 }
 
-void
+
+
+SlTexture*
 SlTexture::createFromTile(SDL_Renderer *renderer, const std::shared_ptr<SlSprite> tile, int width, int height)
 {
 
@@ -137,28 +145,25 @@ SlTexture::createFromTile(SDL_Renderer *renderer, const std::shared_ptr<SlSprite
   
   SDL_SetRenderTarget(renderer, nullptr);
   SDL_RenderClear(renderer);
-}
 
-
-
-bool
-SlTexture::dimensions(int& width, int& height)
-{
-  bool hasDimensions = true;
-  if (texture_ == nullptr) {
-#ifdef DEBUG
-    std::cerr << "[SlTexture::dimensions] no texture for " << name_ << std::endl;
-#endif
-    hasDimensions = false;
-    return hasDimensions;
-  }
-  SDL_QueryTexture(texture_, nullptr, nullptr, &width, &height);
-  return hasDimensions;
+  return this;
 }
 
 
 
 void
+SlTexture::dimensions(int& width, int& height)
+{
+
+  if (texture_ == nullptr) 
+    throw std::runtime_error( "[SlTexture::dimensions] no texture for " + name_ );
+  SDL_QueryTexture(texture_, nullptr, nullptr, &width, &height);
+
+}
+
+
+
+SlTexture*
 SlTexture::loadFromFile(SDL_Renderer* renderer, const std::string& fileName)
 {
   if (texture_)
@@ -168,4 +173,6 @@ SlTexture::loadFromFile(SDL_Renderer* renderer, const std::string& fileName)
   
   if( texture_ == nullptr )
     throw std::runtime_error("Unable to create texture from " + fileName + " " + SDL_GetError() );
+
+  return this;
 }

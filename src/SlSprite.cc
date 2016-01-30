@@ -66,18 +66,20 @@ SlSprite::~SlSprite()
 
 
 
-void
+SlSprite*
 SlSprite::addDefaultDestination()
 {
   SlRenderSettings defSet;
   defSet.destinationRect = sourceRect_;
   defSet.destinationRect.x = defSet.destinationRect.y = 0;
   destinations_.push_back(defSet);
+
+  return this;
 }
 
 
 
-void
+SlSprite*
 SlSprite::addDestination(int x, int y, uint32_t renderOptions)
 {
   SlRenderSettings toAdd;
@@ -85,11 +87,13 @@ SlSprite::addDestination(int x, int y, uint32_t renderOptions)
   toAdd.destinationRect.x = x;
   toAdd.destinationRect.y = y;
   destinations_.push_back(toAdd);
+
+  return this;
 }
 
 
 
-void 
+SlSprite*
 SlSprite::centerAt( unsigned int x, unsigned int y, unsigned int destination)
 {
   if ( destination >= destinations_.size() )
@@ -98,24 +102,24 @@ SlSprite::centerAt( unsigned int x, unsigned int y, unsigned int destination)
   SDL_Rect& dest = destinations_.at(destination).destinationRect ;
   dest.x = x - dest.w / 2 ;
   dest.y = y - dest.h / 2 ;
+
+  return this;
 }
 
 
 
-void
+SlSprite*
 SlSprite::centerInSprite(const std::shared_ptr<SlSprite> otherSprite, unsigned int destinationThis, unsigned int destinationOther)
 {
-  if ( destinationThis >= destinations_.size() || destinationOther >= otherSprite->destinations_.size() ) {
-#ifdef DEBUG
-    std::cout << "[SlSprite::centerInSprite] Couldn't center " << name_ << " in " << otherSprite->name_ << " destination out of bounds." << std::endl;
-#endif
-    return;
-  }
+  if ( destinationThis >= destinations_.size() || destinationOther >= otherSprite->destinations_.size() ) 
+    throw std::invalid_argument( "[SlSprite::centerInSprite] Couldn't center " + name_ + " in " + otherSprite->name_ + ": destination out of bounds." );
     
   SDL_Rect target = otherSprite->destinations_.at(destinationOther).destinationRect;
   SDL_Rect& dest = destinations_.at(destinationThis).destinationRect ;
   dest.x = target.x + ( target.w - dest.w ) / 2 ;
   dest.y = target.y + ( target.h - dest.h ) / 2 ;
+
+  return this;
 }
 
 
