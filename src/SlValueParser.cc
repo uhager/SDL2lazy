@@ -70,9 +70,9 @@ SlValueParser::assembleFormula(const std::vector<std::string>& stringValues, uns
   auto iter = std::remove_if(formula.begin(), formula.end(), ::isspace);
   formula.erase( iter, formula.end() );
 
-#ifdef DEBUG
-  std::cout << "[SlValueParser::assembleFormula] formula \"" << formula << "\"" << std::endl;
-#endif
+// #ifdef DEBUG
+//   std::cout << "[SlValueParser::assembleFormula] formula \"" << formula << "\"" << std::endl;
+// #endif
   return formula;
 }
 
@@ -82,9 +82,15 @@ double
 SlValueParser::calculateFormula(std::queue<SlFormulaItem>& outputQueue)
 {
   std::stack<SlFormulaItem> tempStorage; 
+#ifdef DEBUG
+  std::cout << "[SlValueParser::calculateFormula] ";
+#endif //DEBUG
 
   for ( ; !outputQueue.empty() ; outputQueue.pop() ) {
     SlFormulaItem item = outputQueue.front();
+#ifdef DEBUG
+    std::cout << item.print() << " " ;
+#endif //DEBUG
     if ( item.what == 'n' ) {   //!< number
       tempStorage.push(item);
     }
@@ -118,7 +124,10 @@ SlValueParser::calculateFormula(std::queue<SlFormulaItem>& outputQueue)
 
   if ( tempStorage.size() != 1 )
     throw std::runtime_error("Bad formula.");
-
+  
+#ifdef DEBUG
+  std::cout << " = " << tempStorage.top().data << std::endl;
+#endif //DEBUG
   return tempStorage.top().data;
 }
 
@@ -216,7 +225,7 @@ SlValueParser::shuntFormula(std::string& formula)
 	if ( currentItem.what == '-' ) isNegative = true;
 	break;
       }
-      while ( !operatorStack.empty() && operatorStack.top().precedence > currentItem.precedence ) {
+      while ( !operatorStack.empty() && operatorStack.top().precedence >= currentItem.precedence ) {
 	outputQueue.push( operatorStack.top() );
 	operatorStack.pop();
       }
