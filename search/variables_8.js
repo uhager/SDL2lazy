@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['renderer_5f',['renderer_',['../classSlManager.html#a3d3207dd3bef3e0e62c4dafee9264d25',1,'SlManager']]],
-  ['rendermanip_5f',['renderManip_',['../classSlManager.html#ad853bf60aa8109b3453da74e98891fe6',1,'SlManager']]],
-  ['renderme_5f',['renderMe_',['../classSlRenderItem.html#a9bc18ee1f238cc178f7929852ac9b2dc',1,'SlRenderItem']]],
-  ['renderoptions',['renderOptions',['../structSlRenderSettings.html#a7d2848b536f71f4ddc1cb950a3fc924d',1,'SlRenderSettings']]],
-  ['renderqueue_5f',['renderQueue_',['../classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82',1,'SlManager::renderQueue_()'],['../classSlRenderQueueManipulation.html#a3727034caee485f9b36be4a37af76a98',1,'SlRenderQueueManipulation::renderQueue_()']]]
+  ['name',['name',['../classSlEventAction.html#aceed1145626dcff9838ce609dae0a2f7',1,'SlEventAction']]],
+  ['name_5f',['name_',['../classSlFont.html#af07ff8c6b7b7cf79c1a940513d39bb0e',1,'SlFont::name_()'],['../classSlManipulation.html#a8c1949708926fbc829b220bfdee4a5d2',1,'SlManipulation::name_()'],['../classSlSprite.html#a390f5e40313754666ca0749f63ff38db',1,'SlSprite::name_()'],['../classSlTexture.html#a0c17a906576f0aa5c74a6d42840f7520',1,'SlTexture::name_()']]],
+  ['need_5fmouse_5fcoordinates',['need_mouse_coordinates',['../classSlEventObject.html#ace430c0274637e20e652095e2cdc08b6',1,'SlEventObject']]]
 ];

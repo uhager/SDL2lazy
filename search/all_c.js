@@ -10,6 +10,7 @@ var searchData=
   ['parsesprite',['parseSprite',['../classSlSpriteManager.html#a4db809c7dcadc1f712f6e02dcaeefeed',1,'SlSpriteManager']]],
   ['parsespritemanipulation',['parseSpriteManipulation',['../classSlSpriteManager.html#a71f5066173bd77e0742ddced1c07eb23',1,'SlSpriteManager']]],
   ['parsetexture',['parseTexture',['../classSlTextureManager.html#a6d0d5951ac6ee83f04dc00e3a1f94bcf',1,'SlTextureManager']]],
+  ['pollevent',['pollEvent',['../classSlEventHandler.html#a2e3e1ee382ebc9493dca985c79174744',1,'SlEventHandler']]],
   ['precedence',['precedence',['../classSlFormulaItem.html#a9d78475623c0121c134219f6c869f509',1,'SlFormulaItem']]],
   ['print',['print',['../classSlFormulaItem.html#a3c73860a34c71e4dd41107203847d535',1,'SlFormulaItem']]]
 ];

@@ -84,6 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classSlEventObject-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -105,13 +106,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2ea7568c450b5912dd80aa84bdec6dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ef9c186e4d49009651d308f12f538e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventObject.html#a4ef9c186e4d49009651d308f12f538e0">addAction</a> (std::string name, int destination, <a class="el" href="classSlManipulation.html">SlManipulation</a> *manip, std::vector&lt; std::string &gt; params)</td></tr>
 <tr class="separator:a4ef9c186e4d49009651d308f12f538e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18694e6b1e1a3e967d9b26c8474896e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventObject.html#a18694e6b1e1a3e967d9b26c8474896e1">trigger</a> ()</td></tr>
-<tr class="separator:a18694e6b1e1a3e967d9b26c8474896e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fe27188613d13538d31bf6c24d0b3f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventObject.html#a4fe27188613d13538d31bf6c24d0b3f6">trigger</a> (int mouse_x=-1, int mouse_y=-1)</td></tr>
+<tr class="separator:a4fe27188613d13538d31bf6c24d0b3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ace430c0274637e20e652095e2cdc08b6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventObject.html#ace430c0274637e20e652095e2cdc08b6">need_mouse_coordinates</a> = false</td></tr>
+<tr class="separator:ace430c0274637e20e652095e2cdc08b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:acd762a2e81206cd5c98e2514ce31f5ff"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classSlEventAction.html">SlEventAction</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventObject.html#acd762a2e81206cd5c98e2514ce31f5ff">actions_</a></td></tr>
 <tr class="separator:acd762a2e81206cd5c98e2514ce31f5ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a272a473d29e68cb04abe792638806b8e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventObject.html#a272a473d29e68cb04abe792638806b8e">last_mouse_</a> [2] = {-1,-1}</td></tr>
+<tr class="separator:a272a473d29e68cb04abe792638806b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Object associated with a specific user input. This object's SlEventActions will be performed when the corresponding input event is received. </p>
@@ -238,19 +246,30 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a18694e6b1e1a3e967d9b26c8474896e1"></a>
+<a class="anchor" id="a4fe27188613d13538d31bf6c24d0b3f6"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void SlEventObject::trigger </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mouse_x</em> = <code>-1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mouse_y</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Triggers the <a class="el" href="classSlEventAction.html#a67550dfca3c7c0947573a1116c400cd3">SlEventAction::act()</a> for all objects in <a class="el" href="classSlEventObject.html#acd762a2e81206cd5c98e2514ce31f5ff">actions_</a>. </p>
+<p>Triggers the <a class="el" href="classSlEventAction.html#a10297ac0a956b6556c7955700a587439">SlEventAction::act()</a> for all objects in <a class="el" href="classSlEventObject.html#acd762a2e81206cd5c98e2514ce31f5ff">actions_</a>. </p>
 
 </div>
 </div>
@@ -273,6 +292,40 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>The SlEventActions that will be performed when this object is triggered. </p>
+
+</div>
+</div>
+<a class="anchor" id="a272a473d29e68cb04abe792638806b8e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SlEventObject::last_mouse_[2] = {-1,-1}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Store previous mouse coordinates for relative movement. </p>
+
+</div>
+</div>
+<a class="anchor" id="ace430c0274637e20e652095e2cdc08b6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlEventObject::need_mouse_coordinates = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Determines if this object required mouse coordinates. If true, coordinates and delta-coordinates will be added to parameters. </p>
 
 </div>
 </div>

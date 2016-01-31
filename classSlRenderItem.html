@@ -109,6 +109,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af6c508eb7108a11d2847939ef516a302"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e5f4c57794cf557fd61d9e3b1296b14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlRenderItem.html#a8e5f4c57794cf557fd61d9e3b1296b14">initialize</a> (const std::shared_ptr&lt; <a class="el" href="classSlSprite.html">SlSprite</a> &gt; pSprite, unsigned int dest)</td></tr>
 <tr class="separator:a8e5f4c57794cf557fd61d9e3b1296b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a567e17af42f93d3c5becf1fa3552d627"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlRenderItem.html#a567e17af42f93d3c5becf1fa3552d627">is_inside</a> (const int &amp;x, const int &amp;y)</td></tr>
+<tr class="separator:a567e17af42f93d3c5becf1fa3552d627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad846a1be11af7f38109badc3bbd85b75"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlRenderItem.html#ad846a1be11af7f38109badc3bbd85b75">name</a> ()</td></tr>
+<tr class="separator:ad846a1be11af7f38109badc3bbd85b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -116,6 +120,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ace66481218d99066f1b0eb80f0924d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94fb50c022d1f511dfdeeb1d5dab759c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlRenderItem.html#a94fb50c022d1f511dfdeeb1d5dab759c">destination_</a></td></tr>
 <tr class="separator:a94fb50c022d1f511dfdeeb1d5dab759c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab11be78901c31ba1a4856093f446bf84"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlRenderItem.html#ab11be78901c31ba1a4856093f446bf84">isActive</a> = false</td></tr>
+<tr class="separator:ab11be78901c31ba1a4856093f446bf84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bc18ee1f238cc178f7929852ac9b2dc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlRenderItem.html#a9bc18ee1f238cc178f7929852ac9b2dc">renderMe_</a></td></tr>
 <tr class="separator:a9bc18ee1f238cc178f7929852ac9b2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -211,6 +217,57 @@ The pointer to the sprite is added to avoid having ro repeatedly find the sprite
 
 </div>
 </div>
+<a class="anchor" id="a567e17af42f93d3c5becf1fa3552d627"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlRenderItem::is_inside </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks if the provided coordinates are inside the destination of this render item. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad846a1be11af7f38109badc3bbd85b75"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string SlRenderItem::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The name of the sprite. </p>
+
+</div>
+</div>
 <a class="anchor" id="af6c508eb7108a11d2847939ef516a302"></a>
 <div class="memitem">
 <div class="memproto">
@@ -289,6 +346,19 @@ The pointer to the sprite is added to avoid having ro repeatedly find the sprite
       </table>
 </div><div class="memdoc">
 <p>The position in <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">SlSprite::destinations_</a> . </p>
+
+</div>
+</div>
+<a class="anchor" id="ab11be78901c31ba1a4856093f446bf84"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SlRenderItem::isActive = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>State of the render item, used to determine if it was previously grabbed by mouse. </p>
 
 </div>
 </div>

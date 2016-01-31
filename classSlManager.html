@@ -146,6 +146,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8fef0e1dc5e3cca1a1cab840bafc73fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99b4448836d16c9a84b4afe39fb2d3db"><td class="memItemLeft" align="right" valign="top">SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a99b4448836d16c9a84b4afe39fb2d3db">renderer</a> ()</td></tr>
 <tr class="separator:a99b4448836d16c9a84b4afe39fb2d3db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18c9d42efade442a8c399e33cddf3bfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a18c9d42efade442a8c399e33cddf3bfc">run</a> ()</td></tr>
+<tr class="separator:a18c9d42efade442a8c399e33cddf3bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b88c2e3b603eca77ce0f04806a3a9f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a2b88c2e3b603eca77ce0f04806a3a9f8">screenWidth</a> ()</td></tr>
 <tr class="separator:a2b88c2e3b603eca77ce0f04806a3a9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee282398e2131ab14f7a51c46fccd5ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aee282398e2131ab14f7a51c46fccd5ca">screenHeight</a> ()</td></tr>
@@ -156,18 +158,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3df9f725e2ef70af5d32eaf839410c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61200de2717ea528cde81b47cc1eb053"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a61200de2717ea528cde81b47cc1eb053">setSpriteRenderOptions</a> (const std::string &amp;name, uint32_t renderOptions, unsigned int destination=0)</td></tr>
 <tr class="separator:a61200de2717ea528cde81b47cc1eb053"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f51f554a4690e3c56cc2ffa0dd5b160"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a9f51f554a4690e3c56cc2ffa0dd5b160">swapInRenderQueue</a> (const std::string &amp;toAdd, const std::string &amp;toRemove, unsigned int destToAdd=0, unsigned int destToRemove=0)</td></tr>
-<tr class="separator:a9f51f554a4690e3c56cc2ffa0dd5b160"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ff48baa2fa7589de9b312dbcb7008a7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a7ff48baa2fa7589de9b312dbcb7008a7">swapInRenderQueueAtPosition</a> (const std::string &amp;toAdd, unsigned int destToAdd, unsigned int position)</td></tr>
-<tr class="separator:a7ff48baa2fa7589de9b312dbcb7008a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47dbaea29190f05578631a8f34854e5b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a47dbaea29190f05578631a8f34854e5b">swapInRenderQueueLastPosition</a> (const std::string &amp;toAdd, unsigned int destToAdd=0)</td></tr>
-<tr class="separator:a47dbaea29190f05578631a8f34854e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd3b3f5515f3f48798b8c1b6158e2bd2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#abd3b3f5515f3f48798b8c1b6158e2bd2">toggleRender</a> (const std::string &amp;toToggle, unsigned int destination=0, int onOrOff=-1)</td></tr>
-<tr class="separator:abd3b3f5515f3f48798b8c1b6158e2bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a8d763438dcbab98b03cf9e8a255056"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a7a8d763438dcbab98b03cf9e8a255056">toggleRenderOff</a> (const std::string &amp;toToggle, unsigned int destination=0)</td></tr>
-<tr class="separator:a7a8d763438dcbab98b03cf9e8a255056"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2939fc8bdb095367d47a04ff3cadb63c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a2939fc8bdb095367d47a04ff3cadb63c">toggleRenderOn</a> (const std::string &amp;toToggle, unsigned int destination=0)</td></tr>
-<tr class="separator:a2939fc8bdb095367d47a04ff3cadb63c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc43505b243c4907e06594751f79f7f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#abc43505b243c4907e06594751f79f7f5">swapInRenderQueue</a> (const std::string &amp;toAdd, const std::string &amp;toRemove, unsigned int destToAdd=0, unsigned int destToRemove=0)</td></tr>
+<tr class="separator:abc43505b243c4907e06594751f79f7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a219a18ceeb377b734def2b79ce36d8dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a219a18ceeb377b734def2b79ce36d8dd">swapInRenderQueueAtPosition</a> (const std::string &amp;toAdd, unsigned int destToAdd, unsigned int position)</td></tr>
+<tr class="separator:a219a18ceeb377b734def2b79ce36d8dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b30ed3af664f91e3b5982f850d1aec3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a5b30ed3af664f91e3b5982f850d1aec3">swapInRenderQueueLastPosition</a> (const std::string &amp;toAdd, unsigned int destToAdd=0)</td></tr>
+<tr class="separator:a5b30ed3af664f91e3b5982f850d1aec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a055eb5c63c1274056cf8f403963bcfe8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a055eb5c63c1274056cf8f403963bcfe8">toggleRender</a> (const std::string &amp;toToggle, unsigned int destination=0, int onOrOff=-1)</td></tr>
+<tr class="separator:a055eb5c63c1274056cf8f403963bcfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf0106e7ecea53bfcf0d9a28f4f5392f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#aaf0106e7ecea53bfcf0d9a28f4f5392f">toggleRenderOff</a> (const std::string &amp;toToggle, unsigned int destination=0)</td></tr>
+<tr class="separator:aaf0106e7ecea53bfcf0d9a28f4f5392f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be7e3ccab66730cec67cbd968615c6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlManager.html#a1be7e3ccab66730cec67cbd968615c6b">toggleRenderOn</a> (const std::string &amp;toToggle, unsigned int destination=0)</td></tr>
+<tr class="separator:a1be7e3ccab66730cec67cbd968615c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -459,6 +461,9 @@ Private Attributes</h2></td></tr>
 <a class="anchor" id="a7085a1004a418c10ff81ff14b2221368"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void SlManager::handleEvent </td>
@@ -468,8 +473,13 @@ Private Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p>Pass event on to <a class="el" href="classSlEventHandler.html">SlEventHandler</a> <a class="el" href="classSlManager.html#af5f6fa7d704fef9c24674d042b00ab5b">eventHandler_</a> . </p>
+<p>Pass event on to <a class="el" href="classSlEventHandler.html">SlEventHandler</a> <a class="el" href="classSlManager.html#af5f6fa7d704fef9c24674d042b00ab5b">eventHandler_</a> . Deprecated, just call <a class="el" href="classSlManager.html#a18c9d42efade442a8c399e33cddf3bfc">run()</a>. </p>
 
 </div>
 </div>
@@ -912,6 +922,22 @@ Default file name: "SlTextures.ini". </p>
 
 </div>
 </div>
+<a class="anchor" id="a18c9d42efade442a8c399e33cddf3bfc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlManager::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Run the event - render loop. </p>
+
+</div>
+</div>
 <a class="anchor" id="aee282398e2131ab14f7a51c46fccd5ca"></a>
 <div class="memitem">
 <div class="memproto">
@@ -963,6 +989,9 @@ Default file name: "SlTextures.ini". </p>
 <a class="anchor" id="ab908dd90cd6a64ad73ae14655fc83e02"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void SlManager::setSpriteColor </td>
@@ -1006,6 +1035,11 @@ Default file name: "SlTextures.ini". </p>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Sets color for <a class="el" href="classSlSprite.html">SlSprite</a> name at position i of <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">SlSprite::destinations_</a>.</p>
 <p>Color is use when using color mod to render, and when creating a texture from a rectangle. </p>
@@ -1015,6 +1049,9 @@ Default file name: "SlTextures.ini". </p>
 <a class="anchor" id="a3df9f725e2ef70af5d32eaf839410c89"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void SlManager::setSpriteDestinationOrigin </td>
@@ -1046,6 +1083,11 @@ Default file name: "SlTextures.ini". </p>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Changes destinationRect for <a class="el" href="classSlSprite.html">SlSprite</a> name at position destination of <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">SlSprite::destinations_</a>.</p>
 <p>Sets where the sprite will be rendered. </p>
@@ -1055,6 +1097,9 @@ Default file name: "SlTextures.ini". </p>
 <a class="anchor" id="a61200de2717ea528cde81b47cc1eb053"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void SlManager::setSpriteRenderOptions </td>
@@ -1080,6 +1125,11 @@ Default file name: "SlTextures.ini". </p>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Sets SlRenderOptions for <a class="el" href="classSlSprite.html">SlSprite</a> name at position i of <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">SlSprite::destinations_</a>. </p><dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
@@ -1090,12 +1140,12 @@ Default file name: "SlTextures.ini". </p>
 
 </div>
 </div>
-<a class="anchor" id="a9f51f554a4690e3c56cc2ffa0dd5b160"></a>
+<a class="anchor" id="abc43505b243c4907e06594751f79f7f5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool SlManager::swapInRenderQueue </td>
+          <td class="memname">void SlManager::swapInRenderQueue </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>toAdd</em>, </td>
@@ -1134,12 +1184,12 @@ Default file name: "SlTextures.ini". </p>
 
 </div>
 </div>
-<a class="anchor" id="a7ff48baa2fa7589de9b312dbcb7008a7"></a>
+<a class="anchor" id="a219a18ceeb377b734def2b79ce36d8dd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool SlManager::swapInRenderQueueAtPosition </td>
+          <td class="memname">void SlManager::swapInRenderQueueAtPosition </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>toAdd</em>, </td>
@@ -1168,12 +1218,12 @@ Note that the first item is in position 0. </p>
 
 </div>
 </div>
-<a class="anchor" id="a47dbaea29190f05578631a8f34854e5b"></a>
+<a class="anchor" id="a5b30ed3af664f91e3b5982f850d1aec3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool SlManager::swapInRenderQueueLastPosition </td>
+          <td class="memname">void SlManager::swapInRenderQueueLastPosition </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>toAdd</em>, </td>
@@ -1195,12 +1245,12 @@ Note that the first item is in position 0. </p>
 
 </div>
 </div>
-<a class="anchor" id="abd3b3f5515f3f48798b8c1b6158e2bd2"></a>
+<a class="anchor" id="a055eb5c63c1274056cf8f403963bcfe8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool SlManager::toggleRender </td>
+          <td class="memname">void SlManager::toggleRender </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>toToggle</em>, </td>
@@ -1228,12 +1278,15 @@ Note that the first item is in position 0. </p>
 
 </div>
 </div>
-<a class="anchor" id="a7a8d763438dcbab98b03cf9e8a255056"></a>
+<a class="anchor" id="aaf0106e7ecea53bfcf0d9a28f4f5392f"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool SlManager::toggleRenderOff </td>
+          <td class="memname">void SlManager::toggleRenderOff </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>toToggle</em>, </td>
@@ -1250,17 +1303,25 @@ Note that the first item is in position 0. </p>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Turns off rendering for the specified <a class="el" href="classSlRenderItem.html">SlRenderItem</a> in the <a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a> . </p>
 
 </div>
 </div>
-<a class="anchor" id="a2939fc8bdb095367d47a04ff3cadb63c"></a>
+<a class="anchor" id="a1be7e3ccab66730cec67cbd968615c6b"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool SlManager::toggleRenderOn </td>
+          <td class="memname">void SlManager::toggleRenderOn </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>toToggle</em>, </td>
@@ -1277,6 +1338,11 @@ Note that the first item is in position 0. </p>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p>Turns on rendering for the specified <a class="el" href="classSlRenderItem.html">SlRenderItem</a> in the <a class="el" href="classSlManager.html#ae6bb06d56cfff1f6a0a3432f42563f82">renderQueue_</a> . </p>
 

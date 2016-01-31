@@ -103,12 +103,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac5b90348484dafafb8d418c319a87478"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3365bdedcc82fcb4242e6deb721b0e50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlEventHandler.html">SlEventHandler</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#a3365bdedcc82fcb4242e6deb721b0e50">operator=</a> (const <a class="el" href="classSlEventHandler.html">SlEventHandler</a> &amp;)=delete</td></tr>
 <tr class="separator:a3365bdedcc82fcb4242e6deb721b0e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6aeab1675272a427196569564643cf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#ae6aeab1675272a427196569564643cf9">addAction</a> (const std::string &amp;key, const std::string &amp;whatToDo, const std::string &amp;spritename, int destination, std::vector&lt; std::string &gt; parameters)</td></tr>
+<tr class="separator:ae6aeab1675272a427196569564643cf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a897a92d83bf6476e53b6e293c1b1bc9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#a897a92d83bf6476e53b6e293c1b1bc9f">addManipulations</a> (const std::map&lt; std::string, <a class="el" href="classSlManipulation.html">SlManipulation</a> * &gt; &amp;manip)</td></tr>
 <tr class="separator:a897a92d83bf6476e53b6e293c1b1bc9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71d0c91b60e1e3d54527ee007ecaed7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#a71d0c91b60e1e3d54527ee007ecaed7c">handleEvent</a> (const SDL_Event &amp;event)</td></tr>
-<tr class="separator:a71d0c91b60e1e3d54527ee007ecaed7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a1e64e5072b9cf1fb4fe62d6de0f69d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSlManipulation.html">SlManipulation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#a4a1e64e5072b9cf1fb4fe62d6de0f69d">getManipulation</a> (const std::string &amp;whatToDo)</td></tr>
+<tr class="separator:a4a1e64e5072b9cf1fb4fe62d6de0f69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affa6dfbe6bf3d3279b78239e4c6c29cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#affa6dfbe6bf3d3279b78239e4c6c29cd">handleEvent</a> (const SDL_Event &amp;event)</td></tr>
+<tr class="separator:affa6dfbe6bf3d3279b78239e4c6c29cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33cab4c5ba6195f76c883fe4bc8d3875"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#a33cab4c5ba6195f76c883fe4bc8d3875">parseEvent</a> (std::ifstream &amp;input)</td></tr>
 <tr class="separator:a33cab4c5ba6195f76c883fe4bc8d3875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e3e1ee382ebc9493dca985c79174744"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#a2e3e1ee382ebc9493dca985c79174744">pollEvent</a> ()</td></tr>
+<tr class="separator:a2e3e1ee382ebc9493dca985c79174744"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -116,6 +122,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a830cdb63ccf96a2796b2d50bd7556510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6a163387971958f669b21645173b284"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="classSlManipulation.html">SlManipulation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#ac6a163387971958f669b21645173b284">manipulations_</a></td></tr>
 <tr class="separator:ac6a163387971958f669b21645173b284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a51a81ec23b9f620f3316c389f3c4fd"><td class="memItemLeft" align="right" valign="top">SDL_Event&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlEventHandler.html#a2a51a81ec23b9f620f3316c389f3c4fd">event_</a></td></tr>
+<tr class="separator:a2a51a81ec23b9f620f3316c389f3c4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Takes a SDL_Event and calls the assigned <a class="el" href="classSlEventObject.html">SlEventObject</a>. </p>
@@ -178,6 +186,51 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ae6aeab1675272a427196569564643cf9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlEventHandler::addAction </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>whatToDo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>spritename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>destination</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::string &gt;&#160;</td>
+          <td class="paramname"><em>parameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates the <a class="el" href="classSlEventAction.html">SlEventAction</a> based on the parsed input. Creates <a class="el" href="classSlEventObject.html">SlEventObject</a> if it doesn't exist. </p>
+
+</div>
+</div>
 <a class="anchor" id="a897a92d83bf6476e53b6e293c1b1bc9f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -195,12 +248,34 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a71d0c91b60e1e3d54527ee007ecaed7c"></a>
+<a class="anchor" id="a4a1e64e5072b9cf1fb4fe62d6de0f69d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SlEventHandler::handleEvent </td>
+          <td class="memname"><a class="el" href="classSlManipulation.html">SlManipulation</a> * SlEventHandler::getManipulation </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>whatToDo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns specified <a class="el" href="classSlManipulation.html">SlManipulation</a> from <a class="el" href="classSlEventHandler.html#ac6a163387971958f669b21645173b284">manipulations_</a> based on whatToDo keyword. </p><dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>if not found. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="affa6dfbe6bf3d3279b78239e4c6c29cd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SlEventHandler::handleEvent </td>
           <td>(</td>
           <td class="paramtype">const SDL_Event &amp;&#160;</td>
           <td class="paramname"><em>event</em></td><td>)</td>
@@ -208,7 +283,13 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The actual event handling, checking what SDL_Event was registered. Limited implimentation. </p>
+<p>The actual event handling, checking what SDL_Event was registered. Limited implimentation. </p><dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>if event was quit. </td></tr>
+    <tr><td class="paramname">0</td><td>otherwise. </td></tr>
+  </table>
+  </dd>
+</dl>
 <p>&lt; undefined input is ignored. </p>
 
 </div>
@@ -255,7 +336,51 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a2e3e1ee382ebc9493dca985c79174744"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SlEventHandler::pollEvent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check for events. </p><dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">1</td><td>if event was quit. </td></tr>
+    <tr><td class="paramname">0</td><td>otherwise. </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>&lt; 0 means don't quit, 1 means quit </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a2a51a81ec23b9f620f3316c389f3c4fd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Event SlEventHandler::event_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The event used for polling. </p>
+
+</div>
+</div>
 <a class="anchor" id="a830cdb63ccf96a2796b2d50bd7556510"></a>
 <div class="memitem">
 <div class="memproto">

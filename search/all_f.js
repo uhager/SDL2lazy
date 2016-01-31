@@ -5,8 +5,8 @@ var searchData=
   ['texturename',['textureName',['../classSlSprite.html#aae684573402503cc870d8c359ae7f67b',1,'SlSprite']]],
   ['textures_5f',['textures_',['../classSlTextureManager.html#a29b251d227346d2730179db2f1e71ef6',1,'SlTextureManager']]],
   ['tmngr_5f',['tmngr_',['../classSlManager.html#af54efde697703042a41dedad123b0cde',1,'SlManager']]],
-  ['togglerender',['toggleRender',['../classSlManager.html#abd3b3f5515f3f48798b8c1b6158e2bd2',1,'SlManager']]],
-  ['togglerenderoff',['toggleRenderOff',['../classSlManager.html#a7a8d763438dcbab98b03cf9e8a255056',1,'SlManager']]],
-  ['togglerenderon',['toggleRenderOn',['../classSlManager.html#a2939fc8bdb095367d47a04ff3cadb63c',1,'SlManager']]],
-  ['trigger',['trigger',['../classSlEventObject.html#a18694e6b1e1a3e967d9b26c8474896e1',1,'SlEventObject']]]
+  ['togglerender',['toggleRender',['../classSlManager.html#a055eb5c63c1274056cf8f403963bcfe8',1,'SlManager']]],
+  ['togglerenderoff',['toggleRenderOff',['../classSlManager.html#aaf0106e7ecea53bfcf0d9a28f4f5392f',1,'SlManager']]],
+  ['togglerenderon',['toggleRenderOn',['../classSlManager.html#a1be7e3ccab66730cec67cbd968615c6b',1,'SlManager']]],
+  ['trigger',['trigger',['../classSlEventObject.html#a4fe27188613d13538d31bf6c24d0b3f6',1,'SlEventObject']]]
 ];

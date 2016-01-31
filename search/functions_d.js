@@ -37,7 +37,7 @@ var searchData=
   ['stringstodoubles',['stringsToDoubles',['../classSlValueParser.html#a74820a4f37fe5075d5b13b675eb641d5',1,'SlValueParser']]],
   ['stringstonumbers',['stringsToNumbers',['../classSlValueParser.html#a02c62fb94895c0923e9d3173ea05bafe',1,'SlValueParser']]],
   ['stringstorenderoptions',['stringsToRenderOptions',['../classSlValueParser.html#af05865ec0f6c333d8f92c29b5cd47600',1,'SlValueParser']]],
-  ['swapinrenderqueue',['swapInRenderQueue',['../classSlManager.html#a9f51f554a4690e3c56cc2ffa0dd5b160',1,'SlManager']]],
-  ['swapinrenderqueueatposition',['swapInRenderQueueAtPosition',['../classSlManager.html#a7ff48baa2fa7589de9b312dbcb7008a7',1,'SlManager']]],
-  ['swapinrenderqueuelastposition',['swapInRenderQueueLastPosition',['../classSlManager.html#a47dbaea29190f05578631a8f34854e5b',1,'SlManager']]]
+  ['swapinrenderqueue',['swapInRenderQueue',['../classSlManager.html#abc43505b243c4907e06594751f79f7f5',1,'SlManager']]],
+  ['swapinrenderqueueatposition',['swapInRenderQueueAtPosition',['../classSlManager.html#a219a18ceeb377b734def2b79ce36d8dd',1,'SlManager']]],
+  ['swapinrenderqueuelastposition',['swapInRenderQueueLastPosition',['../classSlManager.html#a5b30ed3af664f91e3b5982f850d1aec3',1,'SlManager']]]
 ];
