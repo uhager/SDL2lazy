@@ -87,6 +87,17 @@ public:
 
 
 
+/*! \class SlSMsetAngle derived from SlSpriteManipulation. Sets renderOptions for sprite.
+ */ 
+class SlSMsetAngle : public SlSpriteManipulation
+{
+public:
+  SlSMsetAngle(SlSpriteManager* manager, SlValueParser* valPars);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
 
 
 

@@ -163,3 +163,28 @@ SlSMcolor::manipulate(const std::string& name, unsigned int destination, const s
   valParser->stringsToNumbers<short>( parameters, colours, 4 );
   toChange->setColor( colours[0], colours[1], colours[2], colours[3], destination );
 }
+
+
+
+/*! SlSMsetAngle implementation
+ */
+SlSMsetAngle::SlSMsetAngle(SlSpriteManager* manager, SlValueParser* valPars)
+  : SlSpriteManipulation(manager, valPars)
+{
+  name_ = "setAngle";
+}
+
+
+
+void
+SlSMsetAngle::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  std::shared_ptr<SlSprite> toChange = verifySprite(name, destination);
+  
+  double angle ;
+  valParser->stringsToNumbers<double>( parameters, &angle, 1 );
+  toChange->setAngle( angle, destination );
+}
+
+
+

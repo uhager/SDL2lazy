@@ -242,10 +242,20 @@ SlSprite::render(SDL_Renderer* renderer, unsigned int i)
     texture_->alphaModIsSet = false;
   }
 
-  int hasRendered = SDL_RenderCopy(renderer, texture_->texture(), &sourceRect_, & dest.destinationRect);
+  int hasRendered = SDL_RenderCopyEx(renderer, texture_->texture(), &sourceRect_, &dest.destinationRect, dest.angle, NULL, SDL_FLIP_NONE);
   if (hasRendered != 0) {
     throw std::runtime_error("Error rendering " + name_ + ": " + std::string( SDL_GetError() ) );
   }
+}
+
+
+
+void
+SlSprite::setAngle(double angle, unsigned int i)
+{
+  if (i >= destinations_.size() )
+    throw std::invalid_argument("[SlSprite::setAngle] attempting to access destination " + std::to_string(i) + " out of " + std::to_string( destinations_.size() ) );
+  destinations_.at(i).angle = angle;
 }
 
 

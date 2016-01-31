@@ -193,6 +193,8 @@ SlSpriteManager::initialize( SlValueParser* valPars)
   manipulations_[toAdd->name()] = toAdd;
   toAdd = new SlSMcolor( this, valParser );
   manipulations_[toAdd->name()] = toAdd;
+  toAdd = new SlSMsetAngle( this, valParser );
+  manipulations_[toAdd->name()] = toAdd;
 }
 
 

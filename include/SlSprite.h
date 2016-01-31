@@ -44,6 +44,9 @@ struct SlRenderSettings
   /*! SlRenderOptions for the texture.
   */
   uint32_t renderOptions = SL_RENDER_DEFAULT;
+  /*! Angle by which the sprite will be rotated.
+   */
+  double angle = 0;
 };
 
 
@@ -118,8 +121,11 @@ class SlSprite
    */
   void render(SDL_Renderer* renderer, unsigned int i);
 
+  /*! Sets angle for position i of #destinations_.
+    The angle in degrees that indicates the rotation that will be applied when that sprite destination is rendered. Rotation will be around object centre.
+   */
+  void setAngle(double angle, unsigned int i = 0);
   /*! Sets color for position i of #destinations_.
-
     Color is use when using color mod to render, and when creating a texture from a rectangle.
    */
   void setColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 0xFF, unsigned int i = 0);

@@ -71,7 +71,7 @@ class SlEventObject
    */
   void trigger(int mouse_x = -1, int mouse_y = -1);
 
-  /*! Determines if this object required mouse coordinates. If true, coordinate changes (relative to #last_mouse_x_, #last_mouse_y_ will be added to parameters.
+  /*! Determines if this object required mouse coordinates. If true, coordinates and delta-coordinates will be added to parameters.
    */
   bool need_mouse_coordinates = false;
 
