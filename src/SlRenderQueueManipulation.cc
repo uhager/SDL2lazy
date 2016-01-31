@@ -412,6 +412,8 @@ SlRMactivateIfInside::SlRMactivateIfInside(SlSpriteManager* smngr, SlValueParser
 void
 SlRMactivateIfInside::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
+  if ( parameters.size() < 2 )
+    throw std::invalid_argument("[SlRMactivateIfInside::manipulate] Error: Need 2 coordinates to move object " + name + "; found " + std::to_string(parameters.size()) );
 
   auto iter = renderQueue_->begin();
   for ( ; iter != renderQueue_->end() ; ++iter) {
@@ -472,7 +474,9 @@ SlRMdeactivateIfInside::SlRMdeactivateIfInside(SlSpriteManager* smngr, SlValuePa
 void
 SlRMdeactivateIfInside::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
 {
-
+  if ( parameters.size() < 2 )
+   throw std::invalid_argument("[SlRMdeactivateIfInside::manipulate] Error: Need 2 coordinates to move object " + name + "; found " + std::to_string(parameters.size()) );
+    
   auto iter = renderQueue_->begin();
   for ( ; iter != renderQueue_->end() ; ++iter) {
     if ( ( (*iter)->sprite_->name() ==  name ) && ( (*iter)->destination_ == destination ) ) {
@@ -485,6 +489,74 @@ SlRMdeactivateIfInside::manipulate(const std::string& name, unsigned int destina
 
   int coord[2];
   valParser->stringsToNumbers<int>( parameters, coord, 2 );
-  if ( (*iter)->is_inside( coord[0], coord[1] ) )
+  if ( (*iter)->is_inside( coord[0], coord[1] ) ) {
     (*iter)->isActive = false;
+  }
+}
+
+
+
+/*! \class SlRMmoveBy implementation
+ */
+SlRMmoveBy::SlRMmoveBy(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "moveBy";
+}
+
+
+
+void
+SlRMmoveBy::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  if (parameters.size() != 4 )
+    throw std::invalid_argument("[SlRMmoveBy::manipulate] Error: Need 4 parameters (x,y,dx,dy) to move object " + name + "; found " + std::to_string(parameters.size()) );
+
+  auto iter = renderQueue_->begin();
+  for ( ; iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  name ) && ( (*iter)->destination_ == destination ) ) {
+      break;
+    }
+  }
+
+  if ( iter == renderQueue_->end() )
+    throw std::runtime_error( "[SlRMmoveBy::manipulate] Error: Couldn't find SlRenderItem for " + name ) ;
+
+  int coord[4];
+  valParser->stringsToNumbers<int>( parameters, coord, 4 );
+  (*iter)->sprite_->moveDestinationOriginBy(coord[2], coord[3], destination);
+}
+
+
+
+/*! \class SlRMmoveActiveBy implementation
+ */
+SlRMmoveActiveBy::SlRMmoveActiveBy(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue)
+  : SlRenderQueueManipulation( smngr, valPars, renderQueue )
+{
+  name_ = "moveActiveBy";
+}
+
+
+
+void
+SlRMmoveActiveBy::manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters)
+{
+  if (parameters.size() != 4 )
+    throw std::invalid_argument("[SlRMmoveActiveBy::manipulate] Error: Need 4 parameters (x,y,dx,dy) to move object " + name + "; found " + std::to_string(parameters.size()) );
+
+  auto iter = renderQueue_->begin();
+  for ( ; iter != renderQueue_->end() ; ++iter) {
+    if ( ( (*iter)->sprite_->name() ==  name ) && ( (*iter)->destination_ == destination ) ) {
+      break;
+    }
+  }
+
+  if ( iter == renderQueue_->end() )
+    throw std::runtime_error( "[SlRMmoveActiveBy::manipulate] Error: Couldn't find SlRenderItem for " + name ) ;
+
+  if ( !(*iter)->isActive ) return;
+  int coord[4];
+  valParser->stringsToNumbers<int>( parameters, coord, 4 );
+   (*iter)->sprite_->moveDestinationOriginBy(coord[2], coord[3], destination);
 }

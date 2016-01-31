@@ -28,7 +28,7 @@ class SlEventAction
   ~SlEventAction();
   /*! Calls the SlManipulation
    */
-  void act(int mouse_x = -1, int mouse_y = -1);
+  void act( std::vector<std::string> additionalParams );
 
   /*! The manipulation object that handles the action.
    */
@@ -70,10 +70,18 @@ class SlEventObject
   /*! Triggers the SlEventAction::act() for all objects in #actions_.
    */
   void trigger(int mouse_x = -1, int mouse_y = -1);
+
+  /*! Determines if this object required mouse coordinates. If true, coordinate changes (relative to #last_mouse_x_, #last_mouse_y_ will be added to parameters.
+   */
+  bool need_mouse_coordinates = false;
+
  private:
   /*! The SlEventActions that will be performed when this object is triggered.
    */
   std::vector<SlEventAction> actions_ ;
+  /*! Store previous mouse coordinates for relative movement.
+   */
+  int last_mouse_[2] = {-1,-1};
 };
 
 
@@ -95,6 +103,9 @@ class SlEventHandler
   /*! Deleted, same reason as copy constructor.
    */
   SlEventHandler& operator=(const SlEventHandler&) = delete;
+  /*! Creates the SlEventAction based on the parsed input. Creates SlEventObject if it doesn't exist.
+   */
+  void addAction(const std::string& key, const std::string& whatToDo, const std::string& spritename, int destination, std::vector<std::string> parameters );
   /*! Adds the given SlManipulations to #manipulations_.
    */
   void addManipulations(const std::map<std::string, SlManipulation*>& manip);

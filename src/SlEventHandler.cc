@@ -21,8 +21,9 @@
 /*! \class SlEventAction
  */
 void
-SlEventAction::act(int mouse_x, int mouse_y)
+SlEventAction::act( std::vector<std::string> additionalParams )
 {
+  parameters.insert( parameters.end(), additionalParams.begin(), additionalParams.end() );
   try {
     manipulation->manipulate( name, destination, parameters );
   }
@@ -74,8 +75,17 @@ SlEventObject::addAction(std::string name, int destination, SlManipulation* mani
 void
 SlEventObject::trigger(int mouse_x, int mouse_y)
 {
+  std::vector<std::string> additionalParams;
+  if ( need_mouse_coordinates ) {
+    additionalParams.push_back( std::to_string( mouse_x ) );
+    additionalParams.push_back( std::to_string( mouse_y) );
+    additionalParams.push_back( std::to_string( mouse_x-last_mouse_[0] ) );
+    additionalParams.push_back( std::to_string( mouse_y-last_mouse_[1] ) );
+    last_mouse_[0] = mouse_x;
+    last_mouse_[1] = mouse_y;
+  }
   for (auto action: actions_) {
-    action.act();
+    action.act(additionalParams);
   }
 }
 
@@ -93,6 +103,33 @@ SlEventHandler::~SlEventHandler()
 {
 }
 
+
+
+void
+SlEventHandler::addAction(const std::string& key, const std::string& whatToDo, const std::string& spritename, int destination, std::vector<std::string> parameters )
+{
+  if ( key == "leftclick" && whatToDo == "move") {
+    SlEventObject& obj1 = eventActions_["is_mouse-down"];
+    obj1.need_mouse_coordinates = true;
+    SlManipulation* manip = getManipulation( "activateIfInside" );
+    obj1.addAction( spritename, destination, manip, parameters );
+
+    SlEventObject& obj2 = eventActions_["is_mouse-move"];
+    obj2.need_mouse_coordinates = true;
+    manip = getManipulation( "moveActiveBy" );
+    obj2.addAction( spritename, destination, manip, parameters );
+
+    SlEventObject& obj3 = eventActions_["is_mouse-up"];
+    manip = getManipulation( "deactivate" );
+    obj3.addAction( spritename, destination, manip, parameters );
+  }
+  else {
+    SlManipulation* manip = getManipulation( whatToDo );
+    std::string keyword = "is_" + key;
+    SlEventObject& obj = eventActions_[keyword];
+    obj.addAction(spritename, destination, manip, parameters);
+  }
+}
 
 
 void
@@ -135,6 +172,7 @@ SlEventHandler::handleEvent(const SDL_Event& event)
     //    int relx, rely;
     SDL_GetMouseState( &mouse_x, &mouse_y );
     //   SDL_GetRelativeMouseState(&relx, &rely);
+    keyword = "is_mouse-move";
   }
   else if (event.type == SDL_KEYDOWN)
     {
@@ -221,10 +259,7 @@ SlEventHandler::parseEvent(std::ifstream& input)
 	}
 	if ( parameters.back().empty() )
 	  parameters.pop_back();
-	SlManipulation* manip = getManipulation( whatToDo );
-	std::string keyword = "is_" + key;
-	SlEventObject& obj = eventActions_[keyword];
-	obj.addAction(spritename, destination, manip, parameters);
+	addAction(key, whatToDo, spritename, destination, parameters);
       }
       catch (const std::exception& expt ) {
 	std::cerr << "[SlEventHandler::parseEvent] Error: " << expt.what() << std::endl;

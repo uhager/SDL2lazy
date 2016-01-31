@@ -104,6 +104,9 @@ class SlSprite
   /*! Checks whether the given coordinates are inside the specified destination for this sprite.
    */
   bool is_inside(const int& x, const int& y, const unsigned int& dest = 0);
+  /*! Moves the sprite by the amounts given by x and y, i.e. x and y are deltas not absolutes.
+  */
+  void moveDestinationOriginBy(int x, int y, unsigned int i = 0);
   /*! Allows reading the name, but not changing it.
    */
   std::string name() const {return name_;}
@@ -136,7 +139,6 @@ class SlSprite
   */
   void setDestinationDimension(int width, int height, unsigned int i = 0);
   /*! Changes destinationRect for position i of #destinations_ .
-
     Sets where the sprite will be rendered.
   */
   void setDestinationOrigin(int x, int y, unsigned int i = 0);

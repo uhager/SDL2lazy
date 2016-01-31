@@ -265,12 +265,8 @@ SlValueParser::setDimensions(const int& width, const int& height)
 void
 SlValueParser::stringsToDoubles(const std::vector<std::string>& stringValues, double* values, unsigned int length )
 {
-  if ( stringValues.size() < length ) {
-#ifdef DEBUG
-    std::cerr << "[SlValueParser::stringsToDoubles] Need " << length << " values, found " << stringValues.size() << std::endl;
-#endif
-    throw std::invalid_argument("Too few values.");
-  }
+  if ( stringValues.size() < length )
+    throw std::invalid_argument("[SlValueParser::stringsToDoubles] Error: Too few values. Need " + std::to_string(length) + ", found " + std::to_string( stringValues.size() ));
 
   for ( unsigned int i = 0 ; i != stringValues.size() ; ++i) {
     //! Skip trailing whitespace at end of line otherwise causes exception.

@@ -189,6 +189,16 @@ SlSprite::is_inside(const int& x, const int& y, const unsigned int& dest)
 
 
 void
+SlSprite::moveDestinationOriginBy(int x, int y, unsigned int i)
+{
+  SDL_Rect& destRect = destinations_.at(i).destinationRect;
+  destRect.x += x;
+  destRect.y += y;
+}
+
+
+
+void
 SlSprite::render(SDL_Renderer* renderer)
 {
 #ifdef DEBUG

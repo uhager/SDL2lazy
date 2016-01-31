@@ -149,7 +149,7 @@ class SlRMswapAt : public SlRenderQueueManipulation
 
 
 /*! \class SlRMactivate
-  Swap new render item in place of other item in render queue.
+  Set is_active to true. Will enable mouse movement.
  */
 class SlRMactivate : public SlRenderQueueManipulation
 {
@@ -161,7 +161,7 @@ class SlRMactivate : public SlRenderQueueManipulation
 
 
 /*! \class SlRMdeactivate
-  Swap new render item in place of other item in render queue.
+  Set is_active to false, disable mouse movement.
  */
 class SlRMdeactivate : public SlRenderQueueManipulation
 {
@@ -173,7 +173,7 @@ class SlRMdeactivate : public SlRenderQueueManipulation
 
 
 /*! \class SlRMactivateIfInside
-  Swap new render item in place of other item in render queue.
+  Set is_active to true if given coordinates are inside object
  */
 class SlRMactivateIfInside : public SlRenderQueueManipulation
 {
@@ -185,12 +185,36 @@ class SlRMactivateIfInside : public SlRenderQueueManipulation
 
 
 /*! \class SlRMdeactivateIfInside
-  Swap new render item in place of other item in render queue.
+  Set is_active to false if given coordinates are inside object
  */
 class SlRMdeactivateIfInside : public SlRenderQueueManipulation
 {
  public:
   SlRMdeactivateIfInside(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMmoveBy
+  Moves the object's destination by the given offset values.
+ */
+class SlRMmoveBy : public SlRenderQueueManipulation
+{
+ public:
+  SlRMmoveBy(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
+  void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
+};
+
+
+
+/*! \class SlRMmoveActiveBy
+  Moves the object's destination by the given offset values.
+ */
+class SlRMmoveActiveBy : public SlRenderQueueManipulation
+{
+ public:
+  SlRMmoveActiveBy(SlSpriteManager* smngr, SlValueParser* valPars, std::vector<SlRenderItem*>* renderQueue);
   void manipulate(const std::string& name, unsigned int destination, const std::vector<std::string>& parameters) override;
 };
 
