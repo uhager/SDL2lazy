@@ -137,6 +137,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa2de89ac4fb27f4432729d614eefb525"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcb789055920dd3fba86a0487d43dbac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#adcb789055920dd3fba86a0487d43dbac">render</a> (SDL_Renderer *renderer, unsigned int i)</td></tr>
 <tr class="separator:adcb789055920dd3fba86a0487d43dbac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96d2e716ffeefe8aa3dc66854c7af04d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a96d2e716ffeefe8aa3dc66854c7af04d">setAngle</a> (double angle, unsigned int i=0)</td></tr>
+<tr class="separator:a96d2e716ffeefe8aa3dc66854c7af04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7bc220ef225481bac32d406c399562b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#ac7bc220ef225481bac32d406c399562b">setColor</a> (uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha=0xFF, unsigned int i=0)</td></tr>
 <tr class="separator:ac7bc220ef225481bac32d406c399562b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37f1fde741572deec40a971418bd113b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlSprite.html#a37f1fde741572deec40a971418bd113b">setDestination</a> (const SDL_Rect &amp;dstRect, unsigned int i=0)</td></tr>
@@ -729,6 +731,33 @@ The default values will use the whole texture as a sprite. Calls <a class="el" h
 
 </div>
 </div>
+<a class="anchor" id="a96d2e716ffeefe8aa3dc66854c7af04d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SlSprite::setAngle </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>i</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets angle for position i of <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">destinations_</a>. The angle in degrees that indicates the rotation that will be applied when that sprite destination is rendered. Rotation will be around object centre. </p>
+
+</div>
+</div>
 <a class="anchor" id="ac7bc220ef225481bac32d406c399562b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -770,8 +799,7 @@ The default values will use the whole texture as a sprite. Calls <a class="el" h
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets color for position i of <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">destinations_</a>.</p>
-<p>Color is use when using color mod to render, and when creating a texture from a rectangle. </p>
+<p>Sets color for position i of <a class="el" href="classSlSprite.html#a665d5f620f430f17175e8a41c3c61e6c">destinations_</a>. Color is use when using color mod to render, and when creating a texture from a rectangle. </p>
 
 </div>
 </div>

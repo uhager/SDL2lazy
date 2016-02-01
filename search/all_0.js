@@ -8,6 +8,7 @@ var searchData=
   ['addmanipulations',['addManipulations',['../classSlEventHandler.html#a897a92d83bf6476e53b6e293c1b1bc9f',1,'SlEventHandler']]],
   ['addtexture',['addTexture',['../classSlTextureManager.html#aef400facb5d808e7476dd35b25da396c',1,'SlTextureManager']]],
   ['alphamodisset',['alphaModIsSet',['../classSlTexture.html#ac65190b76d2b0e06fd41187d73aa0df5',1,'SlTexture']]],
+  ['angle',['angle',['../structSlRenderSettings.html#a6ebe59adf6f9ed70f65f8352c7229434',1,'SlRenderSettings']]],
   ['appendtorenderqueue',['appendToRenderQueue',['../classSlManager.html#aaf880e0439421ecd2406c34e0098dd9a',1,'SlManager']]],
   ['assembleformula',['assembleFormula',['../classSlValueParser.html#aa1010627a8d30ea6f403c505030d1336',1,'SlValueParser']]]
 ];
