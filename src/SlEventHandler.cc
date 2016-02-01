@@ -257,7 +257,7 @@ SlEventHandler::parseEvent(std::ifstream& input)
 	  parameters.push_back("");
 	  stream >> parameters.back();
 	}
-	if ( parameters.back().empty() )
+	if ( !parameters.empty() && parameters.back().empty() )
 	  parameters.pop_back();
 	addAction(key, whatToDo, spritename, destination, parameters);
       }
