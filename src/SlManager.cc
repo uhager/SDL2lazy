@@ -13,6 +13,7 @@
 #include <stdexcept>
 #include <memory>
 #include <algorithm>
+#include <iterator>
 
 #include "SlTexture.h"
 #include "SlSprite.h"
@@ -435,7 +436,6 @@ SlManager::parseIniFile(const std::string& filename)
     throw std::runtime_error("[SlManager::parseIniFile] Couldn't open ini file " + filename );
   
   std::string line, token, name;
-  std::vector<std::string> dimensions;
   getline(input,line);
   while ( input )
     {
@@ -447,13 +447,9 @@ SlManager::parseIniFile(const std::string& filename)
       else if ( token == "window" ) {
 	std::string name;
 	stream >> name;
-	while ( !stream.eof() ){
-	  dimensions.push_back("");
-	  stream >> dimensions.back();
-	}
-	unsigned int dims[2];
-	valParser_.stringsToNumbers<unsigned int>( dimensions, dims, 2);
-	initializeWindow( name, dims[0], dims[1] );
+	std::istream_iterator<unsigned int> uint_iter(stream), eof;
+	std::vector<unsigned int> dims(uint_iter, eof);
+	initializeWindow( name, dims.at(0), dims.at(1) );
       }
       else if ( token == "file" ) {
 	std::string filename;
@@ -496,11 +492,8 @@ SlManager::parseRenderQueueManipulation( std::ifstream& input )
 	name = token ;
 	stream >> destination ;
 	stream >> whatToDo ;
-	std::vector<std::string> parameters;
-	while ( !stream.eof() ){
-	  parameters.push_back("");
-	  stream >> parameters.back();
-	}
+	std::istream_iterator<std::string> str_iter(stream), eof;
+	std::vector<std::string> parameters(str_iter, eof);
 	manipulateRenderQueue( name, destination, whatToDo, parameters );
       }
       catch (const std::exception& expt) {

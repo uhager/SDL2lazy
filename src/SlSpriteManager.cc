@@ -13,6 +13,7 @@
 #include <stdexcept>
 #include <memory>
 #include <algorithm>
+#include <iterator>
 
 #include "SlSprite.h"
 #include "SlTexture.h"
@@ -240,10 +241,8 @@ SlSpriteManager::parseSprite(std::ifstream& input)
       stream >> texture ;
     }
     else if ( token == "location" ) {
-      while ( !stream.eof() ){
-	location.push_back("");
-	stream >> location.back();
-      }
+      std::istream_iterator<std::string> str_iter(stream), eof;
+      location = { str_iter, eof };
     }
     
     else {
@@ -299,11 +298,8 @@ SlSpriteManager::parseSpriteManipulation(std::ifstream& input)
 	name = token ;
 	stream >> destination ;
 	stream >> whatToDo ;
-	std::vector<std::string> parameters;
-	while ( !stream.eof() ){
-	  parameters.push_back("");
-	  stream >> parameters.back();
-	}
+	std::istream_iterator<std::string> str_iter(stream), eof;
+	std::vector<std::string> parameters( str_iter, eof );
 	manipulateSprite( name, destination, whatToDo, parameters );
       }
       catch (const std::exception& expt) {
